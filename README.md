@@ -1,4 +1,4 @@
-# a command
+# a simple command
 
 This is a project for terminal interaction, serving the [ixxx](https://github.com/lmssee/ixxx) class
 

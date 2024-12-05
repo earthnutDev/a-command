@@ -8,13 +8,10 @@ import {
 } from './types';
 import { AuxiliaryData } from './auxiliaryData';
 
-/**  Binding options, descriptions, and abbreviation
- *
+/**
  * 绑定选项、说明及缩写
  *
- * @param data {@link BindParamsType}   Binding Command Line Parameter
- *
- *        data {@link BindParamsType}  绑定命令行参数
+ * @param  data {@link BindParamsType}  绑定命令行参数
  */
 
 export default function bindInstruction(
@@ -38,17 +35,12 @@ export default function bindInstruction(
     abbr: '',
     options: [],
   };
-  /**  If a string is used to specify
-   *
-   * 倘若使用字符串指定  */
+  /** 倘若使用字符串指定   */
   if (typeof data == 'string') {
     const [name, abbr, info] = parsingDataOfString(data);
     return bindInstruction({ name, abbr, info }, auxiliaryData);
   } else if (Array.isArray(data)) {
-    /** If the input parameter is an array
-     *
-     *   倘若为传入参数为数组
-     */
+    /**  倘若为传入参数为数组  */
     return data.forEach((currentEle: BindParamsType) =>
       bindInstruction(currentEle, auxiliaryData),
     );
@@ -66,8 +58,7 @@ export default function bindInstruction(
             name,
             info,
             abbr,
-            // @ts-expect-error 在上一个 if 中已做了处理
-            options: data[currentEle],
+            options: data[currentEle as never],
           },
           auxiliaryData,
         );
@@ -75,35 +66,29 @@ export default function bindInstruction(
     });
   }
   _d = data as ParamType;
-  /** Configure abbreviations for easy retrieval
-   *
-   * 配置缩写，方便检索
-   */
+  /** 配置缩写，方便检索 */
   Boolean(_d.abbr) && (auxiliaryData.abbr[_d.abbr as string] = _d.name);
 
-  /** If there are sub items
+  /**
+   *  倘若有子项
    *
-   *  倘若有子项 \
    * 这里对 _d.options 做了数组判定
    */
   if (_d.options) {
-    // @ts-expect-error 这里无需处理
-    _d.options = parsingSubOption(_d.options, _d.name, auxiliaryData);
+    _d.options = parsingSubOption(_d.options, _d.name, auxiliaryData) as never;
   }
-  // @ts-expect-error 这里无需处理
-  auxiliaryData.originalBind[_d.name] = { ..._d };
+  auxiliaryData.originalBind[_d.name] = { ..._d } as never;
 }
 
-/** Parse sub items
- *
+/**
  * 解析子项
  *
- *
  * ```ts
- * type BindParamsOptionsType = string | SubOptionsType
- *                              | (string | SubOptionsType)[];
+ * type BindParamsOptionsType =
+ *      | string
+ *      | SubOptionsType
+ *      | (string | SubOptionsType)[];
  *
- * type AuxiliaryData
  * ```
  *
  */
@@ -141,8 +126,7 @@ function parsingSubOption(
   return temporaryObject;
 }
 
-/** Parse when binding data to string type
- *
+/**
  * 解析当绑定数 据为字符串类型
  *
  * @returns 返回是 [string, string, string] ，对应了 [name , abbr , info];

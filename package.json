@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "name": "a-command",
   "main": "cjs/index.cjs",
   "module": "mjs/index.mjs",

@@ -33,13 +33,10 @@ export default function executeParsing(auxiliaryData: AuxiliaryData) {
  */
 function beforeRun(auxiliaryData: AuxiliaryData) {
   ['name', 'originBind', 'abbr'].forEach((currentEle: string) => {
-    // @ts-expect-error 冷冻属性（这里有判断，但是 ts 未识别， eslint 又不让 as any）
-    if (auxiliaryData[currentEle]) {
-      // @ts-expect-error 冷冻属性
-      Object.freeze(auxiliaryData[currentEle]);
+    if (auxiliaryData[currentEle as never]) {
+      Object.freeze(auxiliaryData[currentEle as never]);
       Object.defineProperty(auxiliaryData, currentEle, {
-        // @ts-expect-error 冷冻属性
-        value: auxiliaryData[currentEle],
+        value: auxiliaryData[currentEle as never],
         writable: false,
         enumerable: true,
         configurable: false,

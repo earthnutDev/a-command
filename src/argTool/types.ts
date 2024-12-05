@@ -55,25 +55,18 @@ export type ParamType = {
    * 功能描述
    */
   info: string;
-  /**  options
-   *
-   *  选项
-   */
+  /**   选项 */
   options?: BindParamsOptionsType;
-  /** abbreviation
-   *
-   * 缩写
-   */
+  /**  缩写 */
   abbr?: string;
-  /**  Is it displayed in the help
-   *
-   * 是否展示在帮助中
-   */
+  /**  是否展示在帮助中 */
   hide?: boolean;
 };
 
-/** 原始绑定的类型声明
- * ```ts
+/**
+ *  原始绑定的类型声明
+ *
+ *  ```ts
  *  type  SubOptionsType = {
  *        name: string;
  *        abbr: string;
@@ -91,10 +84,7 @@ export type ArgOriginBind = {
     options: { [key: string]: SubOptionsType };
   };
 };
-/** Description of Binding Command Line Parameter Types
- *
- * 绑定命令行参数类型说明
- */
+/** 绑定命令行参数类型说明 */
 export type BindParamsType =
   | string
   | {
@@ -103,7 +93,10 @@ export type BindParamsType =
   | (string | ParamType)[]
   | ParamType;
 
-/** 绑定的子项类型声明\
+/**
+ *
+ *  绑定的子项类型声明
+ *
  * 这个一般用不到
  * ```ts
  * // 命令行选项参数
@@ -120,10 +113,7 @@ export type BindParamsOptionsType =
   | SubOptionsType
   | (string | SubOptionsType)[];
 
-/** stateType
- *
- * 当前的状态
- */
+/**   当前的状态 */
 export type StateType = {
   code: 1 | 2 | 3 | 4;
   text: 'start' | 'bind over' | 'run over' | 'over';
@@ -131,7 +121,8 @@ export type StateType = {
 };
 
 /**
- * 当前的  arg \
+ * 当前的  arg
+ *
  * 处理后的原始参数的值
  */
 export type ArgsItem = {
@@ -140,7 +131,7 @@ export type ArgsItem = {
   options: { name: string; value: string[] }[];
 };
 
-//  Record<string, boolean | unknown>
+//
 /** $map 的类型声明
  *
  * ```ts
@@ -160,7 +151,8 @@ export type ArgsMapItemType = {
   value: (string | number | boolean)[];
 };
 
-/** 导出数组对象的类型
+/**
+ * 导出数组对象的类型
  *
  * ```ts
  *  type ArgsMapType = {
@@ -173,7 +165,8 @@ export type ArgsMapItemType = {
  */
 export type ArgsArrMapType = ArgsMapType[];
 
-/** 导出 arg 返回的 args 的类型
+/**
+ * 导出 arg 返回的 args 的类型
  *
  * 是一个继承于 {@link Array} 的对象，有属性
  * - $nomatch  未匹配的值，即顶端的数据
@@ -195,7 +188,8 @@ export interface ArgsType extends Array<ArgsItem> {
    *   也能直接拿到数据，且无需去 `process.argv` 抓取
    */
   $nomatch: string[];
-  /** 返回 map 模式的数据，用来做配置文件比较爽
+  /**
+   * 返回 map 模式的数据，用来做配置文件比较爽
    *
    * ```ts
    *  type ArgsMapItemType = {
@@ -206,8 +200,8 @@ export interface ArgsType extends Array<ArgsItem> {
    */
   $map: ArgsMapType;
   /**
-   *
    *  返回的数组数据
+   *
    * ```ts
    * type $arrMap = {
    *     [key:string]: {
@@ -219,27 +213,39 @@ export interface ArgsType extends Array<ArgsItem> {
    *
    */
   $arrMap: ArgsArrMapType;
-  /** 仅有头部的字符串数组\
-   *  即，只返回了最开始的匹配模式\
-   *  暂时并没有发现可用之处\
+  /**
+   *  仅有头部的字符串数组
+   *
+   *  即，只返回了最开始的匹配模式
+   *
+   *  暂时并没有发现可用之处
+   *
    *  只读可修改数据（修改并影响下一份数据）\
    *  ```ts
    *   type $only = string[]
    *  ```
    */
   $only: string[];
-  /** 原始参数\
-   *  用户输入启动参数元数据\
-   *  相当于 `process.argv.slice(2)`\
-   *  只读可修改数据（修改并影响下一份数据）\
+  /**
+   *  原始参数
+   *  用户输入启动参数元数据
+   *
+   *  相当于 `process.argv.slice(2)`
+   *
+   *  只读可修改数据（修改并影响下一份数据）
+   *
    * ```ts
-   * type  $origin = string[]
+   *  type  $origin = string[]
    * ```
    */
   $original: string[];
-  /** 是否为空  \
-   *  即用户是否根本未使用参数\
-   *  可做第一判断或是最后全未匹配的验证\
+  /**
+   *  是否为空
+   *
+   *  即用户是否根本未使用参数
+   *
+   *  可做第一判断或是最后全未匹配的验证
+   *
    *  ```ts
    *  type  $isVoid = boolean
    *  ```
@@ -247,17 +253,17 @@ export interface ArgsType extends Array<ArgsItem> {
   $isVoid: boolean;
 }
 
-/** 子项的类型
- *
- *
- */
+/** 子项的类型   */
 export type ManageDataTypeItem = {
   name: string;
   value: (string | boolean)[];
 };
 
-/** 子项列的类型\
- * 你大概率不太可能会用到这个\
+/**
+ *  子项列的类型
+ *
+ * 你大概率不太可能会用到这个
+ *
  * 这是一个内部使用的类型声明
  *
  * ```ts
@@ -275,8 +281,12 @@ export type ManageDataTypeObject = {
   options: ManageDataTypeItem[];
 };
 
-/** 解析用户参数数据\
- * 你大概率不太可能会用到这个\
+/**
+ *
+ *  解析用户参数数据
+ *
+ * 你大概率不太可能会用到这个
+ *
  * 这是一个内部使用的类型声明
  *
  * ```ts

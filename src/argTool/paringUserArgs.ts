@@ -2,7 +2,7 @@ import { AuxiliaryData } from './auxiliaryData';
 import showVersion from './showVersion';
 import { ArgsType, ManageDataType, ManageDataTypeItem } from './types';
 
-/** Parsing user parameters
+/**
  *
  *
  * 解析用户参数
@@ -26,13 +26,13 @@ import { ArgsType, ManageDataType, ManageDataTypeItem } from './types';
 export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
   // 用户没有传参数
   if (process.argv.length == 2) return;
-  /** Get user input parameters
+  /**
    *
    * 获取用户输入参数
    */
   const _args = auxiliaryData.originalArg,
     _argString = `^${_args.join('^')}^`;
-  /**  Check if there is a requirement help document included
+  /**
    *
    * 检测是否含有需求帮助文档
    */

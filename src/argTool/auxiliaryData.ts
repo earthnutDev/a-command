@@ -17,29 +17,17 @@ export const auxiliaryDataStore: { [key: symbol]: AuxiliaryData } = {};
 /** 定义类 */
 export class AuxiliaryData {
   originalArg = originalArg.slice();
-  /** Command Name
-   *
-   * 命令名称
-   */
+  /** 命令名称 */
   name: string = '';
-  /** File name
-   *
-   * 文件目录
-   */
+  /** 文件目录 */
   __filename: string = '';
-  /** current state
-   *
-   *   - 1 `start`  At the beginning, waiting for binding
-   *   - 2 `bind over`  Execute binding, wait for execution
-   *   - 3  `run over`  Parsing completed
-   *   - 4 `over` Execution completed, it is not recommended to take any action after this command
-   *
-   *
+  /**
    *  当前状态
+   *
    *  - 1 `start`  刚开始，等待绑定
    *  - 2 `bind over`  执行绑定，等待执行
    *  - 3  `run over`  解析完毕
-   *   - 4 `over` 执行完毕，不建议在此命令后进行任何操作
+   *  - 4 `over` 执行完毕，不建议在此命令后进行任何操作
    *
    */
 
@@ -59,29 +47,21 @@ export class AuxiliaryData {
 
   _state: StateType = { code: 1, text: 'start' };
 
-  /** Startup options (processed user input)
-   *
-   * 启动的选项（处理后的用户输入）
-   */
+  /**  启动的选项（处理后的用户输入）*/
   args: ArgsType = new TempArgs();
   /** abbreviate table
    *
    *  缩写表
    */
   abbr: { [key: string]: string } = {};
-  /**  Help document
-   *
-   *  帮助文档
-   */
+  /**   帮助文档*/
   helpInfo: string | string[] = '';
-  /**
-   *
-   * 原始参数
-   */
+  /**  原始参数 */
   originalBind: ArgOriginBind = {};
 
   /**
-   * 未匹配值的数据值\
+   * 未匹配值的数据值
+   *
    * 使用 `bind` 绑定之外的数据，即直接作用在
    */
   values: (string | number | boolean)[] = [];
@@ -206,8 +186,8 @@ function get$map(value: ArgsItem[]): ArgsMapType {
   return resultValue;
 }
 
-/** 返回一个数组对象，有序的，与本体值类似，每一个元素都可以做会返回值。
- *
+/**
+ * 返回一个数组对象，有序的，与本体值类似，每一个元素都可以做会返回值。
  *
  * 主要关注的是有序
  */

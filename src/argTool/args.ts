@@ -6,77 +6,8 @@ import executeParsing from './executeParsing';
 import { organizeHelpInformation } from './organizeHelpInformation';
 import showVersion from './showVersion';
 
-/**  Analyzing user input parameters
- *   **_will only start working after calling `run`, and all `bind` must be completed before `run`_**
- *  - `commandName argName`
- *  - `commandName argName   value`
- *  - `commandName argName    optionName`
- *  - `commandName argName    optionName  value`
- * Example：
- *    If your command name is `gig` , You added parameters：
- *    _When you have multiple configuration items, you can use an array to group the configuration items that comply with the rules_
- *  - Simplified example
- *      ```js
- *        import { Args }  from "ismi-command";
- *        const  command : Args =  new Args('ixxx);
- *        command.bind("init <-i> (Initialize configuration file)").run();
- *      ```
- * - Simple configuration example
- *
- *      ```js
- *        import { Args }  from "ismi-command";
- *        const  command : Args =  new Args('ixxx);
- *        command.bind({
- *                      name: "init",
- *                      abbr: "-i",
- *                      info: "Initialize configuration file",
- *                     }).run();
- *      ```
- *  - Example of carrying sub item configuration
- *      ```js
- *        import { Args }  from "ismi-command";
- *        const  command : Args =  new Args();
- *        command
- *            .bind({
- *              name: "init",
- *              abbr: "-i",
- *              info: "Initialize configuration file",
- *              options: [
- *                      "ts <-t> (Initialize a `ts` configuration file)",
- *                      "js <-j> (Initialize a `js` configuration file)",
- *                      "json <-o> (Initialize a `json` configuration file)",
- *                       ]
- *             });
- *        command.run(); // Users can use `gig init -o`
- *      ```
- *
- *  - Example of carrying detailed configuration of sub items
- *      ```js
- *        import { Args }  from "ismi-command";
- *        const  command : Args =  new Args();
- *        command
- *            .bind({
- *              name: "init",
- *              abbr: "-i",
- *              info: "Initialize configuration file",
- *              options: [{
- *                          name:"ts",
- *                          abbr: "-t",
- *                          info: "Initialize a `ts` configuration file"
- *                        },{
- *                          name:"js",
- *                          abbr: "-j",
- *                          info: "Initialize a `js` configuration file"
- *
- *                        },{
- *                          name:"json",
- *                          abbr: "-o",
- *                          info: "Initialize a `json` configuration file"
- *                        }]
- *             });
- *        command.run(); // Users can use `gig init -o`
- *      ```
- *
+/**   
+ 
  *
  *  解析用户的输入参数
  *  可接受用用操作
@@ -155,13 +86,9 @@ import showVersion from './showVersion';
 class Args {
   // 为一只
   uniKey: symbol;
-  /**
-   * The initialization parameter is used to specify whether to overwrite when there are duplicate instructions
-   *
-   *  and is not overwritten by default
-   *
-   *  初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
-   */
+  /**************************
+   * 初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
+   **************************/
   constructor(name: string = '') {
     if (typeof name !== 'string') name = `${name}`;
     this.uniKey = Symbol(name);
@@ -196,22 +123,14 @@ class Args {
     return auxiliaryDataStore[this.uniKey].name;
   }
 
-  /** current state
-   *
-   *   - 1 `start`  At the beginning, waiting for binding
-   *   - 2 `bind over`  Execute binding, wait for execution
-   *   - 3  `run over`  Parsing completed
-   *   - 4 `over` Execution completed, it is not recommended to take any action after this command
-   *
-   *
+  /**************************
    *  当前状态
    *  - 1 `start`  刚开始，等待绑定
    *  - 2 `bind over`  执行绑定，等待执行
    *  - 3  `run over`  解析完毕
    *  - 4 `over` 执行完毕，不建议在此命令后进行任何操作
    *
-   */
-
+   **************************/
   get state(): StateType {
     return auxiliaryDataStore[this.uniKey].state;
   }
@@ -251,41 +170,22 @@ class Args {
     return true;
   }
 
-  /**  Binding options, descriptions, and abbreviation
-   * 
-   * ```ts
-   * 
-   *  type ParamType = {  
-   *     name: string
-   *     info: string
-   *     options?: SubOptionsType | (SubOptionsType | string)[] | string 
-   *     hide?: boolean
-   *    }
-   * 
-   * type BindParamsType = string | (string | ParamType)[] |  ParamType | {
-    [x: string]: string | SubOptionsType | (string | SubOptionsType)[] | undefined;
-} ;
-   * 
-   * 
-   * ```
+  /**************************
    * 绑定选项、说明及缩写
-   * 
+   *
+   *
    * @param data {@link BindParamsType}   Binding Command Line Parameter
-   *      
+   *
    *        data {@link BindParamsType}  绑定命令行参数
-   * 
-   * 
-   * 
-   */
+   **************************/
   bind(data: BindParamsType) {
     bindInstruction(data, auxiliaryDataStore[this.uniKey]);
     return this;
   }
 
-  /**  Perform  analyzing  users
-   *
-   *  开始执行回调
-   */
+  /**************************
+   * 开始执行回调
+   **************************/
   run() {
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该问题的出现。所以所有的数据保持单一 */
     executeParsing(auxiliaryDataStore[this.uniKey]);

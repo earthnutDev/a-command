@@ -1,6 +1,10 @@
-/** 一个简单的管理数据中心 \
- * 使用 on 将数据添加到 callList 上 \
- * 使用 remove 进行移除 callList 的第一个元素 \
+/**
+ *
+ *  一个简单的管理数据中心
+ *
+ * 使用 on 将数据添加到 callList 上
+ *
+ * 使用 remove 进行移除 callList 的第一个元素
  *
  */
 export default {
