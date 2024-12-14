@@ -4,7 +4,7 @@ This is a project for terminal interaction, serving the [ixxx](https://github.co
 
 ## language
 
-[English](https://github.com/lmssee/command/blob/main/README.md) [中文](https://github.com/lmssee/command/blob/main/自述文件.md)
+[English](https://github.com/lmssee/npm-a-command/blob/main/README.md) [中文](https://github.com/lmssee/npm-a-command/blob/main/自述文件.md)
 
 ## install
 
@@ -333,4 +333,4 @@ const result = await selection({
 
 _If you don't want to display the issue and preview, you can use the pattern of the incoming object for custom configuration_
 
-If you have any questions, you can directly [submit question](https://github.com/lmssee/command/issues/new)
+If you have any questions, you can directly [submit question](https://github.com/lmssee/npm-a-command/issues/new)

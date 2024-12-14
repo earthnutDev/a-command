@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "name": "a-command",
   "main": "cjs/index.cjs",
   "module": "mjs/index.mjs",
@@ -42,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lmssee/command.git"
+    "url": "git+https://github.com/lmssee/npm-a-command.git"
   },
   "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
   "license": "ISC",
@@ -50,9 +50,9 @@
     "command",
     "a-command"
   ],
-  "homepage": "https://lmssee.github.io/command",
+  "homepage": "https://lmssee.com/command",
   "bugs": {
-    "url": "https://github.com/lmssee/command/issues"
+    "url": "https://github.com/lmssee/npm-a-command/issues"
   },
   "publishConfig": {
     "access": "public",
