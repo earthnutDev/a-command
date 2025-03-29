@@ -1,8 +1,9 @@
 import questionData, { originalData } from './questionData';
 import draw from './draw';
 import userInput from './userInput';
-import { _p, t } from 'a-node-tools';
+import { _p } from 'a-node-tools';
 import { QuestionParamDataType } from './types';
+import { t } from 'color-pen';
 
 const { stdout } = process;
 /** unexpected exit
@@ -14,6 +15,12 @@ const unexpectedExit = () =>
     `${t}${stdout.columns}D${t}J${t}?25h ❌ ${questionData.currentIssue.text} `,
   );
 
+/**
+ *
+ * @param data
+ * @param simpleResult
+ * @returns
+ */
 export default async function (
   data: QuestionParamDataType,
   simpleResult = false,
@@ -30,7 +37,8 @@ export default async function (
    *
    *  移除监听
    */
-  process.removeListener('exit', unexpectedExit), _p(`${t}2K`, false);
+  process.removeListener('exit', unexpectedExit);
+  _p(`${t}2K`, false);
   if (questionData.multi) {
     if (simpleResult) {
       return questionData.results.map(

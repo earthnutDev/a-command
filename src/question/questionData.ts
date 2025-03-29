@@ -36,10 +36,7 @@ export const originalData: {
 
 /** data  */
 const data: QuestionDataType = {
-  /** Current type
-   *
-   * -  0  ordinary  Q&A
-   * -  1  select Q&A
+  /**
    *
    * 当前类型
    *
@@ -54,22 +51,26 @@ const data: QuestionDataType = {
   set type(newValue: 0 | 1) {
     originalData.type = newValue;
     /** 当前类型的改变，触发是否隐藏光标  */
-    newValue == 1 ? cursorHide() : cursorShow();
+    if (newValue == 1) {
+      cursorHide();
+    } else {
+      cursorShow();
+    }
   },
 
-  /** Multiple question mode
+  /**
    *
    * 多问模式
    */
   get multi(): boolean {
     return originalData.multi;
   },
-  /** User input
+  /**
    *
    * 用户输入
    */
   userInput: [],
-  /** The progress of the multi question mode will trigger changes to the current issue
+  /**
    *
    * 多问模式的进度，改变会触发当前问题的变更
    */
@@ -85,7 +86,7 @@ const data: QuestionDataType = {
    * 浮标移动
    */
   cursorTranslate: 0,
-  /** When changing, a new count of this.cursorTranslate value will be triggered
+  /**
    *
    * 当前的浮标位置，当改变时会触发 this.cursorTranslate 的自更新
    */
@@ -94,43 +95,43 @@ const data: QuestionDataType = {
   },
 
   set indexOfCursor(newValue: number) {
-    (originalData.indexOfCursor = newValue),
-      (this.cursorTranslate = Reflect.apply(computeCodeCount, this, []));
+    originalData.indexOfCursor = newValue;
+    this.cursorTranslate = Reflect.apply(computeCodeCount, this, []);
   },
 
-  /**  current issue
+  /**
    *
    * 当前问题
    */
   currentIssue: {
-    /**    question text
+    /**
      *
      * 当前问题展示
      **/
     text: 'Please change to your own question',
-    /** User prompt: When it is pure text, display as text prompt; When it is an array, it defaults to selective questioning
+    /**
      *
      *  用户提示：当为纯文本时，展示为文本提示；当为数组时，默认为选择式提问
      * */
     tip: '',
-    /** Type, only supports text and password，default  is text
+    /**
      *
      * 类型，仅支持文本（text）和密码（password），缺省为文本
      **/
     type: 'text',
-    /** Privacy mode, user answers will overwrite the previous question line
+    /**
      *
      *
      * 隐私模式
      */
     private: false,
-    /** Result display
+    /**
      *
      * 结果展示
      */
     resultText: '',
   },
-  /** The returned result set
+  /**
    *
    * 结果集，用于多询问模式
    */

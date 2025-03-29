@@ -1,17 +1,20 @@
-import { t, Color, cursorMoveUp, _p } from 'a-node-tools';
+import { cursorMoveUp, _p } from 'a-node-tools';
 import selectionData from './selectionData';
 import setColumns from './setColumn';
+import pen, { t } from 'color-pen';
 
-/** draw
+/**
  *
- *  绘制  */
+ *  绘制
+ *
+ */
 export default function () {
   const len = selectionData.data.length, // Get the number of options  // 获取选项长度
     { info, select, drawData, showPreview, preview } = selectionData;
   // 绘制数据截断
   setColumns();
   _p(
-    `${t}1K${t}J${t}w${t}${(info as string).length + 6}D${Color.green('? ')}${info}\n`,
+    `${t}1K${t}J${t}w${t}${(info as string).length + 6}D${pen.green('? ')}${info}\n`,
   );
   // 遍历需要绘制的每一行
   for (let i = 0; i < len; i++) {

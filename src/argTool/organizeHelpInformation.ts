@@ -1,6 +1,7 @@
-import { _p, Color, t } from 'a-node-tools';
+import { _p } from 'a-node-tools';
 import { AuxiliaryData } from './auxiliaryData';
 import { ArgOriginBind, SubOptionsType } from './types';
+import pen, { t } from 'color-pen';
 /** 空白 */
 const _blank = '\x20'.repeat(4);
 /** organize help information
@@ -19,19 +20,19 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
     auxiliaryData.helpInfo !== 'help'
   ) {
     const data = auxiliaryData.originalBind[auxiliaryData.helpInfo];
-    _p(`${_blank}${data.name}${_blank}${Color.magenta(data.info)}\n`);
+    _p(`${_blank}${data.name}${_blank}${pen.magenta(data.info)}\n`);
     // 带子项的这里打印
     if (data.options && Object.keys(data.options).length > 0) {
       _p(
-        `${Color.darkYellow(`${_blank}use:`)}  ${auxiliaryData.name}   ${
+        `${pen.yellow(`${_blank}use:`)}  ${auxiliaryData.name}   ${
           auxiliaryData.helpInfo
         }   [subOptions/subAbbr  [value]]\n`,
       );
-      _p(`${Color.cyan(`${_blank}subOptions:`)} \n`);
+      _p(`${pen.cyan(`${_blank}subOptions:`)} \n`);
       printHelpOther(data.options || {});
     } else {
       _p(
-        `${Color.green(`${_blank}use:`)}  ${auxiliaryData.name}   ${
+        `${pen.green(`${_blank}use:`)}  ${auxiliaryData.name}   ${
           auxiliaryData.helpInfo
         }    [value]\n`,
       );
@@ -45,23 +46,23 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
     (auxiliaryData.helpInfo as string[]).length == 2
   ) {
     _p(
-      `${Color.cyan(' you can use:')}  ${auxiliaryData.name}   ${(
+      `${pen.cyan(' you can use:')}  ${auxiliaryData.name}   ${(
         auxiliaryData.helpInfo as []
-      ).join('   ')}   [value]\n ${Color.green(' description:')} ${
+      ).join('   ')}   [value]\n ${pen.green(' description:')} ${
         auxiliaryData.originalBind[auxiliaryData.helpInfo[0]]['options'][
           auxiliaryData.helpInfo[1]
         ].info
       }`,
     );
   } else {
-    /** Follow up on configuration help documents
+    /**
      *
      * 配置帮助文档
      */
     _p(
-      `${Color.darkRed(' you can use:')}  ${
+      `${pen.brightRed(' you can use:')}  ${
         auxiliaryData.name
-      }  options/abbr  [subOptions/subAbbr  [value]]\n\n${Color.random(
+      }  options/abbr  [subOptions/subAbbr  [value]]\n\n${pen.random(
         'options:',
       )}\n`,
     );
@@ -71,6 +72,9 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
 
 /**
  * 打印其他信息
+ *
+ * @type
+ *
  *  ```ts
  *  type ArgOriginBind = {
  *     [key: string]: {
@@ -84,7 +88,6 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
  * }
  * ```
  */
-
 function printHelpOther(
   data: ArgOriginBind | { [key: string]: SubOptionsType },
   printOther?: boolean,
@@ -122,7 +125,11 @@ function printHelpOther(
   }
 }
 
-/**  Format help text so that their values are in the same column
+/**
+ * 格式化帮助文本，让他们值在同一列
+ *
+ * @type
+ *
  *  ```ts
  *    type param =  {
  *        name: string ,
@@ -132,7 +139,6 @@ function printHelpOther(
  *        color:  boolean  // default = true
  *    }
  *    ```
- * 格式化帮助文本，让他们值在同一列
  */
 function formatHelpText(_d: {
   name: string;
@@ -170,7 +176,7 @@ function formatHelpText(_d: {
     abbrLimitLength + 1 - computerCodePoint(data.abbr || '', abbrLimitLength),
   );
   // 打印 description
-  str += data.color ? Color.magenta(data.info) : data.info;
+  str += data.color ? pen.magenta(data.info) : data.info;
   return str;
 }
 

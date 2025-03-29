@@ -22,14 +22,14 @@ import showVersion from './showVersion';
  *    **使用字符串参数时，注意 `<>` 和 `()` 均为英文符号**
  *  - 最简单的例子
  *      ```js
- *        import { Args }  from "ismi-command";
+ *        import { Args }  from "a-command";
  *        const  command : Args =  new Args();
  *        command.bind("init <-i> (初始化一个配置文件)").run();
  *      ```
  * - 不带子项的配置
  *
  *      ```js
- *        import { Args }  from "ismi-command";
+ *        import { Args }  from "a-command";
  *        const  command : Args =  new Args();
  *        command.bind({
  *                      name: "init",
@@ -39,7 +39,7 @@ import showVersion from './showVersion';
  *      ```
  *  - 带子项配置（子项纯文本的）
  *      ```js
- *        import { Args }  from "ismi-command";
+ *        import { Args }  from "a-command";
  *        const  command : Args =  new Args();
  *        command
  *            .bind({
@@ -57,7 +57,7 @@ import showVersion from './showVersion';
  *
  *  - 全配置的
  *      ```js
- *        import { Args }  from "ismi-command";
+ *        import { Args }  from "a-command";
  *        const  command : Args =  new Args();
  *        command
  *            .bind({
@@ -86,9 +86,9 @@ import showVersion from './showVersion';
 class Args {
   // 为一只
   uniKey: symbol;
-  /**************************
+  /**
    * 初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
-   **************************/
+   */
   constructor(name: string = '') {
     if (typeof name !== 'string') name = `${name}`;
     this.uniKey = Symbol(name);
@@ -123,19 +123,19 @@ class Args {
     return auxiliaryDataStore[this.uniKey].name;
   }
 
-  /**************************
+  /**
    *  当前状态
    *  - 1 `start`  刚开始，等待绑定
    *  - 2 `bind over`  执行绑定，等待执行
    *  - 3  `run over`  解析完毕
    *  - 4 `over` 执行完毕，不建议在此命令后进行任何操作
    *
-   **************************/
+   */
   get state(): StateType {
     return auxiliaryDataStore[this.uniKey].state;
   }
 
-  /**  over
+  /**
    *
    *  是否已结束
    *
@@ -144,7 +144,17 @@ class Args {
   get isEnd() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this;
+    /**
+     *
+     *
+     *
+     */
     class My extends Boolean {
+      /**
+       *
+       *
+       *
+       */
       constructor() {
         super(auxiliaryDataStore[_this.uniKey].state.code == 4);
       }
@@ -152,7 +162,10 @@ class Args {
        *
        * 此时若无其他操作，建议 end 一下 */
       get end() {
-        if (this.valueOf()) _this.end;
+        if (this.valueOf()) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          _this.end;
+        }
         return true;
       }
     }
@@ -170,22 +183,22 @@ class Args {
     return true;
   }
 
-  /**************************
+  /**
    * 绑定选项、说明及缩写
    *
    *
    * @param data {@link BindParamsType}   Binding Command Line Parameter
    *
    *        data {@link BindParamsType}  绑定命令行参数
-   **************************/
+   */
   bind(data: BindParamsType) {
     bindInstruction(data, auxiliaryDataStore[this.uniKey]);
     return this;
   }
 
-  /**************************
+  /**
    * 开始执行回调
-   **************************/
+   */
   run() {
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该问题的出现。所以所有的数据保持单一 */
     executeParsing(auxiliaryDataStore[this.uniKey]);
@@ -229,8 +242,8 @@ class Args {
    *
    * 用户可主动调用该方法在用户参数没有包含 -h 的时候展示帮助文档
    *
-   * @param {string} [optionName]  调用的一级展示
-   * @param {string} [subOptionName] 调用的二级（一级的子项）
+   * @param  optionName  调用的一级展示
+   * @param  subOptionName 调用的二级（一级的子项）
    * @memberof Args
    */
   help(optionName?: string, subOptionName?: string) {

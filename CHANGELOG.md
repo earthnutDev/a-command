@@ -14,6 +14,11 @@
 - default
 - data type
 
+## 0.1.0 (3 月 30 日 2025 年)
+
+- 更新了依赖
+- 优化了 `args` 的返回值，现在添加 `error` ，用于指示未匹配的参数数据
+
 ## 0.0.8 (12 月 15 日 2024 年)
 
 - 维护了代码源 github 的地址
@@ -91,7 +96,7 @@
 
 - 添加了对 windows 的支持
 - `selection` 添加了 `private` 私密模式，不打印结果行
-- 把 `readInput`、`Color`、`cursor` 拆分到了 [node-tools](https://github.com/lmssee/nde-tools) ，保持 command 的独立性
+- 把 `readInput`、`Color`、`cursor` 拆分到了 [node-tools](https://github.com/earthnutDev/a-node-tools) ，保持 command 的独立性
 
 ## 0.0.36 （6 月 1 日 2024 年）
 

@@ -1,0 +1,51 @@
+name: 测试率自动化工具
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '触发原因（选填）'
+        required: false
+        default: '手动触发'
+
+jobs:
+  test:
+    # 在提交的代码包含 `version` 字样时才运行该动作
+    # 或者手动触发
+    name: 运行测试并将测试率提交到 Codecov 和 coveralls
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'push' && contains(github.event.head_commit.message, 'version')) ||
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - name: 代码检出
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 初始化 Node 并设定 Node 版本
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: 安装 dependencies 依赖
+        run: npm install
+
+      - name: 运行测试
+        run: npx jest --coverage
+
+      - name: 上传测试结果到 Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          # token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          verbose: true
+
+      - name: 上传测试结果到 coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info

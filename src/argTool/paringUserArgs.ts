@@ -166,7 +166,13 @@ function manageResult(data: string[], auxiliaryData: AuxiliaryData): void {
   addResultItem();
 }
 
-// 当值为选择选项
+/**
+ *
+ *
+ * 当值为选择选项
+ *
+ *
+ */
 function dataIsCode(name: string) {
   // 倘若上一个项存在
   if (manageData.name !== '') {
@@ -177,7 +183,11 @@ function dataIsCode(name: string) {
   manageData.resetObject(name);
 }
 
-// 当前值为子项
+/**
+ *
+ *  当前值为子项
+ *
+ */
 function dataIsOption(name: string) {
   const { item, object } = manageData;
   // 上一个子项值存在 。因为在 if 中已经做了存在的判断
@@ -185,7 +195,13 @@ function dataIsOption(name: string) {
   manageData.resetItem(name);
 }
 
-// 当值被认定为参数的值
+/**
+ *
+ *
+ * 当值被认定为参数的值
+ *
+ *
+ */
 function dataIsValue(value: string | boolean | number) {
   // value 值进行整理
   if (value == 'true') {
@@ -228,7 +244,9 @@ function addResultItem() {
     return;
   }
 
-  item.name && object.options?.push(item);
+  if (item.name) {
+    object.options?.push(item);
+  }
   // 将数据推进结果
   result.push(JSON.parse(JSON.stringify(object)));
 }

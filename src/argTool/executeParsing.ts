@@ -3,7 +3,7 @@ import { AuxiliaryData } from './auxiliaryData';
 import { organizeHelpInformation } from './organizeHelpInformation';
 import paringUserArgs from './paringUserArgs';
 
-/**  Perform  analyzing  users
+/**
  *
  *  开始执行  run ，解析用户行为
  */
@@ -27,7 +27,7 @@ export default function executeParsing(auxiliaryData: AuxiliaryData) {
     return organizeHelpInformation(auxiliaryData);
 }
 
-/** Execute frozen data
+/**
  *
  * 执行冷冻数据
  */

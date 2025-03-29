@@ -2,47 +2,53 @@ import commandData from 'src/commandData';
 import { SelectionParamDataType } from './types';
 import origin_selection from './originSelection';
 
-/** Export a displayed list selection
+/**
  *
- *  ```ts
- *  type SelectionParamDataType =  any[] | DataType;
+ * ```ts
+ *  type SelectionParamDataType = any[] | type;
  *
- *  type DataType = {
- *    data: any[], //  Selected data to be rendered
- *    resultText:string,  //  Result display
- *    info?: string,  //  Questioning information
- *    showPreview?: boolean,  //  Is the answer preview displayed
- *     preview?: string //  Preview on selection
- *     private?: false | true; // Privacy mode, user answers will overwrite the previous question line
+ * type DataType = {
+ * data:  any[];  // 选择要渲染的数据
+ * resultText: string;  // 结果显示
+ * info？:  string;  // 质疑信息
+ * showPreview？:  boolean;  // 是否显示答案预览
+ * preview？:  string; // 选择时预览
+ * private？:  false | true; 隐私模式下，用户回答将覆盖上一个问题行
  * };
  *
- *  ```
- * @param data any passes in the data that needs to be selected by the user, which can be an array or an object
- * When the data is an array composed of one-dimensional pure strings, the default configuration is used by default
- * Example:
- *  ```js
- *      [
- *         "Hamburg",
- *         "steak",
- *         "pizza",
- *      ]
  * ```
- *  When the data is in {@link Object} format, more information can be customized:
- * Example:
- *  ```ts
- * {
- *   info: "Please choose what to have for lunch",     //Custom prompt text information
- *   resultText?: "The result you have chosen is ",    //   Result display
- *   showPreview: true,        //Do you want to prompt for selected results
- *   preview: "Currently selected as"       // Preview on selection
- *   private: true, // not show result
- *   data: []             //An array composed of strings
- *  }
+ * @param data 传入需要由用户选择的数据，可以是数组或对象
  *
+ * 当数据是由一维纯字符串组成的数组时，默认使用默认配置
+ *
+ * 例：
+ *
+ *
+ * ```js
+ * [
+ *    "汉堡",
+ *   "牛排",
+ *   "披萨",
+ * ]
  * ```
+ *
+ * 当数据为 `Object` 格式时，可以自定义更多信息：
+ *
+ *例：
+ * ```ts
+ * {
+ *    info: "请选择午餐吃什么",  //自定义提示文字信息
+ *    resultText？: "您选择的结果是 ",  // 结果显示
+ *    showPreview: true,  //是否要提示选择结果
+ *    preview: "Currently selected as", // 选择时预览
+ *    private: true,  // 不显示结果
+ *    data: [] //由字符串组成的数组
+ * }
+ *
+ *```
  *
  *  导出一个显示的列表选择.
- *  @param  data  any 传入需要供用户选择的数据，可以是数组或对象.
+ *
  * 当 data 为一维纯字符串组成的数组时，则默认使用默认的配置.
  *      例:
  *        ```ts
@@ -53,7 +59,7 @@ import origin_selection from './originSelection';
  *           ]
  *          ```
  *
- *  当 data 为 {@link Object} 格式时，可以自定义更多信息：
+ *  当 data 为 `Object` 格式时，可以自定义更多信息：
  *      例：
  *
  *  ```ts

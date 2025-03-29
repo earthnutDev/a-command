@@ -2,21 +2,8 @@ import commandData from 'src/commandData';
 import origin_question from './originQuestion';
 import { QuestionParamDataType } from './types';
 
-/**  Use to ask users questions
+/**
  *
- * ```js
- *
- * ParamDataType = {
- *        text: string,
- *       // User prompt: When it is pure text, display as text prompt; When it is an array, it defaults to selective questioning
- *      tip?: string | number | never | Boolean | null | undefined | any[],
- *      // Type, only supports text and password，default  is text
- *      type?: "text" | "password"
- *      // Privacy mode, user answers will overwrite the previous question line
- *       private: false,
- *       // Result display
- *        resultText: "",
- *  }
  *
  * ```
  * 一个向提问的并收集用户答录
@@ -35,16 +22,10 @@ import { QuestionParamDataType } from './types';
  *  }
  *
  * ```
- *  @param data   Parameters can be stings, ParamDataType, or an array composed of them
- *
- *                   参数，可以是 string、ParamDataType 或是他们组成的数组
- *
- * @param [simpleResult=false]  Is it displayed as a simple mode return (default return is question and answer)
- *
- *        [simpleResult=false]   是否显示为简单模式的返回（默认返回是答案与）
+ *  @param data     参数，可以是 string、ParamDataType 或是他们组成的数组
+ * @param  simpleResult   是否显示为简单模式的返回（默认返回是答案与），缺省为 false
  *
  */
-
 export default function question(
   params: QuestionParamDataType,
   simpleResult: boolean = false,

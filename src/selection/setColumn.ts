@@ -2,10 +2,11 @@ import selectionData from './selectionData';
 
 const { stdout } = process;
 
-/** Option truncation
+/**
  *
  * 选项截断
- * */
+ *
+ */
 export default function setColumns() {
   const len = selectionData.data.length,
     { data, drawData } = selectionData;
