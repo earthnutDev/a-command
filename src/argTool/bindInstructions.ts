@@ -1,4 +1,3 @@
-import { typeOf } from 'a-js-tools';
 import { _p } from 'a-node-tools';
 import {
   BindParamsOptionsType,
@@ -7,13 +6,13 @@ import {
   SubOptionsType,
 } from './types';
 import { AuxiliaryData } from './auxiliaryData';
+import { isArray } from 'a-type-of-js';
 
 /**
  * 绑定选项、说明及缩写
  *
  * @param  data {@link BindParamsType}  绑定命令行参数
  */
-
 export default function bindInstruction(
   data: BindParamsType,
   auxiliaryData: AuxiliaryData,
@@ -66,8 +65,13 @@ export default function bindInstruction(
     });
   }
   _d = data as ParamType;
-  /** 配置缩写，方便检索 */
-  Boolean(_d.abbr) && (auxiliaryData.abbr[_d.abbr as string] = _d.name);
+  /** 配置缩写，方便检索
+   *
+   *
+   */
+  if (_d.abbr) {
+    auxiliaryData.abbr[_d.abbr as string] = _d.name;
+  }
 
   /**
    *  倘若有子项
@@ -100,7 +104,7 @@ function parsingSubOption(
   [a: string]: { name: string; abbr: string; info: string };
 } {
   // 转化非数组
-  if (typeOf(data) !== 'array') {
+  if (!isArray(data)) {
     data = [data as SubOptionsType | string];
   }
   const temporaryObject: {
@@ -120,7 +124,9 @@ function parsingSubOption(
       // 直接将值进行转化
       _d = Object.assign(_d, currentEle);
     }
-    _d.abbr && (auxiliaryData.abbr[`${name}^${_d.abbr}`] = _d.name);
+    if (_d.abbr) {
+      auxiliaryData.abbr[`${name}^${_d.abbr}`] = _d.name;
+    }
     temporaryObject[_d.name] = _d;
   });
   return temporaryObject;

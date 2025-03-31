@@ -18,22 +18,22 @@
  */
 
 export type SubOptionsType = {
-  /** Command line option parameter name，suggest within 15 English characters
+  /**
    *
    * 命令行选项参数名称，建议在 15 个英文字符内
    */
   name: string;
-  /**  Function Description
+  /**
    *
    * 功能描述
    */
   info: string;
-  /** abbreviation .The name limit is already 15, is this limit of 10 okay ?
+  /**
    *
    * 缩写，名字都限制 15 了，这个限制 10 没问题吧
    */
   abbr?: string;
-  /**  Is it displayed in the help
+  /**
    *
    * 是否展示在帮助中
    */
@@ -45,12 +45,12 @@ export type SubOptionsType = {
  * 参数类型
  */
 export type ParamType = {
-  /** Command line option name
+  /**
    *
    * 命令行选项名称
    */
   name: string;
-  /**  Function Description
+  /**
    *
    * 功能描述
    */

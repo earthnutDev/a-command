@@ -3,26 +3,23 @@ import selection from './selection/selection';
 import question from './question/question';
 
 /**
- * This is a collection that inherits {@link Args} and integrates {@link question} and {@link selection}
- *
- * The initialization parameter is used to specify whether to overwrite when there are duplicate instructions
- *
- *
- * However, it is recommended to use {@link Command} instead of {@link question} or {@link selection}
- *
- * Because {@link Command} automatically manages the order of calls, depending on individual usage habits
  *
  *
  *
- * 这是一个集合体，继承于 {@link Args}，又集成了 {@link question} 与 {@link selection}
+ * 这是一个集合体，继承于 `Args`，又集成了 `question` 与 `selection`
  *
  *
- * 但是，建议使用 {@link Command} 而不是 {@link question} 或 {@link selection}
+ * 但是，建议使用 `Command` 而不是 `question` 或 `selection`
  *
- * 因为 {@link Command} 会自动管理调用的顺序 ，这看个人使用习惯
+ * 因为 `Command` 会自动管理调用的顺序 ，这看个人使用习惯
  *
  */
 class Command extends Args {
+  /**
+   *
+   * @param name 命令的名称
+   *
+   */
   constructor(name: string = '') {
     super(name);
     Object.defineProperties(this, {
@@ -41,9 +38,10 @@ class Command extends Args {
     });
   }
 
-  /**  This method is detached from  `selection` and can directly `import {selection} form "ismi-command";`
+  /**
+   * 该应用抽离于 `selection` , 可直接 `import  { selection } form  "a-command";`
    *
-   *  For detailed usage, please refer to : {@link selection}
+   * @example
    *
    * ```ts
    * type DataType = {
@@ -59,16 +57,16 @@ class Command extends Args {
    * ```
    *
    *
-   * 该应用抽离于 `selection` , 可直接 `import  { selection } form  "ismi-command";`
    *
-   * data: ParamDataType, resultType?: "number" | "string"
-   *  详细用法参见 ： {@link selection}
-   * */
+   */
   selection = selection;
 
-  /**  This method is detached from  `question` and can directly `import { question } form "ismi-command";`
+  /**
    *
-   *  For detailed usage, please refer to : {@link question}
+   * 该应用抽离于 `question` , 可直接 `import  { question } form  "a-command";`
+   *
+   *
+   * @example
    *
    * ```ts
    * ParamDataType = {
@@ -88,13 +86,18 @@ class Command extends Args {
    * ```
    *
    *
-   * 该应用抽离于 `question` , 可直接 `import  { question } form  "ismi-command";`
    *
-   *
-   *  详细用法参见 ： {@link question}
    * */
 
   question = question;
+
+  /**
+   * 主动抛出一个错误终止进程
+   */
+  get error() {
+    process.exit(1);
+    return true;
+  }
 }
 
 export default Command;

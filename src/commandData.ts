@@ -12,7 +12,9 @@ export default {
   /** 注册事件 */
   on(uniKey: symbol, callFn: () => void) {
     const list: CommandDataItem[] = this.callList;
-    list.length == 0 && Reflect.apply(callFn, undefined, []);
+    if (list.length == 0) {
+      Reflect.apply(callFn, undefined, []);
+    }
     list.push([uniKey, callFn]);
   },
   /** 移除上一个事件

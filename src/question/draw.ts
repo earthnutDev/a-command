@@ -1,5 +1,6 @@
-import { t, Color, cursorMoveLeft, _p } from 'a-node-tools';
+import { cursorMoveLeft, _p } from 'a-node-tools';
 import questionData from './questionData';
+import pen, { t } from 'color-pen';
 
 const { stdout } = process;
 
@@ -20,18 +21,15 @@ export default () => {
    *
    * 显示头
    */
-  _p(
-    `${t}2K${transformLength}${Color.green('?')} ${currentIssue.text}: `,
-    false,
-  );
+  _p(`${t}2K${transformLength}${pen.green('?')} ${currentIssue.text}: `, false);
   // 打印选择模式
   if (type != 0) {
     _p(
       (currentIssue.tip as string[])
         .map(i =>
           i == userInput[0]
-            ? t.concat('25;1;4;5m').concat(Color.cyan(i))
-            : Color.darkMagenta(i),
+            ? t.concat('25;1;4;5m').concat(pen.cyan(i))
+            : pen.magenta(i),
         )
         .join('  '),
       false,
@@ -45,7 +43,7 @@ export default () => {
         0,
       );
     // 打印含提示且用户为输入时文本
-    _p(' '.concat(Color.darkGreen(currentIssue.tip as string)), false);
+    _p(' '.concat(pen.green(currentIssue.tip as string)), false);
     cursorMoveLeft(transformLength);
   } else {
     if (currentIssue.type == 'text') {
@@ -55,6 +53,8 @@ export default () => {
       // 打印密码模式
       _p(` ${userInput.map(() => '*').join('')}`, false);
     }
-    cursorTranslate !== 0 && cursorMoveLeft(cursorTranslate);
+    if (cursorTranslate !== 0) {
+      cursorMoveLeft(cursorTranslate);
+    }
   }
 };

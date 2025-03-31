@@ -1,12 +1,12 @@
-import { typeOf } from 'a-js-tools';
 import { CurrentIssueType } from './types';
 import questionData, { originalData } from './questionData';
+import { isString } from 'a-type-of-js';
 
-/**Change the current issue (Every change initializes the `questionData.data`)
+/**
  *
- *  变更当前问题（每次变更会初始化  questionData.data）
+ *  变更当前问题（每次变更会初始化 ）
  *
- *  @param data {@link ParamDataType}
+ 
  **/
 export default function changeCurrentIssue() {
   const { multi, progressCount } = questionData;
@@ -26,7 +26,7 @@ export default function changeCurrentIssue() {
   };
   const currentIssue: CurrentIssueType = Object.assign(
     _e,
-    typeOf(_d) == 'string' ? { text: _d } : _d,
+    isString(_d) ? { text: _d } : _d,
   );
   // 初始化当前问题
   const type: 0 | 1 = Array.isArray(currentIssue.tip) ? 1 : 0;

@@ -30,11 +30,14 @@ export class AuxiliaryData {
    *  - 4 `over` 执行完毕，不建议在此命令后进行任何操作
    *
    */
-
   get state(): StateType {
     return this._state;
   }
-
+  /**
+   *
+   *
+   *
+   */
   set state(stateCode: 1 | 2 | 3 | 4) {
     this._state = [
       undefined,
@@ -69,22 +72,51 @@ export class AuxiliaryData {
 
 /** 仅作初始化用，其实这里直接返回不得了 */
 class TempArgs extends Array {
+  /**
+   *
+   *
+   *
+   */
   get $nomatch(): string[] {
     return [];
   }
+  /**
+   *
+   *
+   *
+   */
   get $map(): ArgsMapType {
     return {};
   }
+  /**
+   *
+   *
+   *
+   */
   get $arrMap(): ArgsArrMapType {
     return [];
   }
+  /**
+   *
+   *
+   *
+   */
   get $only(): string[] | [] {
     return [];
   }
+  /**
+   *
+   *
+   *
+   */
   get $original(): string[] | [] {
     return [];
   }
-
+  /**
+   *
+   *
+   *
+   */
   get $isVoid(): boolean {
     return false;
   }
@@ -111,9 +143,9 @@ export const createAuxiliaryData = () =>
               | '$original'
               | '$isVoid'
               | '$nomatch',
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             _receiver,
           ) {
-            _receiver;
             switch (_p) {
               case '$nomatch':
                 return target.values.slice();

@@ -1,336 +1,331 @@
-# a simple command
+# a command
 
-This is a project for terminal interaction, serving the [ixxx](https://github.com/lmssee/ixxx) class
+[![version](<https://img.shields.io/npm/v/a-command.svg?logo=npm&logoColor=rgb(0,0,0)&label=版本号&labelColor=rgb(73,73,228)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![NPM Last Update](<https://img.shields.io/npm/last-update/a-command?logo=npm&label=版本最后更新&labelColor=rgb(255,36,63)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![📦 size](<https://img.shields.io/bundlephobia/minzip/a-command.svg?logo=npm&label=压缩包大小&labelColor=rgb(201,158,140)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![downloads](<https://img.shields.io/npm/dm/a-command.svg?logo=npm&logoColor=rgb(0,0,0)&label=月下载量&labelColor=rgb(194,112,210)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![downloads](<https://img.shields.io/npm/dt/a-command.svg?logo=npm&label=总下载量&labelColor=rgb(107,187,124)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command)
 
-## language
+[![last commit](<https://img.shields.io/github/last-commit/earthnutDev/a-command.svg?logo=github&logoColor=rgb(0,0,0)&label=最后推码&labelColor=rgb(255,165,0)&color=rgb(0,0,0)>)](https://github.com/earthnutDev/a-command) [![GitHub commit activity](<https://img.shields.io/github/commit-activity/y/earthnutDev/a-command.svg?logo=github&label=推码数&labelColor=rgb(128,0,128)&color=rgb(0,0,0)>)](https://github.com/earthnutDev/a-command) [![Coverage Status](<https://img.shields.io/coverallsCoverage/github/earthnutDev/a-command?logo=coveralls&label=coveralls&labelColor=rgb(12, 244, 39)&color=rgb(0,0,0)>)](https://coveralls.io/github/earthnutDev/a-command?branch=main) [![codecov](<https://img.shields.io/codecov/c/github/earthnutDev/a-command/main?logo=codecov&label=codecov&labelColor=rgb(7, 245, 245)&color=rgb(0,0,0)>)](https://codecov.io/gh/earthnutDev/a-command)
 
-[English](https://github.com/lmssee/npm-a-command/blob/main/README.md) [中文](https://github.com/lmssee/npm-a-command/blob/main/自述文件.md)
+[![查看 📔 日志](<https://img.shields.io/badge/👀-日_%20_志-rgb(0,125,206)>)](https://github.com/earthnutDev/a-command/blob/main/CHANGELOG.md) [![bug 🙋‍♂️ 提交](<https://img.shields.io/badge/☣️-bug_%20_提交-rgb(255,0,63)>)](https://github.com/earthnutDev/a-command/issues)
 
-## install
+---
+
+这里是一个用于终端交互的，服务于 [cil](https://earthnut.dev) 类项目
+
+## 安装
 
 ```sh
 npm install   a-command  --save
 ```
 
-## use
+## 使用
 
 ```js
 import Command from 'a-command';
 ```
 
-### Command section
+### Command 部分 ()
 
-The comprehensive part is to put [`Args`](#args-section-get-user-start-program-params), [`selection`](#selection-section-select-mode), and [`question`](#question-section-qa-mode) together
+综合部分是把 [`Args`](#args-部分-获取用户启动时参数) 、 [`selection`](#selection-部分-选择模式-) 和 [`question`](#question-部分问答模式) 放在一起
 
-For specific usage, please refer to their own instructions section
+具体使用可分别参见他们自己的说明部分
 
-### Args section (get user start program params)
+### Args 部分 （获取用户启动时参数）
 
-`Args` can obtain the parameters passed in by the user when starting the program
+`Args` 可以获取用户启动该程序传入的参数
 
-Analyzing user input parameters
+解析用户的输入参数
 
-**_will only start working after calling `run`, and all `bind` must be completed before `run`_**
-
-Please note that the execution is sequential, and once the `run` operation is completed, the `bind` operation cannot be executed. If you insist on doing so, users may see strange information that was originally meant to remind you .
-
-During the execution process, you can refer to the 'state' value to view. When the user is only referring to the version number or printing help, the 'state. code' will be 4, and 'state. overText' will be returned to indicate whether they are referring to the version number or printing help. It is not recommended to execute other commands when 'state. code' is 4. You can also print some other fun ones
+可接受用用操作
 
 - `commandName argName`
-- `commandName argName   value`
-- `commandName argName    optionName`
-- `commandName argName    optionName  value`
+- `commandName argName value`
+- `commandName argName optionName`
+- `commandName argName optionName value`
 
-Example：
+**_调用 `run` 后才会开始工作，并且，请在执行 `run` 之前完成所有操作的绑定_**
 
-If your command name is `ixxx` , You added parameters：
+请注意，执行是有顺序的，当执行完毕 `run` 后，是无法执行 `bind` 操作的。如果你执意要这么做，可能用户会看到奇怪的信息，而这些信息，本来是提醒你的！！！
 
-**Please avoid abbreviations as much as possible `h`、`v`**
+在执行过程中，可以参看 `state` 值查看。当用户仅是参看版本号或是打印帮助时， `state.code` 会是 4 ，同时返回 `state.overText` 来说明到底是参看版本号还是打印帮助。不建议在 `state.code` 为 4 时再执行其他命令。你也可以打印一些其他好玩的
 
-_When you have multiple configuration items, you can use an array to group the configuration items that comply with the rules_
+示例：
 
-- Simplified example
+倘若你的执行前缀为 `ixxx` , 可用：
+
+- **当你有多个配置项时，可把符合规则的配置项放入数组**
+- **缩写请尽量避开 `h`、`v`**
+- **使用字符串参数时，注意 `<>` 和 `()` 均为英文符号**
+
+- 最简单的例子
+
   ```js
   import { Args } from "a-command";
-  const command: Args = new Args("ixxx");
-  command.bind("init <-i> (Initialize configuration file)").run();
+  const command: Args = new Args('ixxx');
+  command.bind("init <-i> (初始化一个配置文件)").run();
   ```
-- Simple configuration example
-  ```js
+
+- 不带子项的配置
+
+```js
   import { Args } from "a-command";
-  const command: Args = new Args("ixxx");
+  const command: Args = new Args('ixxx');
   command
     .bind({
       name: "init",
       abbr: "-i",
-      info: "Initialize configuration file",
+      info: "初始化一个配置文件",
     })
     .run();
+```
+
+- 带子项配置（子项纯文本的）
+
+  ```js
+  import { Args } from "a-command";
+  const command: Args = new Args('ixxx');
+  command.bind({
+    name: "init",
+    abbr: "-i",
+    info: "初始化一个配置文件",
+    options: [
+      "ts <-t> (初始化一个 `ts` 后缀配置文件)",
+      "js <-j> (初始化一个 `js` 后缀配置文件)",
+      "json <-o> (初始化一个 `json` 后缀配置文件)",
+    ],
+  });
+  command.run(); // Users can use `gig init -o`
   ```
-- Example of carrying sub item configuration
 
-```js
-import { Args } from "a-command";
-const command: Args = new Args("ixxx");
-command.bind({
-  name: "init",
-  abbr: "-i",
-  info: "Initialize configuration file",
-  options: [
-    "ts <-t> (Initialize a `ts` configuration file)",
-    "js <-j> (Initialize a `js` configuration file)",
-    "json <-o> (Initialize a `json` configuration file)",
-  ],
-});
-command.run(); // Users can use `gig init -o`
-```
+- 全配置的
 
-- Example of carrying detailed configuration of sub items
+  ```js
+  import { Args } from "a-command";
+  const command: Args = new Args('ixxx');
+  command.bind({
+    name: "init",
+    abbr: "-i",
+    info: "初始化一个配置文件",
+    options: [
+      {
+        name: "ts",
+        abbr: "-t",
+        info: "初始化一个 `ts` 后缀配置文件",
+      },
+      {
+        name: "js",
+        abbr: "-j",
+        info: "初始化一个 `js` 后缀配置文件",
+      },
+      {
+        name: "json",
+        abbr: "-o",
+        info: "初始化一个 `json` 后缀配置文件",
+      },
+    ],
+  });
+  command.run(); // Users can use `gig init -o`
+  ```
 
-```js
-import { Args } from "a-command";
-const command: Args = new Args('ixxx');
-command.bind({
-  name: "init",
-  abbr: "-i",
-  info: "Initialize configuration file",
-  options: [
-    {
-      name: "ts",
-      abbr: "-t",
-      info: "Initialize a `ts` configuration file",
-    },
-    {
-      name: "js",
-      abbr: "-j",
-      info: "Initialize a `js` configuration file",
-    },
-    {
-      name: "json",
-      abbr: "-o",
-      info: "Initialize a `json` configuration file",
-    },
-  ],
-});
-command.run(); // Users can use `gig init -o`
-```
-
-- Strange behavior binding parameters:
+- 怪异行为绑定参数：
 
 ```ts
 import { Args } from 'a-command';
 const command: Args = new Args('ixxx');
 command.bind({
-  'init <-i> (Initialize project)': [
-    'ts  (Initialize a ts configuration file)',
-    'js  (Initialize a js configuration file)',
-    'json  (Initialize a json configuration file)',
+  'init <-i> (初始化项目)': [
+    'ts  (初始化一个 ts 配置文件)',
+    'js  (初始化一个 js 配置文件)',
+    'json  (初始化一个 json 配置文件)',
   ],
-  'create <-c> (Add a file)': [
-    'ts  (add a ts  file)',
-    'js  (add a js file)',
-    'json  (add a  json file)',
+  'create <-c> (添加一个文件)': [
+    'ts  (添加一个 ts 配置文件)',
+    'js  (添加一个 js 配置文件)',
+    'json  (添加一个 json 配置文件)',
   ],
 });
 command.run(); // Users can use `gig init ts`
 ```
 
-- Finally, you can use `args` to obtain the user's actual value input
+- 最后，可以使用 `args` 来获取用户实际的值输入
 
 ```ts
-    ... // other code
-
+    ... // 其他代码
      /**
-      *   Obtain processed user input parameters
+      *   获取处理后的用户输入的参数
       *
-      *  This mode preserves user input as much as possible, but also discards some unrecognized inputs
+      *   这种模式尽可能的保留了用户输入，但是也舍弃了部分无法识别的输入
       * */
     command.args;
     /**
-     *  Obtain the Object form of the processed user input parameters
+     *  获取处理后的用户输入的参数的 Object 形式
      *
-     *  This mode is more suitable for configuring files
+     *  这种模式更适合用于配置文件
      *
-     * **_In this mode, `subOptions` will overwrite the superior's `value`_**
+     * **_在这种模式下，`subOptions` 会覆盖上级的 `value`_**
      *
      * */
     command.args.$map;
     /**
-     * For the convenience of obtaining ordered object pattern data
+     * 为了获取有序的对象值
      *
-     *  this has been added
+     * 现 可以通过 `$arrMap` 获取
      *
      */
-    command.args.$arrMap
+    command.args.$arrMap;
      /**
-      *   Obtain a simple form of the processed user input parameters
+      *   获取处理后的用户输入的参数的简单形式
       *
-      *  This mode is suitable for simple commands, only checking if the command has
+      *  这种模式适合简单的命令，仅查看命令是否有
       * */
     command.args.$only;
 
-      /**
+  /**
    *
-   *   Is it empty? Check if the user has not entered command parameters
+   *    是否为空，判断用户未输入命令参数
    */
     command.args.$isVoid;
     /**
      *
-     * User's original input parameters
+     * 用户原始输入参数
      */
     command.args.$original;
-    /**
-     *
-     * No matching data (not bound)
-      */
-    command.args.$nomatch
 
 ```
 
-Get current status
+获取当前状态
 
 ```ts
 /**
- * is over ? you will get  a  boolean value
- *  although ,it over
- *  you can do other thing  if you want , you can get `state`  for what over
+ * 当使用带 -h 或者  -v 的参数测试的时候内部解析会标记为已结束状态, 但是是否结束看具体需求
  *
+ * isEnd 是一个扩展后的 Boolean  数据, 上面携带 end 属性, 用于结束状态
+ *
+ *  即在 isEnd 值为 true 时, 访问 end 属性会结束当前程序
  */
-command.isEnd;
-/**
- * If you have nothing else to do after
- *  the user uses the help document or
- * printed version information,
- *
- * you can use the `end`
- *
- */
-command.isEnd.end;
-command.state; //  state
-command.state.code; // state code
-command.state.overText; //    "version" | "help" | undefined;
+console.log(command.isEnd); // 打印是否结束，一个 `boolean` 值，你也可以知啊结束后根据 `state` 来获取具体信息来干其他的
+console.log(command.isEnd.end); //如果你在用户使用帮助文档或是打印版本信息后没有其他事情，可以使用结束
+console.log(command.state); // 打印当情状态
+console.log(command.state.code); // 打印当情状态
+command.state.overText; // 结束文本   "version" | "help";
+command.error; /// 将抛出错误并退出 node 程序
 ```
 
-#### Proactively using help documents
+#### 主动使用帮助文档
 
-Now you can actively display help documents by calling the `help` method
+现在可通过调用 `help` 方法主动展示帮助文档
 
-**Proactively calling, saying I hope you can use complete spelling instead of abbreviations**
+- _主动调用的，说我希望你能用全拼_
 
 ```ts
 command.help();
-command.help('init'); // Display init command
-command.help('init', 'vue'); // Display vue command information under init
+command.help('init'); // 展示 init 命令信息
+command.help('init', 'vue'); // 展示 init 下的 vue 命令信息
 ```
 
-#### Proactively using version instructions
+#### 主动使用版本说明
 
-Now you can actively display version information by calling the `version` method
+现在可通过调用 `version` 方法主动展示版本信息
 
 ```ts
 command.version();
 ```
 
-### question section (Q&A mode)
+### question 部分（问答模式）
 
-`Question 'is a question and answer mode that can be used to ask users questions or make simple choices. After referencing this function, use it where needed
-_A function waiting for user input. Because it needs to wait, it is asynchronous, and when using it, `wait` should be used\_
+`question` 是一个问答模式，可使用其向用户进行提问或是简单的选择使用。可引用该函数后，在需要的位置使用
+_等待用户输入的一个函数。因为要等待，所以是异步的，使用的时候应当使用 `await`_
 
-#### Example
+#### 示例
 
-The simplest use :
+最简单的使用
 
 ```js
 import { question } from 'a-command';
-const result = await question('What do you want for lunch');
+const result = await question('中午吃什么');
 ```
 
-Using custom configurations can provide users with a better experience.
+使用自定义配置，可以给用户更好的体验。
 
 ```js
 import { question } from 'a-command';
 const result = await question({
-  text: 'What do you want for lunch',
-  tip: 'Hamburg or Italian pasta',
-  type: 'text',
+  text: '中午吃什么', // 必须的参数
+  tip: '板面还是油泼面', // 可选参数，为数组时进入选择模式
+  type: 'text', // 一个类型选择，支持 `text` 、 `password`
+  private: false, // 选择完毕后是否覆盖
+  resultText: '你想吃的是', // 可选参数，选择后展示
 });
 ```
 
-You can also configure 'tip' as an array and configure Q&A as a simple selection.At this point, users can only choose from the values provided by 'tip' **Only suitable for simple selection, such as' yes' or 'no' or 'male' or 'female' options with more words, it is recommended to use [selection] (# selection - section - selection mode -)**
+还可以配置 `tip` 为数组，将问答配置为简单的选择，这时候用户仅可以在 `tip` 提供的值中进行选择 **仅适用于简单选择，类似于 `yes` or `no` 或者 `男` or `女` 这种，字多的选项，建议使用[selection](#selection-部分-选择模式-)**
 
 ```js
 import { question } from 'a-command';
 
 const result = await question({
-  text: 'What do you want for lunch', // Required parameters
-  tip: ['Hamburg ', ' Italian pasta'], // Optional parameter, enter selection mode when it is an array
-  type: 'text', //A type selection that supports `text` and `password`,Optional parameter, default : `text``
-  private: false, // Overwrite after input,Optional parameter,,default: `false`
-  resultText: "Okay, then let's go eat", // Optional parameter,of  result display
+  text: '中午吃什么',
+  tip: ['板面', '油泼面'],
+  resultText: '那我们就去吃',
 });
 ```
 
-Multiple questions can also be provided at once, just place them in an array (array and object patterns can be mixed and matched)
+配置 `type` 为 `password` 即为密码模式
+
+也可以一次提供多个提问，只需放置于数组之中即可（数组与对象模式可混搭）
 
 ```js
 import { question } from 'a-command';
-
 const result = await question([
   {
-    text: 'What do you want for lunch',
-    tip: ['Hamburg ', 'Italian pasta'],
-    resultText: "Okay, then let's go eat",
+    text: '中午吃什么',
+    tip: ['板面', '油泼面'],
+    type: 'text',
   },
   {
-    text: 'What`s your favorite dessert',
+    text: '你最喜欢的甜点是',
     private: true,
   },
-  'Where to play after dinner',
+  '吃完饭去哪里玩呢',
 ]);
 ```
 
-### selection section (Select mode)
+### selection 部分（ 选择模式 ）
 
-After referencing this function, use it where needed
-_A function waiting for user input. Because it needs to wait, it is asynchronous, and when using it, `wait` should be used_
+可引用该函数后，在需要的位置使用
+_等待用户输入的一个函数。因为要等待，所以是异步的，使用的时候应当使用 `await`_
 
-#### Example
+示例
 
-The simplest use :
+最简单的使用
 
 ```js
 import { selection } from 'a-command';
-console.log('What do you want for lunch');
+
+console.log('中午吃什么');
 const result = await selection([
-  'Hamburg',
-  'Italian pasta',
-  'steak',
-  'pizza',
-  'chafing dish',
+  '包子',
+  '河北特产之正宗安牛肉徽板面',
+  '烧烤',
+  '麻辣烫',
+  '火锅',
 ]);
 ```
 
-Full configuration :
+全配置模式
 
 ```js
-import  { selection } from "a-command";
-
+import { selection } from 'a-command';
 const result = await selection({
-    showInfo: true,
-    info: "What do you want for lunch?",
-    data: [
-        "Hamburg",
-        "Italian pasta",
-        "steak",
-        "pizza",
-        "chafing dish",
-      ],
-    showPreview: true,
-    preview: "currently want to eat"
-    resultText: "Okay, then let's go eat "
+  showInfo: true,
+  info: '中午想吃啥子',
+  data: ['包子', '板面', '烧烤', '麻辣烫', '火锅'],
+  showPreview: true,
+  preview: '当前选的是',
+  resultText: "Okay, then let's go eat ",
 });
 ```
 
-_If you don't want to display the issue and preview, you can use the pattern of the incoming object for custom configuration_
+_如果你不想展示预览，可以使用传入对象的模式（设置 `showPreview: false`）进行自定义配置_
 
-If you have any questions, you can directly [submit question](https://github.com/lmssee/npm-a-command/issues/new)
+## 文档地址
+
+参看 [https://earthnut.dev/a-command/](https://earthnut.dev/a-command/)
