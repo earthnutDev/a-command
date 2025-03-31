@@ -1,3 +1,4 @@
+import { isArray } from 'a-type-of-js';
 import { SelectionParamDataMapType, SelectionParamDataType } from './types';
 
 /*** 默认语言  */
@@ -18,12 +19,38 @@ const data: DataType = {
   initData(params: SelectionParamDataType) {
     // 清理旧的数据
     this.reset();
-    // (Array.isArray(data) && (selectionData.data = [...data])) ||
-    // selectionData.assign(data);
-    Object.keys(params).forEach(currentKey => {
-      // @ts-expect-error 这里使用了 this ，但是又无法处理
-      if (this[currentKey] != undefined) this[currentKey] = params[currentKey];
-    });
+    /**
+     * 使用参数为 `string` 或 `number` 的数组时
+     *
+     * `data` 使用参数，而其他值
+     */
+    if (isArray(params)) {
+      this.data = [...params] as (string | number)[];
+    } else {
+      Object.keys(params).forEach(currentKey => {
+        switch (currentKey) {
+          case 'data':
+            this.data = [...params[currentKey]] as (string | number)[];
+            break;
+          case 'info':
+            this.info = params[currentKey];
+            break;
+          case 'showPreview':
+            this.showPreview = params[currentKey] !== false;
+            break;
+          case 'resultText':
+            this.resultText = params[currentKey];
+            break;
+          case 'preview':
+            this.preview = params[currentKey];
+            this.showPreview = true;
+            break;
+          case 'private':
+            this.private = params[currentKey];
+            break;
+        }
+      });
+    }
   },
   reset() {
     this.drawData.length = this.data.length = 0;
@@ -56,4 +83,4 @@ type DataType = SelectionParamDataMapType & {
   reset: () => void;
 };
 
-export default data;
+export { data as selectionData };

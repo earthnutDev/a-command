@@ -194,6 +194,9 @@ command.run(); // Users can use `gig init ts`
 获取当前状态
 
 ```ts
+import { _p } from 'a-node-tools';
+import { Command } from 'a-command';
+const command = new Command();
 /**
  * 当使用带 -h 或者  -v 的参数测试的时候内部解析会标记为已结束状态, 但是是否结束看具体需求
  *
@@ -201,10 +204,10 @@ command.run(); // Users can use `gig init ts`
  *
  *  即在 isEnd 值为 true 时, 访问 end 属性会结束当前程序
  */
-console.log(command.isEnd); // 打印是否结束，一个 `boolean` 值，你也可以知啊结束后根据 `state` 来获取具体信息来干其他的
-console.log(command.isEnd.end); //如果你在用户使用帮助文档或是打印版本信息后没有其他事情，可以使用结束
-console.log(command.state); // 打印当情状态
-console.log(command.state.code); // 打印当情状态
+_p(command.isEnd); // 打印是否结束，一个 `boolean` 值，你也可以知啊结束后根据 `state` 来获取具体信息来干其他的
+_p(command.isEnd.end); //如果你在用户使用帮助文档或是打印版本信息后没有其他事情，可以使用结束
+_p(command.state); // 打印当情状态
+_p(command.state.code); // 打印当情状态
 command.state.overText; // 结束文本   "version" | "help";
 command.error; /// 将抛出错误并退出 node 程序
 ```
@@ -298,9 +301,10 @@ _等待用户输入的一个函数。因为要等待，所以是异步的，使�
 最简单的使用
 
 ```js
+import { _p } from 'a-node-tools';
 import { selection } from 'a-command';
 
-console.log('中午吃什么');
+_p('中午吃什么');
 const result = await selection([
   '包子',
   '河北特产之正宗安牛肉徽板面',

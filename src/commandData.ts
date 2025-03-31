@@ -17,7 +17,9 @@ export default {
     }
     list.push([uniKey, callFn]);
   },
-  /** 移除上一个事件
+  /**
+   *
+   * 移除上一个事件
    *
    * 返回值仅代表当前是否结束
    */
