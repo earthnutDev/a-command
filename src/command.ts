@@ -94,9 +94,8 @@ class Command extends Args {
   /**
    * 主动抛出一个错误终止进程
    */
-  get error() {
-    process.exit(1);
-    return true;
+  get error(): never {
+    return process.exit(1);
   }
 }
 

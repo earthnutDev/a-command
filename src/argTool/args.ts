@@ -158,13 +158,16 @@ class Args {
       constructor() {
         super(auxiliaryDataStore[_this.uniKey].state.code == 4);
       }
-      /** 倘若 isEnd 返回的是 true ，证明用户使用 -v 、-h 。默认回去展示它们
+      /**
        *
-       * 此时若无其他操作，建议 end 一下 */
-      get end() {
+       * 倘若 isEnd 返回的是 true ，证明用户使用 -v 、-h 。默认回去展示它们
+       *
+       * 此时若无其他操作，建议 end 一下
+       *
+       */
+      get end(): true {
         if (this.valueOf()) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          _this.end;
+          return _this.end;
         }
         return true;
       }
@@ -178,9 +181,18 @@ class Args {
    *
    *  这是一个属性
    */
-  get end(): true {
-    process.exit();
-    return true;
+  get end(): never {
+    return process.exit();
+  }
+
+  /**
+   *
+   * 以🙅终止当前进程，该终结将导致后续 npm 的终结
+   *
+   *
+   */
+  get error(): never {
+    return process.exit(1);
   }
 
   /**
