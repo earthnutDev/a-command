@@ -4,12 +4,12 @@ import pen, { t } from 'color-pen';
 
 const { stdout } = process;
 
-/** draw
+/**
  *
  *  绘制
  * */
 export default () => {
-  /** Terminal display column count
+  /**
    *
    * 终端屏的显示列数
    */
@@ -17,7 +17,7 @@ export default () => {
   ///  向左移动的光标
   const transformLength = screenWidth ? `${t}${screenWidth}D` : `${t}123D`;
   const { type, currentIssue, userInput, cursorTranslate } = questionData;
-  /** Display head
+  /**
    *
    * 显示头
    */

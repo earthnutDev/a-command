@@ -6,7 +6,7 @@ import { QuestionParamDataType } from './types';
 import { t } from 'color-pen';
 
 const { stdout } = process;
-/** unexpected exit
+/**
  *
  * 意外退出回调函数
  */
@@ -33,12 +33,12 @@ export default async function (
   draw();
   /** 等待用户输入 */
   await userInput();
-  /** Remove listening
+  /**
    *
    *  移除监听
    */
   process.removeListener('exit', unexpectedExit);
-  _p(`${t}2K`, false);
+  _p(`\r${t}2K`, false); // 清除当前行
   if (questionData.multi) {
     if (simpleResult) {
       return questionData.results.map(

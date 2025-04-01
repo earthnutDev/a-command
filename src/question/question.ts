@@ -33,15 +33,22 @@ export default function question(
   return new Promise((resolve, reject) => {
     /// 注册事件并进行排队
     commandData.on(Symbol('question'), () => {
-      origin_question(params, simpleResult)
-        .then(result => {
-          commandData.remove();
-          resolve(result as string);
-        })
-        .catch(() => {
-          commandData.remove();
-          reject((Array.isArray(params) && []) || '');
-        });
+      try {
+        /// 原始方法进行问询
+        origin_question(params, simpleResult)
+          .then(result => {
+            commandData.remove();
+            resolve(result as string);
+          })
+          .catch(() => {
+            commandData.remove();
+            reject((Array.isArray(params) && []) || '');
+          });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        commandData.remove();
+        reject((Array.isArray(params) && []) || '');
+      }
     });
   });
 }
