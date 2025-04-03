@@ -53,15 +53,25 @@ export default async function (
    */
   process.removeListener('exit', unexpectedExit);
   _p(`\r${t}2K`, false); // 清除当前行
+  /**  多问模式将返回 questionData.results  */
   if (questionData.multi) {
+    /**  返回简单结果  */
     if (simpleResult) {
       return questionData.results.map(
         (currentValue: unknown) => (currentValue as { r: string; t: string }).r,
       );
     } else {
+      /**  返回默认复杂结果  */
       return questionData.results;
     }
   } else {
-    return questionData.userInput.join('');
+    const { currentIssue } = questionData;
+    /**  必须输入值时返回用户的值  */
+    if (currentIssue.required) {
+      return questionData.userInput.join('');
+    } else {
+      /**  非必须输入值时返回默认值  */
+      return currentIssue.defaultValue || currentIssue.tip;
+    }
   }
 }

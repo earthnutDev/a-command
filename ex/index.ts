@@ -38,18 +38,15 @@ await (async skip => {
 await (async skip => {
   if (skip) return;
   const result = await question(
-    [
-      {
-        text: '请输入你的名字',
-        tip: 'tom',
-        type: 'text',
-        private: false,
-        resultText: '请输入你的名字',
-        required: false,
-      },
-      'apple',
-      'orange',
-    ],
+    {
+      text: '请输入你的名字',
+      tip: 'tom',
+      type: 'text',
+      private: false,
+      resultText: '请输入你的名字',
+      required: false,
+    },
+
     true,
   );
   _p('***************');
