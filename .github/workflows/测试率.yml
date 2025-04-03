@@ -16,8 +16,14 @@ jobs:
     # 或者手动触发
     name: 运行测试并将测试率提交到 Codecov 和 coveralls
     runs-on: ubuntu-latest
+    # 复合条件判断（自动触发检查提交信息，手动触发直接放行）
+    # 触发原因：
+    #   - 自动触发：提交信息以 `version` 字样开头
+    #   - 手动触发：手动触发
+    #   - 自动触发：提交信息包含 `coverage` 字样
     if: |
-      (github.event_name == 'push' && contains(github.event.head_commit.message, 'version')) ||
+      (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'version')) || 
+      (github.event_name == 'push' && contains(github.event.head_commit.message, 'coverage')) || 
       github.event_name == 'workflow_dispatch'
     steps:
       - name: 代码检出
