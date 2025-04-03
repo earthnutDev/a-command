@@ -1,23 +1,29 @@
 import { _p, cursorShow, readInput } from 'a-node-tools';
 import draw from './draw';
-import questionData from './questionData';
 import pen, { t } from 'color-pen';
+import { questionData } from './questionData';
 
 /**
  *
  * 监听用户键盘输入并处理
+ *
  */
-export default async function () {
+export default async function userInput() {
+  /**  等待用户输入  */
   await readInput((keyValue: string | undefined, key) => {
     const { type, currentIssue, userInput, results, multi } = questionData;
-    /** 当前问题  */
-    const currentQuestion = currentIssue.text,
-      /** 当前答案  */
-      currentResult = userInput.join('');
+    /** 当前 🙋 */
+    const currentQuestion = currentIssue.text;
+    /** 当前答案  */
+    let currentResult = userInput.join('');
+    /**  当为选择模式时的可选项数组  */
     let arr: string[] = [],
+      /**  选择模式下可选择项数  */
       len: number = 0,
+      /**  可选项模式当前下标  */
       _index: number = 0;
-    if (type != 0) {
+    /**  当前为选择模式而不是输入模式  */
+    if (type !== 0) {
       // 选择模式
       arr = currentIssue.tip as string[];
       len = arr.length - 1;
@@ -28,8 +34,12 @@ export default async function () {
         /**
          *
          *  用户没有输入直接点击的回车键
+         *
+         *  在 `type: 1` 的
+         *
          */
-        if (userInput.length == 0) {
+        if (userInput.length == 0 && currentIssue.required) {
+          /**  提示用户输入 👆 */
           _p(
             ' '
               .repeat(2)
@@ -40,7 +50,13 @@ export default async function () {
           );
           break;
         }
+        /**  当前问题不强制用户输入，可为 🈳 🕳️  */
+        if (userInput.length == 0 && currentIssue.required === false) {
+          currentResult =
+            currentIssue.defaultValue || (currentIssue.tip as string);
+        }
 
+        /**  添加当前 🙋 和答案到结果集  */
         results.push({ q: currentQuestion, r: currentResult });
         /**
          *
@@ -54,6 +70,7 @@ export default async function () {
           );
         }
         cursorShow();
+        /**  在非多问模式和多问模式已达到最后一轮🙋 ✅ ，直接返回 */
         if (!multi || !++questionData.progressCount) {
           return true;
         }

@@ -1,6 +1,6 @@
 import { cursorMoveLeft, _p } from 'a-node-tools';
-import questionData from './questionData';
 import pen, { t } from 'color-pen';
+import { questionData } from './questionData';
 
 const { stdout } = process;
 

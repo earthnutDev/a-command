@@ -30,7 +30,7 @@ export type SubOptionsType = {
   info: string;
   /**
    *
-   * 缩写，名字都限制 15 了，这个限制 10 没问题吧
+   * 缩写，名字都限制 15 了，这个限制 10 没 🙋 吧
    */
   abbr?: string;
   /**

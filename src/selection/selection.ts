@@ -13,7 +13,7 @@ import origin_selection from './originSelection';
  *      info？:  string;  // 自定义信息
  *      showPreview？:  boolean;  // 是否显示答案预览
  *      preview？:  string; // 选择时预览
- *      private？:  false | true; 隐私模式下，用户回答将覆盖上一个问题行
+ *      private？:  false | true; 隐私模式下，用户回答将覆盖上一个 🙋 行
  *  };
  *
  * ```

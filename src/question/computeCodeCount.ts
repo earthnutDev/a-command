@@ -1,4 +1,4 @@
-import questionData from './questionData';
+import { questionData } from './questionData';
 
 /**
  *

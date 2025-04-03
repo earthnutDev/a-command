@@ -204,7 +204,7 @@ function get$map(value: ArgsItem[]): ArgsMapType {
     }
     // 当前元素有子项
     if (currentElement.options) {
-      // 每一个子项再遍历（遍历需考虑旧数据问题，即已经存在同名属性 valueIsExist 为 true 情况）
+      // 每一个子项再遍历（遍历需考虑旧数据 🙋 ，即已经存在同名属性 valueIsExist 为 true 情况）
       currentElement.options.forEach(_currentEle => {
         _temp[_currentEle.name] =
           valueIsExist && _temp[_currentEle.name] !== undefined

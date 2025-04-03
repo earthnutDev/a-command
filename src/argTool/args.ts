@@ -212,7 +212,7 @@ class Args {
    * 开始执行回调
    */
   run() {
-    /** 由于怕数据污染，用户若使用多 args，这可能会导致该问题的出现。所以所有的数据保持单一 */
+    /** 由于怕数据污染，用户若使用多 args，这可能会导致该 🙋 的出现。所以所有的数据保持单一 */
     executeParsing(auxiliaryDataStore[this.uniKey]);
     return this;
   }

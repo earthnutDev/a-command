@@ -4,7 +4,7 @@
 
 [![last commit](<https://img.shields.io/github/last-commit/earthnutDev/a-command.svg?logo=github&logoColor=rgb(0,0,0)&label=最后推码&labelColor=rgb(255,165,0)&color=rgb(0,0,0)>)](https://github.com/earthnutDev/a-command) [![GitHub commit activity](<https://img.shields.io/github/commit-activity/y/earthnutDev/a-command.svg?logo=github&label=推码数&labelColor=rgb(128,0,128)&color=rgb(0,0,0)>)](https://github.com/earthnutDev/a-command) [![Coverage Status](<https://img.shields.io/coverallsCoverage/github/earthnutDev/a-command?logo=coveralls&label=coveralls&labelColor=rgb(12, 244, 39)&color=rgb(0,0,0)>)](https://coveralls.io/github/earthnutDev/a-command?branch=main) [![codecov](<https://img.shields.io/codecov/c/github/earthnutDev/a-command/main?logo=codecov&label=codecov&labelColor=rgb(7, 245, 245)&color=rgb(0,0,0)>)](https://codecov.io/gh/earthnutDev/a-command)
 
-[![查看 📔 日志](<https://img.shields.io/badge/👀-日_%20_志-rgb(0,125,206)>)](https://github.com/earthnutDev/a-command/blob/main/CHANGELOG.md) [![bug 🙋‍♂️ 提交](<https://img.shields.io/badge/☣️-bug_%20_提交-rgb(255,0,63)>)](https://github.com/earthnutDev/a-command/issues)
+[![查看 📔 日志](<https://img.shields.io/badge/👀-日_%20_志-rgb(0,125,206)>)](https://github.com/earthnutDev/a-command/blob/main/CHANGELOG.md) [![bug 🙋 ‍♂️ 提交](<https://img.shields.io/badge/☣️-bug_%20_提交-rgb(255,0,63)>)](https://github.com/earthnutDev/a-command/issues)
 
 ---
 
@@ -256,6 +256,8 @@ const result = await question({
   type: 'text', // 一个类型选择，支持 `text` 、 `password`
   private: false, // 选择完毕后是否覆盖
   resultText: '你想吃的是', // 可选参数，选择后展示
+  required: true, // 是否必填
+  default: '板面',
 });
 ```
 
