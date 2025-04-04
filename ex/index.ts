@@ -44,14 +44,13 @@ await (async skip => {
       type: 'text',
       private: false,
       resultText: '请输入你的名字',
-      required: false,
     },
     true,
   );
   _p('***************');
   _p(result);
   _p('***************');
-})(true);
+})(false);
 
 await (async skip => {
   if (skip) return;

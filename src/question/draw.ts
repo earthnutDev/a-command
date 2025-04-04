@@ -20,7 +20,8 @@ export default () => {
 
   /**  清理旧的输入信息并将光标移动到输入最左侧  */
   _p(`${t}2K${transformLength}`, false);
-  const requiredStr = currentIssue.required ? pen.blink.brightRed('*') : '';
+  const requiredStr =
+    kind === 0 && currentIssue.required ? pen.blink.brightRed('*') : '';
   // 显示头
   _p(
     `${pen.green('?')} ${requiredStr}${currentIssue.text}${requiredStr}: `,

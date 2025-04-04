@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "a-command",
   "main": "cjs/index.cjs",
   "module": "mjs/index.mjs",
