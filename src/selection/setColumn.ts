@@ -1,3 +1,4 @@
+import { isNumber, isString } from 'a-type-of-js';
 import { selectionData } from './selectionData';
 
 const { stdout } = process;
@@ -14,12 +15,12 @@ export default function setColumns() {
   for (let i = 0; i < len; i++) {
     const element = data[i];
     let pushData: string | number = 0;
-    if (typeof element == 'string') {
+    if (isString(element)) {
       pushData =
         element.length > screenLength
           ? element.slice(0, screenLength)
           : (data[i] as string);
-    } else if (typeof element == 'number') {
+    } else if (isNumber(element)) {
       pushData = element % 1000000000000000;
     }
     (drawData as (string | number)[]).push(pushData);

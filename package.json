@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.3.0",
   "name": "a-command",
   "main": "cjs/index.cjs",
   "module": "mjs/index.mjs",
@@ -32,7 +32,7 @@
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "build": "npm run b && npm run clean:package",
     "clean:package": "node scripts/clean-package-json.js",
-    "dev": "rollup --config rollup.dev.config.js && node .test/ex/index.mjs",
+    "dev": "jja rm .test && rollup --config rollup.dev.config.js && node --unhandled-rejections=strict .test/ex/index.mjs",
     "push:version": "gvv",
     "push:submit": "gvv",
     "eslint": "eslint src",

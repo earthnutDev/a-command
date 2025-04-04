@@ -6,7 +6,7 @@ import {
   SubOptionsType,
 } from './types';
 import { AuxiliaryData } from './auxiliaryData';
-import { isArray } from 'a-type-of-js';
+import { isArray, isString } from 'a-type-of-js';
 
 /**
  * 绑定选项、说明及缩写
@@ -35,10 +35,10 @@ export default function bindInstruction(
     options: [],
   };
   /** 倘若使用字符串指定   */
-  if (typeof data == 'string') {
+  if (isString(data)) {
     const [name, abbr, info] = parsingDataOfString(data);
     return bindInstruction({ name, abbr, info }, auxiliaryData);
-  } else if (Array.isArray(data)) {
+  } else if (isArray(data)) {
     /**  倘若为传入参数为数组  */
     return data.forEach((currentEle: BindParamsType) =>
       bindInstruction(currentEle, auxiliaryData),
@@ -118,7 +118,7 @@ function parsingSubOption(
       info: '',
     };
     // 如果是简单的字符串，则使用 `parsingDataOfString` 解析为数组
-    if (typeof currentEle == 'string') {
+    if (isString(currentEle)) {
       [_d.name, _d.abbr, _d.info] = parsingDataOfString(currentEle);
     } else {
       // 直接将值进行转化

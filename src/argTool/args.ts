@@ -5,6 +5,7 @@ import bindInstruction from './bindInstructions';
 import executeParsing from './executeParsing';
 import { organizeHelpInformation } from './organizeHelpInformation';
 import showVersion from './showVersion';
+import { isString } from 'a-type-of-js';
 
 /**   
  
@@ -90,7 +91,7 @@ class Args {
    * 初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
    */
   constructor(name: string = '') {
-    if (typeof name !== 'string') name = `${name}`;
+    if (!isString(name)) name = `${name}`;
     this.uniKey = Symbol(name);
     if (auxiliaryDataStore[this.uniKey])
       throw new Error(
@@ -103,7 +104,7 @@ class Args {
     [auxiliaryDataStore[this.uniKey].__filename] = initializeFile();
     auxiliaryDataStore[this.uniKey].name =
       name ||
-      (typeof process.argv[1] == 'string' &&
+      (isString(process.argv[1]) &&
         process.argv.slice(1, 2)[0].replace(/.*\/.*?$/, '$1')) ||
       '';
     /** 禁止修改唯一值 */
@@ -260,12 +261,9 @@ class Args {
    */
   help(optionName?: string, subOptionName?: string) {
     const _auxiliaryData = auxiliaryDataStore[this.uniKey];
-    if (
-      typeof optionName == 'string' &&
-      _auxiliaryData.originalBind[optionName]
-    ) {
+    if (isString(optionName) && _auxiliaryData.originalBind[optionName]) {
       if (
-        typeof subOptionName == 'string' &&
+        isString(subOptionName) &&
         _auxiliaryData.originalBind[optionName].options &&
         _auxiliaryData.originalBind[optionName].options[subOptionName]
       )

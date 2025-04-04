@@ -2,6 +2,7 @@ import { _p } from 'a-node-tools';
 import { AuxiliaryData } from './auxiliaryData';
 import { ArgOriginBind, SubOptionsType } from './types';
 import pen, { t } from 'color-pen';
+import { isArray, isString } from 'a-type-of-js';
 /** 空白 */
 const _blank = '\x20'.repeat(4);
 /** organize help information
@@ -15,10 +16,7 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
    *
    *  某一 option
    */
-  if (
-    typeof auxiliaryData.helpInfo == 'string' &&
-    auxiliaryData.helpInfo !== 'help'
-  ) {
+  if (isString(auxiliaryData.helpInfo) && auxiliaryData.helpInfo !== 'help') {
     const data = auxiliaryData.originalBind[auxiliaryData.helpInfo];
     _p(`${_blank}${data.name}${_blank}${pen.magenta(data.info)}\n`);
     // 带子项的这里打印
@@ -42,7 +40,7 @@ export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
      *
      * 某一 subOption
      */
-    Array.isArray(auxiliaryData.helpInfo) &&
+    isArray(auxiliaryData.helpInfo) &&
     (auxiliaryData.helpInfo as string[]).length == 2
   ) {
     _p(

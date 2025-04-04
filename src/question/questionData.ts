@@ -1,7 +1,7 @@
 import { QuestionDataType } from './types';
-import computeCodeCount from './computeCodeCount';
+import { computeCodeCount } from './computeCodeCount';
 import changeCurrentIssue from './changeCurrentIssue';
-import { cursorHide, cursorShow } from 'a-node-tools';
+import { _p, cursorHide, cursorShow } from 'a-node-tools';
 import { originalData } from './originalData';
 
 /**
@@ -19,15 +19,15 @@ export const questionData: QuestionDataType = {
    *
    * 该值会在每一次 changeCurrentIssue 时进行赋值
    */
-  get type() {
-    return originalData.type;
+  get kind() {
+    return originalData.kind;
   },
-  set type(newValue: 0 | 1) {
+  set kind(newValue: 0 | 1) {
     /**  配置默认值  */
     if (!isFinite(newValue) || (newValue != 0 && newValue != 1)) {
       newValue = 0;
     }
-    originalData.type = newValue;
+    originalData.kind = newValue;
     /** 当前类型的改变，触发是否隐藏光标  */
     if (newValue == 1) {
       cursorHide();
@@ -48,7 +48,7 @@ export const questionData: QuestionDataType = {
    *
    * 用户输入
    */
-  userInput: [],
+  enterText: [],
   /**
    *
    * 多问模式的进度，改变会触发当前 🙋 的变更
@@ -152,11 +152,19 @@ export const questionData: QuestionDataType = {
   results: [],
 
   /** 混合 🙋 */
-  assign: function (_data: { [key: string]: string }): void {
+  assign: function (_data: QuestionDataType): void {
     /**  该过程将初始化数据  */
-    Object.keys(_data).forEach((currentKey: string) => {
-      // @ts-expect-error  @ts-expect-error   @ts-expect-error
-      if (this[currentKey] != undefined) this[currentKey] = _data[currentKey];
+    Object.keys(_data).forEach(currentKey => {
+      if (
+        Object.hasOwn(this, currentKey) &&
+        _data[currentKey as keyof QuestionDataType] != undefined
+      ) {
+        // @ts-expect-error  @ts-expect-error   @ts-expect-error
+        this[currentKey] = _data[currentKey];
+      } else {
+        _p(`${currentKey} is not exist`);
+        throw new Error(`${currentKey} is not exist`);
+      }
     });
   },
   /** 初始化数据，仅在执行前初始化。防止数据残留 */
@@ -164,7 +172,7 @@ export const questionData: QuestionDataType = {
     /// 清理旧的答案
     this.results.length = 0;
     // 清理旧的输入
-    this.userInput = [];
+    this.enterText = [];
     // 清理旧的光标位置
     this.indexOfCursor = 0;
     /// 该值的变化会初始化当前 🙋 ，所以才会有重复赋值 0 的情况

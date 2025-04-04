@@ -1,6 +1,7 @@
 import commandData from 'src/commandData';
 import origin_question from './originQuestion';
 import { QuestionParamDataType } from './types';
+import { isArray } from 'a-type-of-js';
 
 /**
  *
@@ -42,12 +43,12 @@ export default function question(
           })
           .catch(() => {
             commandData.remove();
-            reject((Array.isArray(params) && []) || '');
+            reject((isArray(params) && []) || '');
           });
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         commandData.remove();
-        reject((Array.isArray(params) && []) || '');
+        reject((isArray(params) && []) || '');
       }
     });
   });

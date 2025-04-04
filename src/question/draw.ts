@@ -16,25 +16,33 @@ export default () => {
   const screenWidth = stdout.columns;
   ///  向左移动的光标
   const transformLength = screenWidth ? `${t}${screenWidth}D` : `${t}123D`;
-  const { type, currentIssue, userInput, cursorTranslate } = questionData;
-  /**
-   *
-   * 显示头
-   */
-  _p(`${t}2K${transformLength}${pen.green('?')} ${currentIssue.text}: `, false);
-  // 打印选择模式
-  if (type != 0) {
+  const { kind, currentIssue, enterText, cursorTranslate } = questionData;
+
+  /**  清理旧的输入信息并将光标移动到输入最左侧  */
+  _p(`${t}2K${transformLength}`, false);
+  const requiredStr = currentIssue.required ? pen.blink.brightRed('*') : '';
+  // 显示头
+  _p(
+    `${pen.green('?')} ${requiredStr}${currentIssue.text}${requiredStr}: `,
+    false,
+  );
+
+  if (kind !== 0) {
+    // 打印选择模式
     _p(
       (currentIssue.tip as string[])
         .map(i =>
-          i == userInput[0]
-            ? t.concat('25;1;4;5m').concat(pen.cyan(i))
+          i === enterText[0]
+            ? pen.underline.bold.blink.cyan(i)
             : pen.magenta(i),
         )
         .join('  '),
       false,
     );
-  } else if (userInput.length == 0 && currentIssue.tip) {
+  }
+  //   输入为空且有提示时，打印提示信息
+  else if (enterText.length == 0 && currentIssue.tip) {
+    /**  计算数据长度以便在输入 `tip` 后能够将光标移动道正确的位置  */
     const transformLength = (currentIssue.tip as string)
       .split('')
       .reduce(
@@ -44,15 +52,18 @@ export default () => {
       );
     // 打印含提示且用户为输入时文本
     _p(' '.concat(pen.green(currentIssue.tip as string)), false);
+    // 将光标移送到输入位置
     cursorMoveLeft(transformLength);
   } else {
-    if (currentIssue.type == 'text') {
-      // 打印不还提示的普通文本
-      _p(` ${userInput.join('')}`, false);
-    } else {
-      // 打印密码模式
-      _p(` ${userInput.map(() => '*').join('')}`, false);
+    // 当不包含提示信息时，打印用户输入的文本
+    if (currentIssue.type === 'text') {
+      _p(` ${enterText.join('')}`, false);
     }
+    // 使用 ** 代替原始输入文本的密码模式
+    else {
+      _p(` ${enterText.map(() => '*').join('')}`, false);
+    }
+    // 将光标移送到输入位置
     if (cursorTranslate !== 0) {
       cursorMoveLeft(cursorTranslate);
     }

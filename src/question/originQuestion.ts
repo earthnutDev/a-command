@@ -43,7 +43,6 @@ export default async function (
   questionData.beforeStart();
   // 退出的时候
   process.on('exit', unexpectedExit);
-
   draw();
   /** 等待用户输入 */
   await Reflect.apply(userInput, questionData, []);
@@ -57,21 +56,12 @@ export default async function (
   if (questionData.multi) {
     /**  返回简单结果  */
     if (simpleResult) {
-      return questionData.results.map(
-        (currentValue: unknown) => (currentValue as { r: string; t: string }).r,
-      );
+      return questionData.results.map(currentValue => currentValue.r);
     } else {
       /**  返回默认复杂结果  */
       return questionData.results;
     }
   } else {
-    const { currentIssue } = questionData;
-    /**  必须输入值时返回用户的值  */
-    if (currentIssue.required) {
-      return questionData.userInput.join('');
-    } else {
-      /**  非必须输入值时返回默认值  */
-      return currentIssue.defaultValue || currentIssue.tip;
-    }
+    return questionData.results[0].r;
   }
 }

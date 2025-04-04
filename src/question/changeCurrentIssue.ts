@@ -11,7 +11,7 @@
  ****************************************************************************/
 import { originalData } from './originalData';
 import { CurrentIssueType, QuestionDataType } from './types';
-import { isString } from 'a-type-of-js';
+import { isArray, isString } from 'a-type-of-js';
 
 /**
  *
@@ -49,26 +49,32 @@ export default function changeCurrentIssue(this: QuestionDataType) {
   Object.assign(currentIssue, isString(_d) ? { text: _d } : _d);
 
   // 初始化当前 🙋
-  const type: 0 | 1 = Array.isArray(currentIssue.tip) ? 1 : 0;
+  const kind: 0 | 1 = isArray(currentIssue.tip) ? 1 : 0;
 
-  /**  即没有提示有没有 `defaultValue` 值时，不允许显式设置 `required` 为 `false`  */
-  if (currentIssue.tip === '' && currentIssue.defaultValue === '') {
-    currentIssue.required = true;
+  let enterText: string[];
+
+  if (kind == 1) {
+    enterText = [(currentIssue.tip as string[])[0]];
+  } else {
+    enterText = [];
+
+    /**  即没有提示有没有 `defaultValue` 值时，不允许显式设置 `required` 为 `false`  */
+    if (currentIssue.tip === '' && currentIssue.defaultValue === '') {
+      currentIssue.required = true;
+    }
+
+    /**  当 `defaultValue` 值不为空时而 `tip` 值为空时，则将 `tip` 值设置为 `defaultValue`   */
+    if (currentIssue.defaultValue !== '' && currentIssue.tip === '') {
+      currentIssue.tip = currentIssue.defaultValue;
+    }
   }
-
-  /**  当 `defaultValue` 值不为空时而 `tip` 值为空时，则将 `tip` 值设置为 `defaultValue`   */
-  if (currentIssue.defaultValue !== '' && currentIssue.tip === '') {
-    currentIssue.tip = currentIssue.defaultValue;
-  }
-
   /**  初始化用户的输入  */
-  const userInput = type == 0 ? [] : [(currentIssue.tip as unknown[])[0]];
 
   this.assign({
     indexOfCursor: 0,
     cursorTranslate: 0,
-    type,
-    userInput,
+    kind,
+    enterText,
     currentIssue,
-  });
+  } as QuestionDataType);
 }

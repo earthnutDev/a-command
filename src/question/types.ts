@@ -82,6 +82,50 @@ export type CurrentIssueType = {
 
 /**
  *
+ * 原始数据
+ *
+ */
+
+export interface OriginalData {
+  /**
+   *
+   * 是否为多问模式（很鸡肋的用法）
+   *
+   */
+  multi: boolean;
+  /**
+   *
+   * 原始的 🙋
+   *
+   */
+  data: QuestionParamDataType;
+  /**
+   *
+   * 当前 🙋 的类型
+   *
+   * - 0 普通问答
+   * - 1 选型问答
+   */
+  kind: 0 | 1;
+  /**
+   *
+   * 多问模式的进度，改变会触发当前 🙋 的变更
+   *
+   */
+  progressCount: number;
+  /**
+   *
+   * 当前的浮标位置，当改变时会触发 this.cursorTranslate 的自更新
+   */
+  indexOfCursor: number;
+  /**
+   * 数据初始化方法
+   */
+  init: (param: QuestionParamDataType) => void;
+}
+
+/**
+ *
  *  数据类型
  */
 export type QuestionDataType = {
@@ -92,7 +136,7 @@ export type QuestionDataType = {
    * - 0 普通问答
    * - 1 选型问答
    */
-  type: 1 | 0;
+  kind: 1 | 0;
   /**
    *
    * 多问模式
@@ -100,9 +144,11 @@ export type QuestionDataType = {
   multi: boolean;
   /**
    *
-   * 用户输入
+   * 用户输入文本
+   *
+   *
    */
-  userInput: string[];
+  enterText: string[];
   /**
    *
    * 多问模式的进度，改变会触发当前 🙋 （`this.currentIssue`）的变更
@@ -126,9 +172,9 @@ export type QuestionDataType = {
    *
    * 结果集，用于多询问模式
    */
-  results: unknown[];
+  results: { r: string; q: string }[];
   /** 内部方法，混合数据 */
-  assign(arg: unknown): void;
+  assign(arg: QuestionDataType): void;
   /**
    *  内部方法，仅在该问询的开始时调用一次，初始化当前 🙋 的数量
    *
