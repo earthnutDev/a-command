@@ -21,7 +21,7 @@ import pen from 'color-pen';
  *
  */
 export default function showVersion(auxiliaryData: AuxiliaryData): void {
-  auxiliaryData.state = 4;
+  auxiliaryData.state = 'version';
   // 目标文件位置
   let targetFilename = pathJoin(
     getCallerFilename(auxiliaryData.__filename),

@@ -1,3 +1,4 @@
+import { isNumber } from 'a-type-of-js';
 import {
   ArgOriginBind,
   ArgsArrMapType,
@@ -5,6 +6,7 @@ import {
   ArgsMapItemType,
   ArgsMapType,
   ArgsType,
+  OverCode,
   StateType,
 } from './types';
 
@@ -38,14 +40,14 @@ export class AuxiliaryData {
    *
    *
    */
-  set state(stateCode: 1 | 2 | 3 | 4) {
+  set state(overCode: 1 | 2 | 3 | OverCode) {
     this._state = [
       undefined,
       { code: 1, text: 'start' },
       { code: 2, text: 'bind over' },
       { code: 3, text: 'run over' },
-      { code: 4, text: 'over', overCode: 'help' },
-    ][stateCode] as StateType;
+      { code: 4, text: 'over', overCode },
+    ][isNumber(overCode) ? overCode : 4] as StateType;
   }
 
   _state: StateType = { code: 1, text: 'start' };

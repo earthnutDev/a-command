@@ -57,59 +57,59 @@ import { isString } from 'a-type-of-js';
  *      ```
  *
  *  - 全配置的
- *      ```js
- *        import { Args }  from "a-command";
- *        const  command : Args =  new Args();
- *        command
- *            .bind({
- *              name: "init",
- *              abbr: "-i",
- *              info: "初始化一个配置文件",
- *              options: [{
- *                          name:"ts",
- *                          abbr: "-t",
- *                          info: "初始化一个 `ts` 后缀配置文件"
- *                        },{
- *                          name:"js",
- *                          abbr: "-j",
- *                          info: "初始化一个 `js` 后缀配置文件"
- *
- *                        },{
- *                          name:"json",
- *                          abbr: "-o",
- *                          info: "初始化一个 `json` 后缀配置文件"
- *                        }]
- *             });
- *        command.run(); // Users can use `gig init -o`
- *      ```
+ *     
+ *  ```js
+ *  import { Args }  from "a-command";
+ *  const  command : Args =  new Args();
+ *  command
+ *      .bind({
+ *        name: "init",
+ *        abbr: "-i",
+ *        info: "初始化一个配置文件",
+ *        options: [{
+ *                    name:"ts",
+ *                    abbr: "-t",
+ *                    info: "初始化一个 `ts` 后缀配置文件"
+ *                  },{
+ *             name:"js",
+ *             abbr: "-j",
+ *             info: "初始化一个 `js` 后缀配置文件"
+ *                 },{
+ *                   name:"json",
+ *                   abbr: "-o",
+ *                   info: "初始化一个 `json` 后缀配置文件"
+ *                 }]
+ *      });
+ * command.run(); // Users can use `gig init -o`
+ * ```
  *
  */
 class Args {
   // 为一只
-  uniKey: symbol;
+  #uniKey: symbol;
   /**
    * 初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
    */
   constructor(name: string = '') {
     if (!isString(name)) name = `${name}`;
-    this.uniKey = Symbol(name);
-    if (auxiliaryDataStore[this.uniKey])
+    this.#uniKey = Symbol(name);
+    if (auxiliaryDataStore[this.#uniKey])
       throw new Error(
         `${name} 已经存在，请更换初始化命令名称，若仍想在原命令上操作，请抽离为单独的文件做数据共享`,
       );
 
     // 初始化数据
-    auxiliaryDataStore[this.uniKey] = createAuxiliaryData();
+    auxiliaryDataStore[this.#uniKey] = createAuxiliaryData();
     // 初始化文件路径
-    [auxiliaryDataStore[this.uniKey].__filename] = initializeFile();
-    auxiliaryDataStore[this.uniKey].name =
+    [auxiliaryDataStore[this.#uniKey].__filename] = initializeFile();
+    auxiliaryDataStore[this.#uniKey].name =
       name ||
       (isString(process.argv[1]) &&
         process.argv.slice(1, 2)[0].replace(/.*\/.*?$/, '$1')) ||
       '';
     /** 禁止修改唯一值 */
-    Object.defineProperty(this, 'uniKey', {
-      value: this.uniKey,
+    Object.defineProperty(this, '#uniKey', {
+      value: this.#uniKey,
       writable: false,
       enumerable: false,
       configurable: false,
@@ -121,7 +121,7 @@ class Args {
    * 命令名称
    */
   get name(): string {
-    return auxiliaryDataStore[this.uniKey].name;
+    return auxiliaryDataStore[this.#uniKey].name;
   }
 
   /**
@@ -133,7 +133,7 @@ class Args {
    *
    */
   get state(): StateType {
-    return auxiliaryDataStore[this.uniKey].state;
+    return auxiliaryDataStore[this.#uniKey].state;
   }
 
   /**
@@ -157,7 +157,7 @@ class Args {
        *
        */
       constructor() {
-        super(auxiliaryDataStore[_this.uniKey].state.code == 4);
+        super(auxiliaryDataStore[_this.#uniKey].state.code == 4);
       }
       /**
        *
@@ -183,6 +183,7 @@ class Args {
    *  这是一个属性
    */
   get end(): never {
+    auxiliaryDataStore[this.#uniKey].state = 'end';
     return process.exit();
   }
 
@@ -193,6 +194,7 @@ class Args {
    *
    */
   get error(): never {
+    auxiliaryDataStore[this.#uniKey].state = 'error';
     return process.exit(1);
   }
 
@@ -205,7 +207,7 @@ class Args {
    *        data {@link BindParamsType}  绑定命令行参数
    */
   bind(data: BindParamsType) {
-    bindInstruction(data, auxiliaryDataStore[this.uniKey]);
+    bindInstruction(data, auxiliaryDataStore[this.#uniKey]);
     return this;
   }
 
@@ -214,7 +216,7 @@ class Args {
    */
   run() {
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该 🙋 的出现。所以所有的数据保持单一 */
-    executeParsing(auxiliaryDataStore[this.uniKey]);
+    executeParsing(auxiliaryDataStore[this.#uniKey]);
     return this;
   }
 
@@ -233,7 +235,7 @@ class Args {
    *
    */
   get args(): ArgsType {
-    return auxiliaryDataStore[this.uniKey].args;
+    return auxiliaryDataStore[this.#uniKey].args;
   }
 
   /**
@@ -248,7 +250,7 @@ class Args {
    *
    */
   get values(): (string | number | boolean)[] {
-    return auxiliaryDataStore[this.uniKey].values.slice();
+    return auxiliaryDataStore[this.#uniKey].values.slice();
   }
 
   /**
@@ -260,7 +262,7 @@ class Args {
    * @memberof Args
    */
   help(optionName?: string, subOptionName?: string) {
-    const _auxiliaryData = auxiliaryDataStore[this.uniKey];
+    const _auxiliaryData = auxiliaryDataStore[this.#uniKey];
     if (isString(optionName) && _auxiliaryData.originalBind[optionName]) {
       if (
         isString(subOptionName) &&
@@ -270,7 +272,7 @@ class Args {
         _auxiliaryData.helpInfo = [optionName, subOptionName];
       else _auxiliaryData.helpInfo = optionName;
     } else _auxiliaryData.helpInfo = 'help';
-    organizeHelpInformation(auxiliaryDataStore[this.uniKey]);
+    organizeHelpInformation(auxiliaryDataStore[this.#uniKey]);
   }
 
   /**
@@ -280,7 +282,7 @@ class Args {
    * @memberof Args
    */
   version() {
-    showVersion(auxiliaryDataStore[this.uniKey]);
+    showVersion(auxiliaryDataStore[this.#uniKey]);
   }
 }
 

@@ -113,11 +113,14 @@ export type BindParamsOptionsType =
   | SubOptionsType
   | (string | SubOptionsType)[];
 
+/**  结束代码  */
+export type OverCode = 'version' | 'help' | 'error' | 'end';
+
 /**   当前的状态 */
 export type StateType = {
   code: 1 | 2 | 3 | 4;
   text: 'start' | 'bind over' | 'run over' | 'over';
-  overCode?: 'version' | 'help';
+  overCode?: OverCode;
 };
 
 /**

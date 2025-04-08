@@ -11,7 +11,7 @@ const _blank = '\x20'.repeat(4);
  */
 export function organizeHelpInformation(auxiliaryData: AuxiliaryData) {
   // 设定当前状态
-  auxiliaryData.state = 4;
+  auxiliaryData.state = 'help';
   /**
    *
    *  某一 option
