@@ -27,7 +27,7 @@ import { isArray } from 'a-type-of-js';
  * @param  simpleResult   是否显示为简单模式的返回（默认返回是答案与），缺省为 false
  *
  */
-export default function question(
+export function question(
   params: QuestionParamDataType,
   simpleResult: boolean = false,
 ): Promise<string> {

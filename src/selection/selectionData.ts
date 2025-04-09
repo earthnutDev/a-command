@@ -1,7 +1,7 @@
 import { isArray } from 'a-type-of-js';
 import { SelectionParamDataMapType, SelectionParamDataType } from './types';
 
-/*** 默认语言  */
+/** 默认语言  */
 export const info = '请使用键盘选择，请使用 Enter 键选择您的选择',
   resultText = '您的选择为',
   showPreview = false,

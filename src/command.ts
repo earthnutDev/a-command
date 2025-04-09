@@ -1,6 +1,7 @@
-import Args from './argTool/args';
-import selection from './selection/selection';
-import question from './question/question';
+import { Args } from './argTool/args';
+import { selection } from './selection/selection';
+import { question } from './question/question';
+import { OptionNameArray } from './argTool/types';
 
 /**
  *
@@ -14,7 +15,7 @@ import question from './question/question';
  * 因为 `Command` 会自动管理调用的顺序 ，这看个人使用习惯
  *
  */
-class Command extends Args {
+class Command<T extends OptionNameArray> extends Args<T> {
   /**
    *
    * @param name 命令的名称
@@ -90,13 +91,6 @@ class Command extends Args {
    * */
 
   question = question;
-
-  /**
-   * 主动抛出一个错误终止进程
-   */
-  get error(): never {
-    return process.exit(1);
-  }
 }
 
-export default Command;
+export { Command };

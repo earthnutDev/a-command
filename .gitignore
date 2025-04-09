@@ -2,14 +2,14 @@ git.js
 
 ## 打包文件
 
-# /node_modules
+node_modules
+
 **/node_modules
 
 dist
 
-## 测试文件
-test/out
-
 .DS_Store 
 
 .test 
+
+.earthnut

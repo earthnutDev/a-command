@@ -59,7 +59,7 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "获取全称 npm version : $VERSION"
 
-          if [[ $VERSION =~ -([a-zA-Z0-9])[-.] ]]; then
+          if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
             TAG=${BASH_REMATCH[1]}
             echo "捕获到 npm tag : $TAG"
           else

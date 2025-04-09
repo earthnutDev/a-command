@@ -1,3 +1,14 @@
+/**
+ *
+ * 原始的一个绑定的类型声明
+ *
+ * 用于 args 及下属属性的类型声明
+ *
+ */
+export type OptionNameArray = {
+  [x: string]: string | undefined;
+};
+
 /** Command line option parameter
  *
  *
@@ -124,14 +135,28 @@ export type StateType = {
 };
 
 /**
+ *
+ *  处理后的参数的 options 类型声明
+ *
+ */
+
+export type ArgsItemOptionsType<T = undefined> = T extends undefined
+  ? never
+  : T extends infer V
+    ? V extends string
+      ? { name: V; value: string[] }[]
+      : never
+    : never;
+
+/**
  * 当前的  arg
  *
  * 处理后的原始参数的值
  */
-export type ArgsItem = {
-  name: string;
+export type ArgsItem<T = OptionNameArray, K extends keyof T = keyof T> = {
+  name: K;
   value: string[];
-  options: { name: string; value: string[] }[];
+  options: ArgsItemOptionsType<T[K]>;
 };
 
 //
@@ -144,18 +169,37 @@ export type ArgsItem = {
  *  }
  * ```
  * */
-export type ArgsMapType = {
-  [key: string]: ArgsMapItemType;
+export type ArgsMapType<T = OptionNameArray> = {
+  [Key in keyof T]?: ArgsMapItemType<T[Key]>;
 };
 
+type GenerateArrayMapItemKeys<T> = T extends undefined
+  ? never
+  : T extends infer U
+    ? U extends string
+      ? U | never
+      : never
+    : never;
+
 /** $map 值的子项  */
-export type ArgsMapItemType = {
-  [key: string]: (string | boolean | number)[];
-  value: (string | number | boolean)[];
+export type ArgsMapItemType<T = undefined> = {
+  [K in GenerateArrayMapItemKeys<T> & string]?: {
+    value: (string | number | boolean)[];
+  };
+} & {
+  value?: (string | number | boolean)[];
 };
 
 /**
  * 导出数组对象的类型
+ *
+ * 该类型的返回值仅是原数据的一个变种
+ *
+ * 将原数据的 name 提出作为数组元素的键名
+ *
+ * value 作为值下的 value 属性
+ *
+ * 其他的属性作为值下的其他属性
  *
  * ```ts
  *  type ArgsMapType = {
@@ -166,7 +210,20 @@ export type ArgsMapItemType = {
  *  }
  * ```
  */
-export type ArgsArrMapType = ArgsMapType[];
+export type ArgsArrMapType<T, K extends keyof T = keyof T> = {
+  [Key in K]?: ArgsArrMapItemType<T[Key]>;
+}[];
+
+export type ArgsArrMapItemType<T> = {
+  value?: (string | number | boolean)[];
+  options?: {
+    [key in GenerateArrayMapItemKeys<T> & string]?: (
+      | string
+      | number
+      | boolean
+    )[];
+  }[];
+};
 
 /**
  * 导出 arg 返回的 args 的类型
@@ -180,7 +237,7 @@ export type ArgsArrMapType = ArgsMapType[];
  * - $isVoid   是否为空
  *
  */
-export interface ArgsType extends Array<ArgsItem> {
+export interface ArgsType<T = OptionNameArray> extends Array<ArgsItem<T>> {
   /**
    *  返回给顶端的数据值
    *
@@ -201,7 +258,7 @@ export interface ArgsType extends Array<ArgsItem> {
    *  }
    * ````
    */
-  $map: ArgsMapType;
+  $map: ArgsMapType<T>;
   /**
    *  返回的数组数据
    *
@@ -215,7 +272,7 @@ export interface ArgsType extends Array<ArgsItem> {
    * ```
    *
    */
-  $arrMap: ArgsArrMapType;
+  $arrMap: ArgsArrMapType<T>;
   /**
    *  仅有头部的字符串数组
    *
@@ -228,7 +285,7 @@ export interface ArgsType extends Array<ArgsItem> {
    *   type $only = string[]
    *  ```
    */
-  $only: string[];
+  $only: (keyof T)[];
   /**
    *  原始参数
    *  用户输入启动参数元数据
@@ -255,71 +312,3 @@ export interface ArgsType extends Array<ArgsItem> {
    */
   $isVoid: boolean;
 }
-
-/** 子项的类型   */
-export type ManageDataTypeItem = {
-  name: string;
-  value: (string | boolean)[];
-};
-
-/**
- *  子项列的类型
- *
- * 你大概率不太可能会用到这个
- *
- * 这是一个内部使用的类型声明
- *
- * ```ts
- *   type ManageDataTypeItem = {
- *      name: string;
- *      value: (string | boolean)[] | [];
- *   }
- *
- * ```
- *
- */
-export type ManageDataTypeObject = {
-  name: string;
-  value: (string | boolean | number)[];
-  options: ManageDataTypeItem[];
-};
-
-/**
- *
- *  解析用户参数数据
- *
- * 你大概率不太可能会用到这个
- *
- * 这是一个内部使用的类型声明
- *
- * ```ts
- *    type ManageDataTypeObject = {
- *      name: string;
- *      value: (string | boolean)[] | [];
- *      options: ManageDataTypeItem[] | [];
- *    }
- *   type ManageDataTypeItem = {
- *      name: string;
- *      value: (string | boolean)[] | [];
- *   }
- *
- * ```
- */
-export type ManageDataType = {
-  /** 结果储存 */
-  result: ManageDataTypeObject[];
-  /** 临时值，最终将复制给  `auxiliaryData.values` */
-  values: (string | number | boolean)[];
-  /** 当前匹配的值 */
-  name: string;
-  /** 当前匹配值的数据  */
-  object: ManageDataTypeObject;
-  /** 当前匹配值的子 */
-  item: ManageDataTypeItem;
-  /** 重置父项 */
-  resetObject: (name: string) => void;
-  /** 重置子项 */
-  resetItem: (name: string) => void;
-  /** 初始化数据，防止数据污染 */
-  init: () => void;
-};

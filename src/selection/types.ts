@@ -3,7 +3,7 @@ export type SelectionParamDataMapType = {
   /**
    *
    * 要渲染的选择的数据数据
-   ***/
+   */
   data: (string | number)[];
   /**
    *
@@ -35,7 +35,7 @@ export type SelectionParamDataMapType = {
 /**
  *
  * *参数数据类型*
- ***/
+ */
 export type SelectionParamDataType =
   | (string | number)[]
   | SelectionParamDataMapType;

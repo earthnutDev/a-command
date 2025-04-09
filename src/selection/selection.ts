@@ -74,7 +74,7 @@ import origin_selection from './originSelection';
  *
  *  ```
  */
-export default function selection(
+export function selection(
   data: SelectionParamDataType,
   resultType?: 'number' | 'string',
 ): Promise<string | number> {

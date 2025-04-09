@@ -5,7 +5,7 @@ import {
   ParamType,
   SubOptionsType,
 } from './types';
-import { AuxiliaryData } from './auxiliaryData';
+import { AuxiliaryData } from './data-store/auxiliaryData';
 import { isArray, isString } from 'a-type-of-js';
 
 /**
@@ -17,17 +17,20 @@ export default function bindInstruction(
   data: BindParamsType,
   auxiliaryData: AuxiliaryData,
 ) {
-  ///  检测当前
+  ///  检测当前状态码
   switch (auxiliaryData.state.code) {
+    // 状态码不正确直接打印消息返回
     case 3:
       _p('已经执行过 `run`');
       return;
     case 4:
       _p('已完成全部');
       return;
+    // 状态码为 3 以下设置状态码值为 2
     default:
       auxiliaryData.state = 2;
   }
+  /**  解析后得到的数据结构  */
   let _d: ParamType = {
     name: '',
     info: '',

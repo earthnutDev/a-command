@@ -3,11 +3,11 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 
-const temporaryArr = ['node:', 'a-', 'color-pen'];
+const excludedPkg = ['node:', 'a-', 'color-pen'];
 
 /** 生成  npm 文件的打包配置文件 */
 export default {
-  input: './ex/index.ts',
+  input: './eg/index.ts',
   output: [
     {
       format: 'es',
@@ -15,11 +15,11 @@ export default {
       preserveModules: true,
       sourcemap: false,
       exports: 'named',
-      dir: '.test/',
+      dir: '.earthnut/',
     },
   ],
   // 配置需要排除的包
-  external: id => new RegExp('^'.concat(temporaryArr.join('|^'))).test(id),
+  external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
   plugins: [
     resolve(),
     commonjs(),

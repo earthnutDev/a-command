@@ -1,11 +1,13 @@
 import { initializeFile } from 'a-node-tools';
-import { ArgsType, BindParamsType, StateType } from './types';
-import { auxiliaryDataStore, createAuxiliaryData } from './auxiliaryData';
+import { ArgsType, BindParamsType, OptionNameArray, StateType } from './types';
+import { AuxiliaryData } from './data-store/auxiliaryData';
 import bindInstruction from './bindInstructions';
-import executeParsing from './executeParsing';
-import { organizeHelpInformation } from './organizeHelpInformation';
-import showVersion from './showVersion';
+import executeParsing from './user-args/executeParsing';
+import { organizeHelpInformation } from './user-args/help';
+import showVersion from './user-args/showVersion';
 import { isString } from 'a-type-of-js';
+import { auxiliaryDataStore } from './data-store/auxiliaryDataStore';
+import { createAuxiliaryData } from './data-store/createAuxiliaryData';
 
 /**   
  
@@ -84,9 +86,18 @@ import { isString } from 'a-type-of-js';
  * ```
  *
  */
-class Args {
+class Args<T extends OptionNameArray> {
   // 为一只
   #uniKey: symbol;
+
+  /**
+   *  数据中心，包含所有的可用数据
+   *
+   *  该数据是独立的，每一个实例将会有自己独特的数据（主要的在执行 bind 时数据不同，解析出来的数据将会不一致）
+   *
+   */
+  #dataStore: AuxiliaryData;
+
   /**
    * 初始化的参数用于指定是否在有重复的指令时是否覆盖，默认不覆盖
    */
@@ -99,10 +110,11 @@ class Args {
       );
 
     // 初始化数据
-    auxiliaryDataStore[this.#uniKey] = createAuxiliaryData();
+    this.#dataStore = auxiliaryDataStore[this.#uniKey] =
+      createAuxiliaryData<T>();
     // 初始化文件路径
-    [auxiliaryDataStore[this.#uniKey].__filename] = initializeFile();
-    auxiliaryDataStore[this.#uniKey].name =
+    [this.#dataStore.__filename] = initializeFile();
+    this.#dataStore.name =
       name ||
       (isString(process.argv[1]) &&
         process.argv.slice(1, 2)[0].replace(/.*\/.*?$/, '$1')) ||
@@ -121,7 +133,7 @@ class Args {
    * 命令名称
    */
   get name(): string {
-    return auxiliaryDataStore[this.#uniKey].name;
+    return this.#dataStore.name;
   }
 
   /**
@@ -133,7 +145,7 @@ class Args {
    *
    */
   get state(): StateType {
-    return auxiliaryDataStore[this.#uniKey].state;
+    return this.#dataStore.state;
   }
 
   /**
@@ -145,17 +157,9 @@ class Args {
   get isEnd() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _this = this;
-    /**
-     *
-     *
-     *
-     */
+    /**    用于判断是否结束的布尔值  */
     class My extends Boolean {
-      /**
-       *
-       *
-       *
-       */
+      /**    用于判断是否结束的布尔值  */
       constructor() {
         super(auxiliaryDataStore[_this.#uniKey].state.code == 4);
       }
@@ -166,9 +170,9 @@ class Args {
        * 此时若无其他操作，建议 end 一下
        *
        */
-      get end(): true {
+      end(): true | never {
         if (this.valueOf()) {
-          return _this.end;
+          return _this.end();
         }
         return true;
       }
@@ -182,8 +186,8 @@ class Args {
    *
    *  这是一个属性
    */
-  get end(): never {
-    auxiliaryDataStore[this.#uniKey].state = 'end';
+  end(): never {
+    this.#dataStore.state = 'end';
     return process.exit();
   }
 
@@ -193,8 +197,8 @@ class Args {
    *
    *
    */
-  get error(): never {
-    auxiliaryDataStore[this.#uniKey].state = 'error';
+  error(): never {
+    this.#dataStore.state = 'error';
     return process.exit(1);
   }
 
@@ -207,7 +211,7 @@ class Args {
    *        data {@link BindParamsType}  绑定命令行参数
    */
   bind(data: BindParamsType) {
-    bindInstruction(data, auxiliaryDataStore[this.#uniKey]);
+    bindInstruction(data, this.#dataStore);
     return this;
   }
 
@@ -216,7 +220,7 @@ class Args {
    */
   run() {
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该 🙋 的出现。所以所有的数据保持单一 */
-    executeParsing(auxiliaryDataStore[this.#uniKey]);
+    executeParsing(this.#dataStore);
     return this;
   }
 
@@ -234,8 +238,8 @@ class Args {
    * - $isVoid   是否为空
    *
    */
-  get args(): ArgsType {
-    return auxiliaryDataStore[this.#uniKey].args;
+  get args(): ArgsType<T> {
+    return this.#dataStore.args as unknown as ArgsType<T>;
   }
 
   /**
@@ -250,7 +254,7 @@ class Args {
    *
    */
   get values(): (string | number | boolean)[] {
-    return auxiliaryDataStore[this.#uniKey].values.slice();
+    return this.#dataStore.values.slice();
   }
 
   /**
@@ -262,7 +266,7 @@ class Args {
    * @memberof Args
    */
   help(optionName?: string, subOptionName?: string) {
-    const _auxiliaryData = auxiliaryDataStore[this.#uniKey];
+    const _auxiliaryData = this.#dataStore;
     if (isString(optionName) && _auxiliaryData.originalBind[optionName]) {
       if (
         isString(subOptionName) &&
@@ -272,7 +276,7 @@ class Args {
         _auxiliaryData.helpInfo = [optionName, subOptionName];
       else _auxiliaryData.helpInfo = optionName;
     } else _auxiliaryData.helpInfo = 'help';
-    organizeHelpInformation(auxiliaryDataStore[this.#uniKey]);
+    organizeHelpInformation(this.#dataStore);
   }
 
   /**
@@ -282,8 +286,8 @@ class Args {
    * @memberof Args
    */
   version() {
-    showVersion(auxiliaryDataStore[this.#uniKey]);
+    showVersion(this.#dataStore);
   }
 }
 
-export default Args;
+export { Args };

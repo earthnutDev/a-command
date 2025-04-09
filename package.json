@@ -3,36 +3,12 @@
   "private": true,
   "version": "2.0.0-next.0",
   "name": "a-command",
-  "main": "cjs/index.cjs",
-  "module": "mjs/index.mjs",
-  "typings": "types/index.d.ts",
-  "description": "终端的完整命令行代码（不允许在浏览器中使用）",
-  "files": [
-    "bin",
-    "mjs",
-    "cjs",
-    "types"
-  ],
-  "exports": {
-    ".": {
-      "import": {
-        "default": "./mjs/index.mjs",
-        "types": "./types/index.d.ts"
-      },
-      "require": {
-        "default": "./cjs/index.cjs",
-        "types": "./types/index.d.ts"
-      }
-    },
-    "./types/args": "./types/src/argTool/types.d.ts",
-    "./types/question": "./types/src/question/types.d.ts",
-    "./types/selection": "./types/src/selection/types.d.ts"
-  },
+  "description": "终端的完整命令行代码（无法在浏览器环境中使用）",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
-    "build": "npm run b && npm run clean:package",
+    "build": "jja rm dist cls&& npm run b && npm run clean:package",
     "clean:package": "node scripts/clean-package-json.js",
-    "dev": "jja rm .test && rollup --config rollup.dev.config.js && node --unhandled-rejections=strict .test/ex/index.mjs",
+    "dev": "jja rm .earthnut cls cls  && rollup --config rollup.dev.config.js && node --unhandled-rejections=strict .earthnut/eg/index.mjs 56 awe  -a  a aa aaa -b bb 154 a bgh 212 c=10 k=200 bb 545 d 56 989 a 45 b bb=56 a=12 a=1",
     "push:version": "gvv",
     "push:submit": "gvv",
     "eslint": "eslint src",
@@ -45,28 +21,7 @@
     "prepublishOnly": "pjj",
     "prepare": "husky"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/earthnutDev/a-command.git"
-  },
-  "author": {
-    "name": "earthnut",
-    "email": "earthnut.dev@outlook.com",
-    "url": "https://earthnut.dev"
-  },
   "license": "ISC",
-  "keywords": [
-    "a-command"
-  ],
-  "homepage": "https://earthnut.dev/a-command",
-  "bugs": {
-    "url": "https://github.com/earthnutDev/a-command/issues",
-    "email": "earthnut.dev@outlook.com"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "lint-staged": {
     "**/*.{js,ts,tsx,jex,md,mdx}": [
       "eslint --fix",
@@ -74,12 +29,12 @@
     ]
   },
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
-    "@rollup/plugin-commonjs": "^25.0.8",
+    "@eslint/js": "^9.24.0",
+    "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.17.30",
     "codecov": "^3.8.2",
@@ -104,16 +59,13 @@
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.29.0",
+    "typescript-eslint": "^8.29.1",
     "vjj": "^0.1.2"
   },
-  "bin": {
-    "a-command": "bin/index.js"
-  },
   "dependencies": {
-    "a-js-tools": ">=0.1.3 <1.0.0",
-    "a-node-tools": ">=1.0.0 <2.0.0",
-    "a-type-of-js": ">=0.1.6 <1.0.0",
-    "color-pen": ">=0.1.1 <1.0.0"
+    "a-js-tools": ">=0.1.4 <1.0.0",
+    "a-node-tools": ">=1.0.2 <2.0.0",
+    "a-type-of-js": ">=0.2.0 <1.0.0",
+    "color-pen": ">=0.1.3 <1.0.0"
   }
 }

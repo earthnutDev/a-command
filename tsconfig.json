@@ -5,8 +5,7 @@
     "src/**/*.ts",
     "**.d.ts",
     "src/**/**/*.ts",
-    "test/**/*.ts",
-    "actions.ts"
+    "eg/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

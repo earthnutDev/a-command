@@ -5,7 +5,7 @@ import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
 
-const temporaryArr = ['node:', 'a-', 'color-pen'];
+const excludedPkg = ['node:', 'a-', 'color-pen'];
 
 /** 生成  npm 文件的打包配置文件 */
 export default {
@@ -21,7 +21,7 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: id => new RegExp('^'.concat(temporaryArr.join('|^'))).test(id),
+  external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
   plugins: [
     resolve(),
     commonjs(),
@@ -32,7 +32,6 @@ export default {
     cleanup(),
     copy({
       targets: [
-        { src: 'bin', dest: 'dist' },
         { src: 'README.md', dest: 'dist' },
         { src: 'LICENSE', dest: 'dist' },
       ],
