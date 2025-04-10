@@ -41,13 +41,11 @@ export function manageResult(
   // 数据重置，防止数据污染
   // （旧的使用方法，现每一次都使用函数返回的新数据，原则上可移除该方法）
   manageData.init();
-  console.log(data);
 
   data = pretreatment(
     data.filter(e => e !== ''),
     auxiliaryData,
   ); // 预处理
-  console.log(data);
 
   // 解析每一个参数
   data.forEach((currentArg: string) => {

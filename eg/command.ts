@@ -28,18 +28,18 @@ command.run().isEnd.end();
 const arg = command.args;
 
 if (arg) {
-  console.log(arg);
-  console.log(arg.$map);
-  console.log(arg.$arrMap);
-  console.log('****-');
+  _p(arg);
+  _p(arg.$map);
+  _p(arg.$arrMap);
+  _p('****-');
 
   arg.$arrMap.forEach(currentEle => {
     for (const key in currentEle) {
       const element = currentEle[key as keyof typeof currentEle];
-      console.log(element);
+      _p(element);
 
       if (element && element?.options && element?.options?.length > 0) {
-        console.log(element?.options);
+        _p(element?.options);
       }
     }
   });
