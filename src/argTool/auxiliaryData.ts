@@ -10,9 +10,10 @@
  *
  ****************************************************************************/
 import { isNumber } from 'a-type-of-js';
-import { ArgOriginBind, ArgsType, OverCode, StateType } from '../types';
-import { TempArgs } from './tempArgs';
-import originalArg from './originalArg';
+import { TempArgs } from './data-store/tempArgs';
+import originalArg from './data-store/originalArg';
+import { ArgOriginBind, OverCode, StateType } from './bind/types';
+import { ArgsType } from './types';
 
 /** 定义类 */
 export class AuxiliaryData {
@@ -47,15 +48,25 @@ export class AuxiliaryData {
 
   _state: StateType = { code: 1, text: 'start' };
 
-  /**  启动的选项（处理后的用户输入）*/
+  /**
+   *
+   *  启动的选项（处理后的用户输入）
+   *
+   *
+   *  该数值
+   */
   args: ArgsType = new TempArgs();
-  /** abbreviate table
+  /**
    *
    *  缩写表
    */
   abbr: { [key: string]: string } = {};
   /**   帮助文档*/
   helpInfo: string | string[] = '';
+
+  /**  是否显示版本信息 */
+  hasShowVersion: boolean = false;
+
   /**  原始参数 */
   originalBind: ArgOriginBind = {};
 
@@ -66,3 +77,6 @@ export class AuxiliaryData {
    */
   values: (string | number | boolean)[] = [];
 }
+
+/** 定义数据中心 */
+export const auxiliaryDataStore: { [key: symbol]: AuxiliaryData } = {};

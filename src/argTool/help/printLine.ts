@@ -1,9 +1,12 @@
 import { _p } from 'a-node-tools';
-import { ArgOriginBind, SubOptionsType } from '../../types';
 import { formatHelpText } from './formatHelpText';
+import { ArgOriginBind, SubOptionsType } from '../bind/types';
 
 /**
  * 打印其他信息
+ *
+ *
+ * @param data 绑定的数据，可为 `argOriginBind` 或 `options`
  *
  * @type
  *
@@ -20,18 +23,15 @@ import { formatHelpText } from './formatHelpText';
  * }
  * ```
  */
-export function printHelpOther(
+export function printLine(
   data: ArgOriginBind | { [key: string]: SubOptionsType },
-  printOther?: boolean,
-) {
-  // 其他必须的信息
-  const _otherMustInfo = ['version -v 版本描述', 'help -h 帮助查看'];
+): number {
   const keys = Object.keys(data).sort();
   /** 限定 option  字符数  */
   let maxLength: number = 8;
-  const name: string = 'name',
-    abbr: string | undefined = 'abbr',
-    info: string = 'description';
+  const name: string = '子命令',
+    abbr: string | undefined = '缩写',
+    info: string = '描述';
   /** 查找最大字符数字符 */
   keys.forEach(
     (currentEle: string) =>
@@ -41,18 +41,23 @@ export function printHelpOther(
   _p(formatHelpText({ len, name, info, abbr, color: false }));
   _p('');
   keys.forEach((currentKey: string) => {
-    // @ts-expect-error 下面对 options 做了 undefined 判断，这里是有意为之
-    const { name, abbr, info, options } = data[currentKey];
-    const textDecoration = options && Object.keys(options).length > 0;
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
+    const { name, abbr, info } = data[currentKey];
+
+    /**  文本装饰 🎍 */
+    let textDecoration = false;
+    if (
+      'options' in data[currentKey] &&
+      Object.keys(data[currentKey].options).length > 0
+    ) {
+      textDecoration = true;
+    }
+
     _p(formatHelpText({ len, name, info, abbr, textDecoration }));
     _p('');
   });
-  /** 打印必须项 */
-  if (printOther) {
-    _otherMustInfo.forEach((currentEle: string) => {
-      const [name, abbr, info] = currentEle.split('\x20');
-      _p(formatHelpText({ len, name, info, abbr }));
-      _p('');
-    });
-  }
+
+  return len;
 }

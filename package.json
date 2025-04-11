@@ -1,14 +1,14 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.0.0-next.1",
+  "version": "2.0.0-next.2",
   "name": "a-command",
   "description": "终端的完整命令行代码（无法在浏览器环境中使用）",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "build": "jja rm dist cls&& npm run b && npm run clean:package",
     "clean:package": "node scripts/clean-package-json.js",
-    "dev": "jja rm .earthnut cls cls  && rollup --config rollup.dev.config.js && node --unhandled-rejections=strict .earthnut/eg/index.mjs 56 awe  -a  a aa aaa -b bb 154 a bgh 212 c=10 k=200 bb 545 d 56 989 a 45 b bb=56 a=12 a=1",
+    "dev": "jja rm .earthnut cls cls  && rollup --config rollup.dev.config.js && node --unhandled-rejections=strict .earthnut/eg/index.mjs ",
     "push:version": "gvv",
     "push:submit": "gvv",
     "eslint": "eslint src",

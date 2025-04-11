@@ -12,7 +12,7 @@ import {
   readFileToJsonSync,
 } from 'a-node-tools';
 import { arch, hostname } from 'node:os';
-import { AuxiliaryData } from '../data-store/auxiliaryData';
+import { AuxiliaryData } from './auxiliaryData';
 import pen from 'color-pen';
 import { isUndefined } from 'a-type-of-js';
 

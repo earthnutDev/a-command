@@ -8,11 +8,11 @@
  *
  *
  ****************************************************************************/
-import { ArgsType, OptionNameArray } from '../types';
+import { ArgsType, OptionNameArray } from './types';
 import { AuxiliaryData } from './auxiliaryData';
-import { get$arrMap } from './getArrayMap';
-import { get$map } from './getMap';
-import originalArg from './originalArg';
+import { get$arrMap } from './data-store/getArrayMap';
+import { get$map } from './data-store/getMap';
+import originalArg from './data-store/originalArg';
 
 /** 因为要保持数据的独立性，所以应当是一个函数 */
 export function createAuxiliaryData<T extends OptionNameArray>() {

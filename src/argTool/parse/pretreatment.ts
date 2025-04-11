@@ -1,5 +1,5 @@
 import { isUndefined } from 'a-type-of-js';
-import { AuxiliaryData } from 'src/argTool/data-store/auxiliaryData';
+import { AuxiliaryData } from 'src/argTool/auxiliaryData';
 
 /**
  *

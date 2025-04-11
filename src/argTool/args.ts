@@ -1,13 +1,14 @@
 import { initializeFile } from 'a-node-tools';
-import { ArgsType, BindParamsType, OptionNameArray, StateType } from './types';
-import { AuxiliaryData } from './data-store/auxiliaryData';
-import bindInstruction from './bindInstructions';
-import executeParsing from './user-args/executeParsing';
-import { organizeHelpInformation } from './user-args/help';
-import showVersion from './user-args/showVersion';
+import { ArgsType, OptionNameArray } from './types';
+import { AuxiliaryData } from './auxiliaryData';
+import executeParsing from './parse';
+import { organizeHelpInformation } from './help';
+import showVersion from './showVersion';
 import { isString } from 'a-type-of-js';
-import { auxiliaryDataStore } from './data-store/auxiliaryDataStore';
-import { createAuxiliaryData } from './data-store/createAuxiliaryData';
+import { auxiliaryDataStore } from './auxiliaryData';
+import { createAuxiliaryData } from './createAuxiliaryData';
+import { BindParamsType, StateType } from './bind/types';
+import bindInstruction from './bind';
 
 /**   
  
@@ -20,7 +21,7 @@ import { createAuxiliaryData } from './data-store/createAuxiliaryData';
  *  - `commandName argName optionName value`
  *    **_调用 `run` 后才会开始工作，并且，请在执行 `run` 之前完成所有操作的绑定_**
  * 示例：
- *    倘若你的执行前缀为 `gig` , 可用：
+ *    倘若你的执行前缀为 `jja` , 可用：
  *    _当你有多个配置项时，可把符合规则的配置项放入数组_
  *    **使用字符串参数时，注意 `<>` 和 `()` 均为英文符号**
  *  - 最简单的例子
@@ -31,58 +32,74 @@ import { createAuxiliaryData } from './data-store/createAuxiliaryData';
  *      ```
  * - 不带子项的配置
  *
- *      ```js
- *        import { Args }  from "a-command";
- *        const  command : Args =  new Args();
- *        command.bind({
- *                      name: "init",
- *                      abbr: "-i",
- *                      info: "初始化一个配置文件",
- *                     }).run();
- *      ```
+ * ```js
+ * import { Args }  from "a-command";
+ *  
+ * const  command =  new Args();
+ * 
+ * command
+ *  .bind({
+ *      name: "init",
+ *      abbr: "-i",
+ *      info: "初始化一个配置文件",
+ *   }).run();
+ * ```
+ * 
  *  - 带子项配置（子项纯文本的）
- *      ```js
- *        import { Args }  from "a-command";
- *        const  command : Args =  new Args();
- *        command
- *            .bind({
- *              name: "init",
- *              abbr: "-i",
- *              info: "初始化一个配置文件",
- *              options: [
- *                      "ts <-t> (初始化一个 `ts` 后缀配置文件)",
- *                      "js <-j> (初始化一个 `js` 后缀配置文件)",
- *                      "json <-o> (初始化一个 `json` 后缀配置文件)",
- *                       ]
- *             });
- *        command.run(); // Users can use `gig init -o`
- *      ```
+ *  
+ *  ```js
+ *  import { Args }  from "a-command";
+ *       
+ *  const  command =  new Args<
+ *    init: 'ts' | 'js' | 'json'
+ *   }>('jja');
+ * 
+ * command
+ *     .bind({
+ *       name: "init",
+ *       abbr: "-i",
+ *       info: "初始化一个配置文件",
+ *       options: [
+ *         "ts <-t> (初始化一个 `ts` 后缀配置文件)",
+ *         "js <-j> (初始化一个 `js` 后缀配置文件)",
+ *         "json <-o> (初始化一个 `json` 后缀配置文件)",
+ *          ]
+ *      });
+ *       
+ *  command.run(); // Users can use `jja init -o`
+ *  ```
  *
  *  - 全配置的
  *     
  *  ```js
  *  import { Args }  from "a-command";
- *  const  command : Args =  new Args();
+ * 
+ *  // 范型有助于在使用 `command.arg` 时，获取类型支持
+ *  const  command =  new Args<{
+ *      init: 'ts' | 'js' | 'json'
+ *   }>('jja');
+ *  
  *  command
- *      .bind({
- *        name: "init",
- *        abbr: "-i",
- *        info: "初始化一个配置文件",
- *        options: [{
- *                    name:"ts",
- *                    abbr: "-t",
- *                    info: "初始化一个 `ts` 后缀配置文件"
- *                  },{
- *             name:"js",
- *             abbr: "-j",
- *             info: "初始化一个 `js` 后缀配置文件"
- *                 },{
- *                   name:"json",
- *                   abbr: "-o",
- *                   info: "初始化一个 `json` 后缀配置文件"
- *                 }]
+ *    .bind({
+ *      name: "init",
+ *      abbr: "-i",
+ *      info: "初始化一个配置文件",
+ *      options: [{
+ *           name:"ts",
+ *           abbr: "-t",
+ *           info: "初始化一个 `ts` 后缀配置文件"
+ *         },{
+ *           name:"js",
+ *           abbr: "-j",
+ *           info: "初始化一个 `js` 后缀配置文件"
+ *        },{
+ *          name:"json",
+ *          abbr: "-o",
+ *          info: "初始化一个 `json` 后缀配置文件"
+ *        }]
  *      });
- * command.run(); // Users can use `gig init -o`
+ * 
+ * command.run(); // Users can use `jja init -o`
  * ```
  *
  */
@@ -154,31 +171,11 @@ class Args<T extends OptionNameArray> {
    *
    *  调用会返回一个布尔值 ，布尔值上有一个属性 `end` 可以直接终止当前进程
    */
-  get isEnd() {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const _this = this;
-    /**    用于判断是否结束的布尔值  */
-    class My extends Boolean {
-      /**    用于判断是否结束的布尔值  */
-      constructor() {
-        super(auxiliaryDataStore[_this.#uniKey].state.code == 4);
-      }
-      /**
-       *
-       * 倘若 isEnd 返回的是 true ，证明用户使用 -v 、-h 。默认回去展示它们
-       *
-       * 此时若无其他操作，建议 end 一下
-       *
-       */
-      end(): true | never {
-        if (this.valueOf()) {
-          return _this.end();
-        }
-        return true;
-      }
+  isEnd(end: boolean = false) {
+    if (end === true) {
+      this.end();
     }
-
-    return new My();
+    return this.#dataStore.state.code === 4;
   }
 
   /**
@@ -219,8 +216,19 @@ class Args<T extends OptionNameArray> {
    * 开始执行回调
    */
   run() {
+    const auxiliaryData = this.#dataStore;
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该 🙋 的出现。所以所有的数据保持单一 */
-    executeParsing(this.#dataStore);
+    executeParsing(auxiliaryData);
+    // * 触发帮助文档
+    if (auxiliaryData.helpInfo != '') {
+      organizeHelpInformation(auxiliaryData);
+    }
+    if (auxiliaryData.hasShowVersion) {
+      showVersion(auxiliaryData);
+    }
+
+    console.log(auxiliaryData);
+
     return this;
   }
 

@@ -15,7 +15,7 @@
  *
  * 即便多了一次遍历，不但对性能无影响，而且也能减少代码量
  ****************************************************************************/
-import { AuxiliaryData } from '../../data-store/auxiliaryData';
+import { AuxiliaryData } from '../auxiliaryData';
 import { dataIsValue } from './dataIsValue';
 import { dataIsCode } from './dataIsCode';
 import { dataIsOption } from './dataIsOption';

@@ -213,20 +213,26 @@ const command = new Command();
 /**
  * 当使用带 -h 或者  -v 的参数测试的时候内部解析会标记为已结束状态, 但是是否结束看具体需求
  *
- * isEnd 是一个扩展后的 Boolean  数据, 上面携带 end 方法, 用于结束状态
+ * `isEnd` 是一个判断当前状态的方法，返回一个布尔值，标记当前的状态是否可用。
  *
- *  即在 isEnd 值为 true 时, 调用 end 方法会结束当前程序
+ * 返回 `false` 值说明当前未结束，返回 `true` 值说明当前已经结束，但是并不会主动退出程序
+ *
+ * 除非你在调用 `isEnd` 时显示传入 `true` 值，用以主动退出程序
+ *
  */
-_p(command.isEnd); // 打印是否结束，一个 `boolean` 值，你也可以知啊结束后根据 `state` 来获取具体信息来干其他的
-_p(command.isEnd.end()); //如果你在用户使用帮助文档或是打印版本信息后没有其他事情，可以使用结束
+_p(command.isEnd()); // 打印是否结束，一个 `boolean` 值
+_p(command.isEnd(true)); // 如果想在 `-v` 或 `-h` 时主动退出程序，可传入 `true` 值
 _p(command.state); // 打印当情状态
 _p(command.state.code); // 打印当情状态
 command.state.overText; // 结束文本   "version" | "help" | "end" | "error";
-command.end(); // 主动结束程序
+
+// 任何时刻都可以用的
+command.end(); // 主结束程序
+// 使用 `error` 是抛出错误而不是简单的退出层序
+// 在某些时候，简单是优雅退出程序会被作为层序结束的消息传递给下一个进程
+// 此时，你可以使用 `error` 来抛出错误，而不是简单的退出层序
 command.error(); /// 将抛出错误并退出 node 程序
 ```
-
-**请注意，使用 `command.isEnd` 进行结果判断时注意不要用 `===` ，因为 `command.isEnd` 是一个扩展了的布尔值**
 
 ### 主动使用帮助文档
 
@@ -261,7 +267,7 @@ command.bind({
 
 });
 
-command.run().isEnd.end(); // 在触发了 `-h` 或 `-v` 后，会自动结束程序
+command.run().isEnd(true); // 在触发了 `-h` 或 `-v` 后，会自动结束程序
 
 ```
 

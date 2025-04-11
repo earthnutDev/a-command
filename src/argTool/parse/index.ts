@@ -7,9 +7,9 @@
  *  @Description 解析用户行为
  ****************************************************************************/
 import { _p } from 'a-node-tools';
-import { AuxiliaryData } from '../data-store/auxiliaryData';
-import { organizeHelpInformation } from './help';
-import paringUserArgs from './parse';
+import { AuxiliaryData } from '../auxiliaryData';
+
+import paringUserArgs from './paringUserArgs';
 
 /**
  *
@@ -32,11 +32,6 @@ export default function executeParsing(auxiliaryData: AuxiliaryData) {
 
   // 冷冻数据
   beforeRun(auxiliaryData);
-
-  // * 触发帮助文档
-  if (auxiliaryData.helpInfo != '') {
-    return organizeHelpInformation(auxiliaryData);
-  }
 }
 
 /**

@@ -6,9 +6,8 @@
  *  @CreateDate  周三  04/09/2025
  *  @Description 解析用户的输入参数
  ****************************************************************************/
-import { AuxiliaryData } from '../../data-store/auxiliaryData';
-import showVersion from '../showVersion';
-import { ArgsType, OptionNameArray } from '../../types';
+import { AuxiliaryData } from '../auxiliaryData';
+import { ArgsType, OptionNameArray } from '../types';
 import { createManageDate } from './createManageData';
 import { manageResult } from './manageResult';
 import { delimiter } from './delimiter';
@@ -57,7 +56,6 @@ export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
    * 在创建 _argString 时，以 `^` 作为分隔符，所以这里使用 `^` 作为正则匹配的分隔符
    */
   if (versionRegExp.test(_argString)) {
-    showVersion(auxiliaryData);
     return;
   }
 
