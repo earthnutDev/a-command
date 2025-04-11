@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.0.0-next.2",
+  "version": "2.0.0",
   "name": "a-command",
   "description": "终端的完整命令行代码（无法在浏览器环境中使用）",
   "scripts": {

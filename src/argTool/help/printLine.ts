@@ -41,11 +41,7 @@ export function printLine(
   _p(formatHelpText({ len, name, info, abbr, color: false }));
   _p('');
   keys.forEach((currentKey: string) => {
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     const { name, abbr, info } = data[currentKey];
-
     /**  文本装饰 🎍 */
     let textDecoration = false;
     if (

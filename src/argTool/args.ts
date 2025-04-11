@@ -172,10 +172,12 @@ class Args<T extends OptionNameArray> {
    *  调用会返回一个布尔值 ，布尔值上有一个属性 `end` 可以直接终止当前进程
    */
   isEnd(end: boolean = false) {
-    if (end === true) {
+    /** 当前是否是结束状态 */
+    const isEnd = this.#dataStore.state.code === 4;
+    if (isEnd && end === true) {
       this.end();
     }
-    return this.#dataStore.state.code === 4;
+    return isEnd;
   }
 
   /**
@@ -226,8 +228,6 @@ class Args<T extends OptionNameArray> {
     if (auxiliaryData.hasShowVersion) {
       showVersion(auxiliaryData);
     }
-
-    console.log(auxiliaryData);
 
     return this;
   }
