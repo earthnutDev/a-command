@@ -56,6 +56,7 @@ export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
    * 在创建 _argString 时，以 `^` 作为分隔符，所以这里使用 `^` 作为正则匹配的分隔符
    */
   if (versionRegExp.test(_argString)) {
+    auxiliaryData.hasShowVersion = true;
     return;
   }
 

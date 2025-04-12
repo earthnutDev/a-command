@@ -72,6 +72,6 @@ writeFileSync(
 
 import { Command } from '../mjs/index.mjs';
 
-new Command('a-command').run().end();
+new Command('a-command').run().isEnd(true);
   `,
 );

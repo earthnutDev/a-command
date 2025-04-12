@@ -11,7 +11,7 @@ import {
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
-import { arch, hostname } from 'node:os';
+import { arch } from 'node:os';
 import { AuxiliaryData } from './auxiliaryData';
 import pen from 'color-pen';
 import { isUndefined } from 'a-type-of-js';
@@ -45,11 +45,13 @@ export default function showVersion(auxiliaryData: AuxiliaryData): void {
   }
   const { platform } = process;
 
-  _p(
-    `您好，${pen.random(hostname())}：应用 (${pen.yellow(
-      json.name,
-    )}) 的当前版本为 ${pen.red(json.version)} for ${platform == 'win32' ? 'Windows' : platform == 'darwin' ? 'mac' : platform} ${pen.brightMagenta(arch())}`,
-  );
+  const pkgName = pen.brightCyan(json.name);
+  const version = json.version;
+  const machine =
+    platform == 'win32' ? 'Windows' : platform == 'darwin' ? 'mac' : platform;
+  const system = pen.brightMagenta(arch());
+
+  _p(`${pkgName} 版本 ${pen.brightRed(version)} (${machine} ${system})`);
 }
 
 /**   未找到版本定义说明  */
