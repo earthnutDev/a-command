@@ -89,15 +89,32 @@ export type ArgsArrMapType<T, K extends keyof T = keyof T> = {
   [Key in K]?: ArgsArrMapItemType<T[Key]>;
 }[];
 
+/**
+ *
+ * args 的 arrMap 子数据类型
+ *
+ */
 export type ArgsArrMapItemType<T> = {
   value?: (string | number | boolean)[];
-  options?: {
-    [key in GenerateArrayMapItemKeys<T> & string]?: (
-      | string
-      | number
-      | boolean
-    )[];
-  }[];
+  options?: ArgsArrMapOptions<T>[];
+};
+
+/**
+ *
+ * args 的 arrMap 子元素的 options 类型
+ *
+ * 接受范型为具体的 options 的键
+ *
+ * @exports
+ *
+ * ```ts
+ * const a:ArgsArrMapOptions<'--a' | '--b' | '--c'> = {
+ *    "--a" : [1,2,3]
+ * }
+ * ```
+ */
+export type ArgsArrMapOptions<T> = {
+  [key in GenerateArrayMapItemKeys<T> & string]?: (string | number | boolean)[];
 };
 
 /**
