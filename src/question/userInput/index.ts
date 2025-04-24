@@ -1,21 +1,22 @@
 import { readInput } from 'a-node-tools';
 import draw from '../draw';
-import { questionData } from '../questionData';
+// import { questionData } from '../questionData';
 import { returnKey } from './returnKey';
 import { leftKey } from './leftKey';
 import { fightKey } from './rightKey';
 import { delKey } from './delKey';
 import { otherKey } from './otherKey';
+import { QuestionDataType } from '../types';
 
 /**
  *
  * 监听用户键盘输入并处理
  *
  */
-export default async function userInput() {
+export default async function userInput(this: QuestionDataType) {
   /**  等待用户输入  */
   await readInput((keyValue: string | undefined, key) => {
-    const { kind, currentIssue, enterText } = questionData;
+    const { kind, currentIssue, enterText } = this;
     /**  当为选择模式时的可选项数组  */
     let arr: string[] = [],
       /**  选择模式下可选择项数  */

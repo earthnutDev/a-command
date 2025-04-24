@@ -1,5 +1,6 @@
+import { dog } from './../dog';
 import commandData from 'src/commandData';
-import origin_question from './originQuestion';
+import origin_question from './actionSteps';
 import { QuestionParamDataType } from './types';
 import { isArray } from 'a-type-of-js';
 
@@ -31,23 +32,18 @@ export function question(
   params: QuestionParamDataType,
   simpleResult: boolean = false,
 ): Promise<string> {
+  const uniKey = Symbol('question');
   return new Promise((resolve, reject) => {
     /// 注册事件并进行排队
-    commandData.on(Symbol('question'), () => {
+    commandData.on(uniKey, async () => {
       try {
         /// 原始方法进行问询
-        origin_question(params, simpleResult)
-          .then(result => {
-            commandData.remove();
-            resolve(result as string);
-          })
-          .catch(() => {
-            commandData.remove();
-            reject((isArray(params) && []) || '');
-          });
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const result = await origin_question(params, simpleResult);
+        commandData.remove(uniKey);
+        resolve(result as string);
       } catch (error) {
-        commandData.remove();
+        dog.error('执行出现错误', error);
+        commandData.remove(uniKey);
         reject((isArray(params) && []) || '');
       }
     });

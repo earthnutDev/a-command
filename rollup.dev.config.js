@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 
-const excludedPkg = ['node:', 'a-', 'color-pen'];
+const excludedPkg = ['node:', 'a-', 'color-pen', '@qqi'];
 
 /** 生成  npm 文件的打包配置文件 */
 export default {

@@ -1,9 +1,9 @@
-import { _p, cursorHide } from 'a-node-tools';
+import { dog } from '../dog';
+import { _p, cursorHide, cursorLineClear, cursorShow } from 'a-node-tools';
 import draw from './draw';
-import { selectionData } from './selectionData';
+import { selectionData } from './data-store';
 import { SelectionParamDataType } from './types';
-import userSelect from './userSelect';
-import { t } from 'color-pen';
+import userSelect from './userInteraction';
 
 /**
  *
@@ -11,12 +11,12 @@ import { t } from 'color-pen';
  *
  *
  */
-const unexpectedExit = () =>
-  /**
-   * 打印意外终止
-   *
-   */
-  _p(`${t}J${t}?25h ❌ ${selectionData.info}\n`);
+const unexpectedExit = () => {
+  cursorLineClear(true);
+  cursorShow();
+
+  _p(` ❌ ${selectionData.info}\n`);
+};
 
 /**
  *
@@ -32,9 +32,13 @@ export default async function (
 ): Promise<string | number> {
   // 数据初始化
   selectionData.initData(data);
+  dog('注册意外退出执行监听');
   process.on('exit', unexpectedExit); // 监听异常退出
+  dog('隐藏光标');
   cursorHide(); // 隐藏光标
+  dog('初始绘制问题选项');
   draw(); // 初始绘制选择框
+  dog('绘制完成，等待用户操作');
   // 等待用户选择
   await userSelect();
   // 移除监听

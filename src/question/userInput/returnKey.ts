@@ -1,6 +1,12 @@
-import { _p, cursorShow } from 'a-node-tools';
+import {
+  _p,
+  cursorAfterClear,
+  cursorLineClear,
+  cursorMoveUp,
+  cursorShow,
+} from 'a-node-tools';
 import { questionData } from '../questionData';
-import pen, { t } from 'color-pen';
+import pen, { terminalResetStyle } from 'color-pen';
 
 /**
  *
@@ -36,10 +42,13 @@ export function returnKey() {
         .concat(requiredStr)
         .concat(pen.red(currentIssue.text))
         .concat(requiredStr)
-        .concat(' '.repeat(3))
-        .concat(`${t}5m👆${t}m${t}1A`),
+        .concat(' '.repeat(3)),
       false,
     );
+    // 打印手指
+    _p(pen.blink`👆`.concat(terminalResetStyle), false);
+    // 光标上移
+    cursorMoveUp();
     return false;
   }
   /**  当前问题不强制用户输入，可为 🈳 🕳️  */
@@ -51,11 +60,13 @@ export function returnKey() {
   results.push({ q: currentQuestion, r: currentResult });
 
   // 清空当前行以展示结果
-  _p(`${t}1A${t}2K${t}J`, false);
+  cursorLineClear(true);
+  // 清理航末
+  cursorAfterClear();
   // 私密模式则不打印
   if (!currentIssue.private) {
     _p(
-      `👌 ${currentIssue.resultText || currentQuestion}: ${pen.random(currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*'))}`,
+      `👌 ${currentIssue.resultText || currentQuestion}: ${pen.brightGreen(currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*'))}`,
     );
   }
   cursorShow(); // 显示光标

@@ -1,5 +1,5 @@
 import { isNumber, isString } from 'a-type-of-js';
-import { selectionData } from './selectionData';
+import { selectionData } from './data-store';
 
 const { stdout } = process;
 

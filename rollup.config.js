@@ -5,7 +5,7 @@ import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
 
-const excludedPkg = ['node:', 'a-', 'color-pen'];
+const excludedPkg = ['node:', 'a-', 'color-pen', '@qqi'];
 
 /** 生成  npm 文件的打包配置文件 */
 export default {

@@ -1,4 +1,4 @@
-import pen, { t } from 'color-pen';
+import pen from 'color-pen';
 import { _blank } from './blank';
 import { computerCodePoint } from './computerCodePoint';
 
@@ -37,21 +37,21 @@ export function formatHelpText(_d: {
       },
       _d,
     );
-  let str = `${t}${(data.color && 32) || ''}m${_blank}`;
+  let str = pen[data.color ? 'green' : 'black'](_blank);
   // 打印含子项的特殊标志
-  str += data.textDecoration ? `${t}34;4m` : '';
   // 打印 name
-  str += `${data.name.slice(0, data.len)}${t}m`;
+  str += pen[data.textDecoration ? 'blue' : 'black'](
+    data.name.slice(0, data.len),
+  );
   // 打印空白字符
   str += ' '.repeat(data.len + 1 - computerCodePoint(data.name, data.len));
   // 打印 abbr
-  str += `${t}${(data.color && 33) || ''}m${
+  str += pen[data.color ? 'yellow' : 'black']`${
     data.abbr?.slice(0, abbrLimitLength) || ''
-  }`;
-  // 打印空白字符
-  str += ' '.repeat(
+  }${' '.repeat(
     abbrLimitLength + 1 - computerCodePoint(data.abbr || '', abbrLimitLength),
-  );
+  )}`;
+  // 打印空白字符
   // 打印 description
   str += data.color ? pen.magenta(data.info) : data.info;
   return str;

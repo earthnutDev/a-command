@@ -13,7 +13,7 @@ export function isAllHelpInformation(auxiliaryData: AuxiliaryData) {
   _p(
     `${pen.brightRed(' 可使用:')}  ${
       auxiliaryData.name
-    }  options/abbr  [subOptions/subAbbr  [value]]\n\n${pen.random('选项:')}\n`,
+    }  options/abbr  [subOptions/subAbbr  [value]]\n\n选项:\n`,
   );
   const len = printLine(auxiliaryData.originalBind);
 

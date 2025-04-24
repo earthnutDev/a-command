@@ -1,25 +1,16 @@
-import { cursorMoveLeft, _p } from 'a-node-tools';
-import pen, { t } from 'color-pen';
+import { cursorMoveLeft, _p, cursorLineClear, cursorHide } from 'a-node-tools';
+import pen from 'color-pen';
 import { questionData } from './questionData';
-
-const { stdout } = process;
 
 /**
  *
  *  绘制
  * */
 export default () => {
-  /**
-   *
-   * 终端屏的显示列数
-   */
-  const screenWidth = stdout.columns;
-  ///  向左移动的光标
-  const transformLength = screenWidth ? `${t}${screenWidth}D` : `${t}123D`;
   const { kind, currentIssue, enterText, cursorTranslate } = questionData;
 
-  /**  清理旧的输入信息并将光标移动到输入最左侧  */
-  _p(`${t}2K${transformLength}`, false);
+  //  清理旧的输入信息并将光标移动到输入最左侧
+  cursorLineClear(true);
   const requiredStr =
     kind === 0 && currentIssue.required ? pen.blink.brightRed('*') : '';
   // 显示头
@@ -28,7 +19,9 @@ export default () => {
     false,
   );
 
+  //  答应选择模式
   if (kind !== 0) {
+    cursorHide(); // 选择模式隐藏光标比较好
     // 打印选择模式
     _p(
       (currentIssue.tip as string[])

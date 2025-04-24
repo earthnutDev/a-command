@@ -1,4 +1,4 @@
-import { _p } from 'a-node-tools';
+import { dog } from './../../dog';
 import { AuxiliaryData } from '../auxiliaryData';
 import { BindParamsOptionsType, BindParamsType, ParamType } from './types';
 import { isArray, isString } from 'a-type-of-js';
@@ -17,12 +17,14 @@ export default function bindInstruction(
   ///  检测当前状态码
   switch (auxiliaryData.state.code) {
     // 状态码不正确直接打印消息返回
-    case 3:
-      _p('已经执行过 `run`');
+    case 3: {
+      dog.warn('执行绑定', '但是已经执行过 `run`');
       return;
-    case 4:
-      _p('已完成全部');
+    }
+    case 4: {
+      dog.warn('执行绑定，但是 command 已完成全部应做动作');
       return;
+    }
     // 状态码为 3 以下设置状态码值为 2
     default:
       auxiliaryData.state = 2;

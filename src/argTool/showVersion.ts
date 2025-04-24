@@ -8,13 +8,14 @@ import {
   _p,
   fileExist,
   getDirectoryBy,
+  PackageJson,
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
 import { arch } from 'node:os';
 import { AuxiliaryData } from './auxiliaryData';
 import pen from 'color-pen';
-import { isUndefined } from 'a-type-of-js';
+import { isNull, isUndefined } from 'a-type-of-js';
 
 /**
  *
@@ -38,9 +39,9 @@ export default function showVersion(auxiliaryData: AuxiliaryData): void {
     return noFoundVersion();
   }
   /** 抓取 package.json 文件的内容 */
-  const json = readFileToJsonSync(packageJsonPath);
+  const json = readFileToJsonSync<PackageJson>(packageJsonPath);
   //  文件没有配置名称及当前版本号
-  if (!json.name && !json.version) {
+  if (isNull(json)) {
     return noFoundVersion();
   }
   const { platform } = process;

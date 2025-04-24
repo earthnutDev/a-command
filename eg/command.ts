@@ -1,5 +1,5 @@
-import { _p } from 'a-node-tools';
-import { Command } from '..';
+import { _p, runOtherCode } from 'a-node-tools';
+import { Command } from '../index';
 import pen from 'color-pen';
 
 /**    */
@@ -10,8 +10,10 @@ const command = new Command<{
   d: 'aaa' | 'bbb' | 'ccc';
 }>('test');
 
+await runOtherCode({ code: 'ls', printLog: false });
+
 process.on('exit', () => {
-  _p(pen.random('\n\n程序已运行结束，我是 exit 事件'));
+  _p(pen.brightRed('\n\n程序已运行结束，我是 exit 事件'));
   _p(command.isEnd());
   _p(command.state);
 });
@@ -41,4 +43,4 @@ if (arg) {
   });
 }
 // await command.question('请输入一个值');
-command.end();
+// command.end();

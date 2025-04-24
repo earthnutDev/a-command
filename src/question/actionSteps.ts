@@ -1,3 +1,4 @@
+import { dog } from './../dog';
 /****************************************************************************
  *  @Author earthnut
  *  @Email earthnut.dev@outlook.com
@@ -11,21 +12,20 @@
  ****************************************************************************/
 import draw from './draw';
 import userInput from './userInput';
-import { _p } from 'a-node-tools';
+import { _p, cursorLineClear, cursorShow } from 'a-node-tools';
 import { QuestionParamDataType } from './types';
-import { t } from 'color-pen';
 import { questionData } from './questionData';
 import { originalData } from './originalData';
 
-const { stdout } = process;
 /**
  *
  * 意外退出回调函数
  */
-const unexpectedExit = () =>
-  _p(
-    `${t}${stdout.columns}D${t}J${t}?25h ❌ ${questionData.currentIssue.text} `,
-  );
+const unexpectedExit = () => {
+  cursorLineClear(true);
+  cursorShow();
+  _p(` ❌ ${questionData.currentIssue.text} `);
+};
 
 /**
  *
@@ -37,24 +37,26 @@ export default async function (
   data: QuestionParamDataType,
   simpleResult = false,
 ) {
+  dog('初始化问题');
   // 保留原始 🙋 （初始化数据）
   originalData.init(data);
+  dog('初始化当前问题');
   // 开始问询 （初始化 🙋 ）
   questionData.beforeStart();
+  dog('注册意外退出的监听，用于在意外退出时恢复光标即清理已打印内容');
   // 退出的时候
   process.on('exit', unexpectedExit);
+  dog('开始绘制问题');
   draw();
-  /** 等待用户输入 */
+  //  等待用户输入
   await Reflect.apply(userInput, questionData, []);
-  /**
-   *
-   *  移除监听
-   */
+  // 移除监听
   process.removeListener('exit', unexpectedExit);
-  _p(`\r${t}2K`, false); // 清除当前行
-  /**  多问模式将返回 questionData.results  */
+  cursorLineClear(true);
+  cursorShow(); // 在推出时确保没有对光标显隐有副作用
+  //  多问模式将返回 questionData.results
   if (questionData.multi) {
-    /**  返回简单结果  */
+    //  返回简单结果
     if (simpleResult) {
       return questionData.results.map(currentValue => currentValue.r);
     } else {

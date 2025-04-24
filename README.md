@@ -207,8 +207,9 @@ npx jja remove  --ignore  dist node_modules
 当前状态可由 `state` 来获取，当 `state.code` 为 4 时，说明用户查看了版本号或是帮助文档或是主动使用 `end` 或 `error` 方法，此时 `state.overText` 会是 `version`、`end`、`error` 或 `help` 来表示到底是查看了版本号还是帮助文档
 
 ```ts
-import { _p } from 'a-node-tools';
 import { Command } from 'a-command';
+
+const _p = console.log;
 const command = new Command();
 /**
  * 当使用带 -h 或者  -v 的参数测试的时候内部解析会标记为已结束状态, 但是是否结束看具体需求
@@ -343,10 +344,12 @@ _等待用户输入的一个函数。因为要等待，所以是异步的，使�
 最简单的使用
 
 ```js
-import { _p } from 'a-node-tools';
 import { selection } from 'a-command';
 
+const _p = console.log;
+
 _p('中午吃什么');
+
 const result = await selection([
   '包子',
   '河北特产之正宗安牛肉徽板面',

@@ -1,3 +1,4 @@
+import { dog } from '../dog';
 import { isArray } from 'a-type-of-js';
 import { SelectionParamDataMapType, SelectionParamDataType } from './types';
 
@@ -17,6 +18,7 @@ const data: DataType = {
   private: privateValue,
   data: [],
   initData(params: SelectionParamDataType) {
+    dog('初始化数据');
     // 清理旧的数据
     this.reset();
     /**
@@ -63,20 +65,14 @@ const data: DataType = {
   },
 };
 
-/**  data type
+/**
  *
  * 数据类型
  **/
 type DataType = SelectionParamDataMapType & {
-  /** Current selection
-   *
-   * 当前选择项
-   */
+  /**  当前选择项  */
   select: number;
-  /**
-   *
-   * 最终绘制的数据
-   */
+  /**  最终绘制的数据 */
   drawData: (string | undefined)[];
   /** 将给订参数放进这里 */
   initData: (_data: SelectionParamDataType) => void;

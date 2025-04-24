@@ -1,6 +1,7 @@
+import { dog } from './../dog';
 import commandData from 'src/commandData';
 import { SelectionParamDataType } from './types';
-import origin_selection from './originSelection';
+import origin_selection from './actionSteps';
 
 /**
  *
@@ -78,6 +79,7 @@ export function selection(
   data: SelectionParamDataType,
   resultType?: 'number' | 'string',
 ): Promise<string | number> {
+  const uniKey = Symbol('selection');
   /**
    * 返回一个 promise
    */
@@ -85,17 +87,18 @@ export function selection(
     /**
      * 注册数据到数据仓中，保证每一个注册的 selection 数据都是独立的
      */
-    commandData.on(Symbol('selection'), async () => {
+    commandData.on(uniKey, async () => {
       try {
         /**
          * 使用原始定义的 selection 方法执行并返回结果
          */
         const result = await origin_selection(data, resultType);
 
-        commandData.remove(); // 执行下一个 selection
+        commandData.remove(uniKey); // 执行下一个 selection
         resolve(result);
-      } catch {
-        commandData.remove(); // 执行下一个 selection
+      } catch (error) {
+        dog.error(error);
+        commandData.remove(uniKey); // 执行下一个 selection
         reject();
       }
     });
