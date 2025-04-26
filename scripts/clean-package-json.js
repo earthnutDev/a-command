@@ -3,7 +3,6 @@ import {
   readFileToJsonSync,
   getDirectoryBy,
   writeJsonFile,
-  runOtherCode,
 } from 'a-node-tools';
 import { writeFileSync } from 'node:fs';
 
@@ -54,7 +53,7 @@ packageJson = {
     registry: 'https://registry.npmjs.org/',
   },
   bin: {
-    'a-command': 'bin/index.js',
+    'a-command': 'bin.js',
   },
 };
 
@@ -64,10 +63,10 @@ const distPackagePath = pathJoin(distPath, './dist/package.json');
 
 writeJsonFile(distPackagePath, packageJson);
 
-await runOtherCode('mkdir -p dist/bin');
+// await runOtherCode('mkdir -p dist/');
 
 writeFileSync(
-  'dist/bin/index.js',
+  'dist/bin.js',
   `#!/usr/bin/env node
 
 import { Command } from '../mjs/index.mjs';

@@ -19,6 +19,14 @@ export default {
       exports: 'named',
       dir: 'dist/mjs',
     },
+    {
+      format: 'cjs',
+      entryFileNames: '[name].cjs',
+      preserveModules: true,
+      sourcemap: false,
+      exports: 'named',
+      dir: 'dist/cjs',
+    },
   ],
   // 配置需要排除的包
   external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
