@@ -63,13 +63,11 @@ const distPackagePath = pathJoin(distPath, './dist/package.json');
 
 writeJsonFile(distPackagePath, packageJson);
 
-// await runOtherCode('mkdir -p dist/');
-
 writeFileSync(
   'dist/bin.js',
   `#!/usr/bin/env node
 
-import { Command } from '../mjs/index.mjs';
+import { Command } from './mjs/index.mjs';
 
 new Command('a-command').run().isEnd(true);
   `,
