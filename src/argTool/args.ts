@@ -131,6 +131,7 @@ class Args<T extends OptionNameArray> {
       createAuxiliaryData<T>();
     // 初始化文件路径
     [this.#dataStore.__filename] = initializeFile();
+
     this.#dataStore.name =
       name ||
       (isString(process.argv[1]) &&

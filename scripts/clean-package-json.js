@@ -17,7 +17,7 @@ packageJson = {
   main: 'cjs/index.cjs',
   module: 'mjs/index.mjs',
   types: 'types/index.d.ts',
-  files: ['bin', 'mjs', 'cjs', 'types'],
+  files: ['bin.js', 'mjs', 'cjs', 'types'],
   repository: {
     type: 'git',
     url: 'git+https://github.com/earthnutDev/a-command.git',
@@ -57,18 +57,22 @@ packageJson = {
   },
 };
 
-const distPath = getDirectoryBy('dist', 'directory');
+{
+  const distPath = getDirectoryBy('dist', 'directory');
 
-const distPackagePath = pathJoin(distPath, './dist/package.json');
+  const distPackagePath = pathJoin(distPath, './dist/package.json');
 
-writeJsonFile(distPackagePath, packageJson);
+  writeJsonFile(distPackagePath, packageJson);
+}
 
-writeFileSync(
-  'dist/bin.js',
-  `#!/usr/bin/env node
-
-import { Command } from './mjs/index.mjs';
-
-new Command('a-command').run().isEnd(true);
-  `,
-);
+{
+  writeFileSync(
+    'dist/bin.js',
+    `#!/usr/bin/env node
+    
+    import { Command } from './mjs/index.mjs';
+    
+    new Command('a-command').run().isEnd(true);
+    `,
+  );
+}

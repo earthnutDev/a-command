@@ -7,6 +7,7 @@
 import {
   _p,
   fileExist,
+  getCallerFileInfo,
   getDirectoryBy,
   PackageJson,
   pathJoin,
@@ -25,8 +26,15 @@ import { isNull, isUndefined } from 'a-type-of-js';
 export default function showVersion(auxiliaryData: AuxiliaryData): void {
   auxiliaryData.state = 'version';
 
+  /**  调用者的信息（根据该路径追踪实际的调用者的数据信息）  */
+  const callFilePath = getCallerFileInfo(auxiliaryData.__filename);
+
   // 目标文件位置
-  const targetFileBaseName = getDirectoryBy('package.json', 'file');
+  const targetFileBaseName = getDirectoryBy(
+    'package.json',
+    'file',
+    callFilePath.name,
+  );
 
   // 未找到 package.json 文件的上级目录
   if (isUndefined(targetFileBaseName)) {
