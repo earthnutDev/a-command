@@ -58,9 +58,7 @@ type GenerateArrayMapItemKeys<T> = T extends undefined
 
 /** $map 值的子项  */
 export type ArgsMapItemType<T = undefined> = {
-  [K in GenerateArrayMapItemKeys<T> & string]?: {
-    value: (string | number | boolean)[];
-  };
+  [K in GenerateArrayMapItemKeys<T> & string]?: (string | number | boolean)[];
 } & {
   value?: (string | number | boolean)[];
 };

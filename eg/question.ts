@@ -1,9 +1,9 @@
 import { _p } from 'a-node-tools';
 import { question } from '..';
-import test from 'node:test';
+import { dev } from '@qqi/dev-log';
 
-test.test('测试与 question 模块相关的内容', async it => {
-  await it.test('测试单问模式', async () => {
+dev.skip('测试与 question 模块相关的内容', async it => {
+  await it('测试单问模式', async () => {
     const result = await question(
       {
         text: '请输入你的名字',
@@ -16,7 +16,7 @@ test.test('测试与 question 模块相关的内容', async it => {
     );
     _p(result);
   });
-  await it.test('测试简必答', async () => {
+  await it('测试简必答', async () => {
     const result = await question(
       {
         text: '请输入你的名字',
@@ -31,7 +31,7 @@ test.test('测试与 question 模块相关的内容', async it => {
     _p(result);
   });
 
-  await it.test('测试单问非必答', async () => {
+  await it('测试单问非必答', async () => {
     const result = await question(
       {
         text: '请输入你的名字',
@@ -46,7 +46,7 @@ test.test('测试与 question 模块相关的内容', async it => {
     _p(result);
   });
 
-  await it.test('测试密码㊙️ 模式', async () => {
+  await it('测试密码㊙️ 模式', async () => {
     const result = await question(
       {
         text: '请输入你的名字',

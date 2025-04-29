@@ -1,6 +1,7 @@
 import { _p, runOtherCode } from 'a-node-tools';
 import { Command } from '../index';
 import pen from 'color-pen';
+import { dev } from '@qqi/dev-log';
 
 /**    */
 const command = new Command<{
@@ -19,7 +20,7 @@ process.on('exit', () => {
 });
 
 command.bind('a <-a> (是 a 呀)').bind({
-  'b <-b> (是 b 呀)': ['a', 'bb', 'cc'],
+  'b <-b> (是 b 呀)': ['aa', 'bb', 'cc'],
   'c <-c> (是 c 呀)': [],
   'd <-d> (是 d 呀)': ['aaa', 'bbb', 'ccc'],
 });
@@ -31,16 +32,23 @@ const arg = command.args;
 console.log('****--*-*-*-*-*-*-*-*-');
 
 if (arg) {
-  arg.$arrMap.forEach(currentEle => {
-    for (const key in currentEle) {
-      const element = currentEle[key as keyof typeof currentEle];
-      _p(element);
-
-      if (element && element?.options && element?.options?.length > 0) {
-        _p(element?.options);
-      }
+  _p('$map');
+  dev('测试 $map', () => {
+    _p(arg.$map);
+    for (const key in arg.$map) {
+      _p('****');
+      _p(key);
+      _p(arg.$map.b?.aa);
+      _p(arg.$map.b?.aa);
+      _p(arg.$map.b?.aa?.[0]);
+      _p('****');
     }
   });
+
+  dev.skip('测试 $arrMap', () => {
+    _p('$arrMap');
+  });
 }
+
 // await command.question('请输入一个值');
 // command.end();
