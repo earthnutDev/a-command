@@ -3,7 +3,7 @@ name: 测试率自动化工具
 on:
   push:
     ## 没有写测试文件，现不执行
-    branches: [no-main]
+    branches: [no-test]
   workflow_dispatch:
     inputs:
       version:

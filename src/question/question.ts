@@ -1,5 +1,5 @@
 import { dog } from './../dog';
-import commandData from 'src/commandData';
+import commandData from '../commandData';
 import origin_question from './actionSteps';
 import { QuestionParamDataType } from './types';
 import { isArray } from 'a-type-of-js';

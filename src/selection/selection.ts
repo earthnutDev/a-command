@@ -1,5 +1,5 @@
 import { dog } from './../dog';
-import commandData from 'src/commandData';
+import commandData from '../commandData';
 import { SelectionParamDataType } from './types';
 import origin_selection from './actionSteps';
 
