@@ -1,9 +1,3 @@
-/**
- * Display current version
- *
- * 展示当前版本
- */
-
 import {
   _p,
   fileExist,

@@ -22,7 +22,7 @@
     "prepublishOnly": "pjj",
     "prepare": "husky"
   },
-  "license": "ISC",
+  "license": "MIT",
   "lint-staged": {
     "**/*.{js,ts,tsx,jex,md,mdx}": [
       "eslint --fix",
