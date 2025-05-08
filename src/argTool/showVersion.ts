@@ -15,7 +15,7 @@ import {
 } from 'a-node-tools';
 import { arch } from 'node:os';
 import { AuxiliaryData } from './auxiliaryData';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { isNull, isUndefined } from 'a-type-of-js';
 
 /**

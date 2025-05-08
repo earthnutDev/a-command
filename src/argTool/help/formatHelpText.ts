@@ -1,4 +1,4 @@
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { _blank } from './blank';
 import { computerCodePoint } from './computerCodePoint';
 

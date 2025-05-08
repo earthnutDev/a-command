@@ -8,7 +8,7 @@ import {
 } from 'a-node-tools';
 import draw from './draw';
 import { selectionData } from './data-store';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 /**
  *
  * 用户选择

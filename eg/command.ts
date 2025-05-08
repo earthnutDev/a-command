@@ -1,6 +1,6 @@
 import { _p, runOtherCode } from 'a-node-tools';
 import { Command } from '../index';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { dev } from '@qqi/dev-log';
 
 /**    */

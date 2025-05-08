@@ -6,7 +6,8 @@ import {
 } from 'a-node-tools';
 import { selectionData } from './data-store';
 import setColumns from './setColumn';
-import pen, { csi, terminalResetStyle } from 'color-pen';
+import { pen } from 'color-pen';
+import { csi, terminalResetStyle } from '@color-pen/static';
 
 /**
  *

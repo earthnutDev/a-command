@@ -1,5 +1,5 @@
 import { _p } from 'a-node-tools';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { AuxiliaryData } from '../auxiliaryData';
 import { printLine } from './printLine';
 import { printHelpAndVersion } from './printHelpAndVersion';

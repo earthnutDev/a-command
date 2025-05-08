@@ -1,5 +1,5 @@
 import { cursorMoveLeft, _p, cursorLineClear, cursorHide } from 'a-node-tools';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { questionData } from './questionData';
 
 /**

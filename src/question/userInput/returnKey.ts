@@ -6,7 +6,8 @@ import {
   cursorShow,
 } from 'a-node-tools';
 import { questionData } from '../questionData';
-import pen, { terminalResetStyle } from 'color-pen';
+import { pen } from 'color-pen';
+import { terminalResetStyle } from '@color-pen/static';
 
 /**
  *

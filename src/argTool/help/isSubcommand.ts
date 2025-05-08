@@ -1,6 +1,6 @@
 import { _p } from 'a-node-tools';
 import { AuxiliaryData } from '../auxiliaryData';
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { _blank } from './blank';
 import { printLine } from './printLine';
 

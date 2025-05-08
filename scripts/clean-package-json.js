@@ -70,9 +70,9 @@ packageJson = {
     'dist/bin.js',
     `#!/usr/bin/env node
     
-    import { Command } from './mjs/index.mjs';
-    
-    new Command('a-command').run().isEnd(true);
+import { Command } from './mjs/index.mjs';
+
+new Command('a-command').run().isEnd(true);
     `,
   );
 }

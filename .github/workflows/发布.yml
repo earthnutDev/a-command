@@ -13,6 +13,7 @@ on:
         description: '分支（选填）'
         required: false
         default: ''
+        type: string
 
 jobs:
   pub:
@@ -50,33 +51,9 @@ jobs:
           node-version: 22.x
           registry-url: https://registry.npmjs.org
 
-      - name: 安装 dependencies 依赖
-        run: |
-          npm ci
-
-      - name: 构建
-        run: |
-          npm run build
-
-      - name: 提取版本号并解析 tag
-        id: extract-version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "获取全称 npm version : $VERSION"
-
-          if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
-            TAG=${BASH_REMATCH[1]}
-            echo "捕获到 npm tag : $TAG"
-          else
-            TAG="latest"
-            echo "未捕获到 npm tag 设置了默认 : $TAG"
-          fi
-
-          echo "tag=${TAG}" >> $GITHUB_ENV # 输出 tag
-
       - name: 发布到 npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
-          cd dist
-          npm publish --provenance --access public --tag ${{ env.tag }}
+          chmod +x ./scripts/pub.sh
+          ./scripts/pub.sh
