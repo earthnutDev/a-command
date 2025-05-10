@@ -9,7 +9,7 @@ dev.skip('测试与 question 模块相关的内容', async it => {
         text: '请输入你的名字',
         tip: ['tom', 'jerry'],
         type: 'text',
-        private: false,
+        private: true,
         resultText: '请输入你的名字',
       },
       true,

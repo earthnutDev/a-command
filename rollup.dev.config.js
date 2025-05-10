@@ -2,8 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-
-const excludedPkg = ['node:', 'a-', 'color-pen', '@qqi'];
+import { external } from '@qqi/rollup-external';
 
 /** 生成  npm 文件的打包配置文件 */
 export default {
@@ -19,7 +18,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
+  external: external({
+    ignore: ['node:os'],
+  }),
   plugins: [
     resolve(),
     commonjs(),
