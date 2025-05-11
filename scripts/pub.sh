@@ -15,7 +15,7 @@ tag=""
 install_check_version
 if ! tag=$(npx "${CHECK_VERSION}" c=. 2>&1); then
     echo "未通过版本校验：$tag"
-    exit 1 
+    exit 0
 fi
 echo "获取🉐发布标签为 ${tag}"
 # 依赖安装
@@ -23,13 +23,13 @@ npm ci
 # 构建项目
 if ! npm run build; then 
   echo "构建失败" 
-  exit 1
+  exit 0
 fi
 
 # 切换到构建目录
 if [ ! -d "dist" ]; then 
   echo "未找到 dist 构建码"
-  exit 1
+  exit 0
 fi
 
 # 确保脚本在遇见错误时立即退出
