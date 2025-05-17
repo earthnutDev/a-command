@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["ESNext", "DOM"],
     "sourceMap": false

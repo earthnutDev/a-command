@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.types.json",
+  "compilerOptions": {
+    "declarationDir": null,
+    "declaration": false
+  },
+  "include": ["eg", "eg/*.ts", "src/**/*.ts", "./index.ts"],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "module",
+  "private": true,
+  "version": "2.2.0",
+  "name": "a-command",
+  "description": "一点点 🤏 终端工具 🧰",
+  "scripts": {
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "build": "jja rm dist cls&& npm run b && npm run clean:package",
+    "clean:package": "node scripts/clean-package-json.js",
+    "diff": "jja pkg --diff",
+    "dev": "jja rm .eg cls cls  && rollup --config rollup.dev.config.js &&a_command=all a_node_tools=all node --unhandled-rejections=strict .eg/index.mjs ",
+    "push:version": "gvv",
+    "push:submit": "gvv",
+    "eslint": "eslint src",
+    "beautify": "npm run prettier",
+    "prettier": "prettier . --write",
+    "test": "lint-staged && jest --coverage",
+    "report": "cat ./coverage/lcov.info | coveralls",
+    "coverage": "codecov",
+    "vjj": "vjj -b",
+    "prepublishOnly": "pjj"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@color-pen/static": "^0.0.2",
+    "@qqi/dev-log": "^0.3.5",
+    "a-js-tools": "^0.6.2",
+    "a-node-tools": "^4.1.0",
+    "a-type-of-js": "^0.3.0",
+    "color-pen": "^2.0.4"
+  }
+}
