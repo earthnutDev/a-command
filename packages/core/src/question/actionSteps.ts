@@ -20,11 +20,12 @@ import {
   cursorPositionUndo,
   cursorShow,
 } from 'a-node-tools';
-import { QuestionParamDataType } from './types';
+import { QuestionParamDataType, QuestionReturnType } from './types';
 import { dataStore } from './data-store';
 import { originalData } from './originalData';
 import { onResize } from './onResize';
 import { pen666, prefixList } from '../utils/info';
+import { isArray, isTrue } from 'a-type-of-js';
 
 /**
  *
@@ -32,10 +33,10 @@ import { pen666, prefixList } from '../utils/info';
  * @param simpleResult
  * @returns
  */
-export async function questionStep(
-  data: QuestionParamDataType,
-  simpleResult = false,
-) {
+export async function actionStep<
+  T extends QuestionParamDataType,
+  U extends boolean | undefined,
+>(data: T, simpleResult: U): Promise<QuestionReturnType<T, U>> {
   process.stdout.removeListener('resize', onResize); /// 移除旧的监听
   process.stdout.on('resize', onResize); // 注册监听终端的尺寸变化
 
@@ -71,13 +72,15 @@ export async function questionStep(
   //  多问模式将返回 questionData.results
   if (dataStore.multi) {
     //  返回简单结果
-    if (simpleResult) {
-      return dataStore.results.map(currentValue => currentValue.r);
+    if (isTrue(simpleResult) && isArray(data)) {
+      return dataStore.results.map(
+        currentValue => currentValue.r,
+      ) as QuestionReturnType<T, U>;
     } else {
       /**  返回默认复杂结果  */
-      return dataStore.results;
+      return dataStore.results as QuestionReturnType<T, U>;
     }
   } else {
-    return dataStore.results[0].r;
+    return dataStore.results[0].r as QuestionReturnType<T, U>;
   }
 }

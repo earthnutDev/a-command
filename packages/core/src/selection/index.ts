@@ -1,6 +1,16 @@
-import { selectionCore } from './core';
-import { SelectionParamDataMapType, SelectionParamDataType } from './types';
+import { core } from './core';
+import {
+  SelectionParamDataMapType,
+  SelectionParamDataType,
+  SelectionResultType,
+} from './types';
 /**
+ *
+ * 一个选择器
+ *
+ * @param data 传入需要由用户选择的数据，可以是数组或对象
+ * @param resultType 可选参数
+ *
  *
  * ```ts
  *  type SelectionParamDataType = (string | number | {
@@ -25,7 +35,6 @@ import { SelectionParamDataMapType, SelectionParamDataType } from './types';
  *  };
  *
  * ```
- * @param data 传入需要由用户选择的数据，可以是数组或对象
  *
  * 当数据是由一维纯字符串组成的数组时，默认使用默认配置
  *
@@ -52,7 +61,7 @@ import { SelectionParamDataMapType, SelectionParamDataType } from './types';
  * }
  *
  *```
- *
+ * @example
  *  导出一个显示的列表选择.
  *
  * 当 data 为一维纯字符串组成的数组时，则默认使用默认的配置.
@@ -65,22 +74,28 @@ import { SelectionParamDataMapType, SelectionParamDataType } from './types';
  *           ]
  *          ```
  *
- *  当 data 为 `Object` 格式时，可以自定义更多信息：
- *      例：
+ * 当 data 为 `Object` 格式时，可以自定义更多信息：
+ *  @example
  *
- *  ```ts
- *     {
- *              info       : "请选择中午吃什么",   // 自定义提示文本信息
- *              resultText : "你想吃的是"         // 结果展示
- *              private    : true ,             // 不展示结果
- *              data       :[]                  //  字符串组成的数组
- *          }
+ * ```ts
+ * {
+ *    info       : "请选择中午吃什么",   // 自定义提示文本信息
+ *    resultText : "你想吃的是"         // 结果展示
+ *    private    : true ,             // 不展示结果
+ *    data       :[]                  //  字符串组成的数组
+ * }
  *
- *  ```
+ * ```
  */
-export const selection = async (
-  data: SelectionParamDataType,
-  resultType?: 'number' | 'string',
-) => await selectionCore(data, resultType);
+export const selection = async function <
+  T extends SelectionParamDataType,
+  U extends 'number' | 'string' | undefined = undefined,
+>(data: T, resultType?: U): Promise<SelectionResultType<T, U>> {
+  return core(data, resultType);
+};
 
-export type { SelectionParamDataType, SelectionParamDataMapType };
+export type {
+  SelectionParamDataType,
+  SelectionParamDataMapType,
+  SelectionResultType,
+};

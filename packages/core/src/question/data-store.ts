@@ -74,7 +74,7 @@ export const dataStore: QuestionDataType = {
         Object.hasOwn(this, currentKey) &&
         _data[currentKey as keyof QuestionAssign] != undefined
       ) {
-        // @ts-expect-error  @ts-expect-error   @ts-expect-error
+        // @ts-expect-error  @ts-expect-error   @ts-expect-error (懒人赋值法)
         this[currentKey] = _data[currentKey];
       } else {
         _p(`${currentKey} is not exist`);

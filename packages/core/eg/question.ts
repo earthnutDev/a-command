@@ -2,7 +2,7 @@ import { _p } from 'a-node-tools';
 import { question } from '..';
 import { dev } from '@qqi/dev-log';
 
-dev('测试与 question 模块相关的内容', async it => {
+dev.skip('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
     const result = await question(
       {
@@ -73,6 +73,7 @@ dev('测试与 question 模块相关的内容', async it => {
 
   await it.skip('测试多问模式，标准输出', async () => {
     const result = await question([1, 2, 3, 4, 5, 6]);
+
     _p(result);
   });
 });

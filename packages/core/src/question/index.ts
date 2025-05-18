@@ -1,5 +1,5 @@
-import { questionCore } from './core';
-import { QuestionParamDataType } from './types';
+import { core } from './core';
+import { QuestionParamDataType, QuestionReturnType } from './types';
 
 /**
  *
@@ -25,9 +25,11 @@ import { QuestionParamDataType } from './types';
  * @param  simpleResult   是否显示为简单模式的返回（默认返回是答案与），缺省为 false
  *
  */
-export const question = async (
-  params: QuestionParamDataType,
-  simpleResult?: boolean,
-) => await questionCore(params, simpleResult);
+export const question = async function <
+  T extends QuestionParamDataType,
+  U extends boolean | undefined = undefined,
+>(params: T, simpleResult?: U): Promise<QuestionReturnType<T, U>> {
+  return core(params, simpleResult);
+};
 
-export type { QuestionParamDataType };
+export type { QuestionParamDataType, QuestionReturnType };

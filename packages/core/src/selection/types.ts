@@ -107,3 +107,19 @@ export type DataType = { data: SelectionUseData[] } & OptionalAttributes & {
     /**  重置  */
     reset: () => void;
   };
+
+/**  返回值  */
+export type SelectionResultType<
+  T extends SelectionParamDataType,
+  U extends 'string' | 'number' | undefined,
+> = T extends SelectionParamData
+  ? U extends 'string' | undefined
+    ? string
+    : number
+  : T extends { kind: 'check' }
+    ? U extends 'string' | undefined
+      ? string[]
+      : number[]
+    : U extends 'string' | undefined
+      ? string
+      : number;

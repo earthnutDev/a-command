@@ -1,9 +1,4 @@
-import {
-  cursorLineClear,
-  cursorPositionUndo,
-  readInput,
-  ReadInputResult,
-} from 'a-node-tools';
+import { readInput } from 'a-node-tools';
 import { draw } from '../draw';
 import { returnKey } from './returnKey';
 import { leftKey } from './leftKey';
@@ -11,7 +6,6 @@ import { fightKey } from './rightKey';
 import { delKey } from './delKey';
 import { otherKey } from './otherKey';
 import { QuestionDataType } from '../types';
-import { dataStore } from '../data-store';
 import { dog } from '../../dog';
 import { isFalse } from 'a-type-of-js';
 
@@ -20,11 +14,9 @@ import { isFalse } from 'a-type-of-js';
  * 监听用户键盘输入并处理
  *
  */
-export async function userInput(
-  this: QuestionDataType,
-): Promise<ReadInputResult> {
+export async function userInput(this: QuestionDataType) {
   /**  等待用户输入  */
-  const result = await readInput((keyValue: string | undefined, key) => {
+  await readInput((keyValue: string | undefined, key) => {
     const { kind, currentIssue, enterText } = this;
     /**  当为选择模式时的可选项数组  */
     let arr: string[] = [],
@@ -74,16 +66,4 @@ export async function userInput(
     if (reDraw) draw(); // 重绘
     return false;
   });
-
-  // 使用 Ctrl + c 但是当前问题禁止退出
-  if (result.isSIGINT) {
-    if (isFalse(returnKey())) {
-      cursorPositionUndo();
-      cursorLineClear(true);
-      draw();
-      return await Reflect.apply(userInput, dataStore, []);
-    }
-  }
-
-  return result;
 }

@@ -1,15 +1,15 @@
 import { dog } from '../dog';
 import commandData from '../commandData';
-import { SelectionParamDataType } from './types';
+import { SelectionParamDataType, SelectionResultType } from './types';
 import { selectionStep } from './actionSteps';
 
 /**
  * 选择的核心逻辑，通过 commandData 来管理数据及执行的顺序
  */
-export async function selectionCore(
-  data: SelectionParamDataType,
-  resultType?: 'number' | 'string',
-): Promise<string | number | (string | number)[]> {
+export async function core<
+  T extends SelectionParamDataType,
+  U extends 'string' | 'number' | undefined,
+>(data: T, resultType?: U): Promise<SelectionResultType<T, U>> {
   const uniKey = Symbol('selection');
   /**
    * 返回一个 promise

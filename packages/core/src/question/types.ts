@@ -226,3 +226,17 @@ export type QuestionParamDataType =
   | number
   | CurrentIssueType
   | (CurrentIssueType | string | number)[];
+
+/**
+ *
+ *  返回数据类型
+ *
+ */
+export type QuestionReturnType<
+  T extends QuestionParamDataType,
+  U extends boolean | undefined,
+> = T extends (string | number | CurrentIssueType)[]
+  ? U extends false | undefined
+    ? { q: string; r: string }[]
+    : string[]
+  : string;
