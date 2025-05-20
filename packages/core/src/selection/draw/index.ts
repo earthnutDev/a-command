@@ -1,30 +1,34 @@
 import {
   __p,
   _p,
+  cursorAfterClear,
   cursorLineClear,
   cursorMoveDown,
   cursorMoveLeft,
   cursorPositionUndo,
 } from 'a-node-tools';
 import { selectionData } from '../data-store';
-import { hexPen, strInOneLineOnTerminal } from 'color-pen';
+import { hexPen, redPen, strInOneLineOnTerminal } from 'color-pen';
 import { diffDrawData } from './diff';
 import { prefixList } from '../../utils/info';
 import { debounce } from 'a-js-tools';
+import { dun } from '../../dog';
 /**
  *
  * 绘制
  *
- * */
+ */
 export const draw = debounce(() => {
-  cursorPositionUndo(); // 恢复光标位置
+  if (dun) {
+    cursorPositionUndo(); // 恢复光标位置
+  }
   diffDrawData(); // 计算差异
 
-  const { info, drawData, kind } = selectionData;
+  const { info, drawData, kind, mustInfo } = selectionData;
   cursorMoveLeft(Infinity);
   cursorLineClear(true);
-  _p(`${prefixList.current()}  ${info} \n`);
-
+  _p(strInOneLineOnTerminal(`${prefixList.current()}  ${info} \n`));
+  // 根据行的是否有变化
   // 遍历需要绘制的每一行
   for (let i = 0, j = drawData.length; i < j; i++) {
     const currentLine = drawData[i];
@@ -54,7 +58,18 @@ export const draw = debounce(() => {
       cursorMoveDown(1, true);
     }
   }
-  __p('8m'); // 输出无色文字
-
-  cursorPositionUndo();
-});
+  if (mustInfo) {
+    selectionData.mustInfo = false;
+    _p(
+      redPen(
+        '\n抱歉，该项至少选择一项！！！\n请使用空格键或是左右键切换选择状态',
+      ),
+    );
+  } else {
+    cursorAfterClear();
+  }
+  if (dun) {
+    __p('8m'); // 输出无色文字
+    cursorPositionUndo();
+  }
+}, 66);

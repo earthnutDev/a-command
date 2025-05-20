@@ -1,8 +1,9 @@
 import { dog } from '../dog';
-import { _p, readInput } from 'a-node-tools';
+import { readInput } from 'a-node-tools';
 import { draw } from './draw';
 import { selectionData } from './data-store';
-import { redPen } from 'color-pen';
+import { esc } from '@color-pen/static';
+import { isTrue } from 'a-type-of-js';
 
 /**
  *
@@ -11,9 +12,14 @@ import { redPen } from 'color-pen';
  *
  */
 export async function userInteraction() {
-  const { data, required, kind, drawData } = selectionData,
+  const { data, required, kind, drawData, canCtrlCExit, canCtrlDExit } =
+      selectionData,
     len = data.length;
-  await readInput((keyValue: string | undefined, key: unknown) => {
+  /**  返回值，用户判定用户是否主动退出  */
+  const result = {
+    exit: false,
+  };
+  await readInput((keyValue, key) => {
     const { focus } = selectionData;
     switch ((key as { name: string }).name) {
       case 'return':
@@ -23,11 +29,7 @@ export async function userInteraction() {
           required &&
           drawData.filter(e => e.checked).length === 0
         ) {
-          _p(
-            redPen(
-              '抱歉，该项至少选择一项！！！请使用空格键或是左右键切换选择状态',
-            ),
-          );
+          selectionData.mustInfo = true;
           draw();
           return false;
         }
@@ -47,31 +49,38 @@ export async function userInteraction() {
 
       case 'right':
         dog('用户使用了键盘键的右键');
-        if (kind === 'check') {
-          drawData[focus].checked = !drawData[focus].checked;
-        }
-        draw();
-        break;
+      // eslint-disable-next-line no-fallthrough
       case 'left':
         dog('用户使用了键盘键的左键');
-        if (kind === 'check') {
-          drawData[focus].checked = !drawData[focus].checked;
-        }
-        draw();
-        break;
+      // eslint-disable-next-line no-fallthrough
       case 'space':
         dog('用户使用了键盘键的空格键');
         if (kind === 'check') {
           drawData[focus].checked = !drawData[focus].checked;
+          draw();
         }
-        draw();
+        break;
+      case 'escape':
+        // 是否是 esc 按键双击
+        if (key?.sequence === esc.repeat(2)) {
+          result.exit = true;
+          return true;
+        }
         break;
       default:
         dog('用户使用了键盘键的非方向键 <', keyValue, '>, <', key, '>');
-        // 用户使用了其他键，直接重新绘制
-        setTimeout(() => draw());
+        if (
+          isTrue(key?.ctrl) &&
+          ((isTrue(canCtrlCExit) && key?.name === 'c') ||
+            (isTrue(canCtrlDExit) && key?.name === 'd'))
+        ) {
+          result.exit = true;
+          return true;
+        }
         break;
     }
     return false;
   });
+
+  return result.exit;
 }

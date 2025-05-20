@@ -2,9 +2,14 @@ export type CurrentIssueRequestParams = {
   /**
    *   当前问题展示
    **/
-  text: string;
+  text: string | number;
 };
 
+/**
+ * 当前问题可选配置项
+ *
+ *
+ */
 export type CurrentIssueOptionsParams = {
   /**
    *
@@ -54,12 +59,10 @@ export type CurrentIssueOptionsParams = {
    *
    */
   defaultValue: string;
-  /**
-   *
-   * 展示必须的文本信息
-   *
-   */
-  mustInfo: boolean;
+  /**  似乎否可以使用 `ctrl + c` 键退出 */
+  canCtrlCExit: boolean;
+  /**  似乎否可以使用 `ctrl + d` 键退出 */
+  canCtrlDExit: boolean;
 };
 /**
  *
@@ -92,8 +95,13 @@ export type CurrentIssueType = CurrentIssueRequestParams & {
   [x in keyof CurrentIssueOptionsParams]?: CurrentIssueOptionsParams[x];
 };
 
+/**  当前的问题（实际使用）  */
 export type CurrentIssue = CurrentIssueRequestParams & {
   [x in keyof CurrentIssueOptionsParams]: CurrentIssueOptionsParams[x];
+} & {
+  // 下面的属性尽在使用时存在，不存在于用户使用配置
+  /**  展示必须的文本信息  */
+  mustInfo: boolean;
 };
 
 /**
@@ -169,42 +177,20 @@ export type QuestionDataType = {
    * 该值会在每一次 changeCurrentIssue 时进行赋值
    */
   kind: 1 | 0;
-  /**
-   *
-   * 多问模式
-   */
+  /**  多问模式 */
   multi: boolean;
-  /**
-   *
-   * 用户输入文本
-   *
-   *
-   */
+  /** 用户输入文本 */
   enterText: string[];
-  /**
-   *
-   * 多问模式的进度，改变会触发当前问题（`this.currentIssue`）的变更
-   */
+  /**  多问模式的进度，改变会触发当前问题（`this.currentIssue`）的变更 */
   progressCount: number;
-  /**
-   *
-   * 浮标移动
-   */
+  /** 浮标移动 */
   cursorTranslate: number;
-  /**
-   * 当前的浮标位置，当改变时会触发 `this.cursorTranslate` 的自更新
-   */
+  /**  当前的浮标位置，当改变时会触发 `this.cursorTranslate` 的自更新  */
   indexOfCursor: number;
-  /**
-   *
-   * 当前问题
-   */
+  /**  当前问题 */
   currentIssue: CurrentIssue;
-  /**
-   *
-   * 结果集，用于多询问模式
-   */
-  results: { r: string; q: string }[];
+  /** 结果集，用于多询问模式 */
+  results: { r: string | undefined; q: string | number }[];
   /** 内部方法，混合数据 */
   assign(arg: QuestionAssign): void;
   /**
@@ -231,12 +217,15 @@ export type QuestionParamDataType =
  *
  *  返回数据类型
  *
+ *  当用户正常输入时为正常的返回值（或默认值）
+ *
+ *  当用户使用强制退出时（双及 `esc` 或其他配置），可退出当前问题，返回值为 undefined
  */
 export type QuestionReturnType<
   T extends QuestionParamDataType,
   U extends boolean | undefined,
 > = T extends (string | number | CurrentIssueType)[]
   ? U extends false | undefined
-    ? { q: string; r: string }[]
-    : string[]
-  : string;
+    ? { q: string | number; r: string | undefined }[]
+    : (string | undefined)[]
+  : string | undefined;

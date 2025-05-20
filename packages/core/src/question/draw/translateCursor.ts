@@ -13,7 +13,7 @@ export function translateCursor() {
 
   const enterStr = enterText.slice(0, indexOfCursor).join('');
 
-  const str = currentIssue.text.concat(enterStr);
+  const str = currentIssue.text.toString().concat(enterStr);
 
   const computerLength = strInTerminalLength(str);
 

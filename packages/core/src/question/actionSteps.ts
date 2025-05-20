@@ -25,7 +25,8 @@ import { dataStore } from './data-store';
 import { originalData } from './originalData';
 import { onResize } from './onResize';
 import { pen666, prefixList } from '../utils/info';
-import { isArray, isTrue } from 'a-type-of-js';
+import { isArray, isTrue, isUndefined } from 'a-type-of-js';
+import { hexPen } from 'color-pen';
 
 /**
  *
@@ -50,20 +51,29 @@ export async function actionStep<
   do {
     cursorPositionSave(); // 保留光标位置
     draw();
-    //  等待用户输入
-    await Reflect.apply(userInput, dataStore, []);
+    try {
+      //  等待用户输入
+      await Reflect.apply(userInput, dataStore, []);
+    } catch (error) {
+      dog.error(error);
+    }
     cursorPositionUndo(); // 恢复坐标
     cursorShow();
     cursorAfterClear();
-    __p('m');
+    __p('m'); /// 重置属性
     const { currentIssue, results } = dataStore;
     const currentText = pen666(currentIssue.resultText || currentIssue.text);
     const currentResult = results[results.length - 1].r;
+
     // 私密模式则不打印
     if (!currentIssue.private) {
-      _p(
-        `${prefixList.success()} ${currentText}: ${currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*')}`,
-      );
+      if (isUndefined(currentResult)) {
+        _p(`${prefixList.error()} ${hexPen('#a30').italic(currentText)}`);
+      } else {
+        _p(
+          `${prefixList.success()} ${currentText}: ${currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*')}`,
+        );
+      }
     }
     ++dataStore.progressCount; // 进度更新
   } while (dataStore.multi && dataStore.progressCount !== 0);

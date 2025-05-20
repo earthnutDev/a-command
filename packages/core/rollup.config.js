@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 // import terser from '@rollup/plugin-terser';
-import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
 import { external } from '@qqi/rollup-external';
 
@@ -40,9 +39,6 @@ export default {
     typescript({
       tsconfig: './tsconfig.rollup.json',
     }),
-    // 去除无用代码
-    cleanup(),
-    // terser(),
     copy({
       targets: [
         { src: 'README.md', dest: 'dist' },

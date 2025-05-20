@@ -11,7 +11,12 @@
  ****************************************************************************/
 import { originalData } from './originalData';
 import { CurrentIssue, CurrentIssueType, QuestionDataType } from './types';
-import { isArray, isEmptyString, isString } from 'a-type-of-js';
+import {
+  isArray,
+  isBusinessEmptyString,
+  isEmptyString,
+  isString,
+} from 'a-type-of-js';
 
 /**
  *
@@ -21,17 +26,17 @@ import { isArray, isEmptyString, isString } from 'a-type-of-js';
  **/
 export default function changeCurrentIssue(this: QuestionDataType) {
   const { multi, progressCount } = this;
+  const text = '请使用你自己的问题';
   // 原始问题
   // 当为单问模式直接读取当前问题
   // 如果是多问模式根据当前的 `progressCount` 读取当前的问题
-  const _d: string | CurrentIssueType = multi
-    ? (originalData.data as [])[
-        (originalData.data as []).length + progressCount
-      ]
-    : (originalData.data as string);
+  const _d: number | string | CurrentIssueType =
+    multi && isArray(originalData.data)
+      ? originalData.data[originalData.data.length + progressCount]
+      : (originalData.data as never);
   // 初始化一个空白问题
   const currentIssue: CurrentIssue = {
-    text: 'Please change to your own question',
+    text,
     tip: '',
     type: 'text',
     private: false,
@@ -39,6 +44,8 @@ export default function changeCurrentIssue(this: QuestionDataType) {
     required: true,
     mustInfo: false,
     defaultValue: '',
+    canCtrlCExit: false,
+    canCtrlDExit: false,
   };
   /**
    *
@@ -73,6 +80,10 @@ export default function changeCurrentIssue(this: QuestionDataType) {
       currentIssue.tip = currentIssue.defaultValue;
     }
   }
+
+  currentIssue.text = isBusinessEmptyString(currentIssue.text.toString())
+    ? text
+    : currentIssue.text;
   /**  初始化用户的输入  */
 
   this.assign({

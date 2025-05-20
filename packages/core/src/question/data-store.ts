@@ -54,7 +54,7 @@ export const dataStore: QuestionDataType = {
   },
   /// 初始化的问题
   currentIssue: {
-    text: 'Please change to your own question',
+    text: '请更换为你自己的问题',
     tip: '',
     type: 'text',
     private: false,
@@ -62,6 +62,8 @@ export const dataStore: QuestionDataType = {
     required: true,
     defaultValue: '',
     mustInfo: false,
+    canCtrlCExit: false,
+    canCtrlDExit: false,
   },
 
   results: [],

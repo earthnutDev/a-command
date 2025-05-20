@@ -1,6 +1,10 @@
 import { dog } from '../dog';
 import { isArray, isBoolean, isString } from 'a-type-of-js';
-import { DataType, SelectionParamDataType } from './types';
+import {
+  DataType,
+  SelectionParamDataMapType,
+  SelectionParamDataType,
+} from './types';
 import { parseData } from './parseData';
 
 /** 默认语言  */
@@ -19,6 +23,9 @@ const data: DataType = {
   private: falseValue,
   required: falseValue,
   kind: defaultKind,
+  canCtrlCExit: falseValue,
+  canCtrlDExit: falseValue,
+  mustInfo: falseValue,
   data: [],
   initData(params: SelectionParamDataType) {
     dog('初始化数据');
@@ -32,39 +39,52 @@ const data: DataType = {
     if (isArray(params)) {
       this.data = parseData(params);
     } else {
-      Object.keys(params).forEach(currentKey => {
-        const v = params[currentKey as never];
-        switch (currentKey) {
-          case 'data':
-            this.data = isArray(v) ? parseData(v) : [];
-            break;
-          case 'info':
-            this.info = isString(v) ? v : info;
-            break;
-          case 'resultText':
-            this.resultText = isString(v) ? v : resultText;
-            break;
-          case 'private':
-            this.private = isBoolean(v) ? v : falseValue;
-            break;
-          case 'required':
-            this.required = isBoolean(v) ? v : falseValue;
-            break;
-          case 'kind':
-            this.kind = v === 'check' ? 'check' : defaultKind;
-            break;
-        }
-      });
+      (Object.keys(params) as (keyof SelectionParamDataMapType)[]).forEach(
+        currentKey => {
+          const v = params[currentKey as never];
+          switch (currentKey) {
+            case 'data':
+              this.data = isArray(v) ? parseData(v) : [];
+              break;
+            case 'info':
+              this.info = isString(v) ? v : info;
+              break;
+            case 'resultText':
+              this.resultText = isString(v) ? v : resultText;
+              break;
+            case 'private':
+              this.private = isBoolean(v) ? v : falseValue;
+              break;
+            case 'required':
+              this.required = isBoolean(v) ? v : falseValue;
+              break;
+            case 'kind':
+              this.kind = v === 'check' ? 'check' : defaultKind;
+              break;
+            case 'canCtrlCExit':
+              this.canCtrlCExit = isBoolean(v) ? v : falseValue;
+              break;
+            case 'canCtrlDExit':
+              this.canCtrlDExit = isBoolean(v) ? v : falseValue;
+              break;
+          }
+        },
+      );
     }
   },
   reset() {
-    this.drawData.length = this.data.length = zeroValue;
+    // 需要重置为 0 的变量
+    this.drawData.length = this.data.length = this.focus = zeroValue;
     this.info = info;
-    this.focus = zeroValue;
-    this.resultText = resultText;
-    this.private = falseValue;
-    this.required = falseValue;
     this.kind = defaultKind;
+    this.resultText = resultText;
+    // 需要重置为 false 的变量
+    this.private =
+      this.required =
+      this.canCtrlCExit =
+      this.canCtrlDExit =
+      this.mustInfo =
+        falseValue;
   },
 };
 

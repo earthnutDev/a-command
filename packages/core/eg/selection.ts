@@ -7,7 +7,7 @@ const version = '1.0.1';
 const [a, b, c, d] = version.split('.').map(e => Number(e));
 
 /**  测试选择  */
-await dev('测试 selection 模块相关的内容', async it => {
+await dev.skip('测试 selection 模块相关的内容', async it => {
   await it('测试选择预测版本', () => {
     const result = selection(
       {
@@ -33,7 +33,7 @@ await dev('测试 selection 模块相关的内容', async it => {
   });
 });
 
-await dev.skip('测试新模式', async () => {
+await dev('测试新模式', async () => {
   const result = await selection(
     {
       info: '请问明天吃什么',
@@ -41,6 +41,8 @@ await dev.skip('测试新模式', async () => {
       private: false,
       required: true,
       kind: 'check',
+      canCtrlCExit: true,
+      canCtrlDExit: true,
       data: [
         '🕐',
         '🕑',

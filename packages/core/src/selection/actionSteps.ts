@@ -38,13 +38,17 @@ export async function selectionStep<
   draw(); // 初始绘制选择框
   dog('绘制完成，等待用户操作');
   // 等待用户选择
-  await userInteraction();
+  const exit = await userInteraction();
   _p(terminalResetStyle, false); // 重置属性
   process.stdout.removeListener('resize', onResize); /// 移除尺寸变化的事件
   const { resultText, info, focus, kind, drawData } = selectionData;
   cursorShow(); // 恢复光标显示
   cursorPositionUndo(); // 恢复光标位置
   cursorAfterClear(true); // 清理后面的内容
+
+  if (exit) {
+    return undefined as SelectionResultType<T, U>;
+  }
 
   /**  当前被选中的元素  */
   const checkedList = drawData.filter(e => e.checked);

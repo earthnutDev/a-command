@@ -11,7 +11,7 @@ export default {
     {
       format: 'es',
       entryFileNames: '[name].mjs',
-      preserveModules: false,
+      preserveModules: true,
       sourcemap: false,
       exports: 'named',
       dir: '.eg/',
@@ -19,7 +19,7 @@ export default {
   ],
   // 配置需要排除的包
   external: external({
-    ignore: ['node:os'],
+    ignore: ['node:os', 'node:fs'],
   }),
   plugins: [
     resolve(),

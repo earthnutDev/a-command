@@ -1,6 +1,7 @@
 import { _p } from 'a-node-tools';
 import { question } from '..';
 import { dev } from '@qqi/dev-log';
+import { isUndefined } from 'a-type-of-js';
 
 dev.skip('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
@@ -26,11 +27,15 @@ dev.skip('测试与 question 模块相关的内容', async it => {
         private: false,
         resultText: '请输入你的名字',
         required: true,
+        canCtrlCExit: false,
+        canCtrlDExit: true,
       },
       true,
     );
     _p('测试简必答', false);
     _p(result);
+    _p(isUndefined(result));
+    _p();
   });
 
   await it.skip('测试单问非必答', async () => {
@@ -47,6 +52,7 @@ dev.skip('测试与 question 模块相关的内容', async it => {
     );
     _p('测试单问非必答', false);
     _p(result);
+    _p();
   });
 
   await it.skip('测试密码㊙️ 模式', async () => {
