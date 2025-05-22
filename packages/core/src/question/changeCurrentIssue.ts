@@ -88,7 +88,6 @@ export default function changeCurrentIssue(this: QuestionDataType) {
 
   this.assign({
     indexOfCursor: 0,
-    cursorTranslate: 0,
     kind,
     enterText,
     currentIssue,

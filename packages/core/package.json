@@ -23,11 +23,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@color-pen/static": "^0.0.2",
+    "@color-pen/static": "^0.0.3",
     "@qqi/dev-log": "^0.3.5",
     "a-js-tools": "^0.6.2",
     "a-node-tools": "^4.1.2",
     "a-type-of-js": "^0.3.0",
-    "color-pen": "^2.0.5"
+    "color-pen": "^2.0.9"
   }
 }

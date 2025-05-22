@@ -99,7 +99,7 @@ export type CurrentIssueType = CurrentIssueRequestParams & {
 export type CurrentIssue = CurrentIssueRequestParams & {
   [x in keyof CurrentIssueOptionsParams]: CurrentIssueOptionsParams[x];
 } & {
-  // 下面的属性尽在使用时存在，不存在于用户使用配置
+  // 下面的属性尽在使用时存在，不存在用户使用配置
   /**  展示必须的文本信息  */
   mustInfo: boolean;
 };
@@ -138,12 +138,7 @@ export interface OriginalData {
    * 该值为小于 1 的整数
    */
   progressCount: number;
-  /**
-   *
-   * 当前的浮标位置（正常位置为输入的末尾，有值也是相对于末尾来说的）
-   *
-   * 当改变时会触发 this.cursorTranslate 的自更新
-   */
+  /** 当前的浮标位置（正常位置为输入的末尾，有值也是相对于末尾来说的）*/
   indexOfCursor: number;
   /**
    * 数据初始化方法
@@ -156,7 +151,6 @@ export interface OriginalData {
  */
 export type QuestionAssign = {
   indexOfCursor: number;
-  cursorTranslate: number;
   kind: 0 | 1;
   enterText: string[];
   currentIssue: CurrentIssue;
@@ -183,9 +177,7 @@ export type QuestionDataType = {
   enterText: string[];
   /**  多问模式的进度，改变会触发当前问题（`this.currentIssue`）的变更 */
   progressCount: number;
-  /** 浮标移动 */
-  cursorTranslate: number;
-  /**  当前的浮标位置，当改变时会触发 `this.cursorTranslate` 的自更新  */
+  /**  当前的浮标位置   */
   indexOfCursor: number;
   /**  当前问题 */
   currentIssue: CurrentIssue;

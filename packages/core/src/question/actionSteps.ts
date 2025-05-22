@@ -16,6 +16,7 @@ import {
   __p,
   _p,
   cursorAfterClear,
+  cursorMoveUp,
   cursorPositionSave,
   cursorPositionUndo,
   cursorShow,
@@ -49,10 +50,12 @@ export async function actionStep<
   dataStore.beforeStart();
   dog('开始绘制问题');
   do {
+    _p('\n'.repeat(2));
+    cursorMoveUp(2);
     cursorPositionSave(); // 保留光标位置
     draw();
+    //  等待用户输入
     try {
-      //  等待用户输入
       await Reflect.apply(userInput, dataStore, []);
     } catch (error) {
       dog.error(error);

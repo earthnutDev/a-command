@@ -7,4 +7,4 @@ import { draw } from './draw';
 export const onResize = debounce(() => {
   _p(terminalResetStyle, false); // 重置属性
   draw();
-});
+}, 6);

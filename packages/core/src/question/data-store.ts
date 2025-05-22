@@ -1,8 +1,8 @@
 import { QuestionAssign, QuestionDataType } from './types';
-import { computeCodeCount } from './computeCodeCount';
-import changeCurrentIssue from './changeCurrentIssue';
+
 import { _p, cursorHide, cursorShow } from 'a-node-tools';
 import { originalData } from './originalData';
+import changeCurrentIssue from './changeCurrentIssue';
 
 /**
  *
@@ -39,10 +39,9 @@ export const dataStore: QuestionDataType = {
   /// 通常 newValue 为小于 1 的整数
   set progressCount(newValue: number) {
     originalData.progressCount = newValue;
+    // 问题更新
     Reflect.apply(changeCurrentIssue, this, []);
   },
-
-  cursorTranslate: 0,
 
   get indexOfCursor() {
     return originalData.indexOfCursor;
@@ -50,7 +49,6 @@ export const dataStore: QuestionDataType = {
 
   set indexOfCursor(newValue: number) {
     originalData.indexOfCursor = newValue;
-    this.cursorTranslate = Reflect.apply(computeCodeCount, this, []);
   },
   /// 初始化的问题
   currentIssue: {
@@ -71,7 +69,7 @@ export const dataStore: QuestionDataType = {
   /** 混合问题*/
   assign(_data): void {
     /**  该过程将初始化数据  */
-    Object.keys(_data).forEach(currentKey => {
+    (Object.keys(_data) as (keyof QuestionAssign)[]).forEach(currentKey => {
       if (
         Object.hasOwn(this, currentKey) &&
         _data[currentKey as keyof QuestionAssign] != undefined
@@ -87,11 +85,12 @@ export const dataStore: QuestionDataType = {
   /** 初始化数据，仅在执行前初始化。防止数据残留 */
   beforeStart(): void {
     /// 清理旧的答案
-    this.results.length = 0;
-    // 清理旧的输入
-    this.enterText = [];
-    // 清理旧的光标位置
-    this.indexOfCursor = 0;
+    this.results.length =
+      // 清理旧的输入
+      this.enterText.length =
+      // 清理旧的光标位置
+      this.indexOfCursor =
+        0;
     /// 该值的变化会初始化当前问题，所以才会有重复赋值 0 的情况
     this.progressCount = originalData.multi
       ? -(originalData.data as []).length

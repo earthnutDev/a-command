@@ -3,7 +3,7 @@ import { question } from '..';
 import { dev } from '@qqi/dev-log';
 import { isUndefined } from 'a-type-of-js';
 
-dev.skip('测试与 question 模块相关的内容', async it => {
+dev('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
     const result = await question(
       {
