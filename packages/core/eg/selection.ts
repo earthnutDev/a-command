@@ -1,3 +1,4 @@
+import { _p } from 'a-node-tools';
 import { selection } from '../index';
 import { dev } from '@qqi/dev-log';
 
@@ -11,6 +12,7 @@ await dev.skip('测试新模式', async () => {
       kind: 'check',
       canCtrlCExit: true,
       canCtrlDExit: true,
+      maxRows: 4,
       data: [
         '🕐',
         '🕑',
@@ -28,5 +30,5 @@ await dev.skip('测试新模式', async () => {
     },
     'number',
   );
-  console.log(result);
+  _p(result);
 });

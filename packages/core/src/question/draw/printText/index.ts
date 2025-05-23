@@ -26,14 +26,14 @@ export function printText(text: string, remainingUsableLength: number): string {
       // 未超长
       text += enterText.join('');
     }
-    text += bgPen666(' ');
+    text += bgPen666.hide(' ');
   } else {
     // 文本长度超限
     if (extraLong) {
       text = notEndOfLineExtraLong(text, remainingUsableLength);
     } else {
       // 文本长度正常
-      text += ` ${enterText.map((e, i) => (i === indexOfCursor ? bgPen666(e) : e)).join('')}`;
+      text += `${enterText.map((e, i) => (i === indexOfCursor ? bgPen666(e) : e)).join('')}`;
     }
   }
 

@@ -32,7 +32,7 @@ dev('测试与 question 模块相关的内容', async it => {
       },
       true,
     );
-    _p('测试简必答', false);
+    _p('测试简必答：>', false);
     _p(result);
     _p(isUndefined(result));
     _p();

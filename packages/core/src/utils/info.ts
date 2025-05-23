@@ -97,3 +97,6 @@ export const prefixList = {
   multipleChoiceCheckedFocus: (prefix: string = '■') =>
     brightGreenPen.blink(prefix),
 } as const;
+
+/**  省略号  */
+export const ellipsis = pen666('.'.repeat(3));

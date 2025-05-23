@@ -1,4 +1,4 @@
-import { readInput } from 'a-node-tools';
+import { _p, readInput } from 'a-node-tools';
 
 import { QuestionDataType } from '../types';
 
@@ -16,6 +16,6 @@ export async function userInput(this: QuestionDataType) {
     await readInput(userInputCn(this));
   } catch (error) {
     dog.error('接收用户输入出错', error);
-    console.log(error);
+    _p(error);
   }
 }

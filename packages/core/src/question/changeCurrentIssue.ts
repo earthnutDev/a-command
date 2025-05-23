@@ -9,8 +9,9 @@
  *  - 根据当前问题的进度更新当前问题
  *  - 更新当前问题时初始化当前的问题
  ****************************************************************************/
+import { createCurrentIssue } from './data-store';
 import { originalData } from './originalData';
-import { CurrentIssue, CurrentIssueType, QuestionDataType } from './types';
+import { CurrentIssueType, QuestionDataType } from './types';
 import {
   isArray,
   isBusinessEmptyString,
@@ -35,18 +36,7 @@ export default function changeCurrentIssue(this: QuestionDataType) {
       ? originalData.data[originalData.data.length + progressCount]
       : (originalData.data as never);
   // 初始化一个空白问题
-  const currentIssue: CurrentIssue = {
-    text,
-    tip: '',
-    type: 'text',
-    private: false,
-    resultText: '',
-    required: true,
-    mustInfo: false,
-    defaultValue: '',
-    canCtrlCExit: false,
-    canCtrlDExit: false,
-  };
+  const currentIssue = createCurrentIssue();
   /**
    *
    * 混合问题

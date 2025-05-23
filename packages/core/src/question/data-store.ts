@@ -1,8 +1,28 @@
-import { QuestionAssign, QuestionDataType } from './types';
+import { CurrentIssue, QuestionAssign, QuestionDataType } from './types';
 
 import { _p, cursorHide, cursorShow } from 'a-node-tools';
 import { originalData } from './originalData';
 import changeCurrentIssue from './changeCurrentIssue';
+
+/**  创建一个新的问题  */
+export function createCurrentIssue(): CurrentIssue {
+  return {
+    text: '请更换为你自己的问题',
+    tip: '',
+    type: 'text',
+    private: false,
+    resultText: '',
+    required: true,
+    defaultValue: '',
+    mustInfo: false,
+    canCtrlCExit: false,
+    canCtrlDExit: false,
+    isWrapLine: false,
+    usableLength: 0,
+    row: 0,
+    cum: 0,
+  };
+}
 
 /**
  *
@@ -51,18 +71,7 @@ export const dataStore: QuestionDataType = {
     originalData.indexOfCursor = newValue;
   },
   /// 初始化的问题
-  currentIssue: {
-    text: '请更换为你自己的问题',
-    tip: '',
-    type: 'text',
-    private: false,
-    resultText: '',
-    required: true,
-    defaultValue: '',
-    mustInfo: false,
-    canCtrlCExit: false,
-    canCtrlDExit: false,
-  },
+  currentIssue: createCurrentIssue(),
 
   results: [],
 

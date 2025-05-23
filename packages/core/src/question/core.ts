@@ -2,6 +2,7 @@ import { dog } from '../dog';
 import commandData from '../commandData';
 import { actionStep } from './actionSteps';
 import { QuestionParamDataType, QuestionReturnType } from './types';
+import { _p } from 'a-node-tools';
 /**  实现  */
 export function core<
   T extends QuestionParamDataType,
@@ -26,7 +27,8 @@ export function core<
     });
   } catch (error) {
     dog.error('系统故障', error);
-    console.log('系统故障', error);
+    _p('系统故障', false);
+    _p(error);
     return new Promise((resolve, reject) => {
       reject(error);
     });

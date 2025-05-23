@@ -26,12 +26,24 @@ import {
  *  })[];
  *
  *  type DataType = {
- *      data:  any[];  // 选择要渲染的数据
- *      resultText?: string;  // 结果显示
- *      info?:  string;  // 自定义信息
- *      required?: boolean; // 是否为必选项
- *      private?:  false | true; 隐私模式下，用户回答将覆盖上一个问题行
- *      kind?: 'radio' | 'check'; 当前的选择模式
+ *      // 选择要渲染的数据
+ *      data:  any[];
+ *      // 结果显示
+ *      resultText?: string;
+ *      // 自定义问题文本
+ *      info?:  string;
+ *      // 是否为必选项
+ *      required?: boolean;
+ *      // 隐私模式下，用户回答将覆盖上一个问题行
+ *      private?:  false | true;
+ *      // 当前的选择模式 radio 为单选， check 为多选
+ *      kind?: 'radio' | 'check';
+ *      // 是否可以使用 `ctrl + c` 键退出 ，将返回 undefined
+ *      canCtrlCExit: boolean;
+ *      //  是否可以使用 `ctrl + d` 键退出
+ *      canCtrlDExit: boolean;
+ *      //  在允许的情况下最多可渲染的条数 (该值受最终终端的尺寸限制)
+ *      maxRows: number;
  *  };
  *
  * ```

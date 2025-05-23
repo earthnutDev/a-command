@@ -1,6 +1,6 @@
 import { truncateStringWithChar } from 'color-pen';
-import { ellipsis } from './ellipsis';
 import { dataStore } from '../../data-store';
+import { ellipsis } from '../../../utils/info';
 
 /**
  *
@@ -18,6 +18,7 @@ export function endOfLineAndExtraLong(
       ...truncateStringWithChar(
         enterText.toReversed().join(''),
         remainingUsableLength - 3,
+        false,
       ),
     ]
       .reverse()

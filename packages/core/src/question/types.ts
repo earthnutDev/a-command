@@ -102,6 +102,14 @@ export type CurrentIssue = CurrentIssueRequestParams & {
   // 下面的属性尽在使用时存在，不存在用户使用配置
   /**  展示必须的文本信息  */
   mustInfo: boolean;
+  /**  本次渲染是否换行  */
+  isWrapLine: boolean;
+  /**  单行剩余可用  */
+  usableLength: number;
+  /**  当前光标所在行（相对于渲染问题本身的行数）  */
+  row: number;
+  /**  渲染次数  */
+  cum: number;
 };
 
 /**

@@ -6,6 +6,7 @@ import {
   SelectionParamDataType,
 } from './types';
 import { parseData } from './parseData';
+import { getMaxRows } from './getMaxRows';
 
 /** 默认语言  */
 const info = '请使用键盘选择，请使用 Enter 键选择您的选择',
@@ -19,6 +20,16 @@ const data: DataType = {
   drawData: [],
   info,
   focus: zeroValue,
+  renderInfo: {
+    rows: 0,
+    renderRows: 0,
+    otherInfoRows: 0,
+    allowBelow: false,
+    size: {
+      width: 0,
+      height: 0,
+    },
+  },
   resultText,
   private: falseValue,
   required: falseValue,
@@ -26,6 +37,7 @@ const data: DataType = {
   canCtrlCExit: falseValue,
   canCtrlDExit: falseValue,
   mustInfo: falseValue,
+  maxRows: getMaxRows(),
   data: [],
   initData(params: SelectionParamDataType) {
     dog('初始化数据');
@@ -67,6 +79,11 @@ const data: DataType = {
             case 'canCtrlDExit':
               this.canCtrlDExit = isBoolean(v) ? v : falseValue;
               break;
+            case 'maxRows':
+              this.maxRows =
+                isFinite(v) && Number.isInteger(v) && v > 0
+                  ? v + 4
+                  : getMaxRows();
           }
         },
       );
@@ -75,8 +92,24 @@ const data: DataType = {
   reset() {
     // 需要重置为 0 的变量
     this.drawData.length = this.data.length = this.focus = zeroValue;
+    // 可绘制的最大数
+    this.maxRows = getMaxRows();
+    // 绘制的数据
+    this.renderInfo = {
+      rows: 0,
+      renderRows: 0,
+      otherInfoRows: 0,
+      allowBelow: false,
+      size: {
+        width: 0,
+        height: 0,
+      },
+    };
+    // 提示信息
     this.info = info;
+    // 默认类型
     this.kind = defaultKind;
+    // 结果展示文本
     this.resultText = resultText;
     // 需要重置为 false 的变量
     this.private =

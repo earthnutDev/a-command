@@ -4,8 +4,7 @@ import {
   truncateStringWithChar,
 } from 'color-pen';
 import { dataStore } from '../../data-store';
-import { ellipsis } from './ellipsis';
-import { bgPen666 } from '../../../utils/info';
+import { bgPen666, ellipsis } from '../../../utils/info';
 
 /**
  * 文本长度超出了限制却不是在文未

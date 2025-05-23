@@ -11,6 +11,7 @@ export function printMustInfo(text: string): string {
   const requiredStr = currentIssue.required ? ' ' : '';
   /**  提示用户输入 👆 */
   text += '\n\r';
+  currentIssue.row++; // \n 导致换行 +1
   text += ' '
     .repeat(2)
     .concat(requiredStr)
@@ -21,6 +22,7 @@ export function printMustInfo(text: string): string {
   text += redPen.blink`👆`;
   // 光标向上且重置到左侧
   text += `\r${csi}1A`;
+  currentIssue.row--; // 光标手动向上
   currentIssue.mustInfo = false; // 下次打印不再展示该文本
   return text;
 }

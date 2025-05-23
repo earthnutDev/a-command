@@ -17,8 +17,6 @@ import {
   _p,
   cursorAfterClear,
   cursorMoveUp,
-  cursorPositionSave,
-  cursorPositionUndo,
   cursorShow,
 } from 'a-node-tools';
 import { QuestionParamDataType, QuestionReturnType } from './types';
@@ -28,6 +26,7 @@ import { onResize } from './onResize';
 import { pen666, prefixList } from '../utils/info';
 import { isArray, isTrue, isUndefined } from 'a-type-of-js';
 import { hexPen } from 'color-pen';
+import { outputSafeZone } from './outputSafeZone';
 
 /**
  *
@@ -50,9 +49,7 @@ export async function actionStep<
   dataStore.beforeStart();
   dog('开始绘制问题');
   do {
-    _p('\n'.repeat(2));
-    cursorMoveUp(2);
-    cursorPositionSave(); // 保留光标位置
+    outputSafeZone(); // 输出安全区
     draw();
     //  等待用户输入
     try {
@@ -60,11 +57,15 @@ export async function actionStep<
     } catch (error) {
       dog.error(error);
     }
-    cursorPositionUndo(); // 恢复坐标
-    cursorShow();
-    cursorAfterClear();
-    __p('m'); /// 重置属性
     const { currentIssue, results } = dataStore;
+    if (currentIssue.row !== 0) {
+      // 向上移动光标
+      cursorMoveUp(currentIssue.row, true);
+      currentIssue.row = 0;
+    }
+    cursorShow();
+    cursorAfterClear(true);
+    __p('m'); /// 重置属性
     const currentText = pen666(currentIssue.resultText || currentIssue.text);
     const currentResult = results[results.length - 1].r;
 

@@ -42,10 +42,13 @@ export type OptionalAttributes = {
   private: boolean;
   /**  类型 */
   kind: 'radio' | 'check';
-  /**  似乎否可以使用 `ctrl + c` 键退出 */
+  /**  是否可以使用 `ctrl + c` 键退出 */
   canCtrlCExit: boolean;
-  /**  似乎否可以使用 `ctrl + d` 键退出 */
+  /**  是否可以使用 `ctrl + d` 键退出 */
   canCtrlDExit: boolean;
+  /**  终端行数变化时  */
+  /**  在允许的情况下最多可渲染的条数 (该值受最终终端的尺寸限制) */
+  maxRows: number;
 };
 
 /** 参数数据对象型类型  **/
@@ -76,6 +79,8 @@ export type DrawDataItem = {
   changed: boolean;
   /**  当前的下标  */
   index: number;
+  /**  是否展示  */
+  show: boolean;
 };
 
 /**  绘制的实际数据  */
@@ -87,13 +92,51 @@ export type DrawData = DrawDataItem[];
  *
  */
 export type DataType = OptionalAttributes & {
-  // 下面的属性仅会出现字啊
+  // 下面的属性仅会出现在内部逻辑中使用
   /**  使用数据（在 initData 中进行了解析 ）  */
   data: SelectionUseData[];
   /**  当前选择项  */
   focus: number;
   /**  最终绘制的数据 */
   drawData: DrawData;
+  /**  实际渲染的信息 */
+  renderInfo: {
+    /**
+     *
+     * 渲染行数
+     *
+     * = renderRows + otherInfoRows
+     */
+    rows: number;
+    /**
+     *
+     * 渲染问题行数
+     *
+     * = rows  - otherInfoRows
+     */
+    renderRows: number;
+    /**
+     * 其他信息的高度
+     *
+     * = rows - renderRows
+     */
+    otherInfoRows: number;
+    /**
+     *
+     * 允许下端渲染空白
+     *
+     *
+     * 在 rows 值大于 7 是该值为 true ，否则该值为 false ，为了保证 renderRows 值不小于 3
+     */
+    allowBelow: boolean;
+    /**  当前终端的尺寸  */
+    size: {
+      /**  终端的宽 （process.stdout.columns） */
+      width: number;
+      /**  终端的高 （process.stdout.rows）  */
+      height: number;
+    };
+  };
   /**  展示必须的文本信息  */
   mustInfo: boolean;
   /** 将给订参数放进这里 */

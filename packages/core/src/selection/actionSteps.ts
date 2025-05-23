@@ -1,12 +1,5 @@
 import { dog } from '../dog';
-import {
-  _p,
-  cursorAfterClear,
-  cursorHide,
-  cursorPositionSave,
-  cursorPositionUndo,
-  cursorShow,
-} from 'a-node-tools';
+import { _p, cursorAfterClear, cursorHide, cursorShow } from 'a-node-tools';
 import { draw } from './draw';
 import { selectionData } from './data-store';
 import { SelectionParamDataType, SelectionResultType } from './types';
@@ -15,6 +8,7 @@ import { terminalResetStyle } from '@color-pen/static';
 import { onResize } from './onResize';
 import { pen666, prefixList } from '../utils/info';
 import { isUndefined } from 'a-type-of-js';
+import { outputSafeZone } from './outputSafeZone';
 
 /**
  *
@@ -34,7 +28,7 @@ export async function selectionStep<
   selectionData.initData(data);
   cursorHide(); // 隐藏光标
   dog('初始绘制问题选项');
-  cursorPositionSave();
+  outputSafeZone();
   draw(); // 初始绘制选择框
   dog('绘制完成，等待用户操作');
   // 等待用户选择
@@ -43,10 +37,12 @@ export async function selectionStep<
   process.stdout.removeListener('resize', onResize); /// 移除尺寸变化的事件
   const { resultText, info, focus, kind, drawData } = selectionData;
   cursorShow(); // 恢复光标显示
-  cursorPositionUndo(); // 恢复光标位置
   cursorAfterClear(true); // 清理后面的内容
 
   if (exit) {
+    if (!selectionData.private) {
+      _p(`${prefixList.error()} ${pen666.italic.dim(info)}`);
+    }
     return undefined as SelectionResultType<T, U>;
   }
 

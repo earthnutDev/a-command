@@ -56,7 +56,8 @@ export async function userInteraction() {
       case 'space':
         dog('用户使用了键盘键的空格键');
         if (kind === 'check') {
-          drawData[focus].checked = !drawData[focus].checked;
+          data[focus].checked = drawData[focus].checked =
+            !drawData[focus].checked;
           draw();
         }
         break;
