@@ -16,7 +16,7 @@ export default {
       preserveModules: true,
       sourcemap: false,
       exports: 'named',
-      dir: 'dist/mjs',
+      dir: 'dist/',
     },
     {
       format: 'cjs',
@@ -24,7 +24,7 @@ export default {
       preserveModules: true,
       sourcemap: false,
       exports: 'named',
-      dir: 'dist/cjs/',
+      dir: 'dist/',
     },
   ],
   // 配置需要排除的包

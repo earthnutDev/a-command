@@ -32,12 +32,9 @@ export type CurrentIssueOptionsParams = {
    * 为 `true` 时，将不显示用户输入结果的文本
    */
   private: false | true;
-  /**
-   *
-   *  结果展示文本
-   *
-   *
-   */
+  /**  错误展示文本，缺省时按序查找 `resultText`、`text` 文本 */
+  errorText: string;
+  /**  结果展示文本，缺省时将展示 `text` 文本  */
   resultText: string;
   /**
    *
@@ -82,6 +79,8 @@ export type CurrentIssueOptionsParams = {
  *     private?: false | true,
  *     //   结果展示文本
  *     resultText?: string
+ *     //  错误展示
+ *     errorText: string;
  *     //  是否为必须的
  *     required?: false | true;
  *     //  非必填时采用默认值

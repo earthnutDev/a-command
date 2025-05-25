@@ -6,7 +6,7 @@ import { SelectionParamDataType, SelectionResultType } from './types';
 import { userInteraction } from './userInteraction';
 import { terminalResetStyle } from '@color-pen/static';
 import { onResize } from './onResize';
-import { pen666, prefixList } from '../utils/info';
+import { ERROR, pen666, SUCCESS } from '../utils/info';
 import { isUndefined } from 'a-type-of-js';
 import { outputSafeZone } from './outputSafeZone';
 
@@ -35,13 +35,13 @@ export async function selectionStep<
   const exit = await userInteraction();
   _p(terminalResetStyle, false); // 重置属性
   process.stdout.removeListener('resize', onResize); /// 移除尺寸变化的事件
-  const { resultText, info, focus, kind, drawData } = selectionData;
+  const { resultText, info, focus, kind, drawData, errorText } = selectionData;
   cursorShow(); // 恢复光标显示
   cursorAfterClear(true); // 清理后面的内容
 
   if (exit) {
     if (!selectionData.private) {
-      _p(`${prefixList.error()} ${pen666.italic.dim(info)}`);
+      ERROR(errorText || resultText || info);
     }
     return undefined as SelectionResultType<T, U>;
   }
@@ -52,8 +52,8 @@ export async function selectionStep<
   if (!selectionData.private) {
     const checkList =
       kind === 'radio' ? [drawData[focus].text] : checkedList.map(e => e.text);
-    _p(
-      `${prefixList.success()} ${pen666.italic.dim(resultText || info)}: ${pen666(checkList.join('、'))}`,
+    SUCCESS(
+      `${pen666.italic.dim(resultText || info)}: ${pen666(checkList.join('、'))}`,
     );
   }
 

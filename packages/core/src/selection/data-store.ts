@@ -9,8 +9,7 @@ import { parseData } from './parseData';
 import { getMaxRows } from './getMaxRows';
 
 /** 默认语言  */
-const info = '请使用键盘选择，请使用 Enter 键选择您的选择',
-  resultText = '您的选择为',
+const info = '请使用键盘选择，请使用 Enter 键进行选择',
   falseValue = false,
   zeroValue = 0,
   defaultKind = 'radio';
@@ -30,7 +29,8 @@ const data: DataType = {
       height: 0,
     },
   },
-  resultText,
+  resultText: '',
+  errorText: '',
   private: falseValue,
   required: falseValue,
   kind: defaultKind,
@@ -62,7 +62,12 @@ const data: DataType = {
               this.info = isString(v) ? v : info;
               break;
             case 'resultText':
-              this.resultText = isString(v) ? v : resultText;
+              this.resultText = isString(v) ? v : this.info || '';
+              break;
+            case 'errorText':
+              this.errorText = isString(v)
+                ? v
+                : this.resultText || this.info || '';
               break;
             case 'private':
               this.private = isBoolean(v) ? v : falseValue;
@@ -110,7 +115,7 @@ const data: DataType = {
     // 默认类型
     this.kind = defaultKind;
     // 结果展示文本
-    this.resultText = resultText;
+    this.resultText = this.errorText = '';
     // 需要重置为 false 的变量
     this.private =
       this.required =

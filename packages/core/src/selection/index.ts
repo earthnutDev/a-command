@@ -28,6 +28,8 @@ import {
  *  type DataType = {
  *      // 选择要渲染的数据
  *      data:  any[];
+ *      // 错误展示文本，缺省时按序查找 `resultText`、`text` 文本
+ *      errorText?: string;
  *      // 结果显示
  *      resultText?: string;
  *      // 自定义问题文本

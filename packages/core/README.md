@@ -13,7 +13,9 @@ npm install a-command --save
 ## 使用
 
 ```js
-import Command from 'a-command';
+import { Command } from 'a-command';
+
+const command = new Command<>();
 ```
 
 ## Command 部分
@@ -259,19 +261,15 @@ command.version();
 
 现在支持 `Typescript` ，你可以使用 `Typescript` 来使用你的返回值
 
-````ts
+```ts
 import { Args } from 'a-command';
 
 const command: Args = new Args('vjj');
 
-command.bind({
-
-});
+command.bind({});
 
 command.run().isEnd(true); // 在触发了 `-h` 或 `-v` 后，会自动结束程序
-
 ```
-
 
 ## question 部分（问答模式）
 
@@ -285,21 +283,30 @@ _等待用户输入的一个函数。因为要等待，所以是异步的，使�
 ```js
 import { question } from 'a-command';
 const result = await question('中午吃什么');
-````
+```
 
 使用自定义配置，可以给用户更好的体验。
 
 ```js
+import { isUndefined } from 'a-type-of-js';
 import { question } from 'a-command';
+
 const result = await question({
   text: '中午吃什么', // 必须的参数
   tip: '板面还是油泼面', // 可选参数，为数组时进入选择模式
   type: 'text', // 一个类型选择，支持 `text` 、 `password`
   private: false, // 选择完毕后是否覆盖
   resultText: '你想吃的是', // 可选参数，选择后展示
-  required: true, // 是否必填
-  default: '板面',
+  errorText: '你丫的看起来是不饿', // 可选参数，用户双击 esc 退出
+  required: true, // 可选参数，是否必填
+  default: '板面', // 可选参数，默认值
+  canCtrlCExit: true, // 可选参数，是否允许用户使用 `Ctrl + C` 退出
+  canCtrlDExit: true, // 可选参数，是否允许用户使用 `Ctrl + D` 退出
 });
+
+if (isUndefined(result)) {
+  process.exit(1);
+}
 ```
 
 还可以配置 `tip` 为数组，将问答配置为简单的选择，这时候用户仅可以在 `tip` 提供的值中进行选择 **仅适用于简单选择，类似于 `yes` or `no` 或者 `男` or `女` 这种，字多的选项，建议使用 [selection](#selection-部分-选择模式-)**
@@ -311,6 +318,7 @@ const result = await question({
   text: '中午吃什么',
   tip: ['板面', '油泼面'],
   resultText: '那我们就去吃',
+  errorText: '不饿，不饿算了，我自己去吃油泼面了',
 });
 ```
 
@@ -364,14 +372,12 @@ const result = await selection([
 ```js
 import { selection } from 'a-command';
 const result = await selection({
-  showInfo: true,
   info: '中午想吃啥子',
   data: ['包子', '板面', '烧烤', '麻辣烫', '火锅'],
-  resultText: "Okay, then let's go eat ",
+  resultText: '走，我们就去吃',
+  errorText: '你丫的不饿就算了',
 });
 ```
-
-_如果你不想展示预览，可以使用传入对象的模式（设置 `showPreview: false`）进行自定义配置_
 
 ## 文档地址
 

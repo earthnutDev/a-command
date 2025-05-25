@@ -1,5 +1,9 @@
 # 更新日志
 
+## v2.2.3 （5 🈷️ 25 日 2025 年）
+
+- `request`、`selection` 添加了 `errorText` 用于用户未按期待的方式返回值时的反馈文本
+
 ## v2.2.2 （5 🈷️ 19 日 2025 年）
 
 - 使用时可双击 `ESC` 键退出 `question` 和 `selection`，亦可自定义用户是够可以通过 `Ctrl + C` 或是 `Ctrl + D` 退出。默认是不可以通过 `Ctrl + C` 或是 `Ctrl + D` 退出，可通过 `canCtrlCExit` 及 `canCtrlDExit` 开启相关配置。此时，返回值为 `undefined` （不使用默认值，用于区分退出还是用户真的使用了默认值）

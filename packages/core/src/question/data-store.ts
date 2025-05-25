@@ -11,6 +11,7 @@ export function createCurrentIssue(): CurrentIssue {
     tip: '',
     type: 'text',
     private: false,
+    errorText: '',
     resultText: '',
     required: true,
     defaultValue: '',
@@ -75,7 +76,7 @@ export const dataStore: QuestionDataType = {
 
   results: [],
 
-  /** 混合问题*/
+  /** 混合问题（将在 `changeCurrentIssue` 时触发，数据已解析 ）  */
   assign(_data): void {
     /**  该过程将初始化数据  */
     (Object.keys(_data) as (keyof QuestionAssign)[]).forEach(currentKey => {

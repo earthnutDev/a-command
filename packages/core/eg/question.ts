@@ -3,7 +3,7 @@ import { question } from '..';
 import { dev } from '@qqi/dev-log';
 import { isUndefined } from 'a-type-of-js';
 
-dev('测试与 question 模块相关的内容', async it => {
+dev.skip('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
     const result = await question(
       {
@@ -26,6 +26,7 @@ dev('测试与 question 模块相关的内容', async it => {
         type: 'text',
         private: false,
         resultText: '请输入你的名字',
+        errorText: '未能获取您的姓名',
         required: true,
         canCtrlCExit: false,
         canCtrlDExit: true,

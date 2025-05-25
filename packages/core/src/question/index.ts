@@ -18,6 +18,8 @@ import { QuestionParamDataType, QuestionReturnType } from './types';
  *       private: false;
  *        //  结果展示
  *       resultText: string;
+ *        //  错误展示
+ *       errorText: string;
  *       //  是否必填（用户使用配置退出不保证返回值不为 undefined）
  *       required?: boolean;
  *       // 默认值，当可选时且用户未输入返值为此值

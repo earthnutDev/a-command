@@ -8,3 +8,15 @@ export type CommandData = {
 };
 
 export type CommandDataItem = [symbol, () => void];
+
+export interface PrintOption {
+  /**  颜色  */
+  color: string;
+  /**   前缀  */
+  prefix: string;
+}
+
+/**  打印消息使用参数  */
+export type CommandPrintOption = {
+  [x in keyof PrintOption]?: PrintOption[x];
+};

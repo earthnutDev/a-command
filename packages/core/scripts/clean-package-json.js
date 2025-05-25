@@ -17,7 +17,7 @@ packageJson = {
   main: 'cjs/index.cjs',
   module: 'mjs/index.mjs',
   types: 'types/index.d.ts',
-  files: ['bin.js', 'mjs', 'cjs', 'types'],
+  files: ['bin.js', 'index.mjs', 'index.cjs', 'index.d.ts', 'src'],
   repository: {
     type: 'git',
     url: 'git+https://github.com/earthnutDev/a-command.git',
@@ -70,7 +70,7 @@ packageJson = {
     'dist/bin.js',
     `#!/usr/bin/env node
     
-import { Command } from './mjs/index.mjs';
+import { Command } from './index.mjs';
 
 new Command('a-command').run().isEnd(true);
     `,

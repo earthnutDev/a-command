@@ -2,12 +2,19 @@ import { Args } from './argTool/args';
 import { selection } from './selection/';
 import { question } from './question/index';
 import { OptionNameArray } from './argTool/types';
+import { _p } from 'a-node-tools';
+import { prefixList, SUCCESS } from './utils/info';
+import { ERROR } from './utils/info';
 
 /**
  *
  *
  *
- * 这是一个集合体，继承于 `Args`，又集成了 `question` 与 `selection`
+ * 这是一个集合体
+ *
+ * 继承于 `Args`，又集成了 `question` 与 `selection`
+ *
+ * 及打印的一些东西
  *
  *
  */
@@ -63,6 +70,8 @@ class Command<T extends OptionNameArray> extends Args<T> {
    *      data:  any[];
    *      // 结果显示
    *      resultText?: string;
+   *      // 错误展示文本，缺省时按序查找 `resultText`、`text` 文本
+   *      errorText?: string;
    *      // 自定义问题文本
    *      info?:  string;
    *      // 是否为必选项
@@ -140,9 +149,6 @@ class Command<T extends OptionNameArray> extends Args<T> {
    *
    * 该应用抽离于 `question` , 可直接 `import  { question } form  "a-command";`
    *
-   *
-   *
-   *
    * ```ts
    *
    * type ParamDataType = {
@@ -155,6 +161,8 @@ class Command<T extends OptionNameArray> extends Args<T> {
    *       private: false;
    *        //  结果展示
    *       resultText: string;
+   *        //  错误展示
+   *       errorText: string;
    *       //  是否必填（用户使用配置退出不保证返回值不为 undefined）
    *       required?: boolean;
    *       // 默认值，当可选时且用户未输入返值为此值
@@ -184,6 +192,48 @@ class Command<T extends OptionNameArray> extends Args<T> {
    * ```
    */
   question = question;
+
+  /**
+   *  提示信息
+   *
+   *  * 默认为绿色的 <span style="color:#2ceeec;">✦</span>
+   *
+   */
+  INFO(message: string, prefix?: string) {
+    _p(`${prefixList.info(prefix)} ${message}`);
+  }
+  /**
+   * 完成
+   * @param message 展示的文本
+   * @param [prefix='⚉'] 展示的前缀，默认为绿色的 <span style="color:#2fe81a;">❖</span>
+   * @returns void
+   * */
+  SUCCESS = SUCCESS;
+  /**
+   * 当前项
+   *
+   * 默认为黄色的 <span style="color:#e8ec14;">▶︎</span>
+   * */
+  CURRENT(message: string, prefix?: string) {
+    _p(`${prefixList.current(prefix)} ${message}`);
+  }
+  /**
+   *  警示
+   *
+   * 默认为洋红色的 <span style="color:#fb00fa;">◼︎</span>
+   *
+   */
+  WARN(message: string, prefix?: string) {
+    _p(`${prefixList.warn(prefix)} ${message}`);
+  }
+
+  /**
+   * 错误信息展示
+   * @param message 展示的文本
+   * @param [prefix='⚉'] 展示的前缀，默认为红色的 <span style="color:#fc2119;">⚉</span>
+   * @returns void
+   */
+  ERROR = ERROR;
 }
 
 export { Command };

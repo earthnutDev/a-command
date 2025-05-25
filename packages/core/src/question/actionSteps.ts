@@ -12,20 +12,13 @@ import { dog } from './../dog';
  ****************************************************************************/
 import { draw } from './draw';
 import { userInput } from './userInput';
-import {
-  __p,
-  _p,
-  cursorAfterClear,
-  cursorMoveUp,
-  cursorShow,
-} from 'a-node-tools';
+import { __p, cursorAfterClear, cursorMoveUp, cursorShow } from 'a-node-tools';
 import { QuestionParamDataType, QuestionReturnType } from './types';
 import { dataStore } from './data-store';
 import { originalData } from './originalData';
 import { onResize } from './onResize';
-import { pen666, prefixList } from '../utils/info';
+import { ERROR, pen666, SUCCESS } from '../utils/info';
 import { isArray, isTrue, isUndefined } from 'a-type-of-js';
-import { hexPen } from 'color-pen';
 import { outputSafeZone } from './outputSafeZone';
 
 /**
@@ -66,16 +59,19 @@ export async function actionStep<
     cursorShow();
     cursorAfterClear(true);
     __p('m'); /// 重置属性
-    const currentText = pen666(currentIssue.resultText || currentIssue.text);
+    /**  结果展示文本  */
+    const currentText = currentIssue.resultText || currentIssue.text;
+    /**  当前问题的返回值  */
     const currentResult = results[results.length - 1].r;
 
     // 私密模式则不打印
     if (!currentIssue.private) {
+      /// 用户使用按键欲跳过该项
       if (isUndefined(currentResult)) {
-        _p(`${prefixList.error()} ${hexPen('#a30').italic(currentText)}`);
+        ERROR(currentIssue.errorText || currentText);
       } else {
-        _p(
-          `${prefixList.success()} ${currentText}: ${currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*')}`,
+        SUCCESS(
+          `${pen666(currentText)}: ${currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*')}`,
         );
       }
     }

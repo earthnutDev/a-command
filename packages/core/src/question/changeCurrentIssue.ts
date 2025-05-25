@@ -16,6 +16,7 @@ import {
   isArray,
   isBusinessEmptyString,
   isEmptyString,
+  isNumber,
   isString,
 } from 'a-type-of-js';
 
@@ -35,7 +36,7 @@ export default function changeCurrentIssue(this: QuestionDataType) {
     multi && isArray(originalData.data)
       ? originalData.data[originalData.data.length + progressCount]
       : (originalData.data as never);
-  // 初始化一个空白问题
+  /**  初始化一个空白问题  */
   const currentIssue = createCurrentIssue();
   /**
    *
@@ -44,7 +45,7 @@ export default function changeCurrentIssue(this: QuestionDataType) {
    * - 如果是 `string` 类型，则直接赋值给 `text`
    * - 如果是 `object` 类型，则混合数据
    */
-  Object.assign(currentIssue, isString(_d) ? { text: _d } : _d);
+  Object.assign(currentIssue, isString(_d) || isNumber(_d) ? { text: _d } : _d);
 
   // 初始化当前问题
   const kind: 0 | 1 = isArray(currentIssue.tip) ? 1 : 0;

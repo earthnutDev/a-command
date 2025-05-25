@@ -1,3 +1,4 @@
+import { _p } from 'a-node-tools';
 import {
   bgHexPen,
   brightCyanPen,
@@ -100,3 +101,28 @@ export const prefixList = {
 
 /**  省略号  */
 export const ellipsis = pen666('.'.repeat(3));
+
+/**
+ * 错误信息展示
+ * @param message 展示的文本
+ * @param [prefix='⚉'] 展示的前缀，默认为红色的 <span style="color:#fc2119;">⚉</span>
+ * @returns void
+ */
+export function ERROR(
+  message: string | number | null | undefined | boolean,
+  prefix: string = '⚉',
+) {
+  _p(`${prefixList.error(prefix)} ${hexPen('#612').italic(message)}`);
+}
+/**
+ * 成功信息展示
+ * @param message 展示的文本
+ * @param [prefix='⚉'] 展示的前缀，默认为绿色的 <span style="color:#2fe81a;">❖</span>
+ * @returns void
+ */
+export function SUCCESS(
+  message: string | number | null | undefined | boolean,
+  prefix: string = '❖',
+) {
+  _p(`${prefixList.success(prefix)} ${message}`);
+}

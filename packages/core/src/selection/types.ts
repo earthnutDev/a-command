@@ -34,6 +34,8 @@ export type RequiredAttributes = {
 export type OptionalAttributes = {
   /** 提问信息 */
   info: string | number;
+  /**  错误展示文本，缺省时按序查找 `resultText`、`text` 文本 */
+  errorText: string | number;
   /**  结果展示文本（缺省则以 `info`  为准） **/
   resultText: string | number;
   /**   是否是必填项 */

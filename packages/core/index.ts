@@ -17,5 +17,6 @@ export type {
   QuestionReturnType,
 } from './src/question/';
 
+export type { CommandPrintOption } from './src/types';
+
 export { Command };
-export default Command;
