@@ -14,9 +14,9 @@ let packageJson = readFileToJsonSync('./package.json');
 
 packageJson = {
   ...packageJson,
-  main: 'cjs/index.cjs',
-  module: 'mjs/index.mjs',
-  types: 'types/index.d.ts',
+  main: 'index.cjs',
+  module: 'index.mjs',
+  types: 'index.d.ts',
   files: ['bin.js', 'index.mjs', 'index.cjs', 'index.d.ts', 'src'],
   repository: {
     type: 'git',
@@ -31,17 +31,17 @@ packageJson = {
   exports: {
     '.': {
       import: {
-        default: './mjs/index.mjs',
-        types: './types/index.d.ts',
+        default: './index.mjs',
+        types: './index.d.ts',
       },
       require: {
-        default: './cjs/index.cjs',
-        types: './types/index.d.ts',
+        default: './index.cjs',
+        types: './index.d.ts',
       },
     },
-    './types/args': './types/src/argTool/types.d.ts',
-    './types/question': './types/src/question/types.d.ts',
-    './types/selection': './types/src/selection/types.d.ts',
+    './types/args': './src/argTool/types.d.ts',
+    './types/question': './src/question/types.d.ts',
+    './types/selection': './src/selection/types.d.ts',
   },
   homepage: 'https://earthnut.dev/a-command',
   bugs: {
