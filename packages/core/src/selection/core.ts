@@ -7,9 +7,10 @@ import { selectionStep } from './actionSteps';
  * 选择的核心逻辑，通过 commandData 来管理数据及执行的顺序
  */
 export async function core<
-  T extends SelectionParamDataType,
   U extends 'string' | 'number' | undefined,
->(data: T, resultType?: U): Promise<SelectionResultType<T, U>> {
+  T extends SelectionParamDataType = SelectionParamDataType,
+  R = string,
+>(data: T, resultType?: U): Promise<SelectionResultType<T, U, R>> {
   const uniKey = Symbol('selection');
   /**
    * 返回一个 promise
@@ -23,7 +24,10 @@ export async function core<
         /**
          * 使用原始定义的 selection 方法执行并返回结果
          */
-        const result = await selectionStep(data, resultType);
+        const result = (await selectionStep(
+          data,
+          resultType,
+        )) as SelectionResultType<T, U, R>;
 
         commandData.remove(uniKey); // 执行下一个 selection
         resolve(result);

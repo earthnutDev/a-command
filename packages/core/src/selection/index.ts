@@ -79,14 +79,16 @@ import {
  *  导出一个显示的列表选择.
  *
  * 当 data 为一维纯字符串组成的数组时，则默认使用默认的配置.
- *      例:
- *        ```ts
- *          [
- *                 "烧饼",
- *                 "板面",
- *                 "油泼面",
- *           ]
- *          ```
+ *
+ * 例:
+ *
+ * ```ts
+ *   [
+ *          "烧饼",
+ *          "板面",
+ *          "油泼面",
+ *    ]
+ * ```
  *
  * 当 data 为 `Object` 格式时，可以自定义更多信息：
  *  @example
@@ -96,16 +98,17 @@ import {
  *    info       : "请选择中午吃什么",   // 自定义提示文本信息
  *    resultText : "你想吃的是"         // 结果展示
  *    private    : true ,             // 不展示结果
- *    data       :[]                  //  字符串组成的数组
+ *    data       :[]                  //  字符串组成的数组或是详细的配置项
  * }
  *
  * ```
  */
 export const selection = async function <
-  T extends SelectionParamDataType,
+  R = string,
+  T extends SelectionParamDataType = SelectionParamDataType,
   U extends 'number' | 'string' | undefined = undefined,
->(data: T, resultType?: U): Promise<SelectionResultType<T, U>> {
-  return core(data, resultType);
+>(data: T, resultType?: U): Promise<SelectionResultType<T, U, R>> {
+  return core<U, T, R>(data, resultType);
 };
 
 export type {

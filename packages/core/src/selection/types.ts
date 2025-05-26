@@ -151,14 +151,15 @@ export type DataType = OptionalAttributes & {
 export type SelectionResultType<
   T extends SelectionParamDataType,
   U extends 'string' | 'number' | undefined,
+  R = string,
 > = T extends SelectionParamData
   ? U extends 'string' | undefined
-    ? string | undefined
+    ? R | undefined
     : number | undefined
   : T extends { kind: 'check' }
     ? U extends 'string' | undefined
-      ? string[] | undefined
+      ? R[] | undefined
       : number[] | undefined
     : U extends 'string' | undefined
-      ? string | undefined
+      ? R | undefined
       : number | undefined;

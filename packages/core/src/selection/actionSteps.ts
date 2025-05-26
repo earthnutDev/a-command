@@ -2,7 +2,7 @@ import { dog } from '../dog';
 import { _p, cursorAfterClear, cursorHide, cursorShow } from 'a-node-tools';
 import { draw } from './draw';
 import { selectionData } from './data-store';
-import { SelectionParamDataType, SelectionResultType } from './types';
+import { SelectionParamDataType } from './types';
 import { userInteraction } from './userInteraction';
 import { terminalResetStyle } from '@color-pen/static';
 import { onResize } from './onResize';
@@ -21,7 +21,7 @@ import { outputSafeZone } from './outputSafeZone';
 export async function selectionStep<
   T extends SelectionParamDataType,
   U extends 'string' | 'number' | undefined,
->(data: T, resultType?: U): Promise<SelectionResultType<T, U>> {
+>(data: T, resultType?: U) {
   process.stdout.removeListener('resize', onResize); /// 移除旧的监听
   process.stdout.on('resize', onResize); // 注册监听终端的尺寸变化
   // 数据初始化
@@ -43,7 +43,7 @@ export async function selectionStep<
     if (!selectionData.private) {
       ERROR(errorText || resultText || info);
     }
-    return undefined as SelectionResultType<T, U>;
+    return undefined;
   }
 
   /**  当前被选中的元素  */
@@ -67,5 +67,5 @@ export async function selectionStep<
     resultType == 'string' || isUndefined(resultType)
       ? resultString
       : resultNumber;
-  return response as SelectionResultType<T, U>;
+  return response;
 }

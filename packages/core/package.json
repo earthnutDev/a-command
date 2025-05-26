@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.2.4",
+  "version": "2.2.5",
   "name": "a-command",
   "description": "一点点 🤏 终端工具 🧰",
   "scripts": {

@@ -371,12 +371,21 @@ const result = await selection([
 
 ```js
 import { selection } from 'a-command';
-const result = await selection({
+
+type Eating = '包子' | '板面' | '烧烤' | '麻辣烫' | '火锅';
+
+const eatList: Eating[] = ['包子', '板面', '烧烤', '麻辣烫', '火锅'];
+
+const result: Eating | undefined = await selection<Eating>({
   info: '中午想吃啥子',
-  data: ['包子', '板面', '烧烤', '麻辣烫', '火锅'],
+  data: ,
   resultText: '走，我们就去吃',
   errorText: '你丫的不饿就算了',
 });
+
+if (result === '包子') {
+  console.log('不，我就要吃火锅');
+}
 ```
 
 ## 文档地址
