@@ -302,6 +302,19 @@ const result = await question({
   default: '板面', // 可选参数，默认值
   canCtrlCExit: true, // 可选参数，是否允许用户使用 `Ctrl + C` 退出
   canCtrlDExit: true, // 可选参数，是否允许用户使用 `Ctrl + D` 退出
+  len: 5, // 限制用户输出长度为 5， 该值优先级高于 `minLen`、`maxLen`，却低于 `verify` 校验
+  minLen: 5, // 限制用户输入长度不低于 5，优先级高于 `maxLen`
+  maxLen: 5, // 限制用户输入长度不超过 5，校验优先级最低
+  verify: [
+    {
+      reg: /^[a-z]+$/, // 限制输入仅可以是小写英文字符
+      info: '您仅可以使用小写英文字符',
+    },
+    {
+      reg: /^.{5}$/, // 限定输入仅为长度为 5
+      info: '输入长度仅可以为 5',
+    },
+  ],
 });
 
 if (isUndefined(result)) {
@@ -310,6 +323,8 @@ if (isUndefined(result)) {
 ```
 
 还可以配置 `tip` 为数组，将问答配置为简单的选择，这时候用户仅可以在 `tip` 提供的值中进行选择 **仅适用于简单选择，类似于 `yes` or `no` 或者 `男` or `女` 这种，字多的选项，建议使用 [selection](#selection-部分-选择模式-)**
+
+在使用的时候，不建议使用 `verify` 来限制字符数，更推荐使用 `len` 、`minLen`、`maxLen` 来限定输入长度。因为 `verify` 是**_输入校验_**，而 `len`、`minLen`、`maxLen` 是**_enter 确认触发校验_**。
 
 ```js
 import { question } from 'a-command';

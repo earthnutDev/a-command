@@ -22,6 +22,10 @@ export function createCurrentIssue(): CurrentIssue {
     usableLength: 0,
     row: 0,
     cum: 0,
+    maxLen: 0,
+    minLen: 0,
+    len: 0,
+    verify: [],
   };
 }
 

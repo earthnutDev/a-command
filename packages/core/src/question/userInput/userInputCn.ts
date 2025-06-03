@@ -14,6 +14,8 @@ import { __p, ReadInputKey } from 'a-node-tools';
 export function userInputCn(_this: QuestionDataType) {
   return (keyValue: string | undefined, key: ReadInputKey) => {
     const { kind, currentIssue, enterText, results } = _this;
+
+    const { tip, text, canCtrlCExit, canCtrlDExit } = currentIssue;
     /**  当为选择模式时的可选项数组  */
     let arr: string[] = [],
       /**  选择模式下可选择项数  */
@@ -24,11 +26,12 @@ export function userInputCn(_this: QuestionDataType) {
     /**  当前为选择模式而不是输入模式  */
     if (kind !== 0) {
       // 选择模式
-      arr = currentIssue.tip as string[];
+      arr = tip as string[];
       len = arr.length - 1;
       _index = arr.indexOf(enterText[0]);
     }
     dog('\n 用户使用了', keyValue, key);
+
     switch ((key as { name: string }).name) {
       case 'return':
         if (returnKey()) {
@@ -53,7 +56,7 @@ export function userInputCn(_this: QuestionDataType) {
         // 是否是 esc 按键双击
         if (key?.sequence === esc.repeat(2)) {
           // 倘若允许直接退出
-          results.push({ q: currentIssue.text, r: undefined });
+          results.push({ q: text, r: undefined });
           reDraw = false;
           return true;
         }
@@ -69,10 +72,10 @@ export function userInputCn(_this: QuestionDataType) {
           reDraw = false;
           __p('m');
           if (
-            (isTrue(currentIssue.canCtrlCExit) && key?.name === 'c') ||
-            (isTrue(currentIssue.canCtrlDExit) && key?.name === 'd')
+            (isTrue(canCtrlCExit) && key?.name === 'c') ||
+            (isTrue(canCtrlDExit) && key?.name === 'd')
           ) {
-            results.push({ q: currentIssue.text, r: undefined });
+            results.push({ q: text, r: undefined });
             return true;
           }
         }

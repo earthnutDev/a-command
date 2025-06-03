@@ -2,7 +2,7 @@ import { _p } from 'a-node-tools';
 import { selection } from '../index';
 import { dev } from '@qqi/dev-log';
 
-await dev('测试新模式', async () => {
+await dev.skip('测试新模式', async () => {
   const result = await selection<'123'>({
     info: '请问明天吃什么',
     resultText: '你想吃',

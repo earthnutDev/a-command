@@ -8,7 +8,7 @@ import {
 import { dataStore } from '../data-store';
 import { csi, terminalResetStyle } from '@color-pen/static';
 import { dog } from '../../dog';
-import { isEmptyString, isString } from 'a-type-of-js';
+import { isEmptyString, isFalse, isString } from 'a-type-of-js';
 import { bgPen666, prefixList } from '../../utils/info';
 import { translateCursor } from './translateCursor';
 import { debounce } from 'a-js-tools';
@@ -22,7 +22,7 @@ import { printMustInfo } from './printMustInfo';
 export const draw = debounce(() => {
   const { kind, currentIssue, enterText } = dataStore;
 
-  const { mustInfo, text: _text, required, tip } = currentIssue;
+  const { mustInfo, text: _text, required, tip, verify } = currentIssue;
   cursorHide();
   let text = '';
   if (currentIssue.row !== 0) {
@@ -33,6 +33,18 @@ export const draw = debounce(() => {
   if (mustInfo) {
     // 当上一次敲击 enter 键却没有输入时
     text = printMustInfo(text);
+  } else if (enterText.length > 0) {
+    // 检验为下一次的绘制前进行校验
+    const userInputStr = enterText.join('');
+    // 检验验证
+    for (const element of verify) {
+      element.reg.lastIndex = 0;
+      if (isFalse(element.reg.test(userInputStr))) {
+        currentIssue.mustInfo = element.info;
+        text = printMustInfo(text);
+        break;
+      }
+    }
   }
   /**  在必填时展示红色的  */
   const requiredStr = kind === 0 && required ? brightRedPen.blink('*') : '';

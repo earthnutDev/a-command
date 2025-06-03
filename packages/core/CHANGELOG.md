@@ -1,5 +1,11 @@
 # 更新日志
 
+## v2.3.0 (2025-6-3)
+
+- 在 `request` 添加了输入模式下的检验（详细见注释及 [readme](./README.md#question-部分问答模式) 的示例）
+
+(其实我用不上这个需求，但是，[a-node-tools](https://www.npmjs.com/package/a-node-tools)中有一个错误导致版本更新，顺手添加点功能)
+
 ## v2.2.5 （5 🈷️ 26 日 2025 年）
 
 - `selection` 现在调用时可使用范性指定返回的值的类型（仅当值返回为 `string` ，即省略第二参数或显式指定为 'string' 时）

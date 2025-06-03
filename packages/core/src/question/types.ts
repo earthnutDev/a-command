@@ -5,6 +5,7 @@ export type CurrentIssueRequestParams = {
   text: string | number;
 };
 
+// 下面的是用户可见（可选参数）及后续代码（解析后必选）可用的
 /**
  * 当前问题可选配置项
  *
@@ -60,6 +61,14 @@ export type CurrentIssueOptionsParams = {
   canCtrlCExit: boolean;
   /**  似乎否可以使用 `ctrl + d` 键退出 */
   canCtrlDExit: boolean;
+  /**  最小长度  */
+  minLen: number;
+  /**  必须长度  */
+  len: number;
+  /**  最大长度  */
+  maxLen: number;
+  /**  验证  */
+  verify: { reg: RegExp; info: string }[];
 };
 /**
  *
@@ -100,7 +109,7 @@ export type CurrentIssue = CurrentIssueRequestParams & {
 } & {
   // 下面的属性尽在使用时存在，不存在用户使用配置
   /**  展示必须的文本信息  */
-  mustInfo: boolean;
+  mustInfo: boolean | string;
   /**  本次渲染是否换行  */
   isWrapLine: boolean;
   /**  单行剩余可用  */

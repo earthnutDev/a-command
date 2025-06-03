@@ -1,5 +1,6 @@
 import { isEmptyString, isFalse } from 'a-type-of-js';
 import { dataStore } from '../data-store';
+import { cyanPen, greenPen } from 'color-pen';
 
 /**
  *
@@ -24,6 +25,33 @@ export function returnKey() {
     currentIssue.mustInfo = true;
     return false;
   }
+  const { len, minLen, maxLen, verify } = currentIssue;
+  const strLen = currentResult.length;
+  if (dataStore.kind === 0) {
+    // 用户有输入检验输入
+    if (verify.length > 0) {
+      for (const i of verify) {
+        i.reg.lastIndex = 0;
+        if (isFalse(i.reg.test(currentResult))) {
+          return !1;
+        }
+      }
+    }
+    if (len !== 0 && strLen !== len) {
+      currentIssue.mustInfo = `您输入的长度 ${greenPen(strLen)} 不符合要求值 ${cyanPen(len)}`;
+      return !1;
+    }
+    if (minLen !== 0 && strLen < minLen) {
+      currentIssue.mustInfo = `您输入的长度 ${greenPen(strLen)} 小于最低要求${cyanPen(minLen)}`;
+      return !1;
+    }
+
+    if (maxLen > minLen && strLen > maxLen) {
+      currentIssue.mustInfo = `您输入的长度 ${greenPen(strLen)} 大于最低要求${cyanPen(maxLen)}`;
+      return !1;
+    }
+  }
+
   /**  当前问题不强制用户输入，可为 🈳 🕳️  */
   if (isEmptyString(currentResult) && isFalse(currentIssue.required)) {
     currentResult =
@@ -33,5 +61,5 @@ export function returnKey() {
   ///  添加当前问题和答案到结果集
   results.push({ q: currentQuestion, r: currentResult });
 
-  return true;
+  return !0;
 }

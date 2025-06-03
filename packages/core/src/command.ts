@@ -188,7 +188,31 @@ class Command<T extends OptionNameArray> extends Args<T> {
    * await question(['姓名', '性别' ,'年龄']);
    *
    * // 全配置模式
-   * await question
+   * await question({
+   *    text: '请输入您最爱吃的一种食物',
+   *    tip : '只能输入吃的呦',
+   *    required: true, // 该项必须输入（当 `len`、`minLen` 大于 0 时将同样限制字符数）
+   *    type: 'text',  // 文本输入默认，另可选 `password`
+   *    private: true, // 不打印默认结果行
+   *    errorText: '您选择了退出，祝您好运', // 用户书用设定退出方式退出
+   *    resultText: '原来你喜欢吃', // 结果展示
+   *    defaultValue: '西瓜', // 默认值，当有值时，且值混乱时可能不可用
+   *    canCtrlCExit: true, // 允许用于使用 `Ctrl + C` 退出
+   *    canCtrlDExit: true, // 允许用于使用 `Ctrl + D` 退出
+   *    len: 5, // 限制用户输出长度为 5， 该值优先级高于 `minLen`、`maxLen`，却低于 `verify` 校验
+   *    minLen: 5, // 限制用户输入长度不低于 5，优先级高于 `maxLen`
+   *    maxLen: 5, // 限制用户输入长度不超过 5，校验优先级最低
+   *    verify: [{
+   *       reg: /^[a-z]+$/, // 限制用户输入仅为 `a-z` 小写英文字符
+   *       info: '您仅可输入英文小写字符', // 该校验不通过的提示信息
+   *    }, {
+   *       reg: /^.{5}$/, // 限制字符数为 5
+   *       info: '您输入长度仅可为 5'
+   *    }]
+   * });
+   * // 在上面的示例中，触发检验流程为：
+   * // required > verify > len > minLen > maxLen
+   * ```
    * ```
    */
   question = question;

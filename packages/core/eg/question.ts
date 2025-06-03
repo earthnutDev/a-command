@@ -3,7 +3,7 @@ import { question } from '..';
 import { dev } from '@qqi/dev-log';
 import { isUndefined } from 'a-type-of-js';
 
-dev.skip('测试与 question 模块相关的内容', async it => {
+dev('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
     const result = await question(
       {
@@ -27,9 +27,17 @@ dev.skip('测试与 question 模块相关的内容', async it => {
         private: false,
         resultText: '请输入你的名字',
         errorText: '未能获取您的姓名',
-        required: true,
         canCtrlCExit: false,
         canCtrlDExit: true,
+        // len: 3,
+        minLen: 4,
+        maxLen: 6,
+        verify: [
+          {
+            reg: /^[a-z]+$/,
+            info: '仅允许 a-z 小写英文字符',
+          },
+        ],
       },
       true,
     );
