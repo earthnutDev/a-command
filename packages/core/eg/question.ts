@@ -24,7 +24,6 @@ dev('测试与 question 模块相关的内容', async it => {
         text: '请输入你的名字',
         tip: 'tom',
         type: 'text',
-        private: false,
         resultText: '请输入你的名字',
         errorText: '未能获取您的姓名',
         canCtrlCExit: false,

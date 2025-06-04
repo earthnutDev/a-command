@@ -10,7 +10,7 @@ export function createCurrentIssue(): CurrentIssue {
     text: '请更换为你自己的问题',
     tip: '',
     type: 'text',
-    private: false,
+    private: true,
     errorText: '',
     resultText: '',
     required: true,

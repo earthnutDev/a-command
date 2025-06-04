@@ -28,7 +28,7 @@ export type CurrentIssueOptionsParams = {
    *
    * 私密模式
    *
-   * 缺省值为 `false`
+   * 缺省值为 `true`
    *
    * 为 `true` 时，将不显示用户输入结果的文本
    */

@@ -1,4 +1,4 @@
-import { _p, runOtherCode } from 'a-node-tools';
+import { _p } from 'a-node-tools';
 import { Command } from '../index';
 import { pen } from 'color-pen';
 import { dev } from '@qqi/dev-log';
@@ -11,8 +11,6 @@ await dev.skip('测试 command', async it => {
     c: undefined;
     d: 'aaa' | 'bbb' | 'ccc';
   }>('test');
-
-  await runOtherCode({ code: 'ls', printLog: false });
 
   process.on('exit', () => {
     _p(pen.brightRed('\n\n程序已运行结束，我是 exit 事件'));

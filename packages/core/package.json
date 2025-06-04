@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.3.0",
+  "version": "2.3.1",
   "name": "a-command",
   "description": "一点点 🤏 终端工具 🧰",
   "scripts": {
@@ -24,9 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "@color-pen/static": "^1.0.0",
-    "@qqi/dev-log": "^1.0.1",
+    "@qqi/dev-log": "^1.0.2",
     "a-js-tools": "^1.0.0",
-    "a-node-tools": "^4.2.4",
+    "a-node-tools": "^4.2.5",
     "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"
   }

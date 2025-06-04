@@ -116,9 +116,10 @@ const data: DataType = {
     this.kind = defaultKind;
     // 结果展示文本
     this.resultText = this.errorText = '';
+    // 现在默认缺省值为 true
+    this.private = true;
     // 需要重置为 false 的变量
-    this.private =
-      this.required =
+    this.required =
       this.canCtrlCExit =
       this.canCtrlDExit =
       this.mustInfo =

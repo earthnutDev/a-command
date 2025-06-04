@@ -40,7 +40,7 @@ export type OptionalAttributes = {
   resultText: string | number;
   /**   是否是必填项 */
   required: boolean;
-  /** 私密模式 */
+  /** 私密模式 (缺省值为 true) */
   private: boolean;
   /**  类型 */
   kind: 'radio' | 'check';

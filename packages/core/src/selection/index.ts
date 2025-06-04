@@ -36,7 +36,7 @@ import {
  *      info?:  string;
  *      // 是否为必选项
  *      required?: boolean;
- *      // 隐私模式下，用户回答将覆盖上一个问题行
+ *      // 隐私模式下，用户回答将覆盖上一个问题行，缺省值为 true，默认不打印结果
  *      private?:  false | true;
  *      // 当前的选择模式 radio 为单选， check 为多选
  *      kind?: 'radio' | 'check';
