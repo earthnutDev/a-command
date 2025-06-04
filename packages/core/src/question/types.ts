@@ -118,6 +118,8 @@ export type CurrentIssue = CurrentIssueRequestParams & {
   row: number;
   /**  渲染次数  */
   cum: number;
+  /**  mustInfo 导致光标的偏移量  */
+  mustInfoLen: number;
 };
 
 /**

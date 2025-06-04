@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.3.1",
+  "version": "2.3.2",
   "name": "a-command",
   "description": "一点点 🤏 终端工具 🧰",
   "scripts": {
@@ -11,7 +11,7 @@
     "diff": "jja pkg --diff",
     "dev": "jja rm .eg cls cls  && rollup --config rollup.dev.config.js && node .eg/eg/index.mjs ",
     "push:version": "gvv",
-    "push:submit": "gvv",
+    "push": "gvv",
     "eslint": "eslint src",
     "beautify": "npm run prettier",
     "prettier": "prettier . --write",

@@ -16,14 +16,14 @@ export type SelectionDataOption = {
 
 /**  使用 data 值  */
 export type SelectionUseData = SelectionDataRequired & SelectionDataOption;
+
+/**  使用对象模式参数  */
+export type SelectionParamObjectData = SelectionDataRequired & {
+  [x in keyof SelectionDataOption]?: SelectionDataOption[x];
+};
+
 /**  参数 data 值  */
-export type SelectionParamData = (
-  | string
-  | number
-  | (SelectionDataRequired & {
-      [x in keyof SelectionDataOption]?: SelectionDataOption[x];
-    })
-)[];
+export type SelectionParamData = (string | number | SelectionParamObjectData)[];
 
 /** 必须的参数 */
 export type RequiredAttributes = {

@@ -24,7 +24,10 @@ export const draw = debounce(() => {
 
   const { mustInfo, text: _text, required, tip, verify } = currentIssue;
   cursorHide();
-  let text = '';
+  /**  渲染字符串  */
+  let text = '',
+    /**  是否打印了其他信息  */
+    printInfo = false;
   if (currentIssue.row !== 0) {
     text += `${csi}${currentIssue.row}A`;
     currentIssue.row = 0;
@@ -33,6 +36,7 @@ export const draw = debounce(() => {
   if (mustInfo) {
     // 当上一次敲击 enter 键却没有输入时
     text = printMustInfo(text);
+    printInfo = true;
   } else if (enterText.length > 0) {
     // 检验为下一次的绘制前进行校验
     const userInputStr = enterText.join('');
@@ -42,6 +46,7 @@ export const draw = debounce(() => {
       if (isFalse(element.reg.test(userInputStr))) {
         currentIssue.mustInfo = element.info;
         text = printMustInfo(text);
+        printInfo = true;
         break;
       }
     }
@@ -80,7 +85,8 @@ export const draw = debounce(() => {
   dog('计算完成的文本为', text);
   _p(strInOneLineOnTerminal(text));
   currentIssue.row++; // _p 自带换行
-  translateCursor();
-  _p(hidePen('I'), false);
+  translateCursor(printInfo);
+  // 光标保护
+  if (!printInfo) _p(hidePen('I'), false);
   __p('8m');
 }, 66);

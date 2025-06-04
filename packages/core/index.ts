@@ -9,6 +9,7 @@ export type {
   SelectionParamDataType,
   SelectionParamDataMapType,
   SelectionResultType,
+  SelectionParamObjectData,
 } from './src/selection/';
 
 export { question } from './src/question/';

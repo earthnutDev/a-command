@@ -20,6 +20,7 @@ export function createCurrentIssue(): CurrentIssue {
     canCtrlDExit: false,
     isWrapLine: false,
     usableLength: 0,
+    mustInfoLen: 0,
     row: 0,
     cum: 0,
     maxLen: 0,

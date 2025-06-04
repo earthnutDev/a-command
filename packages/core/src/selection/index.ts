@@ -2,6 +2,7 @@ import { core } from './core';
 import {
   SelectionParamDataMapType,
   SelectionParamDataType,
+  SelectionParamObjectData,
   SelectionResultType,
 } from './types';
 /**
@@ -115,4 +116,5 @@ export type {
   SelectionParamDataType,
   SelectionParamDataMapType,
   SelectionResultType,
+  SelectionParamObjectData,
 };
