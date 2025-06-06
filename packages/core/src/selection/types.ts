@@ -1,20 +1,27 @@
+// 方便统一扩展该类型
+/**  值的范性类  */
+export type ValueExtendsType = PropertyKey;
+
+/**  简单类型  */
+export type stringOrNumber = string | number;
+
 /**  详细单子项必须参数  */
 export type SelectionDataRequired = {
   /**  值（若 label 缺省，将使用本值）  */
-  value: string | number;
+  value: ValueExtendsType;
+  /**  标签  */
+  label: stringOrNumber;
 };
 
 /**  详细单子项可选配置参数  */
 export type SelectionDataOption = {
-  /**  标签  */
-  label: string | number;
   /**  当前是否被选中  */
   checked: boolean;
   /**  提示信息  */
   tip: string;
 };
 
-/**  使用 data 值  */
+/** <span style="color:#ff0;"> 内部 </span> 使用 data 值  */
 export type SelectionUseData = SelectionDataRequired & SelectionDataOption;
 
 /**  使用对象模式参数  */
@@ -23,7 +30,7 @@ export type SelectionParamObjectData = SelectionDataRequired & {
 };
 
 /**  参数 data 值  */
-export type SelectionParamData = (string | number | SelectionParamObjectData)[];
+export type SelectionParamData = (stringOrNumber | SelectionParamObjectData)[];
 
 /** 必须的参数 */
 export type RequiredAttributes = {
@@ -33,11 +40,11 @@ export type RequiredAttributes = {
 /** 可选的参数 */
 export type OptionalAttributes = {
   /** 提问信息 */
-  info: string | number;
+  info: stringOrNumber;
   /**  错误展示文本，缺省时按序查找 `resultText`、`text` 文本 */
-  errorText: string | number;
+  errorText: stringOrNumber;
   /**  结果展示文本（缺省则以 `info`  为准） **/
-  resultText: string | number;
+  resultText: stringOrNumber;
   /**   是否是必填项 */
   required: boolean;
   /** 私密模式 (缺省值为 true) */
@@ -149,9 +156,9 @@ export type DataType = OptionalAttributes & {
 
 /**  返回值  */
 export type SelectionResultType<
-  T extends SelectionParamDataType,
-  U extends 'string' | 'number' | undefined,
-  R = string,
+  R extends ValueExtendsType = string,
+  T extends SelectionParamDataType = SelectionParamDataType,
+  U extends 'string' | 'number' | undefined = undefined,
 > = T extends SelectionParamData
   ? U extends 'string' | undefined
     ? R | undefined

@@ -2,7 +2,7 @@ import { dog } from '../dog';
 import { _p, cursorAfterClear, cursorHide, cursorShow } from 'a-node-tools';
 import { draw } from './draw';
 import { selectionData } from './data-store';
-import { SelectionParamDataType } from './types';
+import { SelectionParamDataType, ValueExtendsType } from './types';
 import { userInteraction } from './userInteraction';
 import { terminalResetStyle } from '@color-pen/static';
 import { onResize } from './onResize';
@@ -57,7 +57,7 @@ export async function selectionStep<
     );
   }
 
-  const resultString: string | number | (string | number)[] =
+  const resultString: ValueExtendsType | ValueExtendsType[] =
       kind === 'radio'
         ? selectionData.data[focus].value
         : checkedList.map(e => selectionData.data[e.index].value),

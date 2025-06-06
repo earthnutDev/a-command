@@ -1,16 +1,21 @@
 import { dog } from '../dog';
 import commandData from '../commandData';
-import { SelectionParamDataType, SelectionResultType } from './types';
+import {
+  SelectionParamDataType,
+  SelectionResultType,
+  stringOrNumber,
+  ValueExtendsType,
+} from './types';
 import { selectionStep } from './actionSteps';
 
 /**
  * 选择的核心逻辑，通过 commandData 来管理数据及执行的顺序
  */
 export async function core<
-  U extends 'string' | 'number' | undefined,
+  R extends ValueExtendsType = stringOrNumber,
   T extends SelectionParamDataType = SelectionParamDataType,
-  R = string,
->(data: T, resultType?: U): Promise<SelectionResultType<T, U, R>> {
+  U extends 'string' | 'number' | undefined = undefined,
+>(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
   const uniKey = Symbol('selection');
   /**
    * 返回一个 promise
@@ -24,10 +29,10 @@ export async function core<
         /**
          * 使用原始定义的 selection 方法执行并返回结果
          */
-        const result = (await selectionStep(
+        const result = (await selectionStep<T, U>(
           data,
           resultType,
-        )) as SelectionResultType<T, U, R>;
+        )) as SelectionResultType<R, T, U>;
 
         commandData.remove(uniKey); // 执行下一个 selection
         resolve(result);

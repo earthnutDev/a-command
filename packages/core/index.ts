@@ -2,9 +2,8 @@ import { Command } from './src/command';
 
 export { Args } from './src/argTool/args';
 
-export * as ArgsTypes from './src/argTool/types';
-
 export { selection } from './src/selection/';
+
 export type {
   SelectionParamDataType,
   SelectionParamDataMapType,
@@ -16,8 +15,19 @@ export { question } from './src/question/';
 export type {
   QuestionParamDataType,
   QuestionReturnType,
+  ValueExtendsType,
 } from './src/question/';
 
-export type { CommandPrintOption } from './src/types';
+export type {
+  CommandPrintOption,
+  ArgsItemOptionsType,
+  ArgsItem,
+  ArgsMapType,
+  ArgsMapItemType,
+  ArgsArrMapType,
+  ArgsArrMapItemType,
+  ArgsArrMapOptions,
+  ArgsType,
+} from './src/types';
 
 export { Command };

@@ -1,3 +1,4 @@
+import { ValueExtendsType } from '../selection';
 import { core } from './core';
 import { QuestionParamDataType, QuestionReturnType } from './types';
 
@@ -91,4 +92,4 @@ export const question = async function <
   return core(params, simpleResult);
 };
 
-export type { QuestionParamDataType, QuestionReturnType };
+export type { QuestionParamDataType, QuestionReturnType, ValueExtendsType };

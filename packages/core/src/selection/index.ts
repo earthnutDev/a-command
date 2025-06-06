@@ -4,6 +4,7 @@ import {
   SelectionParamDataType,
   SelectionParamObjectData,
   SelectionResultType,
+  ValueExtendsType,
 } from './types';
 /**
  *
@@ -105,11 +106,11 @@ import {
  * ```
  */
 export const selection = async function <
-  R = string,
+  R extends ValueExtendsType = string,
   T extends SelectionParamDataType = SelectionParamDataType,
   U extends 'number' | 'string' | undefined = undefined,
->(data: T, resultType?: U): Promise<SelectionResultType<T, U, R>> {
-  return core<U, T, R>(data, resultType);
+>(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
+  return core<R, T, U>(data, resultType);
 };
 
 export type {
@@ -117,4 +118,5 @@ export type {
   SelectionParamDataMapType,
   SelectionResultType,
   SelectionParamObjectData,
+  ValueExtendsType,
 };
