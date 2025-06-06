@@ -6,12 +6,13 @@ export type ValueExtendsType = PropertyKey;
 export type stringOrNumber = string | number;
 
 /**  详细单子项必须参数  */
-export type SelectionDataRequired = {
-  /**  值（若 label 缺省，将使用本值）  */
-  value: ValueExtendsType;
-  /**  标签  */
-  label: stringOrNumber;
-};
+export type SelectionDataRequired<T extends ValueExtendsType = stringOrNumber> =
+  {
+    /**  值（若 label 缺省，将使用本值）  */
+    value: T;
+    /**  标签  */
+    label: stringOrNumber;
+  };
 
 /**  详细单子项可选配置参数  */
 export type SelectionDataOption = {
@@ -24,10 +25,11 @@ export type SelectionDataOption = {
 /** <span style="color:#ff0;"> 内部 </span> 使用 data 值  */
 export type SelectionUseData = SelectionDataRequired & SelectionDataOption;
 
-/**  使用对象模式参数  */
-export type SelectionParamObjectData = SelectionDataRequired & {
-  [x in keyof SelectionDataOption]?: SelectionDataOption[x];
-};
+/**  使用对象模式参数 <span style="color:#f36;">尽然 `SelectionParamObjectData` 接受范性，当前仅限于 `string | number | symbol`</span> */
+export type SelectionParamObjectData<T extends ValueExtendsType = string> =
+  SelectionDataRequired<T> & {
+    [x in keyof SelectionDataOption]?: SelectionDataOption[x];
+  };
 
 /**  参数 data 值  */
 export type SelectionParamData = (stringOrNumber | SelectionParamObjectData)[];

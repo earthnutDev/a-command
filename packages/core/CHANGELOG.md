@@ -1,5 +1,9 @@
 # 更新日志
 
+## v2.3.4 (2025-6-6)
+
+- 更新 `SelectionParamObjectData` 使用时为范性
+
 ## v2.3.3 (2025-6-6)
 
 - 扩展 `selection` 使用时返回值的范性，添加了 `symbol`
