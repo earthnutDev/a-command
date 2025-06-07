@@ -4,6 +4,7 @@ import {
   isNumber,
   isString,
   isSymbol,
+  isTrue,
   isType,
   isUndefined,
 } from 'a-type-of-js';
@@ -25,6 +26,7 @@ export function parseData(data: SelectionParamData): SelectionUseData[] {
         label: element,
         checked: false,
         tip: '',
+        disable: false,
       });
     } else if (
       isType<SelectionParamObjectData>(
@@ -48,12 +50,14 @@ export function parseData(data: SelectionParamData): SelectionUseData[] {
       const label = element.label;
       if (!isString(label) && !isNumber(label))
         throw new TypeError('label 值类型非法');
+      const disable = isTrue(element.disable);
 
       result.push({
         checked,
         tip,
         value,
         label,
+        disable,
       });
     } else {
       throw new TypeError(

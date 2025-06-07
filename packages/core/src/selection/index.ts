@@ -24,7 +24,8 @@ import {
  *      checked?: boolean;
  *      // 提示信息 (暂时没想好怎么用)
  *      tip: string
- *
+ *      // 是否不可用，默认值为 false，除非显式的设置为 true
+ *      disable: boolean;
  *  })[];
  *
  *  type DataType = {

@@ -25,7 +25,10 @@ export async function selectionStep<
   process.stdout.removeListener('resize', onResize); /// 移除旧的监听
   process.stdout.on('resize', onResize); // 注册监听终端的尺寸变化
   // 数据初始化
-  selectionData.initData(data);
+  const noValueAvailable = selectionData.initData(data);
+  if (noValueAvailable) {
+    return undefined;
+  }
   cursorHide(); // 隐藏光标
   dog('初始绘制问题选项');
   outputSafeZone();

@@ -11,10 +11,11 @@ export function diffDrawData() {
   const { focus, drawData, data, kind } = selectionData;
 
   for (let i = 0, j = data.length; i < j; i++) {
+    const e = data[i];
     // 第一次绘制尚没有数据
     if (isUndefined(drawData[i])) {
       /**  原展示文本信息  */
-      const label = data[i].label.toString();
+      const label = e.label.toString();
       /**  该信息在终端占用长度  */
       const length = strInTerminalLength(label);
 
@@ -23,10 +24,11 @@ export function diffDrawData() {
         text: getText(i),
         length,
         /// 单选状态下始终保持值为 false
-        checked: kind === 'radio' ? false : data[i].checked,
+        checked: kind === 'radio' ? false : e.checked,
         focus: i === focus,
         changed: true,
         show: true,
+        disable: e.disable,
       };
     }
     // 更替未选择项为选择项

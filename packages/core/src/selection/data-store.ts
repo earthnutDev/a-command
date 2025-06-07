@@ -39,7 +39,7 @@ const data: DataType = {
   mustInfo: falseValue,
   maxRows: getMaxRows(),
   data: [],
-  initData(params: SelectionParamDataType) {
+  initData(params: SelectionParamDataType): boolean {
     dog('初始化数据');
     // 清理旧的数据
     this.reset();
@@ -93,6 +93,18 @@ const data: DataType = {
         },
       );
     }
+    const data = this.data;
+
+    for (const i in data) {
+      const ele = data[i];
+      if (!ele.disable) {
+        this.focus = Number(i); // 初始化首选项
+        return false;
+      }
+    }
+
+    // 没有可用值直接返回
+    return true;
   },
   reset() {
     // 需要重置为 0 的变量

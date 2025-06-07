@@ -20,6 +20,8 @@ export type SelectionDataOption = {
   checked: boolean;
   /**  提示信息  */
   tip: string;
+  /**  禁用当前项（当包内的所有的项都被禁用时，直接返回 `undefined` 而不进行交互）  */
+  disable: boolean;
 };
 
 /** <span style="color:#ff0;"> 内部 </span> 使用 data 值  */
@@ -90,8 +92,10 @@ export type DrawDataItem = {
   changed: boolean;
   /**  当前的下标  */
   index: number;
-  /**  是否展示  */
+  /**  是否展示（控制当前展示的区域不足展示全部时是否展示改项）  */
   show: boolean;
+  /** 当前项是否被禁用状态   */
+  disable: boolean;
 };
 
 /**  绘制的实际数据  */
@@ -151,7 +155,7 @@ export type DataType = OptionalAttributes & {
   /**  展示必须的文本信息  */
   mustInfo: boolean;
   /** 将给订参数放进这里 */
-  initData: (_data: SelectionParamDataType) => void;
+  initData: (_data: SelectionParamDataType) => boolean;
   /**  重置  */
   reset: () => void;
 };

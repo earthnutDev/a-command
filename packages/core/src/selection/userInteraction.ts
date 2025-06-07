@@ -4,6 +4,7 @@ import { draw } from './draw';
 import { selectionData } from './data-store';
 import { esc } from '@color-pen/static';
 import { isTrue } from 'a-type-of-js';
+import { changeCurrentFocus } from './changeCurrentFocus';
 
 /**
  *
@@ -13,8 +14,7 @@ import { isTrue } from 'a-type-of-js';
  */
 export async function userInteraction() {
   const { data, required, kind, drawData, canCtrlCExit, canCtrlDExit } =
-      selectionData,
-    len = data.length;
+    selectionData;
   /**  返回值，用户判定用户是否主动退出  */
   const result = {
     exit: false,
@@ -37,13 +37,13 @@ export async function userInteraction() {
       case 'up':
         dog('用户使用了键盘键的 up 键');
         // 用户触发 UP 键，更新当前的 select，重新绘制
-        selectionData.focus = focus == 0 ? len - 1 : focus - 1;
+        changeCurrentFocus(false);
         draw();
         break;
       case 'down':
         dog('用户使用了键盘键的 down 键');
         // 用户触发 DOWN 键，更新当前的 select，重新绘制
-        selectionData.focus = focus == len - 1 ? 0 : focus + 1;
+        changeCurrentFocus();
         draw();
         break;
 

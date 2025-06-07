@@ -12,7 +12,7 @@ await dev.skip('测试新模式', async () => {
     errorText: '看来你不怎么饿',
     private: false,
     required: true,
-    kind: 'check',
+    // kind: 'check',
     canCtrlCExit: true,
     canCtrlDExit: true,
     maxRows: 8,
@@ -20,6 +20,8 @@ await dev.skip('测试新模式', async () => {
       {
         value: '123',
         label: '456',
+        disable: true,
+        checked: true,
       },
       '🕐',
       '🕑',
@@ -33,7 +35,9 @@ await dev.skip('测试新模式', async () => {
       '🕙',
       '🕚',
       '🕛',
-    ].map((e, i) => (isString(e) ? i.toString().concat(e.repeat(20)) : e)),
+    ].map((e, i) =>
+      isString(e) ? i.toString().padStart(2, ' ').concat(e.repeat(20)) : e,
+    ),
   });
   _p(result);
 });
