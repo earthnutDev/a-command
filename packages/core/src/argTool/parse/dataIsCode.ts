@@ -1,3 +1,4 @@
+import { isBusinessEmptyString } from 'a-type-of-js';
 import { addResultItem } from './addResultItem';
 import { ManageDataType } from './types';
 
@@ -10,7 +11,7 @@ import { ManageDataType } from './types';
  */
 export function dataIsCode(name: string, manageData: ManageDataType) {
   // 倘若上一个项存在,则将上一个项添加到结果中
-  if (manageData.name !== '') {
+  if (!isBusinessEmptyString(manageData.name)) {
     addResultItem(manageData);
     manageData.resetItem('');
   }

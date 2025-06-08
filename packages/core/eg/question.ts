@@ -3,7 +3,7 @@ import { question } from '..';
 import { dev } from '@qqi/dev-log';
 import { isUndefined } from 'a-type-of-js';
 
-dev('测试与 question 模块相关的内容', async it => {
+dev.skip('测试与 question 模块相关的内容', async it => {
   await it.skip('测试单问模式', async () => {
     const result = await question(
       {
@@ -34,7 +34,18 @@ dev('测试与 question 模块相关的内容', async it => {
         verify: [
           {
             reg: /^[a-z]+$/,
-            info: '仅允许 a-z 小写英文字符1215458798789798798798',
+            info: '仅允许 a-z 小写英文字符',
+          },
+          {
+            reg: /^jerry$/,
+            info: '不可以是 jerry',
+            inverse: true,
+          },
+          {
+            reg: /^s/,
+            info: 's 开头不吉利',
+            inverse: true,
+            warn: true,
           },
         ],
       },

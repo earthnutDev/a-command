@@ -4,7 +4,7 @@ import { AuxiliaryData } from './auxiliaryData';
 import executeParsing from './parse';
 import { organizeHelpInformation } from './help';
 import showVersion from './showVersion';
-import { isString } from 'a-type-of-js';
+import { isBusinessEmptyString, isString, isTrue } from 'a-type-of-js';
 import { auxiliaryDataStore } from './auxiliaryData';
 import { createAuxiliaryData } from './createAuxiliaryData';
 import { BindParamsType, StateType } from './bind/types';
@@ -175,7 +175,7 @@ class Args<T extends OptionNameArray> {
   isEnd(end: boolean = false) {
     /** 当前是否是结束状态 */
     const isEnd = this.#dataStore.state.code === 4;
-    if (isEnd && end === true) {
+    if (isEnd && isTrue(end)) {
       this.end();
     }
     return isEnd;
@@ -223,7 +223,7 @@ class Args<T extends OptionNameArray> {
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该问题的出现。所以所有的数据保持单一 */
     executeParsing(auxiliaryData);
     // * 触发帮助文档
-    if (auxiliaryData.helpInfo != '') {
+    if (!isBusinessEmptyString(auxiliaryData.helpInfo)) {
       organizeHelpInformation(auxiliaryData);
     }
     if (auxiliaryData.hasShowVersion) {

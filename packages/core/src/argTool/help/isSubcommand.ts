@@ -3,6 +3,7 @@ import { AuxiliaryData } from '../auxiliaryData';
 import { pen } from 'color-pen';
 import { _blank } from './blank';
 import { printLine } from './printLine';
+import { isEmptyObject } from 'a-type-of-js';
 
 /**
  *
@@ -14,7 +15,7 @@ export function isSubcommand(auxiliaryData: AuxiliaryData, subcommand: string) {
 
   _p(`${_blank}${data.name}${_blank}${pen.magenta(data.info)}\n`);
   // 带选项的这里打印
-  if (data.options && Object.keys(data.options).length > 0) {
+  if (data.options && !isEmptyObject(data.options)) {
     /**  打印带选项的帮助信息  */
     const message = `${pen.yellow(`${_blank}使用:`)}  ${auxiliaryData.name}   ${
       subcommand

@@ -108,7 +108,7 @@ import {
  */
 export const selection = async function <
   R extends ValueExtendsType = string,
-  T extends SelectionParamDataType = SelectionParamDataType,
+  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
   U extends 'number' | 'string' | undefined = undefined,
 >(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
   return core<R, T, U>(data, resultType);

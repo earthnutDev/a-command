@@ -1,7 +1,7 @@
 import { dog } from './../../dog';
 import { AuxiliaryData } from '../auxiliaryData';
 import { BindParamsOptionsType, BindParamsType, ParamType } from './types';
-import { isArray, isString } from 'a-type-of-js';
+import { isArray, isString, isUndefined } from 'a-type-of-js';
 import { parsingDataOfString } from './parsingDataOfString';
 import { parsingSubOption } from './parsingSubOption';
 
@@ -43,7 +43,7 @@ export default function bindInstruction(
   // 不是字符串也不是数组就是对象了
   // 而且是没有 `name` 和 `info`
   // 这是一个怪异的模式，直接解析
-  else if (data !== undefined && !data.name && !data.info) {
+  else if (!isUndefined(data) && !data.name && !data.info) {
     return weirdModePreprocessing(data as never, auxiliaryData);
   }
 

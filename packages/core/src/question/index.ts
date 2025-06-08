@@ -1,6 +1,10 @@
 import { ValueExtendsType } from '../selection';
 import { core } from './core';
-import { QuestionParamDataType, QuestionReturnType } from './types';
+import {
+  QuestionParamDataType,
+  QuestionReturnType,
+  QuestionVerify,
+} from './types';
 
 /**
  *
@@ -41,6 +45,10 @@ import { QuestionParamDataType, QuestionReturnType } from './types';
  *         reg: RegExp;
  *         // 未通过时提示信息
  *         info: string
+ *         // 取反
+ *         inverse?: boolean;
+ *         // 仅作提示，不作为最后的提交强验证
+ *         warn?: boolean
  *       }[]
  *  }
  * ```
@@ -92,4 +100,9 @@ export const question = async function <
   return core(params, simpleResult);
 };
 
-export type { QuestionParamDataType, QuestionReturnType, ValueExtendsType };
+export type {
+  QuestionParamDataType,
+  QuestionReturnType,
+  ValueExtendsType,
+  QuestionVerify,
+};

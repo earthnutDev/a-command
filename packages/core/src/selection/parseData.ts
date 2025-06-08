@@ -12,29 +12,35 @@ import {
   SelectionParamData,
   SelectionParamObjectData,
   SelectionUseData,
+  ValueExtendsType,
 } from './types';
 
 /**  解析 data 值  */
-export function parseData(data: SelectionParamData): SelectionUseData[] {
-  const result: SelectionUseData[] = [];
+export function parseData<T extends ValueExtendsType>(
+  data: SelectionParamData<T>,
+): SelectionUseData<T>[] {
+  const result: SelectionUseData<T>[] = [];
 
   for (let i = 0, j = data.length; i < j; i++) {
     const element = data[i];
-    if (isString(element) || isNumber(element)) {
+    if (
+      isType<string | number>(element, ele =>
+        [isString, isNumber].some(e => e(ele)),
+      )
+    ) {
       result.push({
-        value: element,
+        value: element as T,
         label: element,
         checked: false,
         tip: '',
         disable: false,
       });
     } else if (
-      isType<SelectionParamObjectData>(
+      isType<SelectionParamObjectData<T>>(
         element,
         v =>
-          isString(v.label) ||
-          (isNumber(v.label) &&
-            (isString(v.value) || isNumber(v.value) || isSymbol(v.value))),
+          [isString, isString].some(e => e(v.label)) &&
+          [isString, isNumber, isSymbol].some(e => e(v.value)),
       )
     ) {
       let checked = element.checked;
@@ -48,8 +54,9 @@ export function parseData(data: SelectionParamData): SelectionUseData[] {
         throw new TypeError(`value 值类型非法`);
 
       const label = element.label;
-      if (!isString(label) && !isNumber(label))
-        throw new TypeError('label 值类型非法');
+      // 25.6.8 去除下面的校验，已在最外层进行了校验
+      // if (!isString(label) && !isNumber(label))
+      // throw new TypeError('label 值类型非法');
       const disable = isTrue(element.disable);
 
       result.push({

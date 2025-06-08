@@ -16,6 +16,7 @@
  * 可以直观的通过判断 `$map` 下是否有该参数即可
  ****************************************************************************/
 
+import { isEmptyArray } from 'a-type-of-js';
 import {
   ArgsMapItemType,
   ArgsMapType,
@@ -36,7 +37,7 @@ import {
 export function get$map<T extends OptionNameArray>(
   value: ArgsType<T>,
 ): ArgsMapType<T> {
-  if (value.length == 0) return {};
+  if (isEmptyArray(value)) return {};
   // 结果对象
   const resultValue: ArgsMapType = new Object() as ArgsMapType;
 

@@ -3,7 +3,6 @@ import commandData from '../commandData';
 import {
   SelectionParamDataType,
   SelectionResultType,
-  stringOrNumber,
   ValueExtendsType,
 } from './types';
 import { selectionStep } from './actionSteps';
@@ -12,8 +11,8 @@ import { selectionStep } from './actionSteps';
  * 选择的核心逻辑，通过 commandData 来管理数据及执行的顺序
  */
 export async function core<
-  R extends ValueExtendsType = stringOrNumber,
-  T extends SelectionParamDataType = SelectionParamDataType,
+  R extends ValueExtendsType,
+  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
   U extends 'string' | 'number' | undefined = undefined,
 >(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
   const uniKey = Symbol('selection');
@@ -29,7 +28,7 @@ export async function core<
         /**
          * 使用原始定义的 selection 方法执行并返回结果
          */
-        const result = (await selectionStep<T, U>(
+        const result = (await selectionStep<R, T, U>(
           data,
           resultType,
         )) as SelectionResultType<R, T, U>;

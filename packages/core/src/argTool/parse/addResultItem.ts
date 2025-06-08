@@ -1,3 +1,4 @@
+import { isBusinessEmptyString } from 'a-type-of-js';
 import { ManageDataType } from './types';
 
 /**
@@ -12,7 +13,7 @@ export function addResultItem(manageData: ManageDataType) {
   /** 拿到数据 */
   const { name, object, item, result } = manageData;
   /** 数据为空 */
-  if (name === '') {
+  if (isBusinessEmptyString(name)) {
     /**
      *  之前当当前匹配值为空时直接返回
      *

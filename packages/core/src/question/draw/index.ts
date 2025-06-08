@@ -1,6 +1,7 @@
 import { __p, _p, cursorHide } from 'a-node-tools';
 import {
   brightRedPen,
+  brightYellowPen,
   hidePen,
   italicPen,
   strInOneLineOnTerminal,
@@ -8,7 +9,17 @@ import {
 import { dataStore } from '../data-store';
 import { csi, terminalResetStyle } from '@color-pen/static';
 import { dog } from '../../dog';
-import { isEmptyString, isFalse, isString } from 'a-type-of-js';
+import {
+  isBoolean,
+  isEmptyArray,
+  isEmptyString,
+  isFalse,
+  isRegExp,
+  isString,
+  isTrue,
+  isUndefined,
+  isZero,
+} from 'a-type-of-js';
 import { bgPen666, prefixList } from '../../utils/info';
 import { translateCursor } from './translateCursor';
 import { debounce } from 'a-js-tools';
@@ -28,7 +39,7 @@ export const draw = debounce(() => {
   let text = '',
     /**  是否打印了其他信息  */
     printInfo = false;
-  if (currentIssue.row !== 0) {
+  if (!isZero(currentIssue.row)) {
     text += `${csi}${currentIssue.row}A`;
     currentIssue.row = 0;
   }
@@ -37,17 +48,28 @@ export const draw = debounce(() => {
     // 当上一次敲击 enter 键却没有输入时
     text = printMustInfo(text);
     printInfo = true;
-  } else if (enterText.length > 0) {
+  } else if (!isEmptyArray(enterText)) {
     // 检验为下一次的绘制前进行校验
     const userInputStr = enterText.join('');
     // 检验验证
-    for (const element of verify) {
-      element.reg.lastIndex = 0;
-      if (isFalse(element.reg.test(userInputStr))) {
-        currentIssue.mustInfo = element.info;
-        text = printMustInfo(text);
-        printInfo = true;
-        break;
+    for (const i of verify) {
+      // 校验
+      if (
+        isRegExp(i.reg) &&
+        isString(i.info) &&
+        [isUndefined, isBoolean].some(e => e(i.inverse))
+      ) {
+        i.reg.lastIndex = 0;
+        const result = i.reg.test(userInputStr);
+        if (
+          (isTrue(i.inverse) && isTrue(result)) ||
+          (isTrue(!i.inverse) && isFalse(result))
+        ) {
+          currentIssue.mustInfo = i.warn ? brightYellowPen(i.info) : i.info;
+          text = printMustInfo(text);
+          printInfo = true;
+          break;
+        }
       }
     }
   }
@@ -62,12 +84,12 @@ export const draw = debounce(() => {
   text += '\n'.repeat(Number(currentIssue.isWrapLine));
 
   //  答应选择模式
-  if (kind !== 0) {
+  if (!isZero(kind)) {
     // 打印选择模式
     text = printSimpleCheck(text);
   }
   //   输入为空且有提示时，打印提示信息
-  else if (enterText.length == 0 && isString(tip)) {
+  else if (isEmptyArray(enterText) && isString(tip)) {
     // 没有提示文本信息
     if (isEmptyString(tip)) {
       text += italicPen.dim.blink('I');

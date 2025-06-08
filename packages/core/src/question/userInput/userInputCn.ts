@@ -1,5 +1,5 @@
 import { esc } from '@color-pen/static';
-import { isFalse, isTrue } from 'a-type-of-js';
+import { isFalse, isTrue, isZero } from 'a-type-of-js';
 import { draw } from '../draw';
 import { QuestionDataType } from '../types';
 import { delKey } from './delKey';
@@ -24,7 +24,7 @@ export function userInputCn(_this: QuestionDataType) {
       _index: number = 0,
       reDraw = true;
     /**  当前为选择模式而不是输入模式  */
-    if (kind !== 0) {
+    if (!isZero(kind)) {
       // 选择模式
       arr = tip as string[];
       len = arr.length - 1;

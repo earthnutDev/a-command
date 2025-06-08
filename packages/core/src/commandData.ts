@@ -1,3 +1,4 @@
+import { isEmptyArray } from 'a-type-of-js';
 import { dog } from './dog';
 import { CommandData, CommandDataItem } from './types';
 
@@ -15,7 +16,7 @@ const commandData: CommandData = {
   /** 注册事件 */
   on(uniKey: symbol, callFn: () => void) {
     const list: CommandDataItem[] = this.callList;
-    if (list.length == 0) {
+    if (isEmptyArray(list)) {
       dog('当前执行列表为空，直接执行任务', uniKey);
       Reflect.apply(callFn, undefined, []); // 待执行列表为空，则直接执行
     }
@@ -34,7 +35,7 @@ const commandData: CommandData = {
     const uniItem = list.findIndex(([key]) => key === uniKey);
     list.splice(uniItem, 1);
 
-    if (list.length === 0) {
+    if (isEmptyArray(list)) {
       dog('当前执行列表为空，返回 true 结束执行');
       return true;
     } else {

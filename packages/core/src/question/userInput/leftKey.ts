@@ -1,3 +1,4 @@
+import { isZero } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 
 /**
@@ -8,7 +9,7 @@ import { dataStore } from '../data-store';
 export function leftKey(arr: string[], _index: number, len: number) {
   const { kind, enterText } = dataStore;
   // 普通输入模式
-  if (kind === 0) {
+  if (isZero(kind)) {
     dataStore.indexOfCursor =
       dataStore.indexOfCursor === 0
         ? enterText.length

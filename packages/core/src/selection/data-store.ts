@@ -4,6 +4,7 @@ import {
   DataType,
   SelectionParamDataMapType,
   SelectionParamDataType,
+  ValueExtendsType,
 } from './types';
 import { parseData } from './parseData';
 import { getMaxRows } from './getMaxRows';
@@ -15,7 +16,7 @@ const info = '请使用键盘选择，请使用 Enter 键进行选择',
   defaultKind = 'radio';
 
 /**  数据仓库  */
-const data: DataType = {
+const data: DataType<ValueExtendsType> = {
   drawData: [],
   info,
   focus: zeroValue,
@@ -39,7 +40,9 @@ const data: DataType = {
   mustInfo: falseValue,
   maxRows: getMaxRows(),
   data: [],
-  initData(params: SelectionParamDataType): boolean {
+  initData<T extends ValueExtendsType>(
+    params: SelectionParamDataType<T>,
+  ): boolean {
     dog('初始化数据');
     // 清理旧的数据
     this.reset();
@@ -51,7 +54,7 @@ const data: DataType = {
     if (isArray(params)) {
       this.data = parseData(params);
     } else {
-      (Object.keys(params) as (keyof SelectionParamDataMapType)[]).forEach(
+      (Object.keys(params) as (keyof SelectionParamDataMapType<T>)[]).forEach(
         currentKey => {
           const v = params[currentKey as never];
           switch (currentKey) {

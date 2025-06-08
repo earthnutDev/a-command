@@ -18,7 +18,7 @@ import { dataStore } from './data-store';
 import { originalData } from './originalData';
 import { onResize } from './onResize';
 import { ERROR, pen666, SUCCESS } from '../utils/info';
-import { isArray, isTrue, isUndefined } from 'a-type-of-js';
+import { isArray, isTrue, isUndefined, isZero } from 'a-type-of-js';
 import { outputSafeZone } from './outputSafeZone';
 
 /**
@@ -51,7 +51,7 @@ export async function actionStep<
       dog.error(error);
     }
     const { currentIssue, results } = dataStore;
-    if (currentIssue.row !== 0) {
+    if (!isZero(currentIssue.row)) {
       // 向上移动光标
       cursorMoveUp(currentIssue.row, true);
       currentIssue.row = 0;

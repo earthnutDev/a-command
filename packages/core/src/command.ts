@@ -172,6 +172,23 @@ class Command<T extends OptionNameArray> extends Args<T> {
    *       canCtrlCExit?: boolean;
    *       // 默认屏蔽了用户使用 `ctrl + d` 组合键退出，但可配置为允许。此时，返回值为 undefined
    *       canCtrlDExit?: boolean;
+   *       // 设定长度强制限定，优先级高于 `minLen`、`maxLen` 而低于 `verify`
+   *       len?: number;
+   *       // 设定最小字符数，优先级仅高于  `maxLen`
+   *       minLen?: number;
+   *       // 设定最长字符数，优先级最低，通过该值将触发返回
+   *       maxLen?: number;
+   *       // 正则校验
+   *       verify?: {
+   *         // 正则 （该正则验证为）
+   *         reg: RegExp;
+   *         // 未通过时提示信息
+   *         info: string
+   *         // 取反
+   *         inverse?: boolean;
+   *         // 仅作提示，不作为最后的提交强验证
+   *         warn?: boolean
+   *       }[]
    *  }
    *
    * ```
@@ -209,6 +226,15 @@ class Command<T extends OptionNameArray> extends Args<T> {
    *    }, {
    *       reg: /^.{5}$/, // 限制字符数为 5
    *       info: '您输入长度仅可为 5'
+   *    }, {
+   *        ref: /$jerry^/,
+   *        info: '不可以设置成 jerry 呦',
+   *        inverse: true
+   *    },{
+   *      ref: /$ginny^/i,
+   *      info: '严格来说设置这个不好，但是也是允许的',
+   *      inverse: true,
+   *      warn: true
    *    }]
    * });
    * // 在上面的示例中，触发检验流程为：

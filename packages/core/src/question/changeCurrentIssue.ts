@@ -67,7 +67,10 @@ export default function changeCurrentIssue(this: QuestionDataType) {
     }
 
     /**  当 `defaultValue` 值不为空时而 `tip` 值为空时，则将 `tip` 值设置为 `defaultValue`   */
-    if (currentIssue.defaultValue !== '' && isEmptyString(currentIssue.tip)) {
+    if (
+      !isBusinessEmptyString(currentIssue.defaultValue) &&
+      isEmptyString(currentIssue.tip)
+    ) {
       currentIssue.tip = currentIssue.defaultValue;
     }
   }

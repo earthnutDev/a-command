@@ -6,13 +6,12 @@ export type ValueExtendsType = PropertyKey;
 export type stringOrNumber = string | number;
 
 /**  详细单子项必须参数  */
-export type SelectionDataRequired<T extends ValueExtendsType = stringOrNumber> =
-  {
-    /**  值（若 label 缺省，将使用本值）  */
-    value: T;
-    /**  标签  */
-    label: stringOrNumber;
-  };
+export type SelectionDataRequired<T extends ValueExtendsType> = {
+  /**  值（若 label 缺省，将使用本值）  */
+  value: T;
+  /**  标签  */
+  label: stringOrNumber;
+};
 
 /**  详细单子项可选配置参数  */
 export type SelectionDataOption = {
@@ -25,21 +24,25 @@ export type SelectionDataOption = {
 };
 
 /** <span style="color:#ff0;"> 内部 </span> 使用 data 值  */
-export type SelectionUseData = SelectionDataRequired & SelectionDataOption;
+export type SelectionUseData<T extends ValueExtendsType> =
+  SelectionDataRequired<T> & SelectionDataOption;
 
 /**  使用对象模式参数 <span style="color:#f36;">尽然 `SelectionParamObjectData` 接受范性，当前仅限于 `string | number | symbol`</span> */
-export type SelectionParamObjectData<T extends ValueExtendsType = string> =
+export type SelectionParamObjectData<T extends ValueExtendsType> =
   SelectionDataRequired<T> & {
     [x in keyof SelectionDataOption]?: SelectionDataOption[x];
   };
 
 /**  参数 data 值  */
-export type SelectionParamData = (stringOrNumber | SelectionParamObjectData)[];
+export type SelectionParamData<T extends ValueExtendsType> = (
+  | stringOrNumber
+  | SelectionParamObjectData<T>
+)[];
 
 /** 必须的参数 */
-export type RequiredAttributes = {
+export type RequiredAttributes<T extends ValueExtendsType> = {
   /** 要渲染的选择的数据数据 */
-  data: SelectionParamData;
+  data: SelectionParamData<T>;
 };
 /** 可选的参数 */
 export type OptionalAttributes = {
@@ -65,18 +68,19 @@ export type OptionalAttributes = {
 };
 
 /** 参数数据对象型类型  **/
-export type SelectionParamDataMapType = RequiredAttributes & {
-  [x in keyof OptionalAttributes]?: OptionalAttributes[x];
-};
+export type SelectionParamDataMapType<T extends ValueExtendsType> =
+  RequiredAttributes<T> & {
+    [x in keyof OptionalAttributes]?: OptionalAttributes[x];
+  };
 
 /**
  *
  * *参数数据类型*
  *
  */
-export type SelectionParamDataType =
-  | SelectionParamData
-  | SelectionParamDataMapType;
+export type SelectionParamDataType<T extends ValueExtendsType> =
+  | SelectionParamData<T>
+  | SelectionParamDataMapType<T>;
 
 /**  绘制的数据单项  */
 export type DrawDataItem = {
@@ -106,10 +110,10 @@ export type DrawData = DrawDataItem[];
  * 使用数据
  *
  */
-export type DataType = OptionalAttributes & {
+export type DataType<T extends ValueExtendsType> = OptionalAttributes & {
   // 下面的属性仅会出现在内部逻辑中使用
   /**  使用数据（在 initData 中进行了解析 ）  */
-  data: SelectionUseData[];
+  data: SelectionUseData<T>[];
   /**  当前选择项  */
   focus: number;
   /**  最终绘制的数据 */
@@ -155,24 +159,30 @@ export type DataType = OptionalAttributes & {
   /**  展示必须的文本信息  */
   mustInfo: boolean;
   /** 将给订参数放进这里 */
-  initData: (_data: SelectionParamDataType) => boolean;
+  initData: <T extends ValueExtendsType>(
+    _data: SelectionParamDataType<T>,
+  ) => boolean;
   /**  重置  */
   reset: () => void;
 };
 
 /**  返回值  */
 export type SelectionResultType<
-  R extends ValueExtendsType = string,
-  T extends SelectionParamDataType = SelectionParamDataType,
+  /**  输出数据类型，默认为字符串  */
+  R extends ValueExtendsType,
+  /**  参数类型  */
+  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
+  /**  第二参数，控制输出为字符串（或传入的值类型）还是返回当前选择的为第几项  */
   U extends 'string' | 'number' | undefined = undefined,
-> = T extends SelectionParamData
-  ? U extends 'string' | undefined
-    ? R | undefined
-    : number | undefined
-  : T extends { kind: 'check' }
+> =
+  T extends SelectionParamData<ValueExtendsType>
     ? U extends 'string' | undefined
-      ? R[] | undefined
-      : number[] | undefined
-    : U extends 'string' | undefined
       ? R | undefined
-      : number | undefined;
+      : number | undefined
+    : T extends { kind: 'check' }
+      ? U extends 'string' | undefined
+        ? R[] | undefined
+        : number[] | undefined
+      : U extends 'string' | undefined
+        ? R | undefined
+        : number | undefined;

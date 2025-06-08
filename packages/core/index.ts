@@ -16,6 +16,7 @@ export type {
   QuestionParamDataType,
   QuestionReturnType,
   ValueExtendsType,
+  QuestionVerify,
 } from './src/question/';
 
 export type {

@@ -11,6 +11,7 @@ import { ArgsType, OptionNameArray } from '../types';
 import { createManageDate } from './createManageData';
 import { manageResult } from './manageResult';
 import { delimiter } from './delimiter';
+import { isEmptyArray, isUndefined, isZero } from 'a-type-of-js';
 
 /**
  *
@@ -61,7 +62,7 @@ export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
   }
 
   /// 倘若在 `-h`  第一位
-  if (help_index == 0) {
+  if (isZero(help_index)) {
     auxiliaryData.helpInfo = 'help';
     return;
   }
@@ -96,11 +97,11 @@ export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
     // 设定值
     result = auxiliaryData.args as unknown as never;
     /// 未匹配到子命令或选项，即非详细帮助文档模式
-    if (result.length == 0) {
+    if (isEmptyArray(result)) {
       auxiliaryData.helpInfo = 'help';
     }
     // 匹配到子命令，即子命令的详细帮助文档模式
-    else if (result[0].options == undefined || result[0].options?.length == 0) {
+    else if ([isUndefined, isEmptyArray].some(e => e(result[0].options))) {
       auxiliaryData.helpInfo = result[0].name;
     }
     // 匹配到子命令和选项，即子命令和选项的详细帮助文档模式

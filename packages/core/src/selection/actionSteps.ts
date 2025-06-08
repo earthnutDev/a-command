@@ -19,13 +19,14 @@ import { outputSafeZone } from './outputSafeZone';
  * @returns
  */
 export async function selectionStep<
-  T extends SelectionParamDataType,
-  U extends 'string' | 'number' | undefined,
+  R extends ValueExtendsType,
+  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
+  U extends 'string' | 'number' | undefined = undefined,
 >(data: T, resultType?: U) {
   process.stdout.removeListener('resize', onResize); /// 移除旧的监听
   process.stdout.on('resize', onResize); // 注册监听终端的尺寸变化
   // 数据初始化
-  const noValueAvailable = selectionData.initData(data);
+  const noValueAvailable = selectionData.initData<R>(data);
   if (noValueAvailable) {
     return undefined;
   }

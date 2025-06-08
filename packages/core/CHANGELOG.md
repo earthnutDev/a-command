@@ -1,5 +1,12 @@
 # 更新日志
 
+## v2.3.6 (2025-6-8)
+
+- `selection` 的范性进行了优化（再次提醒，尽然是范性，目前仅支持 `string | number | symbol` ，在代码内会有对 value 值的强验证 ）
+- `selection` 添加了 `ctrl + a` 全选 、`ctrl + z` 全部选、`ctrl + r` 全部反选 （但快捷键不会影响设定为 `disable` 的选项的项的 `checked` 值）
+  （该需求出于 [gvv](https://www.npmjs.com/package/gvv) 的 [0.0.6](https://www.npmjs.com/package/gvv/v/0.0.6) 版本中）。
+- `question` 添加了 `verify` 下的 `inverse`、`warn` 两个可选的属性（该需求出自于 [vjj 的 1.0.4](https://www.npmjs.com/package/vjj/)）
+
 ## v2.3.5 (2025-6-7)
 
 - `selection` 添加了 `disable` 不可用状态（该项仅作展示，不可被选择。但其是否选中状态由初始化时数据决定）

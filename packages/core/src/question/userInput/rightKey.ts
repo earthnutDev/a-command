@@ -1,3 +1,4 @@
+import { isZero } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 
 /**
@@ -7,7 +8,7 @@ import { dataStore } from '../data-store';
  */
 export function fightKey(arr: string[], _index: number, len: number) {
   const { kind, enterText } = dataStore;
-  if (kind === 0) {
+  if (isZero(kind)) {
     dataStore.indexOfCursor =
       dataStore.indexOfCursor == dataStore.enterText.length
         ? 0

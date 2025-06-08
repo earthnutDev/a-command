@@ -1,3 +1,4 @@
+import { isBusinessEmptyString } from 'a-type-of-js';
 import { ManageDataType } from './types';
 
 /**
@@ -19,7 +20,7 @@ export function dataIsValue(
   } else if (value == Number(value)) {
     value = Number(value);
   }
-  if (manageData.name === '') {
+  if (isBusinessEmptyString(manageData.name)) {
     // 之前这里直接 return，导致最顶层没有 values
     manageData.values.push(value);
   } else {

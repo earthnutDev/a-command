@@ -1,10 +1,12 @@
-import { dog } from '../dog';
+import { dog } from '../../dog';
 import { readInput } from 'a-node-tools';
-import { draw } from './draw';
-import { selectionData } from './data-store';
+import { draw } from '../draw';
+import { selectionData } from '../data-store';
 import { esc } from '@color-pen/static';
-import { isTrue } from 'a-type-of-js';
-import { changeCurrentFocus } from './changeCurrentFocus';
+import { isEmptyArray, isTrue } from 'a-type-of-js';
+import { changeCurrentFocus } from '../changeCurrentFocus';
+import { checkAll } from './checkAll';
+import { reverseSelectAll } from './reverseSelectAll';
 
 /**
  *
@@ -27,7 +29,7 @@ export async function userInteraction() {
         if (
           kind === 'check' &&
           required &&
-          drawData.filter(e => e.checked).length === 0
+          isEmptyArray(drawData.filter(e => e.checked))
         ) {
           selectionData.mustInfo = true;
           draw();
@@ -70,13 +72,29 @@ export async function userInteraction() {
         break;
       default:
         dog('用户使用了键盘键的非方向键 <', keyValue, '>, <', key, '>');
-        if (
-          isTrue(key?.ctrl) &&
-          ((isTrue(canCtrlCExit) && key?.name === 'c') ||
-            (isTrue(canCtrlDExit) && key?.name === 'd'))
-        ) {
-          result.exit = true;
-          return true;
+        if (isTrue(key?.ctrl)) {
+          if (selectionData.kind === 'check') {
+            if (key?.name === 'a') {
+              checkAll();
+              draw();
+            }
+            if (key?.name === 'z') {
+              checkAll(false);
+              draw();
+            }
+            if (key?.name === 'r') {
+              reverseSelectAll();
+              draw();
+            }
+          }
+          // 退出
+          if (
+            (isTrue(canCtrlCExit) && key?.name === 'c') ||
+            (isTrue(canCtrlDExit) && key?.name === 'd')
+          ) {
+            result.exit = true;
+            return true;
+          }
         }
         break;
     }

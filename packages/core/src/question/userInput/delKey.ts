@@ -1,3 +1,4 @@
+import { isZero } from 'a-type-of-js';
 import { dataStore } from '../data-store';
 
 /**
@@ -7,7 +8,7 @@ import { dataStore } from '../data-store';
  */
 export function delKey() {
   const { enterText, kind } = dataStore;
-  if (kind === 0 && dataStore.indexOfCursor !== 0) {
+  if (isZero(kind) && !isZero(dataStore.indexOfCursor)) {
     enterText.splice(dataStore.indexOfCursor - 1, 1);
     dataStore.indexOfCursor--;
   }

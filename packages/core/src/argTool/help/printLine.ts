@@ -1,6 +1,7 @@
 import { _p } from 'a-node-tools';
 import { formatHelpText } from './formatHelpText';
 import { ArgOriginBind, SubOptionsType } from '../bind/types';
+import { isEmptyObject } from 'a-type-of-js';
 
 /**
  * 打印其他信息
@@ -46,7 +47,7 @@ export function printLine(
     let textDecoration = false;
     if (
       'options' in data[currentKey] &&
-      Object.keys(data[currentKey].options).length > 0
+      !isEmptyObject(data[currentKey].options)
     ) {
       textDecoration = true;
     }

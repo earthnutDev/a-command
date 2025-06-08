@@ -68,141 +68,140 @@ npx jja remove  --ignore  dist node_modules
 - **`-v`/`version` 的优先级要高于`-h`/`help`**
 - **使用字符串参数时，注意 `<>` 和 `()` 均为英文符号**
 
-1. 最简单的例子
+(1) 最简单的例子
 
-   ```js
-   import { Args } from "a-command";
-   const command: Args = new Args('jja');
-   command.bind("init <-i> (初始化一个配置文件)").run();
-   ```
+```js
+import { Args } from "a-command";
 
-2. 不带子项的配置
+const command: Args = new Args('jja');
+command.bind("init <-i> (初始化一个配置文件)").run();
+```
 
-   ```js
-     import { Args } from "a-command";
-     const command: Args = new Args('jja');
-     command
-       .bind({
-         name: "init",
-         abbr: "-i",
-         info: "初始化一个配置文件",
-       })
-       .run();
-   ```
+(2) 不带子项的配置
 
-3. 带子项配置（子项纯文本的）
+```js
+import { Args } from "a-command";
+const command: Args = new Args('jja');
+command
+  .bind({
+    name: "init",
+    abbr: "-i",
+    info: "初始化一个配置文件",
+  })
+  .run();
+```
 
-   ```js
-   import { Args } from "a-command";
-   const command: Args = new Args('jja');
-   command.bind({
-     name: "init",
-     abbr: "-i",
-     info: "初始化一个配置文件",
-     options: [
-       "ts <-t> (初始化一个 `ts` 后缀配置文件)",
-       "js <-j> (初始化一个 `js` 后缀配置文件)",
-       "json <-o> (初始化一个 `json` 后缀配置文件)",
-     ],
-   });
-   command.run(); // Users can use `gig init -o`
-   ```
+(3) 带子项配置（子项纯文本的）
 
-4. 全配置的
+```js
+import { Args } from "a-command";
+const command: Args = new Args('jja');
+command.bind({
+  name: "init",
+  abbr: "-i",
+  info: "初始化一个配置文件",
+  options: [
+    "ts <-t> (初始化一个 `ts` 后缀配置文件)",
+    "js <-j> (初始化一个 `js` 后缀配置文件)",
+    "json <-o> (初始化一个 `json` 后缀配置文件)",
+  ],
+});
+command.run(); // Users can use `gig init -o`
+```
 
-   ```js
-   import { Args } from "a-command";
-   const command: Args = new Args('jja');
-   command.bind({
-     name: "init",
-     abbr: "-i",
-     info: "初始化一个配置文件",
-     options: [
-       {
-         name: "ts",
-         abbr: "-t",
-         info: "初始化一个 `ts` 后缀配置文件",
-       },
-       {
-         name: "js",
-         abbr: "-j",
-         info: "初始化一个 `js` 后缀配置文件",
-       },
-       {
-         name: "json",
-         abbr: "-o",
-         info: "初始化一个 `json` 后缀配置文件",
-       },
-     ],
-   });
-   command.run(); // Users can use `gig init -o`
-   ```
+(二) 全配置的
 
-5. 怪异行为绑定参数：
+```js
+import { Args } from "a-command";
+const command: Args = new Args('jja');
+command.bind({
+  name: "init",
+  abbr: "-i",
+  info: "初始化一个配置文件",
+  options: [
+    {
+      name: "ts",
+      abbr: "-t",
+      info: "初始化一个 `ts` 后缀配置文件",
+    },
+    {
+      name: "js",
+      abbr: "-j",
+      info: "初始化一个 `js` 后缀配置文件",
+    },
+    {
+      name: "json",
+      abbr: "-o",
+      info: "初始化一个 `json` 后缀配置文件",
+    },
+  ],
+});
+command.run(); // Users can use `gig init -o`
+```
 
-   ```ts
-   import { Args } from 'a-command';
-   const command: Args = new Args('jja');
-   command.bind({
-     'init <-i> (初始化项目)': [
-       'ts  (初始化一个 ts 配置文件)',
-       'js  (初始化一个 js 配置文件)',
-       'json  (初始化一个 json 配置文件)',
-     ],
-     'create <-c> (添加一个文件)': [
-       'ts  (添加一个 ts 配置文件)',
-       'js  (添加一个 js 配置文件)',
-       'json  (添加一个 json 配置文件)',
-     ],
-   });
-   command.run(); // Users can use `gig init ts`
-   ```
+(三) 怪异行为绑定参数：
 
-6. 最后，可以使用 `args` 来获取用户实际的值输入
+```ts
+import { Args } from 'a-command';
+const command: Args = new Args('jja');
+command.bind({
+  'init <-i> (初始化项目)': [
+    'ts  (初始化一个 ts 配置文件)',
+    'js  (初始化一个 js 配置文件)',
+    'json  (初始化一个 json 配置文件)',
+  ],
+  'create <-c> (添加一个文件)': [
+    'ts  (添加一个 ts 配置文件)',
+    'js  (添加一个 js 配置文件)',
+    'json  (添加一个 json 配置文件)',
+  ],
+});
+command.run(); // Users can use `gig init ts`
+```
 
-   ```ts
-       ... // 其他代码
-        /**
-         *   获取处理后的用户输入的参数
-         *
-         *   这种模式尽可能的保留了用户输入，但是也舍弃了部分无法识别的输入
-         * */
-       command.args;
-       /**
-        *  获取处理后的用户输入的参数的 Object 形式
-        *
-        *  这种模式更适合用于配置文件
-        *
-        * **_在这种模式下，`subOptions` 会覆盖上级的 `value`_**
-        *
-        * */
-       command.args.$map;
-       /**
-        * 为了获取有序的对象值
-        *
-        * 现 可以通过 `$arrMap` 获取
-        *
-        */
-       command.args.$arrMap;
-        /**
-         *   获取处理后的用户输入的参数的简单形式
-         *
-         *  这种模式适合简单的命令，仅查看命令是否有
-         * */
-       command.args.$only;
+(四) 最后，可以使用 `args` 来获取用户实际的值输入
 
-     /**
-      *
-      *    是否为空，判断用户未输入命令参数
-      */
-       command.args.$isVoid;
-       /**
-        *
-        * 用户原始输入参数
-        */
-       command.args.$original;
-
-   ```
+```ts
+... // 其他代码
+ /**
+  *   获取处理后的用户输入的参数
+  *
+  *   这种模式尽可能的保留了用户输入，但是也舍弃了部分无法识别的输入
+  * */
+command.args;
+/**
+ *  获取处理后的用户输入的参数的 Object 形式
+ *
+ *  这种模式更适合用于配置文件
+ *
+ * **_在这种模式下，`subOptions` 会覆盖上级的 `value`_**
+ *
+ * */
+command.args.$map;
+/**
+ * 为了获取有序的对象值
+ *
+ * 现 可以通过 `$arrMap` 获取
+ *
+ */
+command.args.$arrMap;
+ /**
+  *   获取处理后的用户输入的参数的简单形式
+  *
+  *  这种模式适合简单的命令，仅查看命令是否有
+  * */
+command.args.$only;
+/**
+ *
+ *    是否为空，判断用户未输入命令参数
+ */
+command.args.$isVoid;
+/**
+ *
+ * 用户原始输入参数
+ */
+command.args.$original;
+```
 
 ### 获取当前状态
 
@@ -314,6 +313,19 @@ const result = await question({
       reg: /^.{5}$/, // 限定输入仅为长度为 5
       info: '输入长度仅可以为 5',
     },
+    {
+      reg: /^tom$/,
+      info: '不可以为 tom 呦',
+      inverse: true, // 禁止该正则完全匹配
+    },
+    {
+      //  当无设置 inverse 时，该正则为 false 时展示 info
+      //  设置 inverse 时，则该正则为 true 时展示 info
+      reg: /^jerry$/,
+      info: '不可以为 tom 呦',
+      inverse: true, // 禁止该正则完全匹配
+      warn: true， // 启用此项则显示提示文本而不影响最后的
+    },
   ],
 });
 
@@ -402,6 +414,8 @@ const result = await question([
 
 可引用该函数后，在需要的位置使用
 _等待用户输入的一个函数。因为要等待，所以是异步的，使用的时候应当使用 `await`_
+
+在 `selection` 的 kind 值为 'check' 时，可用快捷键 `ctrl + a` 全选、`ctrl + z` 取消全选、`ctrl + r` 全反选，且该三个快捷键无法像 `ctrl +c` 或是 `ctrl + d` 一样自定义取消。
 
 示例
 

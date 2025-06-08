@@ -22,6 +22,7 @@ import { dataIsOption } from './dataIsOption';
 import { addResultItem } from './addResultItem';
 import { ManageDataType } from './types';
 import { pretreatment } from './pretreatment';
+import { isBusinessEmptyString } from 'a-type-of-js';
 
 /**
  *
@@ -64,7 +65,7 @@ export function manageResult(
     // 当尚未有匹配项时，检测是否有上一次匹配的项
     // 查看是否为 options 全拼
     if (
-      name !== '' &&
+      !isBusinessEmptyString(name) &&
       auxiliaryData.originalBind[name].options &&
       auxiliaryData.originalBind[name].options[currentArg]
     ) {

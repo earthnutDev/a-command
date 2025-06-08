@@ -1,4 +1,4 @@
-import { isUndefined } from 'a-type-of-js';
+import { isBusinessEmptyString, isUndefined } from 'a-type-of-js';
 import { AuxiliaryData } from '../auxiliaryData';
 
 /**
@@ -18,7 +18,7 @@ export function pretreatment(data: string[], auxiliaryData: AuxiliaryData) {
 
   /**  方法重用  */
   function manage(currentArg: string, secondParameter?: string) {
-    if (currentSubcommand !== '') {
+    if (!isBusinessEmptyString(currentSubcommand)) {
       // 是子命令的选项时
       if (auxiliaryData.originalBind[currentSubcommand].options[currentArg]) {
         return pushResult(currentArg, secondParameter);

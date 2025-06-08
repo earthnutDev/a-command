@@ -67,9 +67,52 @@ export type CurrentIssueOptionsParams = {
   len: number;
   /**  最大长度  */
   maxLen: number;
-  /**  验证  */
-  verify: { reg: RegExp; info: string }[];
+  /**
+   * 选择项的验证单项
+   *
+   * ```ts
+   *  type QuestionVerify = {
+   *     // 校验正则
+   *     reg: RegExp;
+   *     // 不符合时提示文本
+   *     info: string;
+   *     // 是否为反向验证
+   *     inverse?: boolean
+   *     // 仅作提示，不在最后进行用户使用 enter 键时强验证
+   *     warn?: boolean;
+   *  }
+   * ```
+   */
+  verify: QuestionVerify[];
 };
+
+/**
+ * 选择项的验证单项
+ *
+ * ```ts
+ *  type QuestionVerify = {
+ *     // 校验正则
+ *     reg: RegExp;
+ *     // 不符合时提示文本
+ *     info: string;
+ *     // 是否为反向验证
+ *     inverse?: boolean
+ *     // 仅作提示，不在最后进行用户使用 enter 键时强验证
+ *     warn?: boolean;
+ *  }
+ * ```
+ */
+export type QuestionVerify = {
+  /**  正则  */
+  reg: RegExp;
+  /**  提示的文本  */
+  info: string;
+  /**  是否为反向验证，默认为 false  */
+  inverse?: boolean;
+  /**  仅作提示，不在最后进行用户使用 enter 键时强验证  */
+  warn?: boolean;
+};
+
 /**
  *
  * 当前的问题

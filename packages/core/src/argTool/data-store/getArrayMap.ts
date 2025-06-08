@@ -7,7 +7,7 @@
  *  @Description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
  ****************************************************************************/
 
-import { isUndefined } from 'a-type-of-js';
+import { isEmptyArray, isUndefined } from 'a-type-of-js';
 import {
   ArgsArrMapItemType,
   ArgsArrMapType,
@@ -23,7 +23,7 @@ import {
 export function get$arrMap<T extends OptionNameArray>(
   value: ArgsType<T>,
 ): ArgsArrMapType<T> {
-  if (value.length == 0) return [];
+  if (isEmptyArray(value)) return [];
   return value.map(currentElement => {
     // 临时演员
     const resultValue: { [key in keyof T]?: ArgsArrMapItemType<T[keyof T]> } =
@@ -34,16 +34,14 @@ export function get$arrMap<T extends OptionNameArray>(
       {};
 
     // 判断当前是否有 value 属性
-    if (currentElement.value && currentElement.value.length > 0) {
+    if (currentElement.value && !isEmptyArray(currentElement.value)) {
       temp.value = currentElement.value;
     }
     // 当前元素有子项时
     if (
       !isUndefined(currentElement) &&
       !isUndefined(currentElement.options) &&
-      // eslint-disable-next-line jsdoc/check-tag-names
-      /**  @ts-expect-error: 暂时不知道怎么处理  */
-      currentElement.options.length > 0
+      !isEmptyArray(currentElement.options)
     ) {
       temp.options = [];
 

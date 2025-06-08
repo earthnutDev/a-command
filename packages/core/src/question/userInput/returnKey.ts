@@ -1,4 +1,13 @@
-import { isEmptyString, isFalse } from 'a-type-of-js';
+import {
+  isBoolean,
+  isEmptyString,
+  isFalse,
+  isRegExp,
+  isString,
+  isTrue,
+  isUndefined,
+  isZero,
+} from 'a-type-of-js';
 import { dataStore } from '../data-store';
 import { cyanPen, greenPen } from 'color-pen';
 
@@ -27,21 +36,34 @@ export function returnKey() {
   }
   const { len, minLen, maxLen, verify } = currentIssue;
   const strLen = currentResult.length;
-  if (dataStore.kind === 0) {
+  if (isZero(dataStore.kind)) {
     // 用户有输入检验输入
     if (verify.length > 0) {
       for (const i of verify) {
-        i.reg.lastIndex = 0;
-        if (isFalse(i.reg.test(currentResult))) {
-          return !1;
+        /**  校验  */
+        if (
+          // 允许强验证
+          [isUndefined, isFalse].some(e => e(i.warn)) &&
+          // 正则类型正确
+          isRegExp(i.reg) &&
+          // 提示类型正确
+          isString(i.info) &&
+          // 是否反向验证
+          [isUndefined, isBoolean].some(e => e(i.inverse))
+        ) {
+          i.reg.lastIndex = 0;
+          const result = i.reg.test(currentResult);
+          if ((isTrue(i.inverse) && result) || (!i.inverse && !result)) {
+            return !1;
+          }
         }
       }
     }
-    if (len !== 0 && strLen !== len) {
+    if (!isZero(len) && strLen !== len) {
       currentIssue.mustInfo = `您输入的长度 ${greenPen(strLen)} 不符合要求值 ${cyanPen(len)}`;
       return !1;
     }
-    if (minLen !== 0 && strLen < minLen) {
+    if (!isZero(minLen) && strLen < minLen) {
       currentIssue.mustInfo = `您输入的长度 ${greenPen(strLen)} 小于最低要求${cyanPen(minLen)}`;
       return !1;
     }

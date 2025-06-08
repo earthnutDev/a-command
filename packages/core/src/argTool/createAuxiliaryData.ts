@@ -19,7 +19,7 @@ export function createAuxiliaryData<T extends OptionNameArray>() {
   return new Proxy(new AuxiliaryData(), {
     get(target, p, receive) {
       /** 代理 args 属性的数据 */
-      if (p == 'args') {
+      if (p === 'args') {
         const args: ArgsType<T> = JSON.parse(
           // @ts-expect-error 后添加的属性，不好处理，这里就直接 ignore 了，后期有别的办法在进行修改
           JSON.stringify(target[Symbol.for('_args')] || []),
@@ -41,19 +41,19 @@ export function createAuxiliaryData<T extends OptionNameArray>() {
               case '$nomatch':
                 return target.values.slice();
             }
-            if (_p == '$map') {
+            if (_p === '$map') {
               return get$map<T>(args);
             }
-            if (_p == '$arrMap') {
+            if (_p === '$arrMap') {
               return get$arrMap<T>(args);
             }
-            if (_p == '$only') {
+            if (_p === '$only') {
               return [...new Set(args.map(currentEle => currentEle.name))];
             }
-            if (_p == '$original') {
+            if (_p === '$original') {
               return originalArg.slice();
             }
-            if (_p == '$isVoid') {
+            if (_p === '$isVoid') {
               return originalArg.slice().length == 0;
             }
             // return 'hello world';
@@ -68,7 +68,7 @@ export function createAuxiliaryData<T extends OptionNameArray>() {
       return Reflect.get(target, p, receive);
     },
     set(target: AuxiliaryData, p, newValue, receiver) {
-      if (p == 'args') {
+      if (p === 'args') {
         // @ts-expect-error 后添加的属性，不好处理，这里就直接 ignore 了，后期有别的办法在进行修改
         target[Symbol.for('_args')] = newValue;
       } else Reflect.set(target, p, newValue, receiver);
