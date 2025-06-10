@@ -17,7 +17,7 @@ import { isNull, isUndefined } from 'a-type-of-js';
  * 当主动触发或是用户输入 `version/-v`  时触发
  *
  */
-export default function showVersion(auxiliaryData: AuxiliaryData): void {
+export function showVersion(auxiliaryData: AuxiliaryData): void {
   auxiliaryData.state = 'version';
 
   /**  调用者的信息（根据该路径追踪实际的调用者的数据信息）  */

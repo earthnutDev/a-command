@@ -45,4 +45,4 @@ const commandData: CommandData = {
   },
 };
 
-export default commandData;
+export { commandData };

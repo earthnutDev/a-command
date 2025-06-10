@@ -2,7 +2,6 @@
 
 ## args
 
-- default
 - options
 - type
 - hide

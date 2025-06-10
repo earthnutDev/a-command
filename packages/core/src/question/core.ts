@@ -1,5 +1,5 @@
 import { dog } from '../dog';
-import commandData from '../commandData';
+import { commandData } from '../commandData';
 import { actionStep } from './actionSteps';
 import { QuestionParamDataType, QuestionReturnType } from './types';
 import { _p } from 'a-node-tools';

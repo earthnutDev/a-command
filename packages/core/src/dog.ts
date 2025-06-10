@@ -1,4 +1,4 @@
-import Dog from '@qqi/dev-log';
+import { Dog } from '@qqi/dev-log';
 import { isFalse } from 'a-type-of-js';
 
 /**  尽在测试环境执行的打印信息  */

@@ -35,7 +35,7 @@ import { isEmptyArray, isUndefined, isZero } from 'a-type-of-js';
  *
  * ```
  */
-export default function paringUserArgs(auxiliaryData: AuxiliaryData): void {
+export function paringUserArgs(auxiliaryData: AuxiliaryData): void {
   // 用户没有传参数
   if (process.argv.length == 2) return;
 

@@ -11,7 +11,7 @@
  ****************************************************************************/
 import { isNumber } from 'a-type-of-js';
 import { TempArgs } from './data-store/tempArgs';
-import originalArg from './data-store/originalArg';
+import { originalArg } from './data-store/originalArg';
 import { ArgOriginBind, OverCode, StateType } from './bind/types';
 import { ArgsType } from './types';
 

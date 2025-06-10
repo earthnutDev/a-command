@@ -8,6 +8,7 @@
  ****************************************************************************/
 /** 原始的用户输入的参数数组 */
 const originalArg: string[] = process.argv.slice(2);
-export default originalArg;
+
+export { originalArg };
 // 📊🥶🕳️
 Object.freeze(originalArg);

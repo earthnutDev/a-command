@@ -2,7 +2,7 @@ import { CurrentIssue, QuestionAssign, QuestionDataType } from './types';
 
 import { _p, cursorHide, cursorShow } from 'a-node-tools';
 import { originalData } from './originalData';
-import changeCurrentIssue from './changeCurrentIssue';
+import { changeCurrentIssue } from './changeCurrentIssue';
 import { isUndefined } from 'a-type-of-js';
 
 /**  创建一个新的问题  */

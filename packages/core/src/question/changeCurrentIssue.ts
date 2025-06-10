@@ -26,7 +26,7 @@ import {
  *
  
  **/
-export default function changeCurrentIssue(this: QuestionDataType) {
+export function changeCurrentIssue(this: QuestionDataType) {
   const { multi, progressCount } = this;
   const text = '请使用你自己的问题';
   // 原始问题

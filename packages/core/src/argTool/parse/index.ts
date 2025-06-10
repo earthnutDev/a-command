@@ -9,13 +9,13 @@
 import { _p } from 'a-node-tools';
 import { AuxiliaryData } from '../auxiliaryData';
 
-import paringUserArgs from './paringUserArgs';
+import { paringUserArgs } from './paringUserArgs';
 
 /**
  *
  *  开始执行 run ，解析绑定数据
  */
-export default function executeParsing(auxiliaryData: AuxiliaryData) {
+export function executeParsing(auxiliaryData: AuxiliaryData) {
   switch (auxiliaryData.state.code) {
     case 3:
       _p('已经执行过 `run`');

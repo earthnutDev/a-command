@@ -10,10 +10,7 @@ import { parsingSubOption } from './parsingSubOption';
  *
  * @param  data {@link BindParamsType}  绑定命令行参数
  */
-export default function bindInstruction(
-  data: BindParamsType,
-  auxiliaryData: AuxiliaryData,
-) {
+function bindInstruction(data: BindParamsType, auxiliaryData: AuxiliaryData) {
   ///  检测当前状态码
   switch (auxiliaryData.state.code) {
     // 状态码不正确直接打印消息返回
@@ -110,3 +107,5 @@ function weirdModePreprocessing(
     }
   });
 }
+
+export { bindInstruction };

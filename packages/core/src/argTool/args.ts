@@ -1,14 +1,14 @@
 import { initializeFile } from 'a-node-tools';
 import { ArgsType, OptionNameArray } from './types';
 import { AuxiliaryData } from './auxiliaryData';
-import executeParsing from './parse';
+import { executeParsing } from './parse';
 import { organizeHelpInformation } from './help';
-import showVersion from './showVersion';
+import { showVersion } from './showVersion';
 import { isBusinessEmptyString, isString, isTrue } from 'a-type-of-js';
 import { auxiliaryDataStore } from './auxiliaryData';
 import { createAuxiliaryData } from './createAuxiliaryData';
 import { BindParamsType, StateType } from './bind/types';
-import bindInstruction from './bind';
+import { bindInstruction } from './bind';
 
 /**   
  
