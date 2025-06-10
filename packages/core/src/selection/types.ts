@@ -57,7 +57,7 @@ export type OptionalAttributes = {
   /** 私密模式 (缺省值为 true) */
   private: boolean;
   /**  类型 */
-  kind: 'radio' | 'check';
+  // kind: 'radio' | 'check';
   /**  是否可以使用 `ctrl + c` 键退出 */
   canCtrlCExit: boolean;
   /**  是否可以使用 `ctrl + d` 键退出 */
@@ -67,11 +67,33 @@ export type OptionalAttributes = {
   maxRows: number;
 };
 
-/** 参数数据对象型类型  **/
-export type SelectionParamDataMapType<T extends ValueExtendsType> =
+export type SelectionNoKindDataMap<T extends ValueExtendsType> =
   RequiredAttributes<T> & {
     [x in keyof OptionalAttributes]?: OptionalAttributes[x];
   };
+
+/**  多选模式下的 */
+export type SelectionCheckDataMap<T extends ValueExtendsType> =
+  RequiredAttributes<T> & {
+    [x in keyof OptionalAttributes]?: OptionalAttributes[x];
+  } & {
+    /**  kind 值有  */
+    kind: 'check';
+  };
+
+/**  单选模式下  */
+export type SelectionRadioDataMap<T extends ValueExtendsType> =
+  RequiredAttributes<T> & {
+    [x in keyof OptionalAttributes]?: OptionalAttributes[x];
+  } & {
+    kind: 'radio';
+  };
+
+/** 参数数据对象型类型  **/
+export type SelectionParamDataMapType<T extends ValueExtendsType> =
+  | SelectionNoKindDataMap<T>
+  | SelectionRadioDataMap<T>
+  | SelectionCheckDataMap<T>;
 
 /**
  *
@@ -111,6 +133,8 @@ export type DrawData = DrawDataItem[];
  *
  */
 export type DataType<T extends ValueExtendsType> = OptionalAttributes & {
+  kind: 'radio' | 'check';
+} & {
   // 下面的属性仅会出现在内部逻辑中使用
   /**  使用数据（在 initData 中进行了解析 ）  */
   data: SelectionUseData<T>[];
@@ -171,18 +195,18 @@ export type SelectionResultType<
   /**  输出数据类型，默认为字符串  */
   R extends ValueExtendsType,
   /**  参数类型  */
-  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
+  T extends SelectionParamDataType<R>,
   /**  第二参数，控制输出为字符串（或传入的值类型）还是返回当前选择的为第几项  */
-  U extends 'string' | 'number' | undefined = undefined,
+  U extends 'string' | 'number' | undefined,
 > =
-  T extends SelectionParamData<ValueExtendsType>
-    ? U extends 'string' | undefined
-      ? R | undefined
-      : number | undefined
-    : T extends { kind: 'check' }
-      ? U extends 'string' | undefined
-        ? R[] | undefined
-        : number[] | undefined
-      : U extends 'string' | undefined
-        ? R | undefined
-        : number | undefined;
+  T extends SelectionRadioDataMap<R>
+    ? U extends 'number'
+      ? number | undefined
+      : R | undefined
+    : T extends SelectionCheckDataMap<R>
+      ? U extends 'number'
+        ? number[] | undefined
+        : R[] | undefined
+      : U extends 'number'
+        ? number | undefined
+        : R | undefined;

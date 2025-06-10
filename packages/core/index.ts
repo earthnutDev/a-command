@@ -9,6 +9,10 @@ export type {
   SelectionParamDataMapType,
   SelectionResultType,
   SelectionParamObjectData,
+  SelectionCheckDataMap,
+  SelectionRadioDataMap,
+  SelectionParamData,
+  SelectionNoKindDataMap,
 } from './src/selection/';
 
 export { question } from './src/question/';

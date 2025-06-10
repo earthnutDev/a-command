@@ -1,8 +1,12 @@
 import { core } from './core';
 import {
+  SelectionCheckDataMap,
+  SelectionNoKindDataMap,
+  SelectionParamData,
   SelectionParamDataMapType,
   SelectionParamDataType,
   SelectionParamObjectData,
+  SelectionRadioDataMap,
   SelectionResultType,
   ValueExtendsType,
 } from './types';
@@ -106,13 +110,51 @@ import {
  *
  * ```
  */
-export const selection = async function <
-  R extends ValueExtendsType = string,
-  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
-  U extends 'number' | 'string' | undefined = undefined,
->(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
-  return core<R, T, U>(data, resultType);
-};
+export async function selection<T extends ValueExtendsType = string>(
+  data: SelectionCheckDataMap<T>,
+  resultType?: 'string',
+): Promise<SelectionResultType<T, SelectionCheckDataMap<T>, 'string'>>;
+export async function selection<T extends ValueExtendsType = number>(
+  data: SelectionCheckDataMap<T>,
+  resultType?: 'number',
+): Promise<SelectionResultType<T, SelectionCheckDataMap<T>, 'number'>>;
+export async function selection<T extends ValueExtendsType = string>(
+  data: SelectionRadioDataMap<T>,
+  resultType?: 'string',
+): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'string'>>;
+export async function selection<T extends ValueExtendsType = number>(
+  data: SelectionRadioDataMap<T>,
+  resultType?: 'number',
+): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'number'>>;
+export async function selection<T extends ValueExtendsType = string>(
+  data: SelectionNoKindDataMap<T>,
+  resultType?: 'string',
+): Promise<SelectionResultType<T, SelectionNoKindDataMap<T>, 'string'>>;
+export async function selection<T extends ValueExtendsType = number>(
+  data: SelectionNoKindDataMap<T>,
+  resultType?: 'number',
+): Promise<SelectionResultType<T, SelectionNoKindDataMap<T>, 'number'>>;
+export async function selection<T extends ValueExtendsType>(
+  data: SelectionParamData<T>,
+  resultType?: 'string',
+): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'string'>>;
+export async function selection<T extends ValueExtendsType>(
+  data: SelectionParamData<T>,
+  resultType?: 'number',
+): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'number'>>;
+
+/**    */
+export function selection<T extends ValueExtendsType = string>(
+  data: SelectionParamDataType<T>,
+  resultType?: 'string' | 'number',
+): Promise<SelectionResultType<T, typeof data, typeof resultType>> {
+  return core<T, typeof data, typeof resultType>(
+    data,
+    resultType,
+  ) as unknown as Promise<
+    SelectionResultType<T, typeof data, typeof resultType>
+  >;
+}
 
 export type {
   SelectionParamDataType,
@@ -120,4 +162,8 @@ export type {
   SelectionResultType,
   SelectionParamObjectData,
   ValueExtendsType,
+  SelectionCheckDataMap,
+  SelectionRadioDataMap,
+  SelectionParamData,
+  SelectionNoKindDataMap,
 };

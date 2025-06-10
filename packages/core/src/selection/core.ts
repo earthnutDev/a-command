@@ -12,8 +12,8 @@ import { selectionStep } from './actionSteps';
  */
 export async function core<
   R extends ValueExtendsType,
-  T extends SelectionParamDataType<R> = SelectionParamDataType<R>,
-  U extends 'string' | 'number' | undefined = undefined,
+  T extends SelectionParamDataType<R>,
+  U extends 'string' | 'number' | undefined,
 >(data: T, resultType?: U): Promise<SelectionResultType<R, T, U>> {
   const uniKey = Symbol('selection');
   /**

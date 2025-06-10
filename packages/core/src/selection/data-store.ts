@@ -54,47 +54,47 @@ const data: DataType<ValueExtendsType> = {
     if (isArray(params)) {
       this.data = parseData(params);
     } else {
-      (Object.keys(params) as (keyof SelectionParamDataMapType<T>)[]).forEach(
-        currentKey => {
-          const v = params[currentKey as never];
-          switch (currentKey) {
-            case 'data':
-              this.data = isArray(v) ? parseData(v) : [];
-              break;
-            case 'info':
-              this.info = isString(v) ? v : info;
-              break;
-            case 'resultText':
-              this.resultText = isString(v) ? v : this.info || '';
-              break;
-            case 'errorText':
-              this.errorText = isString(v)
-                ? v
-                : this.resultText || this.info || '';
-              break;
-            case 'private':
-              this.private = isBoolean(v) ? v : falseValue;
-              break;
-            case 'required':
-              this.required = isBoolean(v) ? v : falseValue;
-              break;
-            case 'kind':
-              this.kind = v === 'check' ? 'check' : defaultKind;
-              break;
-            case 'canCtrlCExit':
-              this.canCtrlCExit = isBoolean(v) ? v : falseValue;
-              break;
-            case 'canCtrlDExit':
-              this.canCtrlDExit = isBoolean(v) ? v : falseValue;
-              break;
-            case 'maxRows':
-              this.maxRows =
-                isFinite(v) && Number.isInteger(v) && v > 0
-                  ? v + 4
-                  : getMaxRows();
-          }
-        },
-      );
+      (
+        Object.keys(params) as (keyof SelectionParamDataMapType<T> | 'kind')[]
+      ).forEach(currentKey => {
+        const v = params[currentKey as never];
+        switch (currentKey) {
+          case 'data':
+            this.data = isArray(v) ? parseData(v) : [];
+            break;
+          case 'info':
+            this.info = isString(v) ? v : info;
+            break;
+          case 'resultText':
+            this.resultText = isString(v) ? v : this.info || '';
+            break;
+          case 'errorText':
+            this.errorText = isString(v)
+              ? v
+              : this.resultText || this.info || '';
+            break;
+          case 'private':
+            this.private = isBoolean(v) ? v : falseValue;
+            break;
+          case 'required':
+            this.required = isBoolean(v) ? v : falseValue;
+            break;
+          case 'kind':
+            this.kind = v === 'check' ? 'check' : defaultKind;
+            break;
+          case 'canCtrlCExit':
+            this.canCtrlCExit = isBoolean(v) ? v : falseValue;
+            break;
+          case 'canCtrlDExit':
+            this.canCtrlDExit = isBoolean(v) ? v : falseValue;
+            break;
+          case 'maxRows':
+            this.maxRows =
+              isFinite(v) && Number.isInteger(v) && v > 0
+                ? v + 4
+                : getMaxRows();
+        }
+      });
     }
     const data = this.data;
 
