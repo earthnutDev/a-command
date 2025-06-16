@@ -56,9 +56,9 @@ export async function actionStep<
       cursorMoveUp(currentIssue.row, true);
       currentIssue.row = 0;
     }
+    __p('m'); /// 重置属性
     cursorShow();
     cursorAfterClear(true);
-    __p('m'); /// 重置属性
     /**  结果展示文本  */
     const currentText = currentIssue.resultText || currentIssue.text;
     /**  当前问题的返回值  */
@@ -67,30 +67,30 @@ export async function actionStep<
     // 私密模式则不打印
     if (!currentIssue.private) {
       /// 用户使用按键欲跳过该项
-      if (isUndefined(currentResult)) {
+      if (isUndefined(currentResult))
         ERROR(currentIssue.errorText || currentText);
-      } else {
+      else
         SUCCESS(
           `${pen666(currentText)}: ${currentIssue.type === 'text' ? currentResult : currentResult.replace(/./gm, '*')}`,
         );
-      }
     }
     ++dataStore.progressCount; // 进度更新
-  } while (dataStore.multi && dataStore.progressCount !== 0);
+  } while (dataStore.progressCount < 0);
 
   process.stdout.removeListener('resize', onResize); /// 移除尺寸变化的事件
-  //  多问模式将返回 questionData.results
-  if (dataStore.multi) {
-    //  返回简单结果
-    if (isTrue(simpleResult) && isArray(data)) {
-      return dataStore.results.map(
-        currentValue => currentValue.r,
-      ) as QuestionReturnType<T, U>;
-    } else {
-      /**  返回默认复杂结果  */
-      return dataStore.results as QuestionReturnType<T, U>;
-    }
-  } else {
-    return dataStore.results[0].r as QuestionReturnType<T, U>;
+  // 下面代码块中仅作退出属性重置双保险，并无作用
+  {
+    __p('m'); /// 重置属性
+    cursorShow();
+    cursorAfterClear(true);
   }
+  //  多问模式将返回 questionData.results
+  return (
+    dataStore.multi
+      ? isTrue(simpleResult) && isArray(data)
+        ? dataStore.results.map(currentValue => currentValue.r)
+        : //  返回简单结果
+          dataStore.results
+      : dataStore.results[0].r
+  ) as QuestionReturnType<T, U>;
 }

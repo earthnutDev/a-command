@@ -1,6 +1,6 @@
 import { CurrentIssue, QuestionAssign, QuestionDataType } from './types';
 
-import { _p, cursorHide, cursorShow } from 'a-node-tools';
+import { _p } from 'a-node-tools';
 import { originalData } from './originalData';
 import { changeCurrentIssue } from './changeCurrentIssue';
 import { isUndefined } from 'a-type-of-js';
@@ -42,16 +42,13 @@ export const dataStore: QuestionDataType = {
   },
   set kind(newValue: 0 | 1) {
     /**  配置默认值  */
-    if (!isFinite(newValue) || (newValue != 0 && newValue != 1)) {
-      newValue = 0;
-    }
+    if (!isFinite(newValue) || (newValue != 0 && newValue != 1)) newValue = 0;
+
     originalData.kind = newValue;
+    // 在每次绘制前会单独触发光标隐藏
     /** 当前类型的改变，触发是否隐藏光标  */
-    if (newValue == 1) {
-      cursorHide();
-    } else {
-      cursorShow();
-    }
+    // if (newValue == 1) cursorHide();
+    // else cursorShow();
   },
 
   get multi(): boolean {
@@ -67,7 +64,8 @@ export const dataStore: QuestionDataType = {
   set progressCount(newValue: number) {
     originalData.progressCount = newValue;
     // 问题更新
-    Reflect.apply(changeCurrentIssue, this, []);
+    // 之前未做校验，导致该值在超出边界后触发，导致 `kind` 值的更新而触发光标异常隐藏
+    if (newValue < 0) Reflect.apply(changeCurrentIssue, this, []);
   },
 
   get indexOfCursor() {
@@ -107,6 +105,6 @@ export const dataStore: QuestionDataType = {
     /// 该值的变化会初始化当前问题，所以才会有重复赋值 0 的情况
     this.progressCount = originalData.multi
       ? -(originalData.data as []).length
-      : 0;
+      : -1;
   },
 };

@@ -3,22 +3,31 @@ import { question } from '..';
 import { dev } from '@qqi/dev-log';
 import { isUndefined } from 'a-type-of-js';
 
-dev.skip('测试与 question 模块相关的内容', async it => {
-  await it.skip('测试单问模式', async () => {
+dev('测试与 question 模块相关的内容', async it => {
+  await it('测试单问模式', async () => {
     const result = await question(
-      {
-        text: '请输入你的名字',
-        tip: ['tom', 'jerry'],
-        type: 'text',
-        private: true,
-        resultText: '请输入你的名字',
-      },
+      [
+        {
+          text: '请输入你的名字',
+          tip: ['tom', 'jerry'],
+          type: 'text',
+          private: true,
+          resultText: '请输入你的名字',
+        },
+        {
+          text: '请输入你的名字',
+          tip: ['tom', 'jerry'],
+          type: 'text',
+          private: true,
+          resultText: '请输入你的名字',
+        },
+      ],
       true,
     );
     _p('测试单问模式', false);
     _p(result);
   });
-  await it('测试简必答', async () => {
+  await it.skip('测试简必答', async () => {
     const result = await question(
       {
         text: '请输入你的名字',

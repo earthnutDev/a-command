@@ -1,4 +1,5 @@
 import { Command } from './src/command';
+import { prefixList } from './src/utils/info';
 
 export { Args } from './src/argTool/args';
 
@@ -36,3 +37,5 @@ export type {
 } from './src/types';
 
 export { Command };
+
+export { prefixList as enPrefixList };

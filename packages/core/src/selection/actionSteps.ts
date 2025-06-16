@@ -25,11 +25,8 @@ export async function selectionStep<
 >(data: T, resultType?: U) {
   process.stdout.removeListener('resize', onResize); /// 移除旧的监听
   process.stdout.on('resize', onResize); // 注册监听终端的尺寸变化
-  // 数据初始化
-  const noValueAvailable = selectionData.initData<R>(data);
-  if (noValueAvailable) {
-    return undefined;
-  }
+  /// 没有可用的有效选择项
+  if (selectionData.initData<R>(data)) return undefined;
   cursorHide(); // 隐藏光标
   dog('初始绘制问题选项');
   outputSafeZone();
@@ -43,10 +40,9 @@ export async function selectionStep<
   cursorShow(); // 恢复光标显示
   cursorAfterClear(true); // 清理后面的内容
 
+  /**  意外退出  */
   if (exit) {
-    if (!selectionData.private) {
-      ERROR(errorText || resultText || info);
-    }
+    if (!selectionData.private) ERROR(errorText || resultText || info);
     return undefined;
   }
 
