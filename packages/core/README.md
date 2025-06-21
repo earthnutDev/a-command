@@ -2,7 +2,7 @@
 
 [![version](<https://img.shields.io/npm/v/a-command.svg?logo=npm&logoColor=rgb(0,0,0)&label=版本号&labelColor=rgb(73,73,228)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![issues 提交](<https://img.shields.io/badge/issues-提交-rgb(255,0,63)?logo=github>)](https://github.com/earthnutDev/a-command/issues)
 
-这里是一个用于终端交互的，服务于 [cil](https://earthnut.dev) 类项目
+这里是一个用于终端交互的，服务于 [jja](https://www.npmjs.com/package/jja)、[create a npm](https://www.npmjs.com/package/create-a-npm) 等类项目
 
 ## 安装
 
