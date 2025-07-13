@@ -19,7 +19,7 @@ export default {
   ],
   // 配置需要排除的包
   external: external({
-    ignore: ['node:os', 'node:fs'],
+    ignore: ['node:os', 'node:fs', '@qqi/dev'],
   }),
   plugins: [
     resolve(),

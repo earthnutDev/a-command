@@ -1,9 +1,9 @@
 import { _p } from 'a-node-tools';
 import { Command } from '../index';
 import { pen } from 'color-pen';
-import { dev } from '@qqi/dev-log';
+import { dev } from '@qqi/dev';
 
-await dev.skip('测试 command', async it => {
+await dev('测试 command', async it => {
   /**    */
   const command = new Command<{
     a: undefined;
@@ -45,6 +45,9 @@ await dev.skip('测试 command', async it => {
     it.skip('测试 $arrMap', () => {
       _p('$arrMap');
     });
+
+    _p('测试 未匹配项');
+    _p(arg.$nomatch);
   }
 
   // await command.question('请输入一个值');

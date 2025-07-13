@@ -1,6 +1,6 @@
 import { _p } from 'a-node-tools';
 import { selection } from '../index';
-import { dev } from '@qqi/dev-log';
+import { dev } from '@qqi/dev';
 import { isString, isUndefined } from 'a-type-of-js';
 
 type T = '123' | '456';

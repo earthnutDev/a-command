@@ -1,5 +1,5 @@
 import { prefixList } from './../src/utils/info';
-import { dev } from '@qqi/dev-log';
+import { dev } from '@qqi/dev';
 
 dev.skip('查看效果', it => {
   it('测试不同等级的将直接执行', () => {

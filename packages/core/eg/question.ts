@@ -1,9 +1,9 @@
 import { _p } from 'a-node-tools';
 import { question } from '..';
-import { dev } from '@qqi/dev-log';
+import { dev } from '@qqi/dev';
 import { isUndefined } from 'a-type-of-js';
 
-dev('测试与 question 模块相关的内容', async it => {
+dev.skip('测试与 question 模块相关的内容', async it => {
   await it('测试单问模式', async () => {
     const result = await question(
       [
