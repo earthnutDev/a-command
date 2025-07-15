@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.3.10",
+  "version": "2.3.11",
   "name": "a-command",
   "description": "一点点 🤏 终端工具 🧰",
   "scripts": {
@@ -26,7 +26,7 @@
     "@color-pen/static": "^1.0.0",
     "@qqi/log": "^0.0.2",
     "a-js-tools": "^1.0.7",
-    "a-node-tools": "^4.2.12",
+    "a-node-tools": "^4.2.13",
     "a-type-of-js": "^1.0.5",
     "color-pen": "^2.0.11"
   }

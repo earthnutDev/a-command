@@ -29,7 +29,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/node": "^24.0.13",
-    "a-node-tools": "^4.2.12",
+    "a-node-tools": "^4.2.13",
     "a-type-of-js": "^1.0.5",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.5",
@@ -47,7 +47,7 @@
     "rollup-plugin-obfuscator": "^1.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.36.0",
+    "typescript-eslint": "^8.37.0",
     "vjj": "^1.0.7"
   }
 }
