@@ -20,7 +20,7 @@ const command = new Command<>();
 
 ## Command 部分
 
-综合部分是把 [`Args`](#args-部分-获取用户启动时参数) 、 [`selection`](#selection-部分-选择模式-) 和 [`question`](#question 部分（问答模式）) 放在一起
+综合部分是把 [`Args`](#args-部分-获取用户启动时参数) 、 [`selection`](#selection-部分-选择模式-) 和 [`question`](#selection-部分-选择模式-) 放在一起
 
 具体使用可分别参见他们自己的说明部分
 
