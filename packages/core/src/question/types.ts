@@ -57,9 +57,9 @@ export type CurrentIssueOptionsParams = {
    *
    */
   defaultValue: string;
-  /**  似乎否可以使用 `ctrl + c` 键退出 */
+  /**  是否可以使用 `ctrl + c` 键退出 */
   canCtrlCExit: boolean;
-  /**  似乎否可以使用 `ctrl + d` 键退出 */
+  /**  是否可以使用 `ctrl + d` 键退出 */
   canCtrlDExit: boolean;
   /**  最小长度  */
   minLen: number;

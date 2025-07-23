@@ -170,7 +170,8 @@ class Args<T extends OptionNameArray> {
    *
    *  是否已结束
    *
-   *  调用会返回一个布尔值 ，布尔值上有一个属性 `end` 可以直接终止当前进程
+   *  @param [end=false]  直接在可终结程序时终结程序
+   *  @returns 返回当前的的状态，也可自己通过状态决定是否总结
    */
   isEnd(end: boolean = false) {
     /** 当前是否是结束状态 */
