@@ -43,7 +43,7 @@ packageJson = {
     './types/question': './src/question/types.d.ts',
     './types/selection': './src/selection/types.d.ts',
   },
-  homepage: 'https://earthnut.dev/a-command',
+  homepage: 'https://earthnut.dev/npm/a-command',
   bugs: {
     url: 'https://github.com/earthnutDev/a-command/issues',
     email: 'earthnut.dev@outlook.com',

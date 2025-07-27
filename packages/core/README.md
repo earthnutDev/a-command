@@ -673,4 +673,4 @@ if (result === '包子') {
 
 ## 文档地址
 
-参看 [https://earthnut.dev/a-command/](https://earthnut.dev/a-command/)
+参看 [https://earthnut.dev/npm/a-command/](https://earthnut.dev/npm/a-command/)
