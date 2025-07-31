@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.3.15",
   "name": "a-command",
-  "description": "一点点 🤏 终端工具 🧰",
+  "description": "一款优秀的终端工具",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "build": "jja rm dist cls&& pnpm run b && pnpm run clean:package",
