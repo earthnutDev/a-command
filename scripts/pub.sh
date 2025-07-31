@@ -34,8 +34,8 @@ update_version() {
     cd "$CWD"
 
     # 依赖安装 
-    npm ci
-    if ! npm run build; then 
+    pnpm install --frozen-lockfile --prod=false
+    if ! pnpm run build; then 
       echo "构建 $NAME 失败" 
       PUB_ERROR+=("$input")
       return 0
@@ -49,7 +49,7 @@ update_version() {
     cd "${BUILD_DIST}" 
     
     echo "开始发布 $NAME npm 包 ${tag} 版本"
-    if ! npm publish --provenance --access public --tag "${tag}" ; then
+    if ! pnpm publish --provenance --access public --tag "${tag}" --no-git-checks ; then
         echo "💥💥💥 $NAME 发布到 npm 💥💥💥"
         PUB_ERROR+=("$input")
     else 

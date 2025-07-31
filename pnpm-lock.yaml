@@ -12,14 +12,14 @@ importers:
         specifier: ^9.32.0
         version: 9.32.0
       '@qqi/check-version':
-        specifier: ^1.0.4
-        version: 1.0.4
+        specifier: ^1.0.5
+        version: 1.0.5
       '@qqi/dev':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       '@qqi/rollup-external':
-        specifier: ^1.0.9
-        version: 1.0.9
+        specifier: ^1.0.10
+        version: 1.0.10
       '@rollup/plugin-commonjs':
         specifier: ^28.0.6
         version: 28.0.6(rollup@4.46.0)
@@ -39,8 +39,8 @@ importers:
         specifier: ^24.1.0
         version: 24.1.0
       a-node-tools:
-        specifier: ^4.2.18
-        version: 4.2.18
+        specifier: ^4.2.19
+        version: 4.2.19
       a-type-of-js:
         specifier: ^1.0.7
         version: 1.0.7
@@ -51,14 +51,14 @@ importers:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.32.0)
       eslint-plugin-jsdoc:
-        specifier: ^51.4.1
-        version: 51.4.1(eslint@9.32.0)
+        specifier: ^52.0.1
+        version: 52.0.1(eslint@9.32.0)
       globals:
         specifier: ^16.3.0
         version: 16.3.0
       gvv:
-        specifier: ^0.1.5
-        version: 0.1.5
+        specifier: ^0.1.6
+        version: 0.1.6
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -66,14 +66,14 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       jja:
-        specifier: ^2.3.14
-        version: 2.3.14
+        specifier: ^2.3.16
+        version: 2.3.16
       lint-staged:
         specifier: ^16.1.2
         version: 16.1.2
       pjj:
-        specifier: ^1.0.3
-        version: 1.0.3
+        specifier: ^1.0.4
+        version: 1.0.4
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -96,8 +96,8 @@ importers:
         specifier: ^8.38.0
         version: 8.38.0(eslint@9.32.0)(typescript@5.8.3)
       vjj:
-        specifier: ^1.0.9
-        version: 1.0.9
+        specifier: ^1.0.10
+        version: 1.0.10
 
   packages/core:
     dependencies:
@@ -111,8 +111,8 @@ importers:
         specifier: ^1.0.10
         version: 1.0.10
       a-node-tools:
-        specifier: ^4.2.18
-        version: 4.2.18
+        specifier: ^4.2.19
+        version: 4.2.19
       a-type-of-js:
         specifier: ^1.0.7
         version: 1.0.7
@@ -123,22 +123,22 @@ importers:
   packages/core/dist:
     dependencies:
       '@color-pen/static':
-        specifier: ^1.0.0
+        specifier: ^1.0.1
         version: 1.0.1
       '@qqi/log':
-        specifier: ^0.1.0
+        specifier: ^0.1.1
         version: 0.1.1
       a-js-tools:
-        specifier: ^1.0.8
+        specifier: ^1.0.10
         version: 1.0.10
       a-node-tools:
-        specifier: ^4.2.16
-        version: 4.2.18
+        specifier: ^4.2.19
+        version: 4.2.19
       a-type-of-js:
-        specifier: ^1.0.5
+        specifier: ^1.0.7
         version: 1.0.7
       color-pen:
-        specifier: ^2.0.12
+        specifier: ^2.0.13
         version: 2.0.13
 
 packages:
@@ -260,23 +260,23 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@qqi/check-version@1.0.4':
-    resolution: {integrity: sha512-Ek5NLBXqtCPkwPwI+xnpHQvScckZ3v34fgzYgQLOzQsvO1YZp3BGrFX7evxfA5uCqMEZECFqFPeFZ45FWDDr4Q==}
+  '@qqi/check-version@1.0.5':
+    resolution: {integrity: sha512-uLf1mfZR6KuG1EIpqnWqv29wftAbguzILMSWboudASggU8Em42WrfS8/H6BKddBioDUASh0KGjEr0rvJzL5a+g==}
     hasBin: true
 
-  '@qqi/copy-text@1.0.5':
-    resolution: {integrity: sha512-FKsp2C6D3RCmedzFeAudamKMuxF+KCUPc5ORHiBwRU/Cbs0QFmh62EzGCT3O5bApYhlof/Tqhs6x77v0XW/ecg==}
+  '@qqi/copy-text@1.0.6':
+    resolution: {integrity: sha512-WeGf3NlJls6bEtxa5stoJIHuPMcQ826ReObeWh2vIfhfRrE+mUAHvqhKASXT2po8aYSrkOZ6OixSn770xCvaOg==}
 
-  '@qqi/dev@0.1.0':
-    resolution: {integrity: sha512-8Y5QJ8e6NtiV6PkCQ6NKJ5/5Ry1JtcS82UQY7UKflBDnLnGsJBFFfuvLL1jYIlPNtOJ+tafbKWN569MZhjXx7A==}
+  '@qqi/dev@0.1.1':
+    resolution: {integrity: sha512-51XCRbSNVCPF8Y/mZsBCj/nwP3iXcfD7vGzxXAmJm+vnBXGyMXiqF7dOcE/tiYtAX0VzaTky4Q1gH+tha4TFQg==}
     engines: {node: '>=18.0.0'}
 
   '@qqi/log@0.1.1':
     resolution: {integrity: sha512-YgV7eGXO20dyiSTMPecajfS9qvbfjlQOsKhUprB0MtTxtylj0BueWoexVMQ82ioglHdlIkgwPS5OJg7jmVRiSQ==}
     engines: {node: '>=18.0.0'}
 
-  '@qqi/rollup-external@1.0.9':
-    resolution: {integrity: sha512-UJ/EItt4WcQO6WCy/YsiUDQO0pxBk0WThd9V6eOA6oWyLDfa9zTC1cS7j1LDrgNCbRVbyh0AgyCtf1T3e7rVfQ==}
+  '@qqi/rollup-external@1.0.10':
+    resolution: {integrity: sha512-q56YWINLwnV6dDefF5DeF4JGACe6NdtAL5WvFvLuPUKycM7t0bfXEH2nBOcunCQa8/H7WLSaAbFlTe1GTCnqsw==}
 
   '@rollup/plugin-commonjs@28.0.6':
     resolution: {integrity: sha512-XSQB1K7FUU5QP+3lOQmVCE3I0FcbbNvmNT4VJSj93iUjayaARrTQeoRdiYQoftAJBLrR9t2agwAd3ekaTgHNlw==}
@@ -543,8 +543,8 @@ packages:
     resolution: {integrity: sha512-axdivxCVdjn3yjx7XsTHR9BT8/F2tgtyIYGzMciVR9Lz0xLDdAdfyXwLWcSr08DNbZZWPquJf9RSYHLR+sS2oQ==}
     engines: {node: '>=15.0.0'}
 
-  a-node-tools@4.2.18:
-    resolution: {integrity: sha512-A9Ka3riuOZHCvyp15+sHeoFxXNuWmmDd6tISd/bQ0HYaK6fQujJ12aRbgta0W5wucEP4PFIiCMMdck05vW6pNQ==}
+  a-node-tools@4.2.19:
+    resolution: {integrity: sha512-cdKNmbx41z6O7rMDg+R6v0e5BV+PfstFg6jiKPIQ+FaZpgg+Oy0JL6b0OWG701UY+5cIgDppJE+600xh+lwTiQ==}
     engines: {node: '>=18.0.0'}
 
   a-type-of-js@1.0.7:
@@ -689,8 +689,9 @@ packages:
     resolution: {integrity: sha512-cTO70qy4KmwVJcQ/YAK+8vHcceBTAJ5NRa7SOu+KOfDS9quEUJRgFAeme0I2ekGIBSsDwZQQKMFSZ/WSHlYszg==}
     engines: {node: '>=12.0.0'}
 
-  colored-table@0.0.2:
-    resolution: {integrity: sha512-rxykP1RqEsFU4vIAMTECDZj0inPbFpizIg0Z415CwJ4vAVsADsKBiCbvBM780c+iKKIiQSP4kR7IuDQmYCAF1A==}
+  colored-table@0.1.0:
+    resolution: {integrity: sha512-2sbE9bX4Js0Le6HC/NGKHiQWiJsjroJV1gJUkr9qE2Z/nUeXXib4zOHVdcklX4NvgCvYUIeKHTXYnTFX0R4OIw==}
+    engines: {node: '>=18.0.0'}
 
   colorette@1.4.0:
     resolution: {integrity: sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==}
@@ -797,8 +798,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-jsdoc@51.4.1:
-    resolution: {integrity: sha512-y4CA9OkachG8v5nAtrwvcvjIbdcKgSyS6U//IfQr4FZFFyeBFwZFf/tfSsMr46mWDJgidZjBTqoCRlXywfFBMg==}
+  eslint-plugin-jsdoc@52.0.1:
+    resolution: {integrity: sha512-zJdjpC9z4x28BBdCoxH+/h0BdDLZ9KXQGVKU9gHt3TQJ9kMraep+DgfTIVaXu9u1wy0HyhK2eFMp3icQBV4dkw==}
     engines: {node: '>=20.11.0'}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -975,8 +976,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  gvv@0.1.5:
-    resolution: {integrity: sha512-NIcMMDzITbIVd6WfsQZnOUVvaLKTpgV7OeV0xkWFzF6zLzwT5GO1sZJ3kmw8PUQwq/pNZCggnnYYIyuNSEC/nA==}
+  gvv@0.1.6:
+    resolution: {integrity: sha512-u1MRVfemm0urh4tDoT9w2B+qg8nCJYzNQWHhRAwmxEYmozUkjj4NDhBOkUFLhfuc10JvDJsQKkss/NrYpy3hCQ==}
     hasBin: true
 
   has-flag@4.0.0:
@@ -1098,8 +1099,8 @@ packages:
     engines: {node: '>=12.22.0'}
     hasBin: true
 
-  jja@2.3.14:
-    resolution: {integrity: sha512-pbDsy/TadgUlj+Gks+6xqY5fA8wlbHd2MO5xeMnzxRC0P15JXYzOfO8vEwx5/T6De0baAWUHKCmwDfdB2L0l3Q==}
+  jja@2.3.16:
+    resolution: {integrity: sha512-2t5KZodGvTmGmHf9DrNDPclGhyJ+mfaRbKUrcs3Yw+n3/YzSqmoyU75fSSpNZCnlwReLn+2S8FNdPVAzDUT+3g==}
     hasBin: true
 
   js-cleanup@1.2.0:
@@ -1307,8 +1308,8 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
-  pjj@1.0.3:
-    resolution: {integrity: sha512-4hp6yOnOH7/xuFAGnmyXdzQ4/Blq2FRSrLS906AlkpdXSA1GcobleuTDmDqAsItLdxG3uKGi8bELg9jEvwSfSw==}
+  pjj@1.0.4:
+    resolution: {integrity: sha512-OtiUIwdGa5D13ULGovknLbIh2ce3tZd1jAgKzrh03v6uOhMpaCPNzzcAHdo0UctmDf2UDkxNNHqJOB5gz0RBCw==}
     hasBin: true
 
   possible-typed-array-names@1.1.0:
@@ -1564,8 +1565,8 @@ packages:
     resolution: {integrity: sha512-BgWVbCI72aIQy937xbawcs+hrVaN/CZ2UwutgaJ36hGqRrLNM+f5LUT/YPRbo8IV/ASeFzXszezV+y2+rq3l8A==}
     engines: {node: '>= 0.10'}
 
-  vjj@1.0.9:
-    resolution: {integrity: sha512-pLw6SGf0EcSMPPKLK6kiKQ5ls+dHZaO4jCg6yw27w961ZWPgO+ieDtyfCg8B45PmwqI4W53MDqqDVeWs9Athdw==}
+  vjj@1.0.10:
+    resolution: {integrity: sha512-tlx1MKYp2RuaAVSOsW523TfSRud4b421UnSebEbMoBcgaCw5VoJqe7aI7osWXgwqEeuSMWOrSdHelvxQ57KzsQ==}
     hasBin: true
 
   which-typed-array@1.1.19:
@@ -1727,19 +1728,19 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@qqi/check-version@1.0.4':
+  '@qqi/check-version@1.0.5':
     dependencies:
       a-command: 2.3.13
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
 
-  '@qqi/copy-text@1.0.5':
+  '@qqi/copy-text@1.0.6':
     dependencies:
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
 
-  '@qqi/dev@0.1.0':
+  '@qqi/dev@0.1.1':
     dependencies:
       '@qqi/log': 0.1.1
       a-js-tools: 1.0.10
@@ -1753,11 +1754,11 @@ snapshots:
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
-  '@qqi/rollup-external@1.0.9':
+  '@qqi/rollup-external@1.0.10':
     dependencies:
-      '@qqi/copy-text': 1.0.5
+      '@qqi/copy-text': 1.0.6
       '@qqi/log': 0.1.1
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -2007,7 +2008,7 @@ snapshots:
       '@color-pen/static': 1.0.1
       '@qqi/log': 0.1.1
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -2015,7 +2016,7 @@ snapshots:
     dependencies:
       a-type-of-js: 1.0.7
 
-  a-node-tools@4.2.18:
+  a-node-tools@4.2.19:
     dependencies:
       '@color-pen/static': 1.0.1
       '@qqi/log': 0.1.1
@@ -2155,7 +2156,7 @@ snapshots:
       a-js-tools: 1.0.10
       a-type-of-js: 1.0.7
 
-  colored-table@0.0.2:
+  colored-table@0.1.0:
     dependencies:
       '@color-pen/static': 1.0.1
       a-js-tools: 1.0.10
@@ -2240,7 +2241,7 @@ snapshots:
     dependencies:
       eslint: 9.32.0
 
-  eslint-plugin-jsdoc@51.4.1(eslint@9.32.0):
+  eslint-plugin-jsdoc@52.0.1(eslint@9.32.0):
     dependencies:
       '@es-joy/jsdoccomment': 0.52.0
       are-docs-informative: 0.0.2
@@ -2455,12 +2456,12 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  gvv@0.1.5:
+  gvv@0.1.6:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.13
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -2588,17 +2589,17 @@ snapshots:
       stringz: 2.1.0
       tslib: 2.5.0
 
-  jja@2.3.14:
+  jja@2.3.16:
     dependencies:
       '@color-pen/static': 1.0.1
-      '@qqi/copy-text': 1.0.5
+      '@qqi/copy-text': 1.0.6
       '@qqi/log': 0.1.1
       a-command: 2.3.13
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
-      colored-table: 0.0.2
+      colored-table: 0.1.0
 
   js-cleanup@1.2.0:
     dependencies:
@@ -2806,12 +2807,12 @@ snapshots:
 
   pidtree@0.6.0: {}
 
-  pjj@1.0.3:
+  pjj@1.0.4:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.13
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -3073,12 +3074,12 @@ snapshots:
 
   validator@13.15.15: {}
 
-  vjj@1.0.9:
+  vjj@1.0.10:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.13
       a-js-tools: 1.0.10
-      a-node-tools: 4.2.18
+      a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 

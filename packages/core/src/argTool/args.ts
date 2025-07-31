@@ -192,12 +192,7 @@ class Args<T extends OptionNameArray> {
     return process.exit();
   }
 
-  /**
-   *
-   * 以🙅终止当前进程，该终结将导致后续 npm 的终结
-   *
-   *
-   */
+  /** 以🙅终止当前进程，该终结将导致后续 npm 的终结 */
   error(): never {
     this.#dataStore.state = 'error';
     return process.exit(1);
@@ -216,9 +211,7 @@ class Args<T extends OptionNameArray> {
     return this;
   }
 
-  /**
-   * 开始执行回调
-   */
+  /**  开始执行回调 */
   run() {
     const auxiliaryData = this.#dataStore;
     /** 由于怕数据污染，用户若使用多 args，这可能会导致该问题的出现。所以所有的数据保持单一 */
