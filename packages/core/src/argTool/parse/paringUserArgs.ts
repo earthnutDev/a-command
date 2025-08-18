@@ -111,6 +111,7 @@ export function paringUserArgs(auxiliaryData: AuxiliaryData): void {
   } else {
     /// 即标准模式
     manageResult(_args, auxiliaryData, manageData);
+
     auxiliaryData.values = manageData.values;
     // 正常的解析
     auxiliaryData.args =

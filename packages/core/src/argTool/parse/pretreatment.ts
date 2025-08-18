@@ -9,14 +9,23 @@ import { AuxiliaryData } from '../auxiliaryData';
 export function pretreatment(data: string[], auxiliaryData: AuxiliaryData) {
   /** 处理后的参数 */
   const result: string[] = [];
-  /** 临时储存值 */
+  /** 临时储存第二命令。用户判断次级命令 */
   let currentSubcommand: string = '';
 
-  /** 结果处理   */
+  /** 结果处理  */
   const pushResult = (arg: string, value?: string) =>
-    isUndefined(value) ? result.push(arg) : result.push(arg, value);
+    isUndefined(value) || isBusinessEmptyString(value)
+      ? result.push(arg)
+      : result.push(arg, value);
 
-  /**  方法重用  */
+  /**
+   *
+   * 分析并参数并将结果转化为标准的全拼追加到值（只有含 `=` 的默认上会包含第二参数）
+   *
+   * @param currentArg  当前需要分析的命令
+   * @param secondParameter  当命令本身包含 `=` 时触发循环解析作为值使用
+   *
+   */
   function manage(currentArg: string, secondParameter?: string) {
     if (!isBusinessEmptyString(currentSubcommand)) {
       // 是子命令的选项时
@@ -43,11 +52,21 @@ export function pretreatment(data: string[], auxiliaryData: AuxiliaryData) {
     }
     // 是普通的参数，且有 "=" 时，拆解并分析数据行为
     if (currentArg.includes('=')) {
-      const [first, second] = currentArg.split('=');
+      // 这里导致了含双 “=” 情况下的问题
+      // const [first, second] = currentArg.split('=');
+      const equalSignIndex = currentArg.indexOf('=');
+      // 等号在第一位（此时第二位不会有值）
+      if (equalSignIndex === 0 || equalSignIndex === currentArg.length - 1)
+        return result.push(currentArg);
+      const [first, second] = [
+        currentArg.slice(0, equalSignIndex),
+        currentArg.slice(equalSignIndex + 1) || 'true',
+      ];
       return manage(first, second);
     }
-    // 是普通的参数，且没有 "=" 时
-    return isUndefined(secondParameter)
+    // 是普通的参数，且没有 "=" 时，如果含第二参数，需要还原为含等号的模式
+    return isUndefined(secondParameter) ||
+      isBusinessEmptyString(secondParameter)
       ? result.push(currentArg)
       : result.push(`${currentArg}=${secondParameter}`);
   }

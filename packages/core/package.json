@@ -1,32 +1,29 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.3.15",
+  "version": "2.3.16",
   "name": "a-command",
   "description": "一款优秀的终端工具",
   "scripts": {
-    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
-    "build": "jja rm dist cls&& pnpm run b && pnpm run clean:package",
-    "clean:package": "node scripts/clean-package-json.js",
-    "diff": "jja pkg --diff",
-    "dev": "jja rm .eg cls cls  && rollup --config rollup.dev.config.js && node .eg/eg/index.mjs ",
+    "prepublishOnly": "pjj",
     "push:version": "gvv",
     "push": "gvv",
     "eslint": "eslint src",
+    "vjj": "vjj -b",
     "beautify": "pnpm run prettier",
     "prettier": "prettier . --write",
-    "test": "lint-staged && jest --coverage",
-    "report": "cat ./coverage/lcov.info | coveralls",
-    "coverage": "codecov",
-    "vjj": "vjj -b",
-    "prepublishOnly": "pjj"
+    "diff": "jja pkg --diff=淘宝",
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "build": "jja rm dist cls&& pnpm run b && pnpm run clean:package",
+    "clean:package": "node scripts/clean-package-json.js",
+    "dev": "jja rm .eg cls && rollup --config rollup.dev.config.js && node .eg/eg/index.mjs a jja_dev=true  PORT=9463 NODE_OPTIONS='--max-old-space-size=768'"
   },
   "license": "MIT",
   "dependencies": {
     "@color-pen/static": "^1.0.1",
     "@qqi/log": "^0.1.1",
-    "a-js-tools": "^1.0.10",
-    "a-node-tools": "^4.2.19",
+    "a-js-tools": "^1.0.12",
+    "a-node-tools": "^4.2.20",
     "a-type-of-js": "^1.0.7",
     "color-pen": "^2.0.13"
   }

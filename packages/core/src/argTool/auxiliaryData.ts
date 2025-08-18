@@ -17,6 +17,7 @@ import { ArgsType } from './types';
 
 /** 定义类 */
 export class AuxiliaryData {
+  /**  用户输入命令的原始参数  */
   originalArg = originalArg.slice();
   /** 命令名称 */
   name: string = '';

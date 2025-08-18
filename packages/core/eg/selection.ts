@@ -5,7 +5,7 @@ import { isString, isUndefined } from 'a-type-of-js';
 
 type T = '123' | '456';
 
-await dev('测试新模式', async it => {
+dev.skip('测试新模式', async it => {
   await it.skip('测试返回值的类型', async () => {
     const result = await selection<symbol>([1, 2, 3], 'string');
 

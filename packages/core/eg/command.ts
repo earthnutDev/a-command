@@ -3,7 +3,7 @@ import { Command } from '../index';
 import { pen } from 'color-pen';
 import { dev } from '@qqi/dev';
 
-await dev('测试 command', async it => {
+dev('测试 command', async it => {
   /**    */
   const command = new Command<{
     a: undefined;
