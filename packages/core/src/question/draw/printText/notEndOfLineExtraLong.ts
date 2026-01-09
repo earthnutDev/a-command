@@ -3,7 +3,7 @@ import {
   strInTerminalLength,
   truncateStringWithChar,
 } from 'color-pen';
-import { bgPen666, ellipsis } from '../../../utils/info';
+import { bgPen666, ellipsis } from '../../../info/info';
 import { dataStore } from '../../data-store';
 
 /**

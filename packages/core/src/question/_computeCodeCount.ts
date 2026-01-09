@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file computeCodeCount.ts
- *  @since 05/21/2025
- *  @description
+ * @file computeCodeCount.ts
+ * @since 05/21/2025
+ * @description
  *
  * 当前使用的是虚拟浮标（光标），不再需要计算该值
  **/

@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file createAuxiliaryData.ts
- *  @since 04/09/2025
- *  @description   创建一个新的辅助函数，用函数的方式创建数据可以防止数据污染
+ * @file createAuxiliaryData.ts
+ * @since 04/09/2025
+ * @description 创建一个新的辅助函数，用函数的方式创建数据可以防止数据污染
  *
  *
  **/

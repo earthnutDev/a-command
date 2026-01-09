@@ -1,5 +1,5 @@
 import { truncateStringWithChar } from 'color-pen';
-import { ellipsis } from '../../../utils/info';
+import { ellipsis } from '../../../utils/pen';
 import { dataStore } from '../../data-store';
 
 /**

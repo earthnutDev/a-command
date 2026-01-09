@@ -1,6 +1,6 @@
 import { _p } from 'a-node-tools';
+
 import {
-  bgHexPen,
   brightCyanPen,
   brightGreenPen,
   brightMagentaPen,
@@ -8,108 +8,99 @@ import {
   brightYellowPen,
   hexPen,
 } from 'color-pen';
-/**
- * 默认为暗黑色 <span style="color:#333;">（#333）的 🖊️</span>
- */
-export const pen333 = hexPen('#333');
-/**
- * 默认为暗黑色 <span style="color:#666;">（#666）的 🖊️</span>
- */
-export const pen666 = hexPen('#666');
 
-/**
- * 默认为暗黑色 <span style="color:#999;">（#999）的 🖊️</span>
- */
-export const pen999 = hexPen('#aaa');
-
-/**
- * 默认为暗黑色 <span style="background:#666;">背景（#666）的 🖊️</span>
- */
-export const bgPen666 = bgHexPen('#666');
+import { pen666 } from '../utils/pen';
 
 export const prefixList = {
   /**
-   * 提示
+   * ## 提示
    *
    * 默认为绿色的 <span style="color:#2ceeec;">✦</span>
+   * @param prefix 显示前置标志
    * */
   info: (prefix: string = '✦') => brightCyanPen(prefix),
   /**
-   * 完成
+   * ## 完成
    *
    * 默认为绿色的 <span style="color:#2fe81a;">❖</span>
+   * @param prefix 显示前置标志
    * */
   success: (prefix: string = '❖') => brightGreenPen(prefix),
   /**
-   * 当前项
+   * ## 当前项
    *
    * 默认为黄色的 <span style="color:#e8ec14;">▶︎</span>
+   * @param prefix 显示前置标志
    * */
   current: (prefix: string = '▶︎') => brightYellowPen(prefix),
   /**
-   *  警示
+   * ## 警示
    *
    * 默认为洋红色的 <span style="color:#fb00fa;">◼︎</span>
-   *
+   * @param prefix 显示前置标志
    */
   warn: (prefix: string = '◼︎') => brightMagentaPen(prefix),
   /**
-   *   错误
+   *  ## 错误
    *
    * 默认为红色的 <span style="color:#fc2119;">⚉</span>
+   * @param prefix 显示前置标志
    */
   error: (prefix: string = '⚉') => brightRedPen(prefix),
   /**
    *
-   * 单选的未选中
+   * ## 单选的未选中
    *
    * 默认为暗黑色（#666）的 <span style="color:#666;">◦</span>
+   * @param prefix 显示前置标志
    */
-  radioNoSelect: (prefix: string = '◦') => hexPen('#666')(prefix),
+  radioNoSelect: (prefix: string = '◦') => pen666(prefix),
   /**
    *
-   * 单选的选中
+   * ## 单选的选中
    *
    * 默认为绿色（#2fe81a）的 <span style="color:#2fe81a;">⚉</span>
+   * @param prefix 显示前置标志
    */
   radioSelect: (prefix: string = '●') => brightGreenPen.blink(prefix),
   /**
    *
-   * 多选未选择未聚焦
+   * ## 多选未选择未聚焦
    *
    * 默认为暗黑色（#666）的 <span style="color:#666;">□</span>
    *
+   * @param prefix 显示前置标志
    */
   multipleChoice: (prefix: string = '□') => pen666(prefix),
   /**
    *
-   * 多选聚焦未选择
+   * ## 多选聚焦未选择
    *
    * 默认为暗黑色（#2fe81a）的 <span style="color:#2fe81a;">□</span>
+   * @param prefix 显示前置标志
    *
    */
   multipleChoiceFocus: (prefix: string = '□') => brightGreenPen.blink(prefix),
   /**
    *
-   * 多选选择未聚焦
+   * ## 多选选择未聚焦
    *
    * 默认为暗黑色（#2fe81a）的 <span style="color:#2fe81a;">■</span>
    *
+   * @param prefix 显示前置标志
    */
   multipleChoiceChecked: (prefix: string = '■') => pen666(prefix),
   /**
    *
-   * 多选选择聚焦
+   * ## 多选选择聚焦
    *
    * 默认为暗黑色（#2fe81a）的 <span style="color:#2fe81a;">■</span>
    *
+   * @param prefix 显示前置标志
    */
   multipleChoiceCheckedFocus: (prefix: string = '■') =>
     brightGreenPen.blink(prefix),
 } as const;
-
-/**  省略号  */
-export const ellipsis = pen666('.'.repeat(3));
 
 /**
  * 错误信息展示

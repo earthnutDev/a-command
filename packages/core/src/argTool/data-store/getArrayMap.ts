@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file getArrayMap.ts
- *  @since 04/09/2025
- *  @description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
+ * @file getArrayMap.ts
+ * @since 04/09/2025
+ * @description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
  **/
 
 import { isEmptyArray, isUndefined } from 'a-type-of-js';
@@ -44,7 +44,7 @@ export function get$arrMap<T extends ArgsGeneralItemParadigm>(
       temp.options = [];
 
       // eslint-disable-next-line jsdoc/check-tag-names
-      /**  @ts-expect-error: 上面的判读就是为了防止这里出错误  */
+      /** @ts-expect-error: 上面的判读就是为了防止这里出错误  */
       // 遍历子项给当前元素添加子项
       currentElement.options.forEach(_currentEle => {
         temp.options?.push(

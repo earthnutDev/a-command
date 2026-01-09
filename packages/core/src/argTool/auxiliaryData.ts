@@ -1,11 +1,11 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file auxiliaryData.ts
- *  @since 04/09/2025
- *  @description 原始的数据仓库
- *  @lastModified 2026-01-08 23:20
+ * @file auxiliaryData.ts
+ * @since 04/09/2025
+ * @description 原始的数据仓库
+ * @lastModified 2026-01-09 09:34
  * 包含原始数据、分析的数据及辅助数据、绑定数据
  *
  **/

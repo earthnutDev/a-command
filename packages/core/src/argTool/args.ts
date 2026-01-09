@@ -169,8 +169,8 @@ class Args<T extends ArgsGeneralItemParadigm> {
    *
    *  是否已结束
    *
-   *  @param [end=false]  直接在可终结程序时终结程序
-   *  @returns 返回当前的的状态，也可自己通过状态决定是否总结
+   * @param [end=false]  直接在可终结程序时终结程序
+   * @returns 返回当前的的状态，也可自己通过状态决定是否总结
    */
   isEnd(end: boolean = false) {
     /** 当前是否是结束状态 */

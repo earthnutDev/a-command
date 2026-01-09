@@ -1,5 +1,5 @@
 import { strInOneLineOnTerminal } from 'color-pen';
-import { ellipsis, pen333, pen999, prefixList } from '../../utils/info';
+import { ellipsis, pen333, pen999, prefixList } from '../../info/info';
 import { selectionData } from '../data-store';
 
 /**  渲染主内容  */

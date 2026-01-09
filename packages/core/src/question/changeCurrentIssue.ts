@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file changeCurrentIssue.ts
- *  @since 04/03/2025
- *  @description问题初始化中心
+ * @file changeCurrentIssue.ts
+ * @since 04/03/2025
+ * @description 问题初始化中心
  *
  *  - 根据当前问题的进度更新当前问题
  *  - 更新当前问题时初始化当前的问题

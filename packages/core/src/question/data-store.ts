@@ -84,7 +84,7 @@ export const dataStore: QuestionDataType = {
     /**  该过程将初始化数据  */
     (Object.keys(_data) as (keyof QuestionAssign)[]).forEach(currentKey => {
       if (Object.hasOwn(this, currentKey) && !isUndefined(_data[currentKey])) {
-        // @ts-expect-error  @ts-expect-error   @ts-expect-error (懒人赋值法)
+        // @ts-expect-error @ts-expect-error  @ts-expect-error (懒人赋值法)
         this[currentKey] = _data[currentKey];
       } else {
         _p(`${currentKey} is not exist`);

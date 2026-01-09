@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file manageResult.ts
- *  @since 04/10/2025
- *  @description  解析用户参数数据
+ * @file manageResult.ts
+ * @since 04/10/2025
+ * @description 解析用户参数数据
  *
  * 该解析说明已经经过了 `-v` 和 `-h` 命令的检测
  *

@@ -7,7 +7,7 @@
  * @packageDocumentation
  * @module  config
  * @since 2026-01-08 22:21
- * @lastModified 2026-01-08 23:21
+ * @lastModified 2026-01-09 10:46
  **/
 
 // eslint.config.mjs（ESM 格式）
@@ -24,7 +24,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const tsconfigPath = resolve(__dirname, 'tsconfig.rollup.json');
+const tsconfigPath = resolve(__dirname, 'tsconfig.types.json');
 
 const ignorePattern = [
   'node_modules/',
@@ -144,12 +144,13 @@ export default [
     rules: {
       // 基础规则
       'jsdoc/check-alignment': 'error',
+      'jsdoc/require-param': 'error',
       'jsdoc/check-param-names': 'error',
       'jsdoc/check-tag-names': [
         'error',
         {
           // 配置允许的标签
-          definedTags: ['packageDocumentation' ,'lastModified'],
+          definedTags: ['packageDocumentation', 'lastModified'],
         },
       ],
       'jsdoc/check-types': 'error',

@@ -1,4 +1,4 @@
-import { bgPen666 } from '../../utils/info';
+import { bgPen666 } from '../../info/info';
 import { dataStore } from '../data-store';
 
 /**  打印密码模式  */

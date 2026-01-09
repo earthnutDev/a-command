@@ -98,7 +98,7 @@ import {
  * ```
  *
  * 当 data 为 `Object` 格式时，可以自定义更多信息：
- *  @example
+ * @example
  *
  * ```ts
  * {

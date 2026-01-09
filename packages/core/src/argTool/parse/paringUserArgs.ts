@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file index.ts
- *  @since 04/09/2025
- *  @description 解析用户的输入参数
+ * @file index.ts
+ * @since 04/09/2025
+ * @description 解析用户的输入参数
  **/
 import { isEmptyArray, isUndefined, isZero } from 'a-type-of-js';
 import { AuxiliaryData } from '../auxiliaryData';

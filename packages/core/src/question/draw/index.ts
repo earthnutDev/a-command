@@ -19,8 +19,8 @@ import {
   italicPen,
   strInOneLineOnTerminal,
 } from 'color-pen';
+import { bgPen666, prefixList } from '../../info/info';
 import { dog } from '../../utils/dog';
-import { bgPen666, prefixList } from '../../utils/info';
 import { dataStore } from '../data-store';
 import { computerStr } from './computerStr';
 import { printMustInfo } from './printMustInfo';

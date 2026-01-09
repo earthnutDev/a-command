@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file organizeHelpInformation.ts
- *  @since 04/08/2025
- *  @description 展示帮助 💻
+ * @file organizeHelpInformation.ts
+ * @since 04/08/2025
+ * @description 展示帮助 💻
  *
  * 根据输入的帮助信息的层级展示对应层级的帮助信息
  **/

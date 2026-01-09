@@ -1,7 +1,23 @@
-import { Command } from './command';
-import { prefixList } from './utils/info';
+export { Command } from './command';
 
-export { Args } from './argTool/args';
+export { Args } from './argTool';
+
+export type {
+  ArgsGeneralItemParadigm,
+  ArgsItemOptions,
+  ArgsMap,
+  ArgsMapItem,
+  ArgsArrMap,
+  ArgsArrMapItem,
+  ArgsArrMapOptions,
+  ArgsType,
+  OptionNameArray,
+  ArgsItemOptionsType,
+  ArgsMapType,
+  ArgsMapItemType,
+  ArgsArrMapType,
+  ArgsArrMapItemType,
+} from './argTool';
 
 export { selection } from './selection';
 
@@ -25,8 +41,5 @@ export type {
   QuestionVerify,
 } from './question';
 
-export type { CommandPrintOption } from './utils/types';
-
-export { Command };
-
-export { prefixList as enPrefixList };
+export { prefixList } from './info/info';
+export type { CommandPrintOption } from './info';

@@ -1,4 +1,4 @@
-import { ellipsis } from '../../utils/info';
+import { ellipsis } from '../../info/info';
 import { selectionData } from '../data-store';
 import { getText } from './getText';
 

@@ -1,10 +1,10 @@
 /**
- *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @author Mr.MudBean <Mr.MudBean@outlook.com>
  * @packageDocumentation
  * @module  a-command
- *  @file getMap.ts
- *  @since 04/09/2025
- *  @description 在使用不需要顺序的时候，直接使用 `$map` 数据要方便些
+ * @file getMap.ts
+ * @since 04/09/2025
+ * @description 在使用不需要顺序的时候，直接使用 `$map` 数据要方便些
  *
  *  使用  `$map` 数据结构，返回一个对象，对象的键值对为：
  *  - 键名：参数名
@@ -54,7 +54,7 @@ export function get$map<T extends ArgsGeneralItemParadigm>(
       // 每一个子项再遍历（遍历需考虑旧数据问题，即已经存在同名属性 valueIsExist 为 true 情况）
       currentElement.options.forEach(currentOptionElement => {
         // eslint-disable-next-line jsdoc/check-tag-names
-        /**  @ts-expect-error: 👻 因为是非显示的给值，该值作为值的属性在判定上不一定成立 */
+        /** @ts-expect-error: 👻 因为是非显示的给值，该值作为值的属性在判定上不一定成立 */
         _temp[currentOptionElement.name] = [
           ...(_temp[currentOptionElement.name as unknown as never] || []),
           ...(currentOptionElement.value || []),
@@ -62,7 +62,7 @@ export function get$map<T extends ArgsGeneralItemParadigm>(
       });
     }
     // eslint-disable-next-line jsdoc/check-tag-names
-    /**  @ts-ignore: 该值一定存在  */
+    /** @ts-ignore: 该值一定存在  */
     resultValue[currentElement.name] = _temp;
   });
 

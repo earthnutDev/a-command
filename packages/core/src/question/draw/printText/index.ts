@@ -1,5 +1,5 @@
 import { strInTerminalLength } from 'color-pen';
-import { bgPen666 } from '../../../utils/info';
+import { bgPen666 } from '../../../info/info';
 import { dataStore } from '../../data-store';
 import { endOfLineAndExtraLong } from './endOfLineAndExtraLong';
 import { notEndOfLineExtraLong } from './notEndOfLineExtraLong';
