@@ -1,9 +1,9 @@
 import { _p, readInput } from 'a-node-tools';
 
+import { dog } from '../../utils/dog';
 import { QuestionDataType } from '../types';
 
 import { userInputCn } from './userInputCn';
-import { dog } from '../../dog';
 
 /**
  *

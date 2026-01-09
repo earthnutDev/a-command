@@ -3,8 +3,8 @@ import {
   strInTerminalLength,
   truncateStringWithChar,
 } from 'color-pen';
-import { dataStore } from '../../data-store';
 import { bgPen666, ellipsis } from '../../../utils/info';
+import { dataStore } from '../../data-store';
 
 /**
  * 文本长度超出了限制却不是在文未

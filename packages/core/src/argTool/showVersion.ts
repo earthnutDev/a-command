@@ -1,3 +1,4 @@
+import { arch } from 'node:os';
 import {
   _p,
   fileExist,
@@ -7,10 +8,9 @@ import {
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
-import { arch } from 'node:os';
-import { AuxiliaryData } from './auxiliaryData';
-import { pen } from 'color-pen';
 import { isNull, isUndefined } from 'a-type-of-js';
+import { pen } from 'color-pen';
+import { AuxiliaryData } from './auxiliaryData';
 
 /**
  *

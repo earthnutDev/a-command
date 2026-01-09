@@ -1,10 +1,10 @@
-import { debounce } from 'a-js-tools';
 import { terminalResetStyle } from '@color-pen/static';
+import { debounce } from 'a-js-tools';
 import { _p, cursorAfterClear, cursorMoveUp } from 'a-node-tools';
+import { isZero } from 'a-type-of-js';
+import { dataStore } from './data-store';
 import { draw } from './draw';
 import { outputSafeZone } from './outputSafeZone';
-import { dataStore } from './data-store';
-import { isZero } from 'a-type-of-js';
 
 /**  当终端发生尺寸变化  */
 export const onResize = debounce(() => {

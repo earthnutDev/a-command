@@ -1,4 +1,4 @@
-import { ArgsArrMapType, ArgsMapType, OptionNameArray } from '../types';
+import { ArgsArrMap, ArgsMap, ArgsGeneralItemParadigm } from '../types';
 
 /** 仅作初始化用，其实这里直接返回不得了 */
 export class TempArgs extends Array {
@@ -8,12 +8,12 @@ export class TempArgs extends Array {
   }
 
   /**  按普通对象的形式返回数据，数据进行了处理，同名的主参数将进行合并  */
-  get $map(): ArgsMapType {
+  get $map(): ArgsMap {
     return {};
   }
 
   /** 数组类型的 map ，主要用于有序的执行   */
-  get $arrMap(): ArgsArrMapType<OptionNameArray> {
+  get $arrMap(): ArgsArrMap<ArgsGeneralItemParadigm> {
     return [];
   }
   /**  返回仅包含的主头  */

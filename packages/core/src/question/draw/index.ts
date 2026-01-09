@@ -1,14 +1,6 @@
-import { __p, _p, cursorHide } from 'a-node-tools';
-import {
-  brightRedPen,
-  brightYellowPen,
-  hidePen,
-  italicPen,
-  strInOneLineOnTerminal,
-} from 'color-pen';
-import { dataStore } from '../data-store';
 import { csi, terminalResetStyle } from '@color-pen/static';
-import { dog } from '../../dog';
+import { debounce } from 'a-js-tools';
+import { __p, _p, cursorHide } from 'a-node-tools';
 import {
   isBoolean,
   isEmptyArray,
@@ -20,12 +12,20 @@ import {
   isUndefined,
   isZero,
 } from 'a-type-of-js';
+import {
+  brightRedPen,
+  brightYellowPen,
+  hidePen,
+  italicPen,
+  strInOneLineOnTerminal,
+} from 'color-pen';
+import { dog } from '../../utils/dog';
 import { bgPen666, prefixList } from '../../utils/info';
-import { translateCursor } from './translateCursor';
-import { debounce } from 'a-js-tools';
+import { dataStore } from '../data-store';
 import { computerStr } from './computerStr';
-import { printSimpleCheck } from './printSimpleCheck';
 import { printMustInfo } from './printMustInfo';
+import { printSimpleCheck } from './printSimpleCheck';
+import { translateCursor } from './translateCursor';
 /**
  *
  *  绘制

@@ -4,6 +4,14 @@
     "declarationDir": null,
     "declaration": false
   },
-  "include": ["eg", "eg/*.ts", "src/**/*.ts", "./index.ts"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "eg",
+    "eg/*.ts",
+    "src/**/*.ts",
+    "./index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
 }

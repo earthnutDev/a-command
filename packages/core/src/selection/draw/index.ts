@@ -1,14 +1,14 @@
-import { _p } from 'a-node-tools';
-import { selectionData } from '../data-store';
-import { cyanPen, strInOneLineOnTerminal } from 'color-pen';
-import { diffDrawData } from './diff';
-import { prefixList } from '../../utils/info';
-import { debounce } from 'a-js-tools';
-import { dun } from '../../dog';
-import { printInfo } from './printInfo';
-import { canIShow } from './canIShow';
 import { csi } from '@color-pen/static';
+import { debounce } from 'a-js-tools';
+import { _p } from 'a-node-tools';
+import { cyanPen, strInOneLineOnTerminal } from 'color-pen';
+import { dun } from '../../utils/dog';
+import { prefixList } from '../../utils/info';
+import { selectionData } from '../data-store';
+import { canIShow } from './canIShow';
+import { diffDrawData } from './diff';
 import { printContent } from './printContent';
+import { printInfo } from './printInfo';
 
 const _draw = () => {
   diffDrawData(); // 计算差异

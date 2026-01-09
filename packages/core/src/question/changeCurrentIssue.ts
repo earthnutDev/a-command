@@ -1,17 +1,14 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName changeCurrentIssue.ts
- *  @CreateDate  周四  04/03/2025
- *  @Description问题初始化中心
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file changeCurrentIssue.ts
+ *  @since 04/03/2025
+ *  @description问题初始化中心
  *
  *  - 根据当前问题的进度更新当前问题
  *  - 更新当前问题时初始化当前的问题
- ****************************************************************************/
-import { createCurrentIssue } from './data-store';
-import { originalData } from './originalData';
-import { CurrentIssueType, QuestionDataType } from './types';
+ **/
 import {
   isArray,
   isBusinessEmptyString,
@@ -19,6 +16,9 @@ import {
   isNumber,
   isString,
 } from 'a-type-of-js';
+import { createCurrentIssue } from './data-store';
+import { originalData } from './originalData';
+import { CurrentIssueType, QuestionDataType } from './types';
 
 /**
  *

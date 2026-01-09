@@ -1,9 +1,9 @@
-import { debounce } from 'a-js-tools';
-import { selectionData } from './data-store';
 import { terminalResetStyle } from '@color-pen/static';
+import { debounce } from 'a-js-tools';
 import { _p, cursorAfterClear } from 'a-node-tools';
-import { outputSafeZone } from './outputSafeZone';
+import { selectionData } from './data-store';
 import { draw, resizeDraw } from './draw';
+import { outputSafeZone } from './outputSafeZone';
 
 /**  当终端发生尺寸变化  */
 export const onResize = debounce(() => {

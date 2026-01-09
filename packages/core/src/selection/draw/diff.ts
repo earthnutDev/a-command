@@ -1,6 +1,6 @@
 import { isTrue, isUndefined } from 'a-type-of-js';
-import { selectionData } from '../data-store';
 import { strInTerminalLength } from 'color-pen';
+import { selectionData } from '../data-store';
 
 import { getText } from './getText';
 

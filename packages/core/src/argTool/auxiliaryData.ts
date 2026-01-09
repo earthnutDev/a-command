@@ -1,18 +1,18 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName auxiliaryData.ts
- *  @CreateDate  周三  04/09/2025
- *  @Description 原始的数据仓库
- *
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file auxiliaryData.ts
+ *  @since 04/09/2025
+ *  @description 原始的数据仓库
+ *  @lastModified 2026-01-08 23:20
  * 包含原始数据、分析的数据及辅助数据、绑定数据
  *
- ****************************************************************************/
+ **/
 import { isNumber } from 'a-type-of-js';
-import { TempArgs } from './data-store/tempArgs';
-import { originalArg } from './data-store/originalArg';
 import { ArgOriginBind, OverCode, StateType } from './bind/types';
+import { originalArg } from './data-store/originalArg';
+import { TempArgs } from './data-store/tempArgs';
 import { ArgsType } from './types';
 
 /** 定义类 */

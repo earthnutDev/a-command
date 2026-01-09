@@ -1,12 +1,12 @@
 import { csi } from '@color-pen/static';
-import { dataStore } from '../data-store';
+import { isBoolean } from 'a-type-of-js';
 import {
   cutoffStringWithChar,
   magentaPen,
   redPen,
   strInTerminalLength,
 } from 'color-pen';
-import { isBoolean } from 'a-type-of-js';
+import { dataStore } from '../data-store';
 
 /**
  * 打印必输入的文本提示

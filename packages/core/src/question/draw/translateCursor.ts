@@ -1,7 +1,7 @@
 import { cursorMoveRight } from 'a-node-tools';
 import { strInTerminalLength } from 'color-pen';
+import { dog } from '../../utils/dog';
 import { dataStore } from '../data-store';
-import { dog } from '../../dog';
 
 /**
  *

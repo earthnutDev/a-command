@@ -1,9 +1,9 @@
-import { dog } from './../../dog';
-import { AuxiliaryData } from '../auxiliaryData';
-import { BindParamsOptionsType, BindParamsType, ParamType } from './types';
 import { isArray, isString, isUndefined } from 'a-type-of-js';
+import { dog } from '../../utils/dog';
+import { AuxiliaryData } from '../auxiliaryData';
 import { parsingDataOfString } from './parsingDataOfString';
 import { parsingSubOption } from './parsingSubOption';
+import { BindParamsOptionsType, BindParamsType, ParamType } from './types';
 
 /**
  * 绑定选项、说明及缩写

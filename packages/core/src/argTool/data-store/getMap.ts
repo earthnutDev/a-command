@@ -1,10 +1,10 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName getMap.ts
- *  @CreateDate  周三  04/09/2025
- *  @Description 在使用不需要顺序的时候，直接使用 `$map` 数据要方便些
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file getMap.ts
+ *  @since 04/09/2025
+ *  @description 在使用不需要顺序的时候，直接使用 `$map` 数据要方便些
  *
  *  使用  `$map` 数据结构，返回一个对象，对象的键值对为：
  *  - 键名：参数名
@@ -14,14 +14,14 @@
  *  - - 键值：参数的子项的子项
  *
  * 可以直观的通过判断 `$map` 下是否有该参数即可
- ****************************************************************************/
+ **/
 
 import { isEmptyArray } from 'a-type-of-js';
 import {
-  ArgsMapItemType,
-  ArgsMapType,
+  ArgsMapItem,
+  ArgsMap,
   ArgsType,
-  OptionNameArray,
+  ArgsGeneralItemParadigm,
 } from '../types';
 
 /**
@@ -34,16 +34,16 @@ import {
  *
  *
  */
-export function get$map<T extends OptionNameArray>(
+export function get$map<T extends ArgsGeneralItemParadigm>(
   value: ArgsType<T>,
-): ArgsMapType<T> {
+): ArgsMap<T> {
   if (isEmptyArray(value)) return {};
   // 结果对象
-  const resultValue: ArgsMapType = new Object() as ArgsMapType;
+  const resultValue: ArgsMap = new Object() as ArgsMap;
 
   value.forEach(currentElement => {
     // 临时演员 ，可能是对象上已存在的值或者是新建的空对象
-    const _temp: ArgsMapItemType = resultValue[currentElement.name] || {};
+    const _temp: ArgsMapItem = resultValue[currentElement.name] || {};
     /** 判断是否已经存在同名属性 */
 
     // 判断当前是否有 value 属性，并判断是否有同名属性，有则追加，没有则直接🆓给值
@@ -61,7 +61,7 @@ export function get$map<T extends OptionNameArray>(
         ];
       });
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, jsdoc/check-tag-names
+    // eslint-disable-next-line jsdoc/check-tag-names
     /**  @ts-ignore: 该值一定存在  */
     resultValue[currentElement.name] = _temp;
   });

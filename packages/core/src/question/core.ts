@@ -1,8 +1,8 @@
-import { dog } from '../dog';
-import { commandData } from '../commandData';
+import { _p } from 'a-node-tools';
+import { commandData } from '../utils/commandData';
+import { dog } from '../utils/dog';
 import { actionStep } from './actionSteps';
 import { QuestionParamDataType, QuestionReturnType } from './types';
-import { _p } from 'a-node-tools';
 /**  实现  */
 export function core<
   T extends QuestionParamDataType,

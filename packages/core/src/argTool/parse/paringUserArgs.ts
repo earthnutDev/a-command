@@ -1,17 +1,17 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName index.ts
- *  @CreateDate  周三  04/09/2025
- *  @Description 解析用户的输入参数
- ****************************************************************************/
-import { AuxiliaryData } from '../auxiliaryData';
-import { ArgsType, OptionNameArray } from '../types';
-import { createManageDate } from './createManageData';
-import { manageResult } from './manageResult';
-import { delimiter } from './delimiter';
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file index.ts
+ *  @since 04/09/2025
+ *  @description 解析用户的输入参数
+ **/
 import { isEmptyArray, isUndefined, isZero } from 'a-type-of-js';
+import { AuxiliaryData } from '../auxiliaryData';
+import { ArgsType, ArgsGeneralItemParadigm } from '../types';
+import { createManageDate } from './createManageData';
+import { delimiter } from './delimiter';
+import { manageResult } from './manageResult';
 
 /**
  *
@@ -93,7 +93,7 @@ export function paringUserArgs(auxiliaryData: AuxiliaryData): void {
     manageResult(_args.slice(0, help_index + 1), auxiliaryData, manageData);
     auxiliaryData.values = manageData.values;
     auxiliaryData.args =
-      manageData.result as unknown as ArgsType<OptionNameArray>;
+      manageData.result as unknown as ArgsType<ArgsGeneralItemParadigm>;
     // 设定值
     result = auxiliaryData.args as unknown as never;
     /// 未匹配到子命令或选项，即非详细帮助文档模式
@@ -115,6 +115,6 @@ export function paringUserArgs(auxiliaryData: AuxiliaryData): void {
     auxiliaryData.values = manageData.values;
     // 正常的解析
     auxiliaryData.args =
-      manageData.result as unknown as ArgsType<OptionNameArray>;
+      manageData.result as unknown as ArgsType<ArgsGeneralItemParadigm>;
   }
 }

@@ -1,5 +1,7 @@
 import { esc } from '@color-pen/static';
+import { __p, ReadInputKey } from 'a-node-tools';
 import { isFalse, isTrue, isZero } from 'a-type-of-js';
+import { dog } from '../../utils/dog';
 import { draw } from '../draw';
 import { QuestionDataType } from '../types';
 import { delKey } from './delKey';
@@ -7,8 +9,6 @@ import { leftKey } from './leftKey';
 import { otherKey } from './otherKey';
 import { returnKey } from './returnKey';
 import { fightKey } from './rightKey';
-import { dog } from '../../dog';
-import { __p, ReadInputKey } from 'a-node-tools';
 
 /**    */
 export function userInputCn(_this: QuestionDataType) {

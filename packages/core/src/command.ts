@@ -1,28 +1,21 @@
-import { Args } from './argTool/args';
-import { selection } from './selection/';
-import { question } from './question/index';
-import { OptionNameArray } from './argTool/types';
 import { _p } from 'a-node-tools';
-import { prefixList, SUCCESS } from './utils/info';
-import { ERROR } from './utils/info';
+import { ArgsGeneralItemParadigm } from './argTool/';
+import { Args } from './argTool/args';
+import { question } from './question/index';
+import { selection } from './selection/';
+import { prefixList, SUCCESS, ERROR } from './utils/info';
 
 /**
+ * ## 这是一个集合体
  *
- *
- *
- * 这是一个集合体
- *
- * 继承于 `Args`，又集成了 `question` 与 `selection`
- *
- * 及打印的一些东西
- *
- *
+ * 继承于 `Args`，又集成了 `question` 与 `selection`及打印的一些东西
+ *  @deprecated **不建议使用该项，由于在仅使用一项或两项功能时，可能会无法很好的进行摇树** 计划在未来的版本移除该项
  */
-class Command<T extends OptionNameArray> extends Args<T> {
+class Command<T extends ArgsGeneralItemParadigm> extends Args<T> {
   /**
    *
    * @param name 命令的名称
-   *
+   *  @deprecated **不建议使用该项，由于在仅使用一项或两项功能时，可能会无法很好的进行摇树** 未来的版本可能会移除该项
    */
   constructor(name: string = '') {
     super(name);

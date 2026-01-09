@@ -1,6 +1,6 @@
 import { truncateStringWithChar } from 'color-pen';
-import { dataStore } from '../../data-store';
 import { ellipsis } from '../../../utils/info';
+import { dataStore } from '../../data-store';
 
 /**
  *

@@ -1,13 +1,13 @@
-import { dog } from '../dog';
 import { isArray, isBoolean, isString } from 'a-type-of-js';
+import { dog } from '../utils/dog';
+import { getMaxRows } from './getMaxRows';
+import { parseData } from './parseData';
 import {
   DataType,
   SelectionParamDataMapType,
   SelectionParamDataType,
   ValueExtendsType,
 } from './types';
-import { parseData } from './parseData';
-import { getMaxRows } from './getMaxRows';
 
 /** 默认语言  */
 const info = '请使用键盘选择，请使用 Enter 键进行选择',

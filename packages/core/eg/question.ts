@@ -1,5 +1,5 @@
 import { _p } from 'a-node-tools';
-import { question } from '..';
+import { question } from '../src';
 import { dev } from '@qqi/dev';
 import { isUndefined } from 'a-type-of-js';
 

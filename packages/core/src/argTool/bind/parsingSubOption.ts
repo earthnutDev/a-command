@@ -1,5 +1,5 @@
-import { AuxiliaryData } from '../auxiliaryData';
 import { isArray, isString } from 'a-type-of-js';
+import { AuxiliaryData } from '../auxiliaryData';
 import { parsingDataOfString } from './parsingDataOfString';
 import { BindParamsOptionsType, SubOptionsType } from './types';
 

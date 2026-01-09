@@ -1,14 +1,13 @@
 import { initializeFile } from 'a-node-tools';
-import { ArgsType, OptionNameArray } from './types';
-import { AuxiliaryData } from './auxiliaryData';
-import { executeParsing } from './parse';
-import { organizeHelpInformation } from './help';
-import { showVersion } from './showVersion';
 import { isBusinessEmptyString, isString, isTrue } from 'a-type-of-js';
-import { auxiliaryDataStore } from './auxiliaryData';
-import { createAuxiliaryData } from './createAuxiliaryData';
-import { BindParamsType, StateType } from './bind/types';
+import { AuxiliaryData, auxiliaryDataStore } from './auxiliaryData';
 import { bindInstruction } from './bind';
+import { BindParamsType, StateType } from './bind/types';
+import { createAuxiliaryData } from './createAuxiliaryData';
+import { organizeHelpInformation } from './help';
+import { executeParsing } from './parse';
+import { showVersion } from './showVersion';
+import { ArgsType, ArgsGeneralItemParadigm } from './types';
 
 /**   
  
@@ -103,7 +102,7 @@ import { bindInstruction } from './bind';
  * ```
  *
  */
-class Args<T extends OptionNameArray> {
+class Args<T extends ArgsGeneralItemParadigm> {
   // 为一只
   #uniKey: symbol;
 

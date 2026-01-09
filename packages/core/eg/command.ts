@@ -1,5 +1,5 @@
 import { _p } from 'a-node-tools';
-import { Command } from '../index';
+import { Command } from '../src/index';
 import { pen } from 'color-pen';
 import { dev } from '@qqi/dev';
 

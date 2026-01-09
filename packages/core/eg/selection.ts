@@ -1,5 +1,5 @@
 import { _p } from 'a-node-tools';
-import { selection } from '../index';
+import { selection } from '../src/index';
 import { dev } from '@qqi/dev';
 import { isString, isUndefined } from 'a-type-of-js';
 

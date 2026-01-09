@@ -1,19 +1,19 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName organizeHelpInformation.ts
- *  @CreateDate  周二  04/08/2025
- *  @Description 展示帮助 💻
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file organizeHelpInformation.ts
+ *  @since 04/08/2025
+ *  @description 展示帮助 💻
  *
  * 根据输入的帮助信息的层级展示对应层级的帮助信息
- ****************************************************************************/
+ **/
 
-import { AuxiliaryData } from '../auxiliaryData';
 import { isArray, isString } from 'a-type-of-js';
+import { AuxiliaryData } from '../auxiliaryData';
 import { isAllHelpInformation } from './isAllHelpInformation';
-import { isSubcommand } from './isSubcommand';
 import { isOptions } from './isOptions';
+import { isSubcommand } from './isSubcommand';
 
 /** organize help information
  *

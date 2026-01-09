@@ -1,10 +1,10 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName manageResult.ts
- *  @CreateDate  周四  04/10/2025
- *  @Description  解析用户参数数据
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file manageResult.ts
+ *  @since 04/10/2025
+ *  @description  解析用户参数数据
  *
  * 该解析说明已经经过了 `-v` 和 `-h` 命令的检测
  *
@@ -14,15 +14,15 @@
  * 因为要处理含 `=` 的参数，所以不打算将预处理 pretreatment 方法并入该方法中
  *
  * 即便多了一次遍历，不但对性能无影响，而且也能减少代码量
- ****************************************************************************/
+ **/
+import { isBusinessEmptyString } from 'a-type-of-js';
 import { AuxiliaryData } from '../auxiliaryData';
-import { dataIsValue } from './dataIsValue';
+import { addResultItem } from './addResultItem';
 import { dataIsCode } from './dataIsCode';
 import { dataIsOption } from './dataIsOption';
-import { addResultItem } from './addResultItem';
-import { ManageDataType } from './types';
+import { dataIsValue } from './dataIsValue';
 import { pretreatment } from './pretreatment';
-import { isBusinessEmptyString } from 'a-type-of-js';
+import { ManageDataType } from './types';
 
 /**
  *

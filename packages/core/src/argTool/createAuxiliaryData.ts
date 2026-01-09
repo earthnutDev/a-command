@@ -1,21 +1,21 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName createAuxiliaryData.ts
- *  @CreateDate  周三  04/09/2025
- *  @Description   创建一个新的辅助函数，用函数的方式创建数据可以防止数据污染
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file createAuxiliaryData.ts
+ *  @since 04/09/2025
+ *  @description   创建一个新的辅助函数，用函数的方式创建数据可以防止数据污染
  *
  *
- ****************************************************************************/
-import { ArgsType, OptionNameArray } from './types';
+ **/
 import { AuxiliaryData } from './auxiliaryData';
 import { get$arrMap } from './data-store/getArrayMap';
 import { get$map } from './data-store/getMap';
 import { originalArg } from './data-store/originalArg';
+import { ArgsType, ArgsGeneralItemParadigm } from './types';
 
 /** 因为要保持数据的独立性，所以应当是一个函数 */
-export function createAuxiliaryData<T extends OptionNameArray>() {
+export function createAuxiliaryData<T extends ArgsGeneralItemParadigm>() {
   return new Proxy(new AuxiliaryData(), {
     get(target, p, receive) {
       /** 代理 args 属性的数据 */

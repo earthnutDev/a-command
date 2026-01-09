@@ -1,11 +1,11 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName executeParsing.ts
- *  @CreateDate  周二  04/08/2025
- *  @Description 解析用户行为
- ****************************************************************************/
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file executeParsing.ts
+ *  @since 04/08/2025
+ *  @description 解析用户行为
+ **/
 import { _p } from 'a-node-tools';
 import { AuxiliaryData } from '../auxiliaryData';
 

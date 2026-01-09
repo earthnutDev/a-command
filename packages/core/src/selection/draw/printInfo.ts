@@ -1,5 +1,5 @@
-import { selectionData } from '../data-store';
 import { cutoffStringWithChar, redPen, strInTerminalLength } from 'color-pen';
+import { selectionData } from '../data-store';
 
 /**  打印提示信息  */
 export function printInfo() {

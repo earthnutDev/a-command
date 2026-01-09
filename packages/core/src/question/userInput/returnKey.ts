@@ -8,8 +8,8 @@ import {
   isUndefined,
   isZero,
 } from 'a-type-of-js';
-import { dataStore } from '../data-store';
 import { cyanPen, greenPen } from 'color-pen';
+import { dataStore } from '../data-store';
 
 /**
  *

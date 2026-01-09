@@ -1,9 +1,8 @@
-import { CurrentIssue, QuestionAssign, QuestionDataType } from './types';
-
 import { _p } from 'a-node-tools';
-import { originalData } from './originalData';
-import { changeCurrentIssue } from './changeCurrentIssue';
 import { isUndefined } from 'a-type-of-js';
+import { changeCurrentIssue } from './changeCurrentIssue';
+import { originalData } from './originalData';
+import { CurrentIssue, QuestionAssign, QuestionDataType } from './types';
 
 /**  创建一个新的问题  */
 export function createCurrentIssue(): CurrentIssue {

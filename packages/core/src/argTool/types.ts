@@ -1,21 +1,16 @@
 /**
+ * ## 原始的一个绑定的类型声明，用于 `args` 以及子属性的类型声明
  *
- * 原始的一个绑定的类型声明
- *
- * 用于 args 及下属属性的类型声明
- *
+ * @version 3.0.0
  */
-export type OptionNameArray = {
+export type ArgsGeneralItemParadigm = {
   [x: string]: string | undefined;
 };
 
 /**
- *
- *  处理后的参数的 options 类型声明
- *
+ * ## 处理后的参数的 options 类型声明
  */
-
-export type ArgsItemOptionsType<T = undefined> = T extends undefined
+export type ArgsItemOptions<T = undefined> = T extends undefined
   ? never
   : T extends infer V
     ? V extends string
@@ -24,28 +19,30 @@ export type ArgsItemOptionsType<T = undefined> = T extends undefined
     : never;
 
 /**
- * 当前的  arg
- *
+ * ## 当前的  arg
  * 处理后的原始参数的值
  */
-export type ArgsItem<T = OptionNameArray, K extends keyof T = keyof T> = {
+export type ArgsItem<
+  T = ArgsGeneralItemParadigm,
+  K extends keyof T = keyof T,
+> = {
   name: K;
   value: string[];
-  options: ArgsItemOptionsType<T[K]>;
+  options: ArgsItemOptions<T[K]>;
 };
 
-//
-/** $map 的类型声明
+/**
+ * ## `Args` 实例属性 `$map` ，使用对象的形式描述用户使用参数
  *
  * ```ts
- *  type ArgsMapItemType = {
+ *  type ArgsMapItem = {
  *      [key:string]: (string | number | boolean)[];
  *      value: (string | number | boolean)[];
  *  }
  * ```
  * */
-export type ArgsMapType<T = OptionNameArray> = {
-  [Key in keyof T]?: ArgsMapItemType<T[Key]>;
+export type ArgsMap<T = ArgsGeneralItemParadigm> = {
+  [Key in keyof T]?: ArgsMapItem<T[Key]>;
 };
 
 type GenerateArrayMapItemKeys<T> = T extends undefined
@@ -56,26 +53,25 @@ type GenerateArrayMapItemKeys<T> = T extends undefined
       : never
     : never;
 
-/** $map 值的子项  */
-export type ArgsMapItemType<T = undefined> = {
+/**
+ * ## $map 属性值
+ * */
+export type ArgsMapItem<T = undefined> = {
   [K in GenerateArrayMapItemKeys<T> & string]?: (string | number | boolean)[];
 } & {
   value?: (string | number | boolean)[];
 };
 
 /**
- * 导出数组对象的类型
+ * ## `Args` 实例 `$arrMap` 属性
  *
- * 该类型的返回值仅是原数据的一个变种
+ * 该类型的返回值仅是原数据的一个变种，将原数据的 name 提出作为数组元素的键名
  *
- * 将原数据的 name 提出作为数组元素的键名
- *
- * value 作为值下的 value 属性
- *
- * 其他的属性作为值下的其他属性
+ * - value 作为值下的 value 属性
+ * - 其他的属性作为值下的其他属性
  *
  * ```ts
- *  type ArgsMapType = {
+ *  type ArgsMap = {
  *     [key:string]: {
  *          [key:string]: (string | number | boolean)[];
  *          value: (string | number | boolean)[];
@@ -83,23 +79,20 @@ export type ArgsMapItemType<T = undefined> = {
  *  }
  * ```
  */
-export type ArgsArrMapType<T, K extends keyof T = keyof T> = {
-  [Key in K]?: ArgsArrMapItemType<T[Key]>;
+export type ArgsArrMap<T, K extends keyof T = keyof T> = {
+  [Key in K]?: ArgsArrMapItem<T[Key]>;
 }[];
 
 /**
- *
- * args 的 arrMap 子数据类型
- *
+ * ## `Args` 实例的 `arrMap` 子项
  */
-export type ArgsArrMapItemType<T> = {
+export type ArgsArrMapItem<T> = {
   value?: (string | number | boolean)[];
   options?: ArgsArrMapOptions<T>[];
 };
 
 /**
- *
- * args 的 arrMap 子元素的 options 类型
+ * ## `Args` 实例 `$arrMap` 子项 `options` 属性值
  *
  * 接受范型为具体的 options 的键
  *
@@ -127,7 +120,9 @@ export type ArgsArrMapOptions<T> = {
  * - $isVoid   是否为空
  *
  */
-export interface ArgsType<T = OptionNameArray> extends Array<ArgsItem<T>> {
+export interface ArgsType<T = ArgsGeneralItemParadigm> extends Array<
+  ArgsItem<T>
+> {
   /**
    *  返回给顶端的数据值
    *
@@ -142,13 +137,13 @@ export interface ArgsType<T = OptionNameArray> extends Array<ArgsItem<T>> {
    * 返回 map 模式的数据，用来做配置文件比较爽
    *
    * ```ts
-   *  type ArgsMapItemType = {
+   *  type ArgsMapItem = {
    *      [key:string]: (string | number | boolean)[];
    *      value: (string | number | boolean)[];
    *  }
    * ````
    */
-  $map: ArgsMapType<T>;
+  $map: ArgsMap<T>;
   /**
    *  返回的数组数据
    *
@@ -162,7 +157,7 @@ export interface ArgsType<T = OptionNameArray> extends Array<ArgsItem<T>> {
    * ```
    *
    */
-  $arrMap: ArgsArrMapType<T>;
+  $arrMap: ArgsArrMap<T>;
   /**
    *  仅有头部的字符串数组
    *

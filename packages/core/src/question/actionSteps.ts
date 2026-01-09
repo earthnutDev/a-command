@@ -1,25 +1,25 @@
-import { dog } from './../dog';
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName originQuestion.ts
- *  @CreateDate  周四  04/03/2025
- *  @Description 原始的问题处理
+import { __p, cursorAfterClear, cursorMoveUp, cursorShow } from 'a-node-tools';
+import { isArray, isTrue, isUndefined, isZero } from 'a-type-of-js';
+import { dog } from '../utils/dog';
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file originQuestion.ts
+ *  @since 04/03/2025
+ *  @description 原始的问题处理
  *
  * 因为在使用多问模式时，发现数据在上一个问询和下一个问询直接存在数据污染，
  * 即使用 `command.data` 将数据进行隔离
- ****************************************************************************/
-import { draw } from './draw';
-import { userInput } from './userInput';
-import { __p, cursorAfterClear, cursorMoveUp, cursorShow } from 'a-node-tools';
-import { QuestionParamDataType, QuestionReturnType } from './types';
-import { dataStore } from './data-store';
-import { originalData } from './originalData';
-import { onResize } from './onResize';
+ **/
 import { ERROR, pen666, SUCCESS } from '../utils/info';
-import { isArray, isTrue, isUndefined, isZero } from 'a-type-of-js';
+import { dataStore } from './data-store';
+import { draw } from './draw';
+import { onResize } from './onResize';
+import { originalData } from './originalData';
 import { outputSafeZone } from './outputSafeZone';
+import { QuestionParamDataType, QuestionReturnType } from './types';
+import { userInput } from './userInput';
 
 /**
  *

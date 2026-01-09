@@ -1,14 +1,14 @@
-import { dog } from '../dog';
+import { terminalResetStyle } from '@color-pen/static';
 import { _p, cursorAfterClear, cursorHide, cursorShow } from 'a-node-tools';
-import { draw } from './draw';
+import { isUndefined } from 'a-type-of-js';
+import { dog } from '../utils/dog';
+import { ERROR, pen666, SUCCESS } from '../utils/info';
 import { selectionData } from './data-store';
+import { draw } from './draw';
+import { onResize } from './onResize';
+import { outputSafeZone } from './outputSafeZone';
 import { SelectionParamDataType, ValueExtendsType } from './types';
 import { userInteraction } from './userInteraction';
-import { terminalResetStyle } from '@color-pen/static';
-import { onResize } from './onResize';
-import { ERROR, pen666, SUCCESS } from '../utils/info';
-import { isUndefined } from 'a-type-of-js';
-import { outputSafeZone } from './outputSafeZone';
 
 /**
  *

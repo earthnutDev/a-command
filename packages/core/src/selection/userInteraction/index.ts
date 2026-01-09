@@ -1,10 +1,10 @@
-import { dog } from '../../dog';
-import { readInput } from 'a-node-tools';
-import { draw } from '../draw';
-import { selectionData } from '../data-store';
 import { esc } from '@color-pen/static';
+import { readInput } from 'a-node-tools';
 import { isEmptyArray, isTrue } from 'a-type-of-js';
+import { dog } from '../../utils/dog';
 import { changeCurrentFocus } from '../changeCurrentFocus';
+import { selectionData } from '../data-store';
+import { draw } from '../draw';
 import { checkAll } from './checkAll';
 import { reverseSelectAll } from './reverseSelectAll';
 

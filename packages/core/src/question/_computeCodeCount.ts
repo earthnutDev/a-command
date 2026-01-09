@@ -1,13 +1,13 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName computeCodeCount.ts
- *  @CreateDate  周三  05/21/2025
- *  @Description
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file computeCodeCount.ts
+ *  @since 05/21/2025
+ *  @description
  *
  * 当前使用的是虚拟浮标（光标），不再需要计算该值
- ****************************************************************************/
+ **/
 
 import { strInTerminalLength } from 'color-pen';
 import { QuestionDataType } from './types';

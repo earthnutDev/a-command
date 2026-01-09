@@ -1,18 +1,18 @@
-/****************************************************************************
- *  @Author earthnut
- *  @Email earthnut.dev@outlook.com
- *  @ProjectName a-command
- *  @FileName getArrayMap.ts
- *  @CreateDate  周三  04/09/2025
- *  @Description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
- ****************************************************************************/
+/**
+ *  @author Mr.MudBean <Mr.MudBean@outlook.com>
+ * @packageDocumentation
+ * @module  a-command
+ *  @file getArrayMap.ts
+ *  @since 04/09/2025
+ *  @description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
+ **/
 
 import { isEmptyArray, isUndefined } from 'a-type-of-js';
 import {
-  ArgsArrMapItemType,
-  ArgsArrMapType,
+  ArgsArrMapItem,
+  ArgsArrMap,
   ArgsType,
-  OptionNameArray,
+  ArgsGeneralItemParadigm,
 } from '../types';
 
 /**
@@ -20,18 +20,16 @@ import {
  *
  * 主要关注的是有序
  */
-export function get$arrMap<T extends OptionNameArray>(
+export function get$arrMap<T extends ArgsGeneralItemParadigm>(
   value: ArgsType<T>,
-): ArgsArrMapType<T> {
+): ArgsArrMap<T> {
   if (isEmptyArray(value)) return [];
   return value.map(currentElement => {
     // 临时演员
-    const resultValue: { [key in keyof T]?: ArgsArrMapItemType<T[keyof T]> } =
-      {};
+    const resultValue: { [key in keyof T]?: ArgsArrMapItem<T[keyof T]> } = {};
 
     const temp =
-      (resultValue[currentElement.name] as ArgsArrMapItemType<T[keyof T]>) ||
-      {};
+      (resultValue[currentElement.name] as ArgsArrMapItem<T[keyof T]>) || {};
 
     // 判断当前是否有 value 属性
     if (currentElement.value && !isEmptyArray(currentElement.value)) {

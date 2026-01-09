@@ -1,6 +1,6 @@
 # a command
 
-[![version](<https://img.shields.io/npm/v/a-command.svg?logo=npm&logoColor=rgb(0,0,0)&label=版本号&labelColor=rgb(73,73,228)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![issues 提交](<https://img.shields.io/badge/issues-提交-rgb(255,0,63)?logo=github>)](https://github.com/earthnutDev/a-command/issues)
+[![version](<https://img.shields.io/npm/v/a-command.svg?logo=npm&logoColor=rgb(0,0,0)&label=版本号&labelColor=rgb(73,73,228)&color=rgb(0,0,0)>)](https://www.npmjs.com/package/a-command) [![issues 提交](<https://img.shields.io/badge/issues-提交-rgb(255,0,63)?logo=github>)](https://github.com/MrMudBean/a-command/issues)
 
 这里是一个用于终端交互的，服务于 [jja](https://www.npmjs.com/package/jja)、[create a npm](https://www.npmjs.com/package/create-a-npm) 等类项目
 
@@ -396,7 +396,7 @@ if (isUndefined(result)) {
 
 还可以配置 `tip` 为数组，将问答配置为简单的选择，这时候用户仅可以在 `tip` 提供的值中进行选择 **仅适用于简单选择，类似于 `yes` or `no` 或者 `男` or `女` 这种，字多的选项，建议使用 [selection](#selection-部分-选择模式-)**
 
-在使用的时候，不建议使用 `verify` 来限制字符数，更推荐使用 `len` 、`minLen`、`maxLen` 来限定输入长度。因为 `verify` 是**_输入校验_**，而 `len`、`minLen`、`maxLen` 是**_enter 确认触发校验_**。
+在使用的时候，不建议使用 `verify` 来限制字符数，更推荐使用 `len` 、`minLen`、`maxLen` 来限定输入长度。因为 `verify` 是***输入校验***，而 `len`、`minLen`、`maxLen` 是***enter 确认触发校验***。
 
 ```js
 import { question } from 'a-command';

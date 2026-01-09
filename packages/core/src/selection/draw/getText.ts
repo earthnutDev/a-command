@@ -1,6 +1,6 @@
 import { cutoffStringWithChar, strInTerminalLength } from 'color-pen';
-import { selectionData } from '../data-store';
 import { ellipsis } from '../../utils/info';
+import { selectionData } from '../data-store';
 
 /**  计算文本展示  */
 export function getText(index: number): string {

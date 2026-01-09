@@ -4,7 +4,7 @@ import { CommandData, CommandDataItem } from './types';
 
 /**
  *
- *  一个简单的管理数据中心
+ * ## 一个简单的管理数据中心
  *
  * 使用 on 将数据添加到 callList 上
  *

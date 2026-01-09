@@ -1,7 +1,7 @@
 import { _p } from 'a-node-tools';
-import { formatHelpText } from './formatHelpText';
-import { ArgOriginBind, SubOptionsType } from '../bind/types';
 import { isEmptyObject } from 'a-type-of-js';
+import { ArgOriginBind, SubOptionsType } from '../bind/types';
+import { formatHelpText } from './formatHelpText';
 
 /**
  * 打印其他信息

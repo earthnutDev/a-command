@@ -1,11 +1,11 @@
-import { dog } from '../dog';
-import { commandData } from '../commandData';
+import { commandData } from '../utils/commandData';
+import { dog } from '../utils/dog';
+import { selectionStep } from './actionSteps';
 import {
   SelectionParamDataType,
   SelectionResultType,
   ValueExtendsType,
 } from './types';
-import { selectionStep } from './actionSteps';
 
 /**
  * 选择的核心逻辑，通过 commandData 来管理数据及执行的顺序

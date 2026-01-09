@@ -1,14 +1,14 @@
 {
   "type": "module",
   "private": true,
-  "version": "2.3.16",
+  "version": "3.0.0",
   "name": "a-command",
-  "description": "一款优秀的终端工具",
+  "description": "简约终端交互。包含：启动参数整理、问答模式、选择模式和提示语打印",
   "scripts": {
     "prepublishOnly": "pjj",
     "push:version": "gvv",
     "push": "gvv",
-    "eslint": "eslint src",
+    "eslint": "eslint . --fix",
     "vjj": "vjj -b",
     "beautify": "pnpm run prettier",
     "prettier": "prettier . --write",
@@ -20,11 +20,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@color-pen/static": "^1.0.1",
-    "@qqi/log": "^0.1.1",
-    "a-js-tools": "^1.0.12",
-    "a-node-tools": "^4.2.20",
-    "a-type-of-js": "^1.0.7",
-    "color-pen": "^2.0.13"
+    "@color-pen/static": "^1.1.1",
+    "@qqi/log": "^1.0.0",
+    "a-js-tools": "^2.0.1",
+    "a-node-tools": "^4.3.0",
+    "a-type-of-js": "^2.0.0",
+    "color-pen": "^3.0.0"
   }
 }

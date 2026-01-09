@@ -1,9 +1,9 @@
 import { _p } from 'a-node-tools';
-import { AuxiliaryData } from '../auxiliaryData';
+import { isEmptyObject } from 'a-type-of-js';
 import { pen } from 'color-pen';
+import { AuxiliaryData } from '../auxiliaryData';
 import { _blank } from './blank';
 import { printLine } from './printLine';
-import { isEmptyObject } from 'a-type-of-js';
 
 /**
  *
