@@ -4,6 +4,8 @@ import { ManageDataType, ManageDataTypeItem } from './types';
  *
  *  当前值为子项
  *
+ * @param name
+ * @param manageData
  */
 export function dataIsOption(name: string, manageData: ManageDataType) {
   const { item, object } = manageData;

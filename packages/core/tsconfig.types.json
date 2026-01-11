@@ -2,6 +2,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": ".",
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationDir": "dist/es"

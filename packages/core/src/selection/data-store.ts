@@ -6,7 +6,6 @@ import {
   DataType,
   SelectionParamDataMapType,
   SelectionParamDataType,
-  ValueExtendsType,
 } from './types';
 
 /** 默认语言  */
@@ -16,7 +15,7 @@ const info = '请使用键盘选择，请使用 Enter 键进行选择',
   defaultKind = 'radio';
 
 /**  数据仓库  */
-const data: DataType<ValueExtendsType> = {
+const data: DataType<PropertyKey> = {
   drawData: [],
   info,
   focus: zeroValue,
@@ -40,9 +39,7 @@ const data: DataType<ValueExtendsType> = {
   mustInfo: falseValue,
   maxRows: getMaxRows(),
   data: [],
-  initData<T extends ValueExtendsType>(
-    params: SelectionParamDataType<T>,
-  ): boolean {
+  initData<T extends PropertyKey>(params: SelectionParamDataType<T>): boolean {
     dog('初始化数据');
     // 清理旧的数据
     this.reset();

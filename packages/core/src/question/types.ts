@@ -1,7 +1,10 @@
-export type CurrentIssueRequestParams = {
+/**
+ * 当前问题必须部分
+ */
+type CurrentIssueRequestParams = {
   /**
    *   当前问题展示
-   **/
+   */
   text: string | number;
 };
 
@@ -11,18 +14,18 @@ export type CurrentIssueRequestParams = {
  *
  *
  */
-export type CurrentIssueOptionsParams = {
+type CurrentIssueOptionsParams = {
   /**
    *
    *  用户提示：当为纯文本时，展示为文本提示；
    *
    *  当为数组时，默认为选择式提问
-   * */
+   */
   tip: unknown | unknown[];
   /**
    *
    * 类型，仅支持文本（`text`）和密码（`password`），缺省为文本
-   **/
+   */
   type: 'text' | 'password';
   /**
    *
@@ -141,12 +144,12 @@ export type QuestionVerify = {
  *     defaultValue?: string;
  * }
  * ```
- * */
-export type CurrentIssueType = CurrentIssueRequestParams & {
+ */
+export type OriginCurrentIssue = CurrentIssueRequestParams & {
   [x in keyof CurrentIssueOptionsParams]?: CurrentIssueOptionsParams[x];
 };
 
-/**  当前的问题（实际使用）  */
+/**  当前的问题（解析后当前问题）  */
 export type CurrentIssue = CurrentIssueRequestParams & {
   [x in keyof CurrentIssueOptionsParams]: CurrentIssueOptionsParams[x];
 } & {
@@ -183,7 +186,7 @@ export interface OriginalData {
    * 原始的问题
    *
    */
-  data: QuestionParamDataType;
+  data: QuestionParamData;
   /**
    *
    * 当前问题的类型
@@ -204,7 +207,7 @@ export interface OriginalData {
   /**
    * 数据初始化方法
    */
-  init: (param: QuestionParamDataType) => void;
+  init: (param: QuestionParamData) => void;
 }
 
 /**
@@ -221,7 +224,7 @@ export type QuestionAssign = {
  *
  *  数据类型
  */
-export type QuestionDataType = {
+export type QuestionData = {
   /**
    *
    * 当前类型
@@ -250,21 +253,23 @@ export type QuestionDataType = {
    *  内部方法，仅在该问询的开始时调用一次，初始化当前问题的数量
    *
    *  而初始化当前问题的数量时，将执行当前的问题的更新及下一轮问题的🎨开始
-   * */
+   */
   beforeStart(): void;
 };
 
 /**
+ * ## 输入参数
  *
- * 参数类型
- *
- *
+ * - `number`
+ * - `string`
+ * - `OriginCurrentIssue`
+ * - `(OriginCurrentIssue | string | number)[]`
  */
-export type QuestionParamDataType =
+export type QuestionParamData =
   | string
   | number
-  | CurrentIssueType
-  | (CurrentIssueType | string | number)[];
+  | OriginCurrentIssue
+  | (OriginCurrentIssue | string | number)[];
 
 /**
  *
@@ -274,10 +279,10 @@ export type QuestionParamDataType =
  *
  *  当用户使用强制退出时（双及 `esc` 或其他配置），可退出当前问题，返回值为 undefined
  */
-export type QuestionReturnType<
-  T extends QuestionParamDataType,
+export type QuestionReturn<
+  T extends QuestionParamData,
   U extends boolean | undefined,
-> = T extends (string | number | CurrentIssueType)[]
+> = T extends (string | number | OriginCurrentIssue)[]
   ? U extends false | undefined
     ? { q: string | number; r: string | undefined }[]
     : (string | undefined)[]

@@ -1,6 +1,16 @@
 import { isEmptyArray } from 'a-type-of-js';
 import { dog } from './dog';
-import { CommandData, CommandDataItem } from './types';
+
+type CommandData = {
+  /**  顺序执行列表  */
+  callList: CommandDataItem[];
+  /**  注册执行事件  */
+  on(uniKey: symbol, callFn: () => void): void;
+  /**  移除对应键的执行  */
+  remove(uniKey: symbol): boolean;
+};
+
+type CommandDataItem = [symbol, () => void];
 
 /**
  *
@@ -13,7 +23,11 @@ import { CommandData, CommandDataItem } from './types';
  */
 const commandData: CommandData = {
   callList: [],
-  /** 注册事件 */
+  /**
+   * 注册事件
+   * @param uniKey
+   * @param callFn
+   */
   on(uniKey: symbol, callFn: () => void) {
     const list: CommandDataItem[] = this.callList;
     if (isEmptyArray(list)) {
@@ -28,6 +42,7 @@ const commandData: CommandData = {
    *
    * 返回值仅代表当前是否结束
    *
+   * @param uniKey
    */
   remove(uniKey: symbol) {
     //

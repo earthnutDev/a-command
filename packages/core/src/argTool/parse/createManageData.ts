@@ -24,6 +24,7 @@ export function createManageDate(): ManageDataType {
     },
     /**
      * 重置
+     * @param name
      */
     resetItem(name: string) {
       this.item = { name, value: [] };

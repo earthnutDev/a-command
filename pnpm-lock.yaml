@@ -36,11 +36,11 @@ importers:
         specifier: ^12.3.0
         version: 12.3.0(rollup@4.55.1)(tslib@2.8.1)(typescript@5.9.3)
       '@types/node':
-        specifier: ^25.0.3
-        version: 25.0.3
+        specifier: ^25.0.6
+        version: 25.0.6
       a-node-tools:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.4.1
+        version: 4.4.1
       a-type-of-js:
         specifier: ^2.0.0
         version: 2.0.0
@@ -57,8 +57,8 @@ importers:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.52.0(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.2)
       eslint-plugin-jsdoc:
-        specifier: ^61.7.1
-        version: 61.7.1(eslint@9.39.2)
+        specifier: ^62.0.0
+        version: 62.0.0(eslint@9.39.2)
       eslint-plugin-jsonc:
         specifier: ^2.21.0
         version: 2.21.0(eslint@9.39.2)
@@ -106,7 +106,7 @@ importers:
         version: 1.1.0(javascript-obfuscator@5.1.0)(rollup@4.55.1)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@25.0.3)(typescript@5.9.3)
+        version: 10.9.2(@types/node@25.0.6)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -129,8 +129,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       a-node-tools:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.4.1
+        version: 4.4.1
       a-type-of-js:
         specifier: ^2.0.0
         version: 2.0.0
@@ -178,9 +178,9 @@ packages:
   '@emnapi/wasi-threads@1.1.0':
     resolution: {integrity: sha512-WI0DdZ8xFSbgMjR1sFsKABJ/C5OnRrjT06JXbZKexJGrDuPTzZdDYfFlsgcCXCyf+suG5QU2e/y1Wo2V/OapLQ==}
 
-  '@es-joy/jsdoccomment@0.78.0':
-    resolution: {integrity: sha512-rQkU5u8hNAq2NVRzHnIUUvR6arbO0b6AOlvpTNS48CkiKSn/xtNfOzBK23JE4SiW89DgvU7GtxLVgV4Vn2HBAw==}
-    engines: {node: '>=20.11.0'}
+  '@es-joy/jsdoccomment@0.79.0':
+    resolution: {integrity: sha512-q/Nc241VsVRC5b1dgbsOI0fnWfrb1S9sdceFewpDHto4+4r2o6SSCpcY+Z+EdLdMPN6Nsj/PjlPcKag6WbU6XQ==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@es-joy/resolve.exports@1.2.0':
     resolution: {integrity: sha512-Q9hjxWI5xBM+qW2enxfe8wDKdFWMfd0Z29k5ZJnuBqD/CasY5Zryj09aCA6owbGATWz+39p5uIdaHXpopOcG8g==}
@@ -567,11 +567,8 @@ packages:
     resolution: {integrity: sha512-zmPitbQ8+6zNutpwgcQuLcsEpn/Cj54Kbn7L5pX0Os5kdWplB7xPgEh/g+SWOB/qmows2gpuCaPyduq8ZZRnxA==}
     deprecated: This is a stub types definition. minimatch provides its own type definitions, so you do not need this installed.
 
-  '@types/node@24.3.0':
-    resolution: {integrity: sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==}
-
-  '@types/node@25.0.3':
-    resolution: {integrity: sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==}
+  '@types/node@25.0.6':
+    resolution: {integrity: sha512-NNu0sjyNxpoiW3YuVFfNz7mxSQ+S4X2G28uqg2s+CzoqoQjLPsWSbsFFyztIAqt2vb8kfEAsJNepMGPTxFDx3Q==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -751,6 +748,10 @@ packages:
 
   a-node-tools@4.3.0:
     resolution: {integrity: sha512-nr9mx4Xrkc7yt2QMtlSm8w7pUZihWb/v9vvBbGISzylIX0pS6oIuqOGj9fgMcHWEuHXWe/1VlG/iJahL1ZJZew==}
+    engines: {node: '>=18.0.0'}
+
+  a-node-tools@4.4.1:
+    resolution: {integrity: sha512-+hqOLClhZ80gnCnVVd/JLQ+JtpcWePXJa/tGqC26suVdeUM1YUm6XLZSoRXudoVX3B6Y/Of3+pzUvrC6thhRPQ==}
     engines: {node: '>=18.0.0'}
 
   a-type-of-js@1.0.7:
@@ -1184,9 +1185,9 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-jsdoc@61.7.1:
-    resolution: {integrity: sha512-36DpldF95MlTX//n3/naULFVt8d1cV4jmSkx7ZKrE9ikkKHAgMLesuWp1SmwpVwAs5ndIM6abKd6PeOYZUgdWg==}
-    engines: {node: '>=20.11.0'}
+  eslint-plugin-jsdoc@62.0.0:
+    resolution: {integrity: sha512-sNdIGLAvjFK3pB0SYFW74iXODZ4ifF8Ax13Wgq8jKepKnrCFzGo7+jRZfLf70h81SD7lPYnTE7MR2nhYSvaLTA==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
@@ -2245,9 +2246,6 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
-  undici-types@7.10.0:
-    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
-
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
@@ -2347,7 +2345,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@es-joy/jsdoccomment@0.78.0':
+  '@es-joy/jsdoccomment@0.79.0':
     dependencies:
       '@types/estree': 1.0.8
       '@typescript-eslint/types': 8.52.0
@@ -2497,18 +2495,18 @@ snapshots:
     dependencies:
       a-command: 2.3.15
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
 
   '@qqi/copy-text@1.0.7':
     dependencies:
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
 
   '@qqi/copy-text@1.1.0':
     dependencies:
       a-js-tools: 2.0.1
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
 
   '@qqi/dev@1.0.0':
     dependencies:
@@ -2535,7 +2533,7 @@ snapshots:
     dependencies:
       '@qqi/copy-text': 1.1.0
       '@qqi/log': 1.0.0
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 2.0.0
       color-pen: 3.0.0
 
@@ -2688,12 +2686,12 @@ snapshots:
 
   '@types/fs-extra@8.1.5':
     dependencies:
-      '@types/node': 24.3.0
+      '@types/node': 25.0.6
 
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 6.0.0
-      '@types/node': 24.3.0
+      '@types/node': 25.0.6
 
   '@types/json-schema@7.0.15': {}
 
@@ -2705,11 +2703,7 @@ snapshots:
     dependencies:
       minimatch: 10.0.3
 
-  '@types/node@24.3.0':
-    dependencies:
-      undici-types: 7.10.0
-
-  '@types/node@25.0.3':
+  '@types/node@25.0.6':
     dependencies:
       undici-types: 7.16.0
 
@@ -2872,7 +2866,7 @@ snapshots:
       '@color-pen/static': 1.1.1
       '@qqi/log': 0.1.1
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -2881,7 +2875,7 @@ snapshots:
       '@color-pen/static': 1.1.1
       '@qqi/log': 0.1.1
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -2894,6 +2888,14 @@ snapshots:
       a-type-of-js: 2.0.0
 
   a-node-tools@4.3.0:
+    dependencies:
+      '@color-pen/static': 1.1.1
+      '@qqi/log': 1.0.0
+      a-js-tools: 2.0.1
+      a-type-of-js: 2.0.0
+      color-pen: 3.0.0
+
+  a-node-tools@4.4.1:
     dependencies:
       '@color-pen/static': 1.1.1
       '@qqi/log': 1.0.0
@@ -3398,9 +3400,9 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jsdoc@61.7.1(eslint@9.39.2):
+  eslint-plugin-jsdoc@62.0.0(eslint@9.39.2):
     dependencies:
-      '@es-joy/jsdoccomment': 0.78.0
+      '@es-joy/jsdoccomment': 0.79.0
       '@es-joy/resolve.exports': 1.2.0
       are-docs-informative: 0.0.2
       comment-parser: 1.4.1
@@ -3686,7 +3688,7 @@ snapshots:
       '@qqi/log': 0.1.1
       a-command: 2.3.16
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -3919,7 +3921,7 @@ snapshots:
       '@qqi/log': 0.1.1
       a-command: 2.3.16
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
       colored-table: 0.1.0
@@ -4184,7 +4186,7 @@ snapshots:
       '@qqi/log': 0.1.1
       a-command: 2.3.15
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -4528,14 +4530,14 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
-  ts-node@10.9.2(@types/node@25.0.3)(typescript@5.9.3):
+  ts-node@10.9.2(@types/node@25.0.6)(typescript@5.9.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 25.0.3
+      '@types/node': 25.0.6
       acorn: 8.15.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -4622,8 +4624,6 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
-  undici-types@7.10.0: {}
-
   undici-types@7.16.0: {}
 
   universalify@0.1.2: {}
@@ -4673,7 +4673,7 @@ snapshots:
       '@qqi/log': 0.1.1
       a-command: 2.3.15
       a-js-tools: 1.0.12
-      a-node-tools: 4.3.0
+      a-node-tools: 4.4.1
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 

@@ -8,7 +8,6 @@ import {
   SelectionParamObjectData,
   SelectionRadioDataMap,
   SelectionResultType,
-  ValueExtendsType,
 } from './types';
 /**
  *
@@ -110,41 +109,54 @@ import {
  *
  * ```
  */
-export async function selection<T extends ValueExtendsType = string>(
+export async function selection<T extends PropertyKey = string>(
   data: SelectionCheckDataMap<T>,
   resultType?: 'string',
 ): Promise<SelectionResultType<T, SelectionCheckDataMap<T>, 'string'>>;
-export async function selection<T extends ValueExtendsType = number>(
+
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey = number>(
   data: SelectionCheckDataMap<T>,
   resultType?: 'number',
 ): Promise<SelectionResultType<T, SelectionCheckDataMap<T>, 'number'>>;
-export async function selection<T extends ValueExtendsType = string>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey = string>(
   data: SelectionRadioDataMap<T>,
   resultType?: 'string',
 ): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'string'>>;
-export async function selection<T extends ValueExtendsType = number>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey = number>(
   data: SelectionRadioDataMap<T>,
   resultType?: 'number',
 ): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'number'>>;
-export async function selection<T extends ValueExtendsType = string>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey = string>(
   data: SelectionNoKindDataMap<T>,
   resultType?: 'string',
 ): Promise<SelectionResultType<T, SelectionNoKindDataMap<T>, 'string'>>;
-export async function selection<T extends ValueExtendsType = number>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey = number>(
   data: SelectionNoKindDataMap<T>,
   resultType?: 'number',
 ): Promise<SelectionResultType<T, SelectionNoKindDataMap<T>, 'number'>>;
-export async function selection<T extends ValueExtendsType>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey>(
   data: SelectionParamData<T>,
   resultType?: 'string',
 ): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'string'>>;
-export async function selection<T extends ValueExtendsType>(
+// eslint-disable-next-line no-redeclare
+export async function selection<T extends PropertyKey>(
   data: SelectionParamData<T>,
   resultType?: 'number',
 ): Promise<SelectionResultType<T, SelectionRadioDataMap<T>, 'number'>>;
 
-/**    */
-export function selection<T extends ValueExtendsType = string>(
+/**
+ *
+ * @param data
+ * @param resultType
+ */
+// eslint-disable-next-line no-redeclare
+export function selection<T extends PropertyKey = string>(
   data: SelectionParamDataType<T>,
   resultType?: 'string' | 'number',
 ): Promise<SelectionResultType<T, typeof data, typeof resultType>> {
@@ -157,13 +169,12 @@ export function selection<T extends ValueExtendsType = string>(
 }
 
 export type {
-  SelectionParamDataType,
-  SelectionParamDataMapType,
-  SelectionResultType,
-  SelectionParamObjectData,
-  ValueExtendsType,
   SelectionCheckDataMap,
-  SelectionRadioDataMap,
-  SelectionParamData,
   SelectionNoKindDataMap,
+  SelectionParamData,
+  SelectionParamDataMapType,
+  SelectionParamDataType,
+  SelectionParamObjectData,
+  SelectionRadioDataMap,
+  SelectionResultType,
 };

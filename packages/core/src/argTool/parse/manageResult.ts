@@ -14,7 +14,7 @@
  * 因为要处理含 `=` 的参数，所以不打算将预处理 pretreatment 方法并入该方法中
  *
  * 即便多了一次遍历，不但对性能无影响，而且也能减少代码量
- **/
+ */
 import { isBusinessEmptyString } from 'a-type-of-js';
 import { AuxiliaryData } from '../auxiliaryData';
 import { addResultItem } from './addResultItem';

@@ -48,7 +48,7 @@
  *
  * ##  数组
  *  - 数组的格式为 `['commandName -n (命令描述)', { name: 'commandName', abbr: '-n', info: '命令描述'  }, ]`
- * */
+ */
 export type BindParamsType =
   | string
   | {

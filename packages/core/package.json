@@ -3,12 +3,11 @@
   "private": true,
   "version": "3.0.0",
   "name": "a-command",
-  "description": "简约终端交互。包含：启动参数整理、问答模式、选择模式和提示语打印",
   "scripts": {
     "prepublishOnly": "pjj",
     "push:version": "gvv",
     "push": "gvv",
-    "eslint": "eslint . --fix",
+    "lint": "eslint . --fix",
     "vjj": "vjj -b",
     "beautify": "pnpm run prettier",
     "prettier": "prettier . --write",
@@ -18,12 +17,11 @@
     "clean:package": "node scripts/clean-package-json.js",
     "dev": "jja rm .eg cls && rollup --config rollup.dev.config.js && node .eg/eg/index.mjs a jja_dev=true  PORT=9463 NODE_OPTIONS='--max-old-space-size=768'"
   },
-  "license": "MIT",
   "dependencies": {
     "@color-pen/static": "^1.1.1",
     "@qqi/log": "^1.0.0",
     "a-js-tools": "^2.0.1",
-    "a-node-tools": "^4.3.0",
+    "a-node-tools": "^4.4.1",
     "a-type-of-js": "^2.0.0",
     "color-pen": "^3.0.0"
   }

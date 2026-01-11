@@ -16,6 +16,7 @@ import { AuxiliaryData } from './auxiliaryData';
  *
  * 当主动触发或是用户输入 `version/-v`  时触发
  *
+ * @param auxiliaryData
  */
 export function showVersion(auxiliaryData: AuxiliaryData): void {
   auxiliaryData.state = 'version';

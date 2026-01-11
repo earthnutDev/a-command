@@ -1,19 +1,23 @@
+/**
+ * @file userInteraction.ts
+ * @description 用户的输入交互判定
+ * @author MrMudBean <Mr.MudBean@outlook.com>
+ * @license MIT
+ * @copyright  2026 ©️ MrMudBean
+ * @packageDocumentation
+ * @module  selection
+ * @since 2026-01-10 10:22
+ * @lastModified 2026-01-11 16:28
+ **/
+
 import { esc } from '@color-pen/static';
 import { readInput } from 'a-node-tools';
 import { isEmptyArray, isTrue } from 'a-type-of-js';
-import { dog } from '../../utils/dog';
-import { changeCurrentFocus } from '../changeCurrentFocus';
-import { selectionData } from '../data-store';
-import { draw } from '../draw';
-import { checkAll } from './checkAll';
-import { reverseSelectAll } from './reverseSelectAll';
+import { dog } from '../utils/dog';
+import { selectionData } from './data-store';
+import { draw } from './draw';
 
-/**
- *
- * 用户选择
- *
- *
- */
+/**  用户选择后处理  */
 export async function userInteraction() {
   const { data, required, kind, drawData, canCtrlCExit, canCtrlDExit } =
     selectionData;
@@ -102,4 +106,57 @@ export async function userInteraction() {
   });
 
   return result.exit;
+}
+
+/**
+ *  全选或取消全选
+ * @param allChecked
+ */
+function checkAll(allChecked: boolean = true) {
+  selectionData.data.forEach(e => {
+    if (!e.disable) {
+      e.checked = allChecked;
+    }
+  });
+  selectionData.drawData.forEach(e => {
+    if (!e.disable) {
+      e.checked = allChecked;
+    }
+  });
+}
+/**  反向全选  */
+function reverseSelectAll() {
+  selectionData.data.forEach(e => {
+    if (!e.disable) {
+      e.checked = !e.checked;
+    }
+  });
+  selectionData.drawData.forEach(e => {
+    if (!e.disable) {
+      e.checked = !e.checked;
+    }
+  });
+}
+
+/**
+ *  更改当前的选择项
+ * @param down
+ */
+export function changeCurrentFocus(down: boolean = true) {
+  const { focus, drawData } = selectionData;
+  const len = drawData.length - 1;
+  const list = down
+    ? focus === len
+      ? drawData
+      : [...drawData.slice(focus + 1), ...drawData.slice(0, focus + 1)]
+    : focus === 0
+      ? drawData.toReversed()
+      : [...drawData.slice(focus), ...drawData.slice(0, focus)].toReversed();
+
+  for (const i of list) {
+    if (!i.disable) {
+      selectionData.focus = i.index;
+      return;
+    }
+  }
 }

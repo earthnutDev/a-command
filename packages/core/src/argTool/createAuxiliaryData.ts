@@ -7,12 +7,12 @@
  * @description 创建一个新的辅助函数，用函数的方式创建数据可以防止数据污染
  *
  *
- **/
+ */
 import { AuxiliaryData } from './auxiliaryData';
 import { get$arrMap } from './data-store/getArrayMap';
 import { get$map } from './data-store/getMap';
 import { originalArg } from './data-store/originalArg';
-import { ArgsType, ArgsGeneralItemParadigm } from './types';
+import { ArgsGeneralItemParadigm, ArgsType } from './types';
 
 /** 因为要保持数据的独立性，所以应当是一个函数 */
 export function createAuxiliaryData<T extends ArgsGeneralItemParadigm>() {

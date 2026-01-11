@@ -9,6 +9,7 @@ import { BindParamsOptionsType, BindParamsType, ParamType } from './types';
  * 绑定选项、说明及缩写
  *
  * @param  data {@link BindParamsType}  绑定命令行参数
+ * @param auxiliaryData
  */
 function bindInstruction(data: BindParamsType, auxiliaryData: AuxiliaryData) {
   ///  检测当前状态码
@@ -70,7 +71,8 @@ function bindInstruction(data: BindParamsType, auxiliaryData: AuxiliaryData) {
 /**
  *
  *  怪异模式预处理
- *
+ * @param data  数据
+ * @param auxiliaryData
  */
 function weirdModePreprocessing(
   data: {

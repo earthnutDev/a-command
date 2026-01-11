@@ -5,7 +5,7 @@
  * @file getArrayMap.ts
  * @since 04/09/2025
  * @description 在针对需要顺序执行的时候，使用 `$arrMap` 数据要方便些
- **/
+ */
 
 import { isEmptyArray, isUndefined } from 'a-type-of-js';
 import {
@@ -19,6 +19,7 @@ import {
  * 返回一个数组对象，有序的，与本体值类似，每一个元素都可以做会返回值。
  *
  * 主要关注的是有序
+ * @param value
  */
 export function get$arrMap<T extends ArgsGeneralItemParadigm>(
   value: ArgsType<T>,

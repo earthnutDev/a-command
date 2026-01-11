@@ -14,7 +14,7 @@
  *  - - 键值：参数的子项的子项
  *
  * 可以直观的通过判断 `$map` 下是否有该参数即可
- **/
+ */
 
 import { isEmptyArray } from 'a-type-of-js';
 import {

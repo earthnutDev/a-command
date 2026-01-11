@@ -8,7 +8,7 @@
  * @module  config
  * @since 2026-01-08 22:21
  * @lastModified 2026-01-09 10:46
- **/
+ */
 
 // eslint.config.mjs（ESM 格式）
 import globals from 'globals'; // 全局变量（非插件，必备）

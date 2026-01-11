@@ -1,5 +1,5 @@
 import { isArray } from 'a-type-of-js';
-import { OriginalData, QuestionParamDataType } from './types';
+import { OriginalData, QuestionParamData } from './types';
 
 export const originalData: OriginalData = {
   /** 该值在下面的 init 中初始化 */
@@ -12,8 +12,11 @@ export const originalData: OriginalData = {
   progressCount: 0,
   /** 该值在每一次绘制前根据与用户交互的结果进行给值 */
   indexOfCursor: 0,
-  /** 初始化数据 */
-  init: function (param: QuestionParamDataType) {
+  /**
+   * 初始化数据
+   * @param param
+   */
+  init: function (param: QuestionParamData) {
     // 初始化数据
     this.data = param;
     // 参看是单问模式还是多问模式

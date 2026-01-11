@@ -1,3 +1,15 @@
+/**
+ * @packageDocumentation
+ * @module  selection
+ * @file outputSafeZone.ts
+ * @description 输出安全区
+ * @author MrMudBean <Mr.MudBean@outlook.com>
+ * @license MIT
+ * @copyright  2026 ©️ MrMudBean
+ * @since 2026-01-12 00:10
+ * @version 3.0.0
+ * @lastModified 2026-01-12 00:10
+ */
 import { selectionData } from './data-store';
 import { getMaxRows } from './getMaxRows';
 

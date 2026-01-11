@@ -8,6 +8,7 @@ import { ManageDataType } from './types';
  *
  * 就会出现追加值的情况
  *
+ * @param manageData
  */
 export function addResultItem(manageData: ManageDataType) {
   /** 拿到数据 */

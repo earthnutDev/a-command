@@ -1,4 +1,4 @@
-import { prefixList } from '../src/info/info';
+import { prefixList } from '../src/info';
 import { dev } from '@qqi/dev';
 
 dev.skip('查看效果', it => {

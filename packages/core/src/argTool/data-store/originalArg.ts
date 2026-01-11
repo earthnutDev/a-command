@@ -1,11 +1,15 @@
 /**
- * @author Mr.MudBean <Mr.MudBean@outlook.com>
- * @packageDocumentation
- * @module  a-command
  * @file originalArg.ts
- * @since 04/09/2025
- * @description 原始的用户输入的参数数组，防止用户自己不小心修改而做备份
+ * @description xx
+ * @author MrMudBean <Mr.MudBean@outlook.com>
+ * @license MIT
+ * @copyright  2026 ©️ MrMudBean
+ * @packageDocumentation
+ * @module  xx
+ * @since 2026-01-10 09:55
+ * @lastModified 2026-01-10 09:55
  **/
+
 /** 原始的用户输入的参数数组 */
 const originalArg: string[] = process.argv.slice(2);
 

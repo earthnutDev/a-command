@@ -192,7 +192,7 @@ command.run(); // Users can use `gig init ts`
   *   获取处理后的用户输入的参数
   *
   *   这种模式尽可能的保留了用户输入，但是也舍弃了部分无法识别的输入
-  * */
+  */
 command.args;
 /**
  *  获取处理后的用户输入的参数的 Object 形式
@@ -201,7 +201,7 @@ command.args;
  *
  * **_在这种模式下，`subOptions` 会覆盖上级的 `value`_**
  *
- * */
+ */
 command.args.$map;
 /**
  * 为了获取有序的对象值
@@ -214,7 +214,7 @@ command.args.$arrMap;
   *   获取处理后的用户输入的参数的简单形式
   *
   *  这种模式适合简单的命令，仅查看命令是否有
-  * */
+  */
 command.args.$only;
 /**
  *

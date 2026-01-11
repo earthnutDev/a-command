@@ -14,6 +14,9 @@ import { BindParamsOptionsType, SubOptionsType } from './types';
  *
  * ```
  *
+ * @param data
+ * @param name
+ * @param auxiliaryData
  */
 export function parsingSubOption(
   data: BindParamsOptionsType,

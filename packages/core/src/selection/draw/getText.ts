@@ -1,8 +1,11 @@
 import { cutoffStringWithChar, strInTerminalLength } from 'color-pen';
-import { ellipsis } from '../../info/info';
+import { ellipsis } from '../../utils/pen';
 import { selectionData } from '../data-store';
 
-/**  计算文本展示  */
+/**
+ *  计算文本展示
+ * @param index
+ */
 export function getText(index: number): string {
   const { data } = selectionData;
   /**  可用列数  */

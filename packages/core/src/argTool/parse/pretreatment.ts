@@ -5,6 +5,8 @@ import { AuxiliaryData } from '../auxiliaryData';
  *
  * 数据预处理，不储存数据名，单纯将短写的参数展开及使用 "=" 的参数展开
  *
+ * @param data
+ * @param auxiliaryData
  */
 export function pretreatment(data: string[], auxiliaryData: AuxiliaryData) {
   /** 处理后的参数 */
@@ -12,7 +14,11 @@ export function pretreatment(data: string[], auxiliaryData: AuxiliaryData) {
   /** 临时储存第二命令。用户判断次级命令 */
   let currentSubcommand: string = '';
 
-  /** 结果处理  */
+  /**
+   * 结果处理
+   * @param arg
+   * @param value
+   */
   const pushResult = (arg: string, value?: string) =>
     isUndefined(value) || isBusinessEmptyString(value)
       ? result.push(arg)

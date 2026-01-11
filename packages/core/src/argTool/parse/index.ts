@@ -5,7 +5,7 @@
  * @file executeParsing.ts
  * @since 04/08/2025
  * @description 解析用户行为
- **/
+ */
 import { _p } from 'a-node-tools';
 import { AuxiliaryData } from '../auxiliaryData';
 
@@ -14,6 +14,7 @@ import { paringUserArgs } from './paringUserArgs';
 /**
  *
  *  开始执行 run ，解析绑定数据
+ * @param auxiliaryData
  */
 export function executeParsing(auxiliaryData: AuxiliaryData) {
   switch (auxiliaryData.state.code) {
@@ -39,6 +40,7 @@ export function executeParsing(auxiliaryData: AuxiliaryData) {
  * 执行冷冻数据
  *
  *
+ * @param auxiliaryData
  */
 function beforeRun(auxiliaryData: AuxiliaryData) {
   ['name', 'originBind', 'abbr'].forEach((currentEle: string) => {

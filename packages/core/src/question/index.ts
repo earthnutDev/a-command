@@ -1,18 +1,12 @@
-import { ValueExtendsType } from '../selection';
 import { core } from './core';
-import {
-  QuestionParamDataType,
-  QuestionReturnType,
-  QuestionVerify,
-} from './types';
+import { QuestionParamData, QuestionReturn, QuestionVerify } from './types';
 
 /**
+ * ## 一个向提问的并收集用户答录
+ * @param params     参数，可以是 string、ParamDataType 或是他们组成的数组
+ * @param simpleResult   是否显示为简单模式的返回（默认返回是答案与），缺省为 false
  *
- *
- * ```
- * 一个向提问的并收集用户答录
  * ```ts
- *
  * interface ParamDataType  {
  *        text: string;
  *        // 用户提示：当为纯文本时，展示为文本提示；当为数组时，默认为选择式提问
@@ -52,10 +46,7 @@ import {
  *       }[]
  *  }
  * ```
- * @param data     参数，可以是 string、ParamDataType 或是他们组成的数组
- * @param  simpleResult   是否显示为简单模式的返回（默认返回是答案与），缺省为 false
  * @example
- *
  * ```ts
  * import { question } from 'a-command';
  *
@@ -94,15 +85,24 @@ import {
  *
  */
 export const question = async function <
-  T extends QuestionParamDataType,
+  T extends QuestionParamData,
   U extends boolean | undefined = undefined,
->(params: T, simpleResult?: U): Promise<QuestionReturnType<T, U>> {
+>(params: T, simpleResult?: U): Promise<QuestionReturn<T, U>> {
   return core(params, simpleResult);
 };
 
-export type {
-  QuestionParamDataType,
-  QuestionReturnType,
-  ValueExtendsType,
-  QuestionVerify,
-};
+/**
+ * ## 输入参数
+ * @deprecated 该类型将在未来版本中移除，请使用 `QuestionParamData` 代替
+ */
+export type QuestionParamDataType = QuestionParamData;
+/**
+ * ## 返回数据类型
+ * @deprecated 该类型将在未来版本中移除，请使用 `QuestionReturn` 代替
+ */
+export type QuestionReturnType<
+  T extends QuestionParamData,
+  U extends boolean | undefined,
+> = QuestionReturn<T, U>;
+
+export type { QuestionParamData, QuestionReturn, QuestionVerify };

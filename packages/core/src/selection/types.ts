@@ -1,12 +1,8 @@
-// 方便统一扩展该类型
-/**  值的范性类  */
-export type ValueExtendsType = PropertyKey;
-
 /**  简单类型  */
 export type stringOrNumber = string | number;
 
 /**  详细单子项必须参数  */
-export type SelectionDataRequired<T extends ValueExtendsType> = {
+export type SelectionDataRequired<T extends PropertyKey> = {
   /**  值（若 label 缺省，将使用本值）  */
   value: T;
   /**  标签  */
@@ -24,23 +20,23 @@ export type SelectionDataOption = {
 };
 
 /** <span style="color:#ff0;"> 内部 </span> 使用 data 值  */
-export type SelectionUseData<T extends ValueExtendsType> =
-  SelectionDataRequired<T> & SelectionDataOption;
+export type SelectionUseData<T extends PropertyKey> = SelectionDataRequired<T> &
+  SelectionDataOption;
 
 /**  使用对象模式参数 <span style="color:#f36;">尽然 `SelectionParamObjectData` 接受范性，当前仅限于 `string | number | symbol`</span> */
-export type SelectionParamObjectData<T extends ValueExtendsType> =
+export type SelectionParamObjectData<T extends PropertyKey> =
   SelectionDataRequired<T> & {
     [x in keyof SelectionDataOption]?: SelectionDataOption[x];
   };
 
 /**  参数 data 值  */
-export type SelectionParamData<T extends ValueExtendsType> = (
+export type SelectionParamData<T extends PropertyKey> = (
   | stringOrNumber
   | SelectionParamObjectData<T>
 )[];
 
 /** 必须的参数 */
-export type RequiredAttributes<T extends ValueExtendsType> = {
+export type RequiredAttributes<T extends PropertyKey> = {
   /** 要渲染的选择的数据数据 */
   data: SelectionParamData<T>;
 };
@@ -50,7 +46,7 @@ export type OptionalAttributes = {
   info: stringOrNumber;
   /**  错误展示文本，缺省时按序查找 `resultText`、`text` 文本 */
   errorText: stringOrNumber;
-  /**  结果展示文本（缺省则以 `info`  为准） **/
+  /**  结果展示文本（缺省则以 `info`  为准） */
   resultText: stringOrNumber;
   /**   是否是必填项 */
   required: boolean;
@@ -67,13 +63,13 @@ export type OptionalAttributes = {
   maxRows: number;
 };
 
-export type SelectionNoKindDataMap<T extends ValueExtendsType> =
+export type SelectionNoKindDataMap<T extends PropertyKey> =
   RequiredAttributes<T> & {
     [x in keyof OptionalAttributes]?: OptionalAttributes[x];
   };
 
 /**  多选模式下的 */
-export type SelectionCheckDataMap<T extends ValueExtendsType> =
+export type SelectionCheckDataMap<T extends PropertyKey> =
   RequiredAttributes<T> & {
     [x in keyof OptionalAttributes]?: OptionalAttributes[x];
   } & {
@@ -82,15 +78,15 @@ export type SelectionCheckDataMap<T extends ValueExtendsType> =
   };
 
 /**  单选模式下  */
-export type SelectionRadioDataMap<T extends ValueExtendsType> =
+export type SelectionRadioDataMap<T extends PropertyKey> =
   RequiredAttributes<T> & {
     [x in keyof OptionalAttributes]?: OptionalAttributes[x];
   } & {
     kind: 'radio';
   };
 
-/** 参数数据对象型类型  **/
-export type SelectionParamDataMapType<T extends ValueExtendsType> =
+/** 参数数据对象型类型  */
+export type SelectionParamDataMapType<T extends PropertyKey> =
   | SelectionNoKindDataMap<T>
   | SelectionRadioDataMap<T>
   | SelectionCheckDataMap<T>;
@@ -100,7 +96,7 @@ export type SelectionParamDataMapType<T extends ValueExtendsType> =
  * *参数数据类型*
  *
  */
-export type SelectionParamDataType<T extends ValueExtendsType> =
+export type SelectionParamDataType<T extends PropertyKey> =
   | SelectionParamData<T>
   | SelectionParamDataMapType<T>;
 
@@ -132,7 +128,7 @@ export type DrawData = DrawDataItem[];
  * 使用数据
  *
  */
-export type DataType<T extends ValueExtendsType> = OptionalAttributes & {
+export type DataType<T extends PropertyKey> = OptionalAttributes & {
   kind: 'radio' | 'check';
 } & {
   // 下面的属性仅会出现在内部逻辑中使用
@@ -183,7 +179,7 @@ export type DataType<T extends ValueExtendsType> = OptionalAttributes & {
   /**  展示必须的文本信息  */
   mustInfo: boolean;
   /** 将给订参数放进这里 */
-  initData: <T extends ValueExtendsType>(
+  initData: <T extends PropertyKey>(
     _data: SelectionParamDataType<T>,
   ) => boolean;
   /**  重置  */
@@ -193,7 +189,7 @@ export type DataType<T extends ValueExtendsType> = OptionalAttributes & {
 /**  返回值  */
 export type SelectionResultType<
   /**  输出数据类型，默认为字符串  */
-  R extends ValueExtendsType,
+  R extends PropertyKey,
   /**  参数类型  */
   T extends SelectionParamDataType<R>,
   /**  第二参数，控制输出为字符串（或传入的值类型）还是返回当前选择的为第几项  */

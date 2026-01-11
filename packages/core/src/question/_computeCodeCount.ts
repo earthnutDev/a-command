@@ -7,10 +7,10 @@
  * @description
  *
  * 当前使用的是虚拟浮标（光标），不再需要计算该值
- **/
+ */
 
 import { strInTerminalLength } from 'color-pen';
-import { QuestionDataType } from './types';
+import { QuestionData } from './types';
 
 /**
  *
@@ -18,7 +18,7 @@ import { QuestionDataType } from './types';
  *
  *
  */
-export function computeCodeCount(this: QuestionDataType) {
+export function computeCodeCount(this: QuestionData) {
   // 数组的 map 和  filter 会遍历两遍数组
   return this.enterText.reduce(
     (currentValue: number, currentElement: string, currentIndex: number) => {

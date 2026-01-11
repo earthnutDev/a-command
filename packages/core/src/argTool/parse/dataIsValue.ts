@@ -7,6 +7,8 @@ import { ManageDataType } from './types';
  * 当值被认定为参数的值
  *
  *
+ * @param value
+ * @param manageData
  */
 export function dataIsValue(
   value: string | boolean | number,

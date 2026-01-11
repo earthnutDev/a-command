@@ -1,7 +1,5 @@
-import { ArgsGeneralItemParadigm } from './argTool/';
-import { Args } from './argTool/args';
-import { CURRENT, INFO, WARN } from './info';
-import { SUCCESS, ERROR } from './info/info';
+import { ArgsGeneralItemParadigm, Args } from './argTool';
+import { CURRENT, ERROR, INFO, SUCCESS, WARN } from './info';
 import { question } from './question/index';
 import { selection } from './selection/';
 
@@ -16,7 +14,7 @@ class Command<T extends ArgsGeneralItemParadigm> extends Args<T> {
   /**
    *
    * @param name 命令的名称
-   * @deprecated **不建议使用该项，由于在仅使用一项或两项功能时，可能会无法很好的进行摇树** 未来的版本可能会移除该项
+   * @deprecated **不建议使用该项，由于在仅使用一项或两项功能时，可能会无法很好的进行 tree shaking** 未来的版本可能会移除该项
    */
   constructor(name: string = '') {
     super(name);
@@ -250,13 +248,13 @@ class Command<T extends ArgsGeneralItemParadigm> extends Args<T> {
    * @param message 展示的文本
    * @param [prefix='⚉'] 展示的前缀，默认为绿色的 <span style="color:#2fe81a;">❖</span>
    * @returns void
-   * */
+   */
   SUCCESS = SUCCESS;
   /**
    * 当前项
    *
    * 默认为黄色的 <span style="color:#e8ec14;">▶︎</span>
-   * */
+   */
   CURRENT = CURRENT;
   /**
    *  警示

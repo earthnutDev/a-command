@@ -40,7 +40,7 @@ export type ArgsItem<
  *      value: (string | number | boolean)[];
  *  }
  * ```
- * */
+ */
 export type ArgsMap<T = ArgsGeneralItemParadigm> = {
   [Key in keyof T]?: ArgsMapItem<T[Key]>;
 };
@@ -55,7 +55,7 @@ type GenerateArrayMapItemKeys<T> = T extends undefined
 
 /**
  * ## $map 属性值
- * */
+ */
 export type ArgsMapItem<T = undefined> = {
   [K in GenerateArrayMapItemKeys<T> & string]?: (string | number | boolean)[];
 } & {

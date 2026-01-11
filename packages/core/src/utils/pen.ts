@@ -8,7 +8,7 @@
  * @module  utils
  * @since 2026-01-09 10:09
  * @lastModified 2026-01-09 10:14
- **/
+ */
 
 import { bgHexPen, hexPen } from 'color-pen';
 

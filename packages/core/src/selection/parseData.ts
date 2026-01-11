@@ -1,3 +1,15 @@
+/**
+ * @packageDocumentation
+ * @module  selection
+ * @file parseData.ts
+ * @description 解析数据
+ * @author MrMudBean <Mr.MudBean@outlook.com>
+ * @license MIT
+ * @copyright  2026 ©️ MrMudBean
+ * @since 2026-01-12 00:12
+ * @version 3.0.0
+ * @lastModified 2026-01-12 00:12
+ */
 import {
   isBoolean,
   isNull,
@@ -12,11 +24,13 @@ import {
   SelectionParamData,
   SelectionParamObjectData,
   SelectionUseData,
-  ValueExtendsType,
 } from './types';
 
-/**  解析 data 值  */
-export function parseData<T extends ValueExtendsType>(
+/**
+ *  解析 data 值
+ * @param data
+ */
+export function parseData<T extends PropertyKey>(
   data: SelectionParamData<T>,
 ): SelectionUseData<T>[] {
   const result: SelectionUseData<T>[] = [];
