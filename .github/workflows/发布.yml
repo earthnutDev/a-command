@@ -26,6 +26,14 @@ on:
           - all
         default: 'all'
 
+# 新的 OpenID Connect 验证方式
+# 无需手动填写 NODE_AUTH_TOKEN 且定期更换
+permissions:
+  id-token: write # 唯一必须的权限：启用 OIDC
+  contents: read # write 必须，克隆代码库权限
+  # packages: write
+
+
 jobs:
   pub:
     # 在提交的代码包含 `version` 字样时才运行该动作
@@ -54,8 +62,14 @@ jobs:
       - name: 初始化 Node 并设定 Node 版本
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 24
           registry-url: https://registry.npmjs.org
+
+      - name: clean npm auth
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken
+          rm -f ~/.npmrc
+        shell: bash
 
       - name: pnpm 安装
         uses: pnpm/action-setup@v2
@@ -105,7 +119,8 @@ jobs:
       - name: 发布到 npm
         if: ${{ env.update_packages && env.update_packages != '' }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_USERCONFIG: /dev/null # 强制忽略本地配置
+          # NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           UPDATE_PACKAGES: ${{ env.update_packages }}
           REPO_ROOT: ${{ env.REPO_ROOT }}
         run: |

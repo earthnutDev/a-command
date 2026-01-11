@@ -20,7 +20,9 @@ import { Command } from 'a-command';
 const command = new Command<>();
 ```
 
-## Command 部分
+## ~Command 部分~
+
+**注意 ⚠️** ：将可能在未来版本移除 `Command`，请分别使用对应的功能
 
 综合部分是把 [`Args`](#args-部分-获取用户启动时参数) 、 [`selection`](#selection-部分-选择模式-) 和 [`question`](#selection-部分-选择模式-) 放在一起
 
