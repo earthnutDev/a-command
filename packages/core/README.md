@@ -8,6 +8,8 @@
 
 ```sh
 npm install a-command --save
+# 或
+pnpm add a-command --save
 ```
 
 ## 使用
