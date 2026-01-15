@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "name": "a-command",
   "scripts": {
     "prepublishOnly": "pjj",
@@ -21,7 +21,7 @@
     "@color-pen/static": "^1.1.1",
     "@qqi/log": "^1.0.0",
     "a-js-tools": "^2.0.1",
-    "a-node-tools": "^4.4.1",
+    "a-node-tools": "^4.4.2",
     "a-type-of-js": "^2.0.0",
     "color-pen": "^3.0.0"
   }

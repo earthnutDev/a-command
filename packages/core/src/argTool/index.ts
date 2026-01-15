@@ -8,7 +8,7 @@
  * @copyright  2026 ©️ MrMudBean
  * @since 2026-01-12 00:40
  * @version 3.0.0
- * @lastModified 2026-01-12 00:44
+ * @lastModified 2026-01-16 02:35
  */
 
 import { initializeFile } from 'a-node-tools';
@@ -337,19 +337,19 @@ export type OptionNameArray = ArgsGeneralItemParadigm;
  * ## 处理后的参数的 options 类型声明
  * @deprecated 该类型声明可能将在下一个版本移除，请使用 `ArgsItemOptions` 替代
  */
-export type ArgsItemOptionsType = ArgsItemOptions;
+export type ArgsItemOptionsType<T = undefined> = ArgsItemOptions<T>;
 
 /**
  * ## `Args` 实例属性 `$map` ，使用对象的形式描述用户使用参数
  * @deprecated 该类型声明可能将在下一个版本移除，请使用 `ArgsMap` 替代
  */
-export type ArgsMapType = ArgsMap;
+export type ArgsMapType<T = ArgsGeneralItemParadigm> = ArgsMap<T>;
 
 /**
  * ## $map 属性值
  * @deprecated 该类型声明可能将在下一个版本移除，请使用 `ArgsMapItem` 替代
  */
-export type ArgsMapItemType = ArgsMapItem;
+export type ArgsMapItemType<T = undefined> = ArgsMapItem<T>;
 /**
  * ##  `Args` 实例 `$arrMap` 属性
  * @deprecated 该类型声明可能将在下一个版本移除，请使用 `ArgsArrMap` 替代
