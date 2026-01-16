@@ -7,7 +7,7 @@
  * @packageDocumentation
  * @module  config
  * @since 2026-01-08 22:21
- * @lastModified 2026-01-09 10:46
+ * @lastModified 2026-01-16 15:31
  */
 
 // eslint.config.mjs（ESM 格式）
@@ -179,7 +179,15 @@ export default [
       ],
     },
   },
-
+  {
+    files: ['**/*.test.js', '**/*.spec.js'],
+    languageOptions: {
+      globals: {
+        ...globals.mocha,
+        ...globals.jest,
+      },
+    },
+  },
   // 4. 关闭 Prettier 冲突规则（必须，用 Prettier 时）
   prettierConfig,
 ];

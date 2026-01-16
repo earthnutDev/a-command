@@ -1,20 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": ".",
     "jsx": "preserve",
     "strict": true,
     "target": "ESNext",
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "sourceMap": false
   }
 }
